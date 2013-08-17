@@ -1,0 +1,190 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F7105066-8FBF-47C3-B9D6-5D439FE025FE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MYOB.AccountRight.SDK</RootNamespace>
+    <AssemblyName>MYOB.AccountRight.SDK</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Profile2</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Artefacts\SDK\Ship\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;PORTABLE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\Artefacts\SDK\Ship\</OutputPath>
+    <DefineConstants>TRACE;PORTABLE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="ApiCommunicationException.cs" />
+    <Compile Include="Communication\ApiRequestHandler.cs" />
+    <Compile Include="Communication\WebRequestFactory.cs" />
+    <Compile Include="Contracts\Version2\GeneralLedger\AccountingProperties.cs" />
+    <Compile Include="Contracts\Version2\GeneralLedger\AccountRegister.cs" />
+    <Compile Include="Contracts\Version2\GeneralLedger\AccountType.cs" />
+    <Compile Include="Contracts\Version2\Contact\Address.cs" />
+    <Compile Include="Contracts\Version2\BaseLink.cs" />
+    <Compile Include="Contracts\Version2\Contact\CustomerLink.cs" />
+    <Compile Include="Contracts\Version2\Contact\CustomerSellingDetails.cs" />
+    <Compile Include="Contracts\Version2\Contact\EmployeeLink.cs" />
+    <Compile Include="Contracts\Version2\GeneralLedger\GSTReportingMethod.cs" />
+    <Compile Include="Contracts\Version2\Sale\InvoiceLineType.cs" />
+    <Compile Include="Contracts\Version2\Sale\InvoiceWithLines.cs" />
+    <Compile Include="Contracts\Version2\GeneralLedger\JournalType.cs" />
+    <Compile Include="Contracts\Version2\Sale\MiscellaneousInvoiceLine.cs" />
+    <Compile Include="Contracts\Version2\Sale\ProfessionalInvoiceLine.cs" />
+    <Compile Include="Contracts\Version2\Sale\Sale.cs" />
+    <Compile Include="Contracts\Version2\Sale\SaleStatus.cs" />
+    <Compile Include="Contracts\Version2\Sale\ServiceInvoiceLine.cs" />
+    <Compile Include="Contracts\Version2\Contact\SupplierBuyingDetails.cs" />
+    <Compile Include="Contracts\Version2\Contact\CardLink.cs" />
+    <Compile Include="Contracts\Version2\GeneralLedger\Category.cs" />
+    <Compile Include="Contracts\Version2\GeneralLedger\CategoryLink.cs" />
+    <Compile Include="Contracts\Version2\GeneralLedger\CategoryRegister.cs" />
+    <Compile Include="Contracts\Version2\GeneralLedger\Classification.cs" />
+    <Compile Include="Contracts\Version2\Contact\Contact.cs" />
+    <Compile Include="Contracts\Version2\Contact\ContactType.cs" />
+    <Compile Include="Contracts\Version2\Contact\CustomerCredit.cs" />
+    <Compile Include="Contracts\Version2\Contact\Customer.cs" />
+    <Compile Include="Contracts\Version2\Sale\CustomerPayment.cs" />
+    <Compile Include="Contracts\Version2\Contact\CustomerPaymentDetails.cs" />
+    <Compile Include="Contracts\Version2\Sale\CustomerPaymentLine.cs" />
+    <Compile Include="Contracts\Version2\Contact\CustomerTerms.cs" />
+    <Compile Include="Contracts\Version2\Sale\DepositTo.cs" />
+    <Compile Include="Contracts\Version2\Sale\DocumentAction.cs" />
+    <Compile Include="Contracts\Version2\Contact\Employee.cs" />
+    <Compile Include="Contracts\Version2\GeneralLedger\GeneralJournal.cs" />
+    <Compile Include="Contracts\Version2\GeneralLedger\GeneralJournalLine.cs" />
+    <Compile Include="Contracts\Version2\Identifier.cs" />
+    <Compile Include="Contracts\Version2\Sale\Invoice.cs" />
+    <Compile Include="Contracts\Version2\Sale\ItemInvoiceLine.cs" />
+    <Compile Include="Contracts\Version2\Sale\InvoiceLayoutType.cs" />
+    <Compile Include="Contracts\Version2\Sale\InvoiceLine.cs" />
+    <Compile Include="Contracts\Version2\Sale\InvoiceTerms.cs" />
+    <Compile Include="Contracts\Version2\Inventory\Item.cs" />
+    <Compile Include="Contracts\Version2\Sale\ItemInvoice.cs" />
+    <Compile Include="Contracts\Version2\Inventory\ItemLink.cs" />
+    <Compile Include="Contracts\Version2\GeneralLedger\Job.cs" />
+    <Compile Include="Contracts\Version2\GeneralLedger\JobLink.cs" />
+    <Compile Include="Contracts\Version2\GeneralLedger\JobRegister.cs" />
+    <Compile Include="Contracts\Version2\GeneralLedger\JournalTransaction.cs" />
+    <Compile Include="Contracts\Version2\GeneralLedger\JournalTransactionLine.cs" />
+    <Compile Include="Contracts\Version2\GeneralLedger\LinkedAccount.cs" />
+    <Compile Include="Contracts\Version2\Sale\MiscellaneousInvoice.cs" />
+    <Compile Include="Contracts\Version2\Contact\SupplierPaymentDetails.cs" />
+    <Compile Include="Contracts\Version2\Contact\Personal.cs" />
+    <Compile Include="Contracts\Version2\Photo.cs" />
+    <Compile Include="Contracts\Version2\Sale\ProfessionalInvoice.cs" />
+    <Compile Include="Contracts\Version2\Contact\PurchaseLayoutType.cs" />
+    <Compile Include="Contracts\Version2\Contact\SupplierRefundDetails.cs" />
+    <Compile Include="Contracts\Version2\Contact\SupplierSellingDetails.cs" />
+    <Compile Include="Contracts\Version2\Sale\ServiceInvoice.cs" />
+    <Compile Include="Contracts\Version2\Contact\Supplier.cs" />
+    <Compile Include="Contracts\Version2\Contact\SupplierCredit.cs" />
+    <Compile Include="Contracts\Version2\Contact\SupplierLink.cs" />
+    <Compile Include="Contracts\Version2\Contact\SupplierTerms.cs" />
+    <Compile Include="Contracts\Version2\GeneralLedger\TaxCode.cs" />
+    <Compile Include="Contracts\Version2\Terms.cs" />
+    <Compile Include="Contracts\Version2\TermsPaymentType.cs" />
+    <Compile Include="Extensions\ExceptionExtensions.cs" />
+    <Compile Include="Extensions\FunctionalExtensions.cs" />
+    <Compile Include="Extensions\JsonExtensions.cs" />
+    <Compile Include="IApiConfiguration.cs" />
+    <Compile Include="IWebRequestFactory.cs" />
+    <Compile Include="ApiConfiguration.cs" />
+    <Compile Include="Communication\BaseRequestHandler.cs" />
+    <Compile Include="Communication\OAuthRequestHandler.cs" />
+    <Compile Include="Contracts\OAuthTokens.cs" />
+    <Compile Include="Contracts\CompanyFile.cs" />
+    <Compile Include="Contracts\CompanyFileWithResources.cs" />
+    <Compile Include="Contracts\Version2\PagedCollection.cs" />
+    <Compile Include="ICompanyFileCredentials.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Contracts\Version2\GeneralLedger\AccountLink.cs" />
+    <Compile Include="Contracts\Version2\GeneralLedger\BankingDetails.cs" />
+    <Compile Include="Contracts\Version2\BaseEntity.cs" />
+    <Compile Include="Contracts\Version2\GeneralLedger\Account.cs" />
+    <Compile Include="Contracts\Version2\GeneralLedger\TaxCodeLink.cs" />
+    <Compile Include="Services\IOAuthService.cs" />
+    <Compile Include="Services\Version2\GeneralLedger\AccountingPropertiesService.cs" />
+    <Compile Include="Services\Version2\GeneralLedger\AccountRegisterService.cs" />
+    <Compile Include="Services\Version2\GeneralLedger\AccountService.cs" />
+    <Compile Include="Services\Version2\GeneralLedger\CategoryRegisterService.cs" />
+    <Compile Include="Services\Version2\GeneralLedger\CategoryService.cs" />
+    <Compile Include="Services\CompanyFileService.cs" />
+    <Compile Include="IOAuthKeyService.cs" />
+    <Compile Include="Services\Version2\Sale\CustomerPaymentService.cs" />
+    <Compile Include="Services\Version2\Contact\CustomerService.cs" />
+    <Compile Include="Services\Version2\Contact\EmployeeService.cs" />
+    <Compile Include="Services\Version2\GeneralLedger\GeneralJournalService.cs" />
+    <Compile Include="Services\ICompanyFileService.cs" />
+    <Compile Include="Services\Version2\IMutable.cs" />
+    <Compile Include="Services\Version2\IMutablePhoto.cs" />
+    <Compile Include="Services\Version2\Sale\InvoiceService.cs" />
+    <Compile Include="Services\Version2\IReadable.cs" />
+    <Compile Include="Services\Version2\IReadablePhoto.cs" />
+    <Compile Include="Services\Version2\Sale\ItemInvoiceService.cs" />
+    <Compile Include="Services\Version2\Inventory\ItemService.cs" />
+    <Compile Include="Services\Version2\GeneralLedger\JobRegisterService.cs" />
+    <Compile Include="Services\Version2\GeneralLedger\JobService.cs" />
+    <Compile Include="Services\Version2\GeneralLedger\JournalTransactionService.cs" />
+    <Compile Include="Services\Version2\GeneralLedger\LinkedAccountService.cs" />
+    <Compile Include="Services\Version2\Sale\MiscellaneousInvoiceService.cs" />
+    <Compile Include="Services\Version2\MutablePhotoService.cs" />
+    <Compile Include="Services\Version2\MutableService.cs" />
+    <Compile Include="Services\OAuthService.cs" />
+    <Compile Include="Services\Version2\Contact\PersonalService.cs" />
+    <Compile Include="Services\Version2\Sale\ProfessionalInvoiceService.cs" />
+    <Compile Include="Services\Version2\ReadableService.cs" />
+    <Compile Include="Services\ServiceBase.cs" />
+    <Compile Include="Services\Version2\Sale\ServiceInvoiceService.cs" />
+    <Compile Include="Services\Version2\Contact\SupplierService.cs" />
+    <Compile Include="Services\Version2\GeneralLedger\TaxCodeService.cs" />
+    <Compile Include="SimpleOAuthKeyService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\packages\Newtonsoft.Json.5.0.6\lib\portable-net40+sl4+wp7+win8\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PCLWebUtility">
+      <HintPath>..\..\packages\PCLWebUtility.1.0.2\lib\portable-net4+sl4+wp7+win8\PCLWebUtility.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpCompress">
+      <HintPath>..\..\packages\sharpcompress.0.10.1.3\lib\portable-net4+sl4+wp7+win8\SharpCompress.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
