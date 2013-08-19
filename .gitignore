@@ -1,0 +1,9 @@
+Artefacts
+/packages/*
+!packages/repositories.config
+MYOB.API.SDK/**/bin/**/*
+MYOB.API.SDK/**/obj/**/*
+*.suo
+*.user
+
+/TestResult.xml
