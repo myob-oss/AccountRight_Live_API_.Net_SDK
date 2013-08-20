@@ -18,9 +18,9 @@ The supplied batch file file `build.bat` can be used from a command prompt to bu
 
 C# Example:
 		
-    using MYOB.AccountRight.SDK
-    using MYOB.AccountRight.SDK.Services
-    using MYOB.AccountRight.SDK.Contracts
+    using MYOB.AccountRight.SDK;
+    using MYOB.AccountRight.SDK.Services;
+    using MYOB.AccountRight.SDK.Contracts;
 
     var configuration = new ApiConfiguration("http://localhost:8080/accountright");
     var cfService = new CompanyFileService(configuration);
