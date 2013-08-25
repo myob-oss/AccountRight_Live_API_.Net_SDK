@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using MYOB.AccountRight.SDK.Contracts.Version2;
 using MYOB.AccountRight.SDK.Contracts.Version2.GeneralLedger;
 
@@ -24,6 +25,26 @@ namespace MYOB.AccountRight.SDK.Services.GeneralLedger
         public override void Get(Contracts.CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, Action<System.Net.HttpStatusCode, CategoryRegister> onComplete, Action<Uri, Exception> onError)
         {
             throw new NotSupportedException();
+        }
+
+        public override CategoryRegister Get(Contracts.CompanyFile cf, Uri uri, ICompanyFileCredentials credentials)
+        {
+            throw new NotSupportedException();
+        }
+
+        public override void Get(Contracts.CompanyFile cf, Uri uri, ICompanyFileCredentials credentials, Action<System.Net.HttpStatusCode, CategoryRegister> onComplete, Action<Uri, Exception> onError)
+        {
+            throw new NotSupportedException();
+        }
+
+        public override Task<CategoryRegister> GetAsync(Contracts.CompanyFile cf, Guid uid, ICompanyFileCredentials credentials)
+        {
+            return Task.Factory.StartNew<CategoryRegister>(() => { throw new NotSupportedException(); });      
+        }
+
+        public override Task<CategoryRegister> GetAsync(Contracts.CompanyFile cf, Uri uri, ICompanyFileCredentials credentials)
+        {
+            return Task.Factory.StartNew<CategoryRegister>(() => { throw new NotSupportedException(); }); 
         }
     }
 }

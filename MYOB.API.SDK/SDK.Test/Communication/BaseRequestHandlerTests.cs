@@ -26,6 +26,13 @@ namespace SDK.Test.Communication
 
             request.BeginGetResponse(HandleResponseCallback<RequestContext<string, UserContract>, string, UserContract>, new RequestContext<string, UserContract>() { Request = request, OnComplete = onSuccess, OnError = onError });
         }
+
+        async public Task<Tuple<HttpStatusCode, UserContract>> MakeRequestAsync(string uri)
+        {
+            var request = _webRequestFactory.Create(new Uri(uri));
+            var get = await GetResponseTask<UserContract>(request);
+            return new Tuple<HttpStatusCode, UserContract>(get.Item1, get.Item3);
+        }
     }
 
     [TestFixture]
@@ -99,6 +106,40 @@ namespace SDK.Test.Communication
             // assert
             Assert.IsNotNull(data);
             Assert.AreEqual("Paul", data.Name);
+        }
+
+        [Test]
+        async public void CanExtractJsonEntityAsync()
+        {
+            // arrange
+            var uri = "http://localhost/";
+            var factory = new TestWebRequestFactory();
+            factory.RegisterResultForUri(uri, "{ \"Name\": \"Paul\" }");
+            var handler = new TestBaseRequestHandler(factory);
+
+            // act
+            var res = await handler.MakeRequestAsync(uri);
+
+            // assert
+            Assert.IsNotNull(res.Item2);
+            Assert.AreEqual("Paul", res.Item2.Name);
+        }
+
+        [Test]
+        async public void CanExtractCompressedJsonEntityAsync()
+        {
+            // arrange
+            var uri = "http://localhost/";
+            var factory = new TestWebRequestFactory();
+            factory.RegisterCompressedResultForUri(uri, "{ \"Name\": \"Paul\" }");
+            var handler = new TestBaseRequestHandler(factory);
+
+            // act
+            var res = await handler.MakeRequestAsync(uri);
+
+            // assert
+            Assert.IsNotNull(res.Item2);
+            Assert.AreEqual("Paul", res.Item2.Name);
         }
     }
 }

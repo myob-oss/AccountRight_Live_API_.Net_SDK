@@ -45,6 +45,25 @@ namespace SDK.Test.Services
                 return MakeApiPostRequestSync(uri, new UserContract(), null);
             }
 
+            async public Task<UserContract> GetAsync(Uri uri)
+            {
+                return await MakeApiGetRequestAsync<UserContract>(uri, null);
+            }
+
+            async public Task DeleteAsync(Uri uri)
+            {
+                await MakeApiDeleteRequestAsync(uri, null);
+            }
+
+            async public Task<string> PutAsync(Uri uri)
+            {
+                return await MakeApiPutRequestAsync(uri, new UserContract(), null);
+            }
+
+            async public Task<string> PostAsync(Uri uri)
+            {
+                return await MakeApiPostRequestAsync(uri, new UserContract(), null);
+            }
         }
 
         [Test]
@@ -82,16 +101,20 @@ namespace SDK.Test.Services
             Assert.IsInstanceOf<InvalidOperationException>(ex.InnerException);
         }
 
-        private readonly Tuple<Action<TestServiceBase, Uri>, string>[] _operations = new[]
+        private readonly Tuple<Action<TestServiceBase, Uri>, string, bool>[] _operations = new[]
             {
-                new Tuple<Action<TestServiceBase, Uri>, string>((@base, uri) => @base.Get(uri), new UserContract() { Name = "User" }.ToJson()),
-                new Tuple<Action<TestServiceBase, Uri>, string>((@base, uri) => @base.Delete(uri), null),
-                new Tuple<Action<TestServiceBase, Uri>, string>((@base, uri) => @base.Put(uri), null),
-                new Tuple<Action<TestServiceBase, Uri>, string>((@base, uri) => @base.Post(uri), null),
+                new Tuple<Action<TestServiceBase, Uri>, string, bool>((@base, uri) => @base.Get(uri), new UserContract() { Name = "User" }.ToJson(), true),
+                new Tuple<Action<TestServiceBase, Uri>, string, bool>((@base, uri) => @base.Delete(uri), null, true),
+                new Tuple<Action<TestServiceBase, Uri>, string, bool>((@base, uri) => @base.Put(uri), null, true),
+                new Tuple<Action<TestServiceBase, Uri>, string, bool>((@base, uri) => @base.Post(uri), null, true),
+                new Tuple<Action<TestServiceBase, Uri>, string, bool>((@base, uri) => @base.GetAsync(uri).Wait(), new UserContract() { Name = "User" }.ToJson(), false),
+                new Tuple<Action<TestServiceBase, Uri>, string, bool>((@base, uri) => @base.DeleteAsync(uri).Wait(), null, false),
+                new Tuple<Action<TestServiceBase, Uri>, string, bool>((@base, uri) => @base.PutAsync(uri).Wait(), null, false),
+                new Tuple<Action<TestServiceBase, Uri>, string, bool>((@base, uri) => @base.PostAsync(uri).Wait(), null, false),
             };
 
         [Test]
-        public void OperationDoesNotUpdateKeyServiceWithNewTokensIfCurrentTokensHaveNotExpired([ValueSource("_operations")] Tuple<Action<TestServiceBase, Uri>, string> operation)
+        public void OperationDoesNotUpdateKeyServiceWithNewTokensIfCurrentTokensHaveNotExpired([ValueSource("_operations")] Tuple<Action<TestServiceBase, Uri>, string, bool> operation)
         {
             // arrange
             var apiUri = ApiRequestHandler.ApiRequestUri;
@@ -114,7 +137,7 @@ namespace SDK.Test.Services
         }
 
         [Test]
-        public void OperationUpdatesKeyServiceWithNewTokensWhenCurrentTokensHaveExpired([ValueSource("_operations")] Tuple<Action<TestServiceBase, Uri>, string> operation)
+        public void OperationUpdatesKeyServiceWithNewTokensWhenCurrentTokensHaveExpired([ValueSource("_operations")] Tuple<Action<TestServiceBase, Uri>, string, bool> operation)
         {
             // arrange
             var apiUri = ApiRequestHandler.ApiRequestUri;
@@ -137,8 +160,13 @@ namespace SDK.Test.Services
         }
 
         [Test]
-        public void OperationCorrectlyHandlesWebExceptionErrors([ValueSource("_operations")] Tuple<Action<TestServiceBase, Uri>, string> operation)
+        public void OperationCorrectlyHandlesWebExceptionErrors([ValueSource("_operations")] Tuple<Action<TestServiceBase, Uri>, string, bool> operation)
         {
+            if (operation.Item3 == false)
+            {
+                Assert.Inconclusive("Not applicable");
+            };
+
             // arrange
             var apiUri = ApiRequestHandler.ApiRequestUri;
 

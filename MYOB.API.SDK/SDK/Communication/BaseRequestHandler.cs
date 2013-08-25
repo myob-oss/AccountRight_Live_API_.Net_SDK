@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Runtime.Serialization.Json;
 using System.Text;
+using System.Threading.Tasks;
 using MYOB.AccountRight.SDK.Extensions;
 using SharpCompress.Compressor;
 using SharpCompress.Compressor.Deflate;
@@ -19,6 +20,20 @@ namespace MYOB.AccountRight.SDK.Communication
             public string Body { get; set; }
             public Action<HttpStatusCode, string, TR> OnComplete { get; set; }
             public Action<Uri, Exception> OnError { get; set; }
+        }
+        
+        protected static async Task<Tuple<HttpStatusCode, string, T>> GetResponseTask<T>(WebRequest request) where T : class
+        {
+            var response = await request.GetResponseAsync();
+            var location = response.Headers["Location"];
+            var statusCode = (response as HttpWebResponse).Maybe(_ => _.StatusCode);
+            if (response.Headers["Content-Encoding"] != null && response.Headers["Content-Encoding"].Contains("gzip"))
+            {
+                var entityCompressed = ExtractCompressedEntity<T>(response);
+                return new Tuple<HttpStatusCode, string, T>(statusCode, location, entityCompressed);
+            }
+            var entityNormal = ExtractEntity<T>(response);
+            return new Tuple<HttpStatusCode, string, T>(statusCode, location, entityNormal);
         }
 
         protected static void HandleResponseCallback<T, TReq, TResp>(IAsyncResult asynchronousResult)
@@ -76,7 +91,5 @@ namespace MYOB.AccountRight.SDK.Communication
                 }
             }
         }
-
-        
     }
 }

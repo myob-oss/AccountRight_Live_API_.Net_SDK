@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using MYOB.AccountRight.SDK.Communication;
 using MYOB.AccountRight.SDK.Contracts;
 using MYOB.AccountRight.SDK.Extensions;
@@ -64,6 +65,14 @@ namespace MYOB.AccountRight.SDK.Services
             return oauthTokens;
         }
 
+        async public Task<OAuthTokens> GetTokensAsync(string code)
+        {
+            var handler = new OAuthRequestHandler(_configuration);
+            var request = _factory.Create(OAuthRequestHandler.OAuthRequestUri);
+            var tokens = await handler.GetOAuthTokensAsync(request, code);
+            return tokens.Item2;
+        }
+
         public void RenewTokens(OAuthTokens oauthTokens, Action<HttpStatusCode, OAuthTokens> onComplete, Action<Uri, Exception> onError)
         {
             var handler = new OAuthRequestHandler(_configuration);
@@ -99,7 +108,14 @@ namespace MYOB.AccountRight.SDK.Services
 
             return newTokens;
         }
-        
+
+        async public Task<OAuthTokens> RenewTokensAsync(OAuthTokens oauthTokens)
+        {
+            var handler = new OAuthRequestHandler(_configuration);
+            var request = _factory.Create(OAuthRequestHandler.OAuthRequestUri);
+            var tokens = await handler.RenewOAuthTokensAsync(request, oauthTokens);
+            return tokens.Item2;
+        }
     }
 
 }

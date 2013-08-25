@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using MYOB.AccountRight.SDK.Contracts.Version2;
 using MYOB.AccountRight.SDK.Contracts.Version2.Sale;
 
@@ -24,6 +25,11 @@ namespace MYOB.AccountRight.SDK.Services.Sale
         public override void Update(Contracts.CompanyFile cf, CustomerPayment entity, ICompanyFileCredentials credentials, Action<System.Net.HttpStatusCode, string> onComplete, Action<Uri, Exception> onError)
         {
             throw new NotSupportedException();
+        }
+
+        public override Task<string> UpdateAsync(Contracts.CompanyFile cf, CustomerPayment entity, ICompanyFileCredentials credentials)
+        {
+            return Task.Factory.StartNew<string>(() => { throw new NotSupportedException(); });       
         }
     }
 }

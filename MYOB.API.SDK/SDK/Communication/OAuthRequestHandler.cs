@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading.Tasks;
 using MYOB.AccountRight.SDK.Contracts;
 using MYOB.AccountRight.SDK.Extensions;
 using PCLWebUtility;
@@ -39,6 +40,15 @@ namespace MYOB.AccountRight.SDK.Communication
             BeginRequest(request, (statusCode, s, response) => onComplete(statusCode, response), onError, data);
         }
 
+        async public Task<Tuple<HttpStatusCode, OAuthTokens>> GetOAuthTokensAsync(WebRequest request, string code)
+        {
+            var data = string.Format("client_id={0}&client_secret={1}&redirect_uri={2}&scope=CompanyFile&code={3}&grant_type=authorization_code",
+                                     _configuration.ClientId, _configuration.ClientSecret, WebUtility.UrlEncode(_configuration.RedirectUrl), code);
+
+            var get = await BeginRequestAsync(request, data);
+            return new Tuple<HttpStatusCode, OAuthTokens>(get.Item1, get.Item3);
+        }
+
         /// <summary>
         /// Renew the OAuth tokens
         /// </summary>
@@ -54,6 +64,15 @@ namespace MYOB.AccountRight.SDK.Communication
             BeginRequest(request, (statusCode, s, response) => onComplete(statusCode, response), onError, data);
         }
 
+        async public Task<Tuple<HttpStatusCode, OAuthTokens>> RenewOAuthTokensAsync(WebRequest request, OAuthTokens oAuthResponse)
+        {
+            var data = string.Format("client_id={0}&client_secret={1}&refresh_token={2}&grant_type=refresh_token",
+                                        _configuration.ClientId, _configuration.ClientSecret, oAuthResponse.RefreshToken);
+
+            var get = await BeginRequestAsync(request, data);
+            return new Tuple<HttpStatusCode, OAuthTokens>(get.Item1, get.Item3);
+        }
+
         private static void BeginRequest(WebRequest request, Action<HttpStatusCode, string, OAuthTokens> onComplete, Action<Uri, Exception> onError, string data)
         {
             request.Method = "POST";
@@ -66,6 +85,23 @@ namespace MYOB.AccountRight.SDK.Communication
                                                OnComplete = onComplete,
                                                OnError = onError
                                            });
+        }
+
+        async private static Task<Tuple<HttpStatusCode, string, OAuthTokens>> BeginRequestAsync(WebRequest request, string data)
+        {
+            return await GetResponseTask<OAuthTokens>(await GetRequestStreamTask<string>(request, data));
+        }
+
+        private static async Task<WebRequest> GetRequestStreamTask<T>(WebRequest request, string data)
+        {
+            using (var stream = await request.GetRequestStreamAsync())
+            {
+                using (var sw = new StreamWriter(stream))
+                {
+                    sw.Write(data);
+                }
+            }
+            return request;
         }
 
         private static void HandleRequestCallback(IAsyncResult asynchronousResult)

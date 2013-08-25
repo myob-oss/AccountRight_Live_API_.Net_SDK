@@ -35,7 +35,7 @@ namespace SDK.Test.Services
 
         private readonly Tuple<string, Func<AccountingPropertiesService, CompanyFile, AccountingProperties>>[] _getAccountingPropertiesActions = new[]
             {
-                new Tuple<string, Func<AccountingPropertiesService, CompanyFile, AccountingProperties>>("Async", 
+                new Tuple<string, Func<AccountingPropertiesService, CompanyFile, AccountingProperties>>("Delegate", 
                     (service, cf) =>
                     {
                         AccountingProperties received = null;
@@ -46,6 +46,11 @@ namespace SDK.Test.Services
                     (service, cf) =>
                     {
                         return service.Get(cf, Guid.Empty, null);
+                    }),
+                new Tuple<string, Func<AccountingPropertiesService, CompanyFile, AccountingProperties>>("Async", 
+                    (service, cf) =>
+                    {
+                        return service.GetAsync(cf, Guid.Empty, null).Result;
                     }),
             };
 

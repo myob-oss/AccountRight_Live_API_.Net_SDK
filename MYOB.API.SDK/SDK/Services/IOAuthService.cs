@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using System.Threading.Tasks;
 using MYOB.AccountRight.SDK.Contracts;
 
 namespace MYOB.AccountRight.SDK.Services
@@ -7,7 +8,7 @@ namespace MYOB.AccountRight.SDK.Services
     public interface IOAuthService
     {
         /// <summary>
-        /// Get the OAuth tokens required to access the cloud based API (Asynchronous)
+        /// Get the OAuth tokens required to access the cloud based API (Delegate)
         /// </summary>
         /// <param name="code"></param>
         /// <param name="onComplete"></param>
@@ -22,7 +23,14 @@ namespace MYOB.AccountRight.SDK.Services
         OAuthTokens GetTokens(string code);
 
         /// <summary>
-        /// Renew the OAuth tokens required to access the cloud based API (Asynchronous)
+        /// Get the OAuth tokens required to access the cloud based API (Asynchronous)
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
+        Task<OAuthTokens> GetTokensAsync(string code);
+
+        /// <summary>
+        /// Renew the OAuth tokens required to access the cloud based API (Delegate)
         /// </summary>
         /// <param name="oauthTokens"></param>
         /// <param name="onComplete"></param>
@@ -35,5 +43,12 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="oauthTokens"></param>
         /// <returns></returns>
         OAuthTokens RenewTokens(OAuthTokens oauthTokens);
+
+        /// <summary>
+        /// Renew the OAuth tokens required to access the cloud based API (Asynchronous)
+        /// </summary>
+        /// <param name="oauthTokens"></param>
+        /// <returns></returns>
+        Task<OAuthTokens> RenewTokensAsync(OAuthTokens oauthTokens);
     }
 }
