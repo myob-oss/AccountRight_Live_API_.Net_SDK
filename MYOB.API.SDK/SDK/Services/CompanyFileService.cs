@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Net;
-using System.Threading.Tasks;
+#if ASYNC
+using System.Threading.Tasks; 
+#endif
 using MYOB.AccountRight.SDK.Communication;
 using MYOB.AccountRight.SDK.Contracts;
 using MYOB.AccountRight.SDK.Extensions;
@@ -20,10 +22,12 @@ namespace MYOB.AccountRight.SDK.Services
             MakeApiGetRequestDelegate(new Uri(Configuration.ApiBaseUrl), null, onComplete, onError);
         }
 
+#if ASYNC
         public Task<CompanyFile[]> GetRangeAsync()
         {
             return MakeApiGetRequestAsync<CompanyFile[]>(new Uri(Configuration.ApiBaseUrl), null);
-        }
+        } 
+#endif
 
         public void GetRange(string queryString, Action<HttpStatusCode, CompanyFile[]> onComplete, Action<Uri, Exception> onError)
         {
@@ -40,10 +44,12 @@ namespace MYOB.AccountRight.SDK.Services
             return MakeApiGetRequestSync<CompanyFile[]>(BuildUri(queryString.Maybe(_ => "?" + _.TrimStart(new[] { '?' }))), null);
         }
 
+#if ASYNC
         public Task<CompanyFile[]> GetRangeAsync(string queryString)
         {
             return MakeApiGetRequestAsync<CompanyFile[]>(BuildUri(queryString.Maybe(_ => "?" + _.TrimStart(new[] { '?' }))), null);
-        }
+        } 
+#endif
 
         public void Get(CompanyFile cf, ICompanyFileCredentials credentials, Action<HttpStatusCode, CompanyFileWithResources> onComplete, Action<Uri, Exception> onError)
         {
@@ -55,10 +61,12 @@ namespace MYOB.AccountRight.SDK.Services
             return MakeApiGetRequestSync<CompanyFileWithResources>(cf.Uri, credentials);
         }
 
+#if ASYNC
         public Task<CompanyFileWithResources> GetAsync(CompanyFile cf, ICompanyFileCredentials credentials)
         {
             return MakeApiGetRequestAsync<CompanyFileWithResources>(cf.Uri, credentials);
-        }
+        } 
+#endif
 
         private Uri BuildUri(string postResource = null)
         {

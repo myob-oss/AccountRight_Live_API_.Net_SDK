@@ -1,5 +1,7 @@
 ﻿using System;
+#if ASYNC
 using System.Threading.Tasks;
+#endif
 using MYOB.AccountRight.SDK.Contracts.Version2;
 using MYOB.AccountRight.SDK.Contracts.Version2.GeneralLedger;
 
@@ -37,6 +39,7 @@ namespace MYOB.AccountRight.SDK.Services.GeneralLedger
             throw new NotSupportedException();
         }
 
+#if ASYNC
         public override Task<CategoryRegister> GetAsync(Contracts.CompanyFile cf, Guid uid, ICompanyFileCredentials credentials)
         {
             return Task.Factory.StartNew<CategoryRegister>(() => { throw new NotSupportedException(); });      
@@ -46,5 +49,6 @@ namespace MYOB.AccountRight.SDK.Services.GeneralLedger
         {
             return Task.Factory.StartNew<CategoryRegister>(() => { throw new NotSupportedException(); }); 
         }
+#endif
     }
 }

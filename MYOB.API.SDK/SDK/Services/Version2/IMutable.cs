@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Net;
+#if ASYNC
 using System.Threading.Tasks;
+#endif
 using MYOB.AccountRight.SDK.Contracts;
 using MYOB.AccountRight.SDK.Contracts.Version2;
 
@@ -25,7 +27,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="uid">The identifier of the entity to retrieve</param>
         /// <param name="credentials">The credentials to access the company file</param>
         void Delete(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials);
-
+#if ASYNC
         /// <summary>
         /// Delete an entity
         /// </summary>
@@ -34,7 +36,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="credentials">The credentials to access the company file</param>
         /// <returns></returns>
         Task DeleteAsync(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials);
-
+#endif
         /// <summary>
         /// Update an existing entity
         /// </summary>
@@ -54,6 +56,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <returns></returns>
         string Update(CompanyFile cf, T entity, ICompanyFileCredentials credentials);
 
+#if ASYNC
         /// <summary>
         /// Update an existing entity
         /// </summary>
@@ -62,7 +65,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="credentials">The credentials to access the company file</param>
         /// <returns></returns>
         Task<string> UpdateAsync(CompanyFile cf, T entity, ICompanyFileCredentials credentials);
-
+#endif
         /// <summary>
         /// Insert a new entity
         /// </summary>
@@ -81,7 +84,8 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="credentials">The credentials to access the company file</param>
         /// <returns></returns>
         string Insert(CompanyFile cf, T entity, ICompanyFileCredentials credentials);
-
+        
+#if ASYNC
         /// <summary>
         /// Insert a new entity
         /// </summary>
@@ -90,5 +94,6 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="credentials">The credentials to access the company file</param>
         /// <returns></returns>
         Task<string> InsertAsync(CompanyFile cf, T entity, ICompanyFileCredentials credentials);
+#endif
     }
 }

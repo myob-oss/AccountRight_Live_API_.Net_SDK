@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Net;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+#if ASYNC
+using System.Threading.Tasks; 
+#endif
 using MYOB.AccountRight.SDK.Communication;
 using MYOB.AccountRight.SDK.Contracts;
 using MYOB.AccountRight.SDK.Contracts.Version2;
@@ -50,10 +52,12 @@ namespace MYOB.AccountRight.SDK.Services
             return MakeApiGetRequestSync<T>(BuildUri(cf, uid), credentials);
         }
 
+#if ASYNC
         public virtual Task<T> GetAsync(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials)
         {
             return MakeApiGetRequestAsync<T>(BuildUri(cf, uid), credentials);
-        }
+        } 
+#endif
 
         public virtual void Get(CompanyFile cf, Uri uri, ICompanyFileCredentials credentials, Action<HttpStatusCode, T> onComplete, Action<Uri, Exception> onError)
         {
@@ -65,10 +69,12 @@ namespace MYOB.AccountRight.SDK.Services
             return MakeApiGetRequestSync<T>(ValidateUri(cf, uri), credentials);
         }
 
+#if ASYNC
         public virtual Task<T> GetAsync(CompanyFile cf, Uri uri, ICompanyFileCredentials credentials)
         {
             return MakeApiGetRequestAsync<T>(ValidateUri(cf, uri), credentials);
-        }
+        } 
+#endif
 
         public virtual void GetRange(CompanyFile cf, string queryString, ICompanyFileCredentials credentials, Action<HttpStatusCode, PagedCollection<T>> onComplete, Action<Uri, Exception> onError)
         {
@@ -80,9 +86,11 @@ namespace MYOB.AccountRight.SDK.Services
             return MakeApiGetRequestSync<PagedCollection<T>>(BuildUri(cf, null, queryString.Maybe(_ => "?" + _.TrimStart(new[] { '?' }))), credentials);
         }
 
+#if ASYNC
         public virtual Task<PagedCollection<T>> GetRangeAsync(CompanyFile cf, string queryString, ICompanyFileCredentials credentials)
         {
             return MakeApiGetRequestAsync<PagedCollection<T>>(BuildUri(cf, null, queryString.Maybe(_ => "?" + _.TrimStart(new[] { '?' }))), credentials);
-        }
+        } 
+#endif
     }
 }

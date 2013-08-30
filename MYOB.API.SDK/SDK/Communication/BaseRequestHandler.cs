@@ -3,12 +3,23 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Runtime.Serialization.Json;
 using System.Text;
-using System.Threading.Tasks;
 using MYOB.AccountRight.SDK.Extensions;
+
+#if ASYNC
+using System.Threading.Tasks;
+#endif
+
+#if PORTABLE
+using System.Runtime.Serialization.Json;
+#endif
+
+#if COMPRESSION
+using System.IO.Compression;
+#else
 using SharpCompress.Compressor;
 using SharpCompress.Compressor.Deflate;
+#endif
 
 namespace MYOB.AccountRight.SDK.Communication
 {
@@ -21,7 +32,8 @@ namespace MYOB.AccountRight.SDK.Communication
             public Action<HttpStatusCode, string, TR> OnComplete { get; set; }
             public Action<Uri, Exception> OnError { get; set; }
         }
-        
+
+#if ASYNC
         protected static async Task<Tuple<HttpStatusCode, string, T>> GetResponseTask<T>(WebRequest request) where T : class
         {
             var response = await request.GetResponseAsync();
@@ -35,6 +47,7 @@ namespace MYOB.AccountRight.SDK.Communication
             var entityNormal = ExtractEntity<T>(response);
             return new Tuple<HttpStatusCode, string, T>(statusCode, location, entityNormal);
         }
+#endif
 
         protected static void HandleResponseCallback<T, TReq, TResp>(IAsyncResult asynchronousResult)
             where T : RequestContext<TReq, TResp>

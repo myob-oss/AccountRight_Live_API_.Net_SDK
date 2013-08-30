@@ -6,25 +6,36 @@
         /// NoDefaults
         /// </summary>
         NoDefault,
+        
         /// <summary>
         /// Service
         /// </summary>
         Service,
+        
         /// <summary>
         /// Item
         /// </summary>
         Item,
+        
         /// <summary>
         /// Professional
         /// </summary>
         Professional,
-        ///// <summary>
-        ///// Time Billing
-        ///// </summary>
+        
+        /// <summary>
+        /// Time Billing
+        /// </summary>
         TimeBilling,
+        
         /// <summary>
         /// Miscellaneous
         /// </summary>
-        Miscellaneous
+        Miscellaneous,
+
+        /// <summary>
+        /// A preconversion invoice is readonly
+        /// </summary>
+        PreConversion,
+
     }
 }

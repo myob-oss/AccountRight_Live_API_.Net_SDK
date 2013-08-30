@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Net;
+#if ASYNC
 using System.Threading.Tasks;
+#endif
 using MYOB.AccountRight.SDK.Communication;
 using MYOB.AccountRight.SDK.Contracts;
 using MYOB.AccountRight.SDK.Contracts.Version2;
@@ -19,10 +21,12 @@ namespace MYOB.AccountRight.SDK.Services
             MakeApiDeleteRequestSync(BuildUri(cf, uid), credentials);
         }
 
+#if ASYNC
         public virtual Task DeleteAsync(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials)
         {
             return MakeApiDeleteRequestAsync(BuildUri(cf, uid), credentials);
         }
+#endif
 
         public virtual void Delete(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, Action<HttpStatusCode> onComplete, Action<Uri, Exception> onError)
         {
@@ -34,10 +38,12 @@ namespace MYOB.AccountRight.SDK.Services
             return MakeApiPutRequestSync(BuildUri(cf, entity.UID), entity, credentials);
         }
 
+#if ASYNC
         public virtual Task<string> UpdateAsync(CompanyFile cf, T entity, ICompanyFileCredentials credentials)
         {
             return MakeApiPutRequestAsync(BuildUri(cf, entity.UID), entity, credentials);
         }
+#endif
 
         public virtual void Update(CompanyFile cf, T entity, ICompanyFileCredentials credentials, Action<HttpStatusCode, string> onComplete, Action<Uri, Exception> onError)
         {
@@ -54,9 +60,11 @@ namespace MYOB.AccountRight.SDK.Services
             MakeApiPostRequestDelegate(BuildUri(cf), entity, credentials, onComplete, onError);
         }
 
+#if ASYNC
         public virtual Task<string> InsertAsync(CompanyFile cf, T entity, ICompanyFileCredentials credentials)
         {
             return MakeApiPostRequestAsync(BuildUri(cf), entity, credentials);
         }
+#endif
     }
 }

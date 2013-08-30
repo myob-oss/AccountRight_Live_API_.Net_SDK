@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Net;
-using System.Threading.Tasks;
+#if ASYNC
+using System.Threading.Tasks; 
+#endif
 using MYOB.AccountRight.SDK.Contracts;
 using MYOB.AccountRight.SDK.Contracts.Version2;
 
@@ -26,6 +28,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="credentials">The credentials to access the company file</param>
         void DeletePhoto(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials);
 
+#if ASYNC
         /// <summary>
         /// Delete a photo of an entity
         /// </summary>
@@ -33,7 +36,8 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="uid">The identifier of the entity to retrieve</param>
         /// <param name="credentials">The credentials to access the company file</param>
         /// <returns></returns>
-        Task DeletePhotoAsync(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials);
+        Task DeletePhotoAsync(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials); 
+#endif
 
         /// <summary>
         /// Save/Update a photo of an entity
@@ -56,6 +60,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <returns></returns>
         string SavePhoto(CompanyFile cf, Guid uid, byte[] photoData, ICompanyFileCredentials credentials);
 
+#if ASYNC
         /// <summary>
         /// Save/Update a photo of an entity
         /// </summary>
@@ -64,6 +69,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="photoData">The image binary</param>
         /// <param name="credentials">The credentials to access the company file</param>
         /// <returns></returns>
-        Task<string> SavePhotoAsync(CompanyFile cf, Guid uid, byte[] photoData, ICompanyFileCredentials credentials);
+        Task<string> SavePhotoAsync(CompanyFile cf, Guid uid, byte[] photoData, ICompanyFileCredentials credentials); 
+#endif
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Net;
-using System.Threading.Tasks;
+#if ASYNC
+using System.Threading.Tasks; 
+#endif
 using MYOB.AccountRight.SDK.Contracts;
 
 namespace MYOB.AccountRight.SDK.Services
@@ -22,12 +24,14 @@ namespace MYOB.AccountRight.SDK.Services
         /// <returns></returns>
         OAuthTokens GetTokens(string code);
 
+#if ASYNC
         /// <summary>
         /// Get the OAuth tokens required to access the cloud based API (Asynchronous)
         /// </summary>
         /// <param name="code"></param>
         /// <returns></returns>
-        Task<OAuthTokens> GetTokensAsync(string code);
+        Task<OAuthTokens> GetTokensAsync(string code); 
+#endif
 
         /// <summary>
         /// Renew the OAuth tokens required to access the cloud based API (Delegate)
@@ -44,11 +48,13 @@ namespace MYOB.AccountRight.SDK.Services
         /// <returns></returns>
         OAuthTokens RenewTokens(OAuthTokens oauthTokens);
 
+#if ASYNC
         /// <summary>
         /// Renew the OAuth tokens required to access the cloud based API (Asynchronous)
         /// </summary>
         /// <param name="oauthTokens"></param>
         /// <returns></returns>
-        Task<OAuthTokens> RenewTokensAsync(OAuthTokens oauthTokens);
+        Task<OAuthTokens> RenewTokensAsync(OAuthTokens oauthTokens); 
+#endif
     }
 }

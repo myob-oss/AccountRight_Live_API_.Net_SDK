@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Net;
-using System.Threading.Tasks;
+#if ASYNC
+using System.Threading.Tasks; 
+#endif
 using MYOB.AccountRight.SDK.Contracts;
 using MYOB.AccountRight.SDK.Contracts.Version2;
 
@@ -27,6 +29,8 @@ namespace MYOB.AccountRight.SDK.Services
         /// <returns></returns>
         T Get(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials);
 
+#if ASYNC
+
         /// <summary>
         /// Retrieve an entity
         /// </summary>
@@ -34,7 +38,8 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="uid">The identifier of the entity to retrieve</param>
         /// <param name="credentials">The credentials to access the company file</param>
         /// <returns></returns>
-        Task<T> GetAsync(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials);
+        Task<T> GetAsync(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials); 
+#endif
 
         /// <summary>
         /// Retrieve an entity
@@ -55,6 +60,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <returns></returns>
         T Get(CompanyFile cf, Uri uri, ICompanyFileCredentials credentials);
 
+#if ASYNC
         /// <summary>
         /// Retrieve an entity
         /// </summary>
@@ -62,7 +68,8 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="uri">The uri of the entity to retrieve</param>
         /// <param name="credentials">The credentials to access the company file</param>
         /// <returns></returns>
-        Task<T> GetAsync(CompanyFile cf, Uri uri, ICompanyFileCredentials credentials);
+        Task<T> GetAsync(CompanyFile cf, Uri uri, ICompanyFileCredentials credentials); 
+#endif
 
         /// <summary>
         /// Retrieve a paged list of entities
@@ -83,6 +90,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <returns></returns>
         PagedCollection<T> GetRange(CompanyFile cf, string queryString, ICompanyFileCredentials credentials);
 
+#if ASYNC
         /// <summary>
         /// Retrieve a paged list of entities
         /// </summary>
@@ -90,6 +98,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="queryString">An odata filter</param>
         /// <param name="credentials">The credentials to access the company file</param>
         /// <returns></returns>
-        Task<PagedCollection<T>> GetRangeAsync(CompanyFile cf, string queryString, ICompanyFileCredentials credentials);
+        Task<PagedCollection<T>> GetRangeAsync(CompanyFile cf, string queryString, ICompanyFileCredentials credentials); 
+#endif
     }
 }

@@ -4,7 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+#if ASYNC
 using System.Threading.Tasks;
+#endif
 using MYOB.AccountRight.SDK.Contracts;
 using MYOB.AccountRight.SDK.Extensions;
 
@@ -36,12 +38,14 @@ namespace MYOB.AccountRight.SDK.Communication
                                          });
         }
 
+#if ASYNC
         async public Task<Tuple<HttpStatusCode, T>> GetAsync<T>(WebRequest request) where T : class
         {
             SetStandardHeaders(request, _credentials.Maybe(_ => _.Username), _credentials.Maybe(_ => _.Password));
             var get = await GetResponseTask<T>(request);
             return new Tuple<HttpStatusCode, T>(get.Item1, get.Item3);
         }
+#endif
 
         public void Delete(WebRequest request, Action<HttpStatusCode> onComplete, Action<Uri, Exception> onError) 
         {
@@ -56,12 +60,14 @@ namespace MYOB.AccountRight.SDK.Communication
                                      });
         }
 
+#if ASYNC
         async public Task DeleteAsync(WebRequest request)
         {
             SetStandardHeaders(request, _credentials.Maybe(_ => _.Username), _credentials.Maybe(_ => _.Password));
             request.Method = "DELETE";
             await GetResponseTask<string>(request);
         }
+#endif
 
         public void Put<T>(WebRequest request, T entity, Action<HttpStatusCode, string> onComplete, Action<Uri, Exception> onError)
         {
@@ -78,6 +84,7 @@ namespace MYOB.AccountRight.SDK.Communication
                                      });
         }
 
+#if ASYNC
         async public Task<string> PutAsync<T>(WebRequest request, T entity) where T : class
         {
             SetStandardHeaders(request, _credentials.Maybe(_ => _.Username), _credentials.Maybe(_ => _.Password));
@@ -86,6 +93,7 @@ namespace MYOB.AccountRight.SDK.Communication
             var res = await GetRequestStreamTask(request, entity).ContinueWith(t => GetResponseTask<T>(t.Result));
             return res.Result.Item2;
         }
+#endif
 
         public void Post<T>(WebRequest request, T entity, Action<HttpStatusCode, string> onComplete, Action<Uri, Exception> onError)
         {
@@ -102,6 +110,7 @@ namespace MYOB.AccountRight.SDK.Communication
                                      });
         }
 
+#if ASYNC
         async public Task<string> PostAsync<T>(WebRequest request, T entity) where T : class
         {
             SetStandardHeaders(request, _credentials.Maybe(_ => _.Username), _credentials.Maybe(_ => _.Password));
@@ -110,7 +119,9 @@ namespace MYOB.AccountRight.SDK.Communication
             var res = await GetRequestStreamTask(request, entity).ContinueWith(t => GetResponseTask<T>(t.Result));
             return res.Result.Item2;
         }
+#endif
 
+#if ASYNC
         private static async Task<WebRequest> GetRequestStreamTask<T>(WebRequest request, T entity) where T : class
         {
             using (var stream = await request.GetRequestStreamAsync())
@@ -122,6 +133,7 @@ namespace MYOB.AccountRight.SDK.Communication
             }
             return request;
         }
+#endif
 
         private static void HandleRequestCallback<T>(IAsyncResult asynchronousResult)
         {

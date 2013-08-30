@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Net;
-using System.Threading.Tasks;
+#if ASYNC
+using System.Threading.Tasks; 
+#endif
 using MYOB.AccountRight.SDK.Contracts;
 
 namespace MYOB.AccountRight.SDK.Services
@@ -20,12 +22,14 @@ namespace MYOB.AccountRight.SDK.Services
         /// <returns></returns>
         CompanyFile[] GetRange();
 
+#if ASYNC
         /// <summary>
         /// Get list of available company fies
         /// </summary>
         /// <returns></returns>
         Task<CompanyFile[]> GetRangeAsync();
-
+        
+#endif
         /// <summary>
         /// Get list of available company fies
         /// </summary>
@@ -41,13 +45,14 @@ namespace MYOB.AccountRight.SDK.Services
         /// <returns></returns>
         CompanyFile[] GetRange(string queryString);
 
+#if ASYNC
         /// <summary>
         /// Get list of available company fies
         /// </summary>
         /// <param name="queryString">An odata filter</param>
         /// <returns></returns>
-        Task<CompanyFile[]> GetRangeAsync(string queryString);
-
+        Task<CompanyFile[]> GetRangeAsync(string queryString);        
+#endif
         /// <summary>
         /// Get a company file entry with the list of available resources
         /// </summary>
@@ -65,12 +70,14 @@ namespace MYOB.AccountRight.SDK.Services
         /// <returns></returns>
         CompanyFileWithResources Get(CompanyFile cf, ICompanyFileCredentials credentials);
 
+#if ASYNC
         /// <summary>
         /// Get a company file entry with the list of available resources
         /// </summary>
         /// <param name="cf">A company file that has been retrieved</param>
         /// <param name="credentials">The credentials to access the company file</param>
         /// <returns></returns>
-        Task<CompanyFileWithResources> GetAsync(CompanyFile cf, ICompanyFileCredentials credentials);
+        Task<CompanyFileWithResources> GetAsync(CompanyFile cf, ICompanyFileCredentials credentials); 
+#endif
     }
 }

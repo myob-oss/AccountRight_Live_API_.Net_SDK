@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Net;
-using System.Threading.Tasks;
+#if ASYNC
+using System.Threading.Tasks; 
+#endif
 using MYOB.AccountRight.SDK.Contracts;
 using MYOB.AccountRight.SDK.Contracts.Version2;
 
@@ -27,6 +29,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <returns></returns>
         byte[] GetPhoto(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials);
 
+#if ASYNC
         /// <summary>
         /// Get the photo of an entity
         /// </summary>
@@ -34,6 +37,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="uid">The identifier of the entity to retrieve</param>
         /// <param name="credentials">The credentials to access the company file</param>
         /// <returns></returns>
-        Task<byte[]> GetPhotoAsync(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials);
+        Task<byte[]> GetPhotoAsync(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials); 
+#endif
     }
 }
