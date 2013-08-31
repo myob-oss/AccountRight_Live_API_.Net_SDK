@@ -60,6 +60,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\SDK\Services\Version2\Contact\ContactService.cs">
+      <Link>Services\ContactService.cs</Link>
+    </Compile>
     <Compile Include="ApiConfigurationTests.cs" />
     <Compile Include="Communication\ApiRequestHandlerTests.cs" />
     <Compile Include="Communication\BaseRequestHandlerTests.cs" />
