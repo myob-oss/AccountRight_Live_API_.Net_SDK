@@ -59,6 +59,11 @@ namespace SDK.Test.Services
                     {
                         return service.Get(cf, _uid, null);
                     }),
+                new Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>("Async", 
+                    (service, cf) =>
+                    {
+                        return service.GetAsync(cf, _uid, null).Result;
+                    }),
             };
 
 
@@ -78,7 +83,7 @@ namespace SDK.Test.Services
 
         private readonly Tuple<string, Func<TestReadOnlyService, CompanyFile, PagedCollection<UserContract>>>[] _getRangeActions = new[]
             {
-                new Tuple<string, Func<TestReadOnlyService, CompanyFile, PagedCollection<UserContract>>>("Async", 
+                new Tuple<string, Func<TestReadOnlyService, CompanyFile, PagedCollection<UserContract>>>("Delegate", 
                     (service, cf) =>
                     {
                         PagedCollection<UserContract> received = null;
@@ -89,6 +94,11 @@ namespace SDK.Test.Services
                     (service, cf) =>
                     {
                         return service.GetRange(cf, null, null);
+                    }),
+                new Tuple<string, Func<TestReadOnlyService, CompanyFile, PagedCollection<UserContract>>>("Async", 
+                    (service, cf) =>
+                    {
+                        return service.GetRangeAsync(cf, null, null).Result;
                     }),
             };
 
@@ -109,7 +119,7 @@ namespace SDK.Test.Services
 
         private readonly Tuple<string, Func<TestReadOnlyService, CompanyFile, PagedCollection<UserContract>>>[] _getRangeQueryActions = new[]
             {
-                new Tuple<string, Func<TestReadOnlyService, CompanyFile, PagedCollection<UserContract>>>("Async", 
+                new Tuple<string, Func<TestReadOnlyService, CompanyFile, PagedCollection<UserContract>>>("Delegate", 
                     (service, cf) =>
                     {
                         PagedCollection<UserContract> received = null;
@@ -120,6 +130,11 @@ namespace SDK.Test.Services
                     (service, cf) =>
                     {
                         return service.GetRange(cf, "$filter=UID eq guid'2BB63466-1A6C-4757-B3B8-D8B799D641E9'", null);
+                    }),
+                new Tuple<string, Func<TestReadOnlyService, CompanyFile, PagedCollection<UserContract>>>("Async", 
+                    (service, cf) =>
+                    {
+                        return service.GetRangeAsync(cf, "$filter=UID eq guid'2BB63466-1A6C-4757-B3B8-D8B799D641E9'", null).Result;
                     }),
             };
 
@@ -152,6 +167,11 @@ namespace SDK.Test.Services
                     {
                         return service.Get(cf, new Uri(cf.Uri.AbsoluteUri + "/Test/User/Contract/" + _uid), null);
                     }),
+                new Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>("Async", 
+                    (service, cf) =>
+                    {
+                        return service.GetAsync(cf, new Uri(cf.Uri.AbsoluteUri + "/Test/User/Contract/" + _uid), null).Result;
+                    }),
             };
 
         [Test]
@@ -170,7 +190,7 @@ namespace SDK.Test.Services
 
         private readonly Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>[] _getByInvalidUriActions = new[]
             {
-                new Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>("AsyncBadCF", 
+                new Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>("DelegateBadCF", 
                     (service, cf) =>
                     {
                         UserContract received = null;
@@ -182,7 +202,12 @@ namespace SDK.Test.Services
                     {
                         return service.Get(cf, new Uri("http://localhost/accountright" + "/Test/User/Contract/" + _uid), null);
                     }),
-                new Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>("AsyncBadRoute", 
+                new Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>("AsyncBadCF", 
+                    (service, cf) =>
+                    {
+                        return service.GetAsync(cf, new Uri("http://localhost/accountright" + "/Test/User/Contract/" + _uid), null).Result;
+                    }),
+                new Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>("DelegateBadRoute", 
                     (service, cf) =>
                     {
                         UserContract received = null;
@@ -194,7 +219,12 @@ namespace SDK.Test.Services
                     {
                         return service.Get(cf, new Uri(cf.Uri.AbsoluteUri + "/Test/UnexpectedRoute/" + _uid.ToString().ToUpper()), null);
                     }),
-                new Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>("AsyncInvalidUID", 
+                new Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>("AsyncBadRoute", 
+                    (service, cf) =>
+                    {
+                        return service.GetAsync(cf, new Uri(cf.Uri.AbsoluteUri + "/Test/UnexpectedRoute/" + _uid.ToString().ToUpper()), null).Result;
+                    }),
+                new Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>("DelegateInvalidUID", 
                     (service, cf) =>
                     {
                         UserContract received = null;
@@ -205,6 +235,11 @@ namespace SDK.Test.Services
                     (service, cf) =>
                     {
                         return service.Get(cf, new Uri(cf.Uri.AbsoluteUri + "/Test/User/Contract/" + "Item1"), null);
+                    }),
+                new Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>("AsyncInvalidUID", 
+                    (service, cf) =>
+                    {
+                        return service.GetAsync(cf, new Uri(cf.Uri.AbsoluteUri + "/Test/User/Contract/" + "Item1"), null).Result;
                     }),
             };
 

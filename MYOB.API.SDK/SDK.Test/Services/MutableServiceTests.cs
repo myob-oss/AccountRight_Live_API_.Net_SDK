@@ -48,17 +48,23 @@ namespace SDK.Test.Services
 
         private readonly Tuple<string, Func<TestReadOnlyService, CompanyFile, bool>>[] _deleteActions = new[]
             {
-                new Tuple<string, Func<TestReadOnlyService, CompanyFile, bool>>("Async", 
+                new Tuple<string, Func<TestReadOnlyService, CompanyFile, bool>>("Delegate", 
                     (service, cf) =>
-                        {
-                            var ret = false;
-                            service.Delete(cf, _uid, null, (code) => { ret = true; }, (uri, exception) => Assert.Fail(exception.Message));
-                            return ret;
-                        }),
+                    {
+                        var ret = false;
+                        service.Delete(cf, _uid, null, (code) => { ret = true; }, (uri, exception) => Assert.Fail(exception.Message));
+                        return ret;
+                    }),
                 new Tuple<string, Func<TestReadOnlyService, CompanyFile, bool>>("Sync", 
                     (service, cf) =>
                     {
                         service.Delete(cf, _uid, null);
+                        return true;
+                    }),
+                new Tuple<string, Func<TestReadOnlyService, CompanyFile, bool>>("Async", 
+                    (service, cf) =>
+                    {
+                        service.DeleteAsync(cf, _uid, null);
                         return true;
                     }),
             };
@@ -80,7 +86,7 @@ namespace SDK.Test.Services
 
         private readonly Tuple<string, Func<TestReadOnlyService, CompanyFile, string>>[] _postActions = new[]
             {
-                new Tuple<string, Func<TestReadOnlyService, CompanyFile, string>>("Async", 
+                new Tuple<string, Func<TestReadOnlyService, CompanyFile, string>>("Delegate", 
                     (service, cf) =>
                     {
                         string received = null;
@@ -91,6 +97,11 @@ namespace SDK.Test.Services
                     (service, cf) =>
                     {
                         return service.Insert(cf, new UserContract() {UID = UID}, null);
+                    }),
+                new Tuple<string, Func<TestReadOnlyService, CompanyFile, string>>("Async", 
+                    (service, cf) =>
+                    {
+                        return service.InsertAsync(cf, new UserContract() {UID = UID}, null).Result;
                     }),
             };
 
@@ -114,7 +125,7 @@ namespace SDK.Test.Services
 
         private readonly Tuple<string, Func<TestReadOnlyService, CompanyFile, string>>[] _putActions = new[]
             {
-                new Tuple<string, Func<TestReadOnlyService, CompanyFile, string>>("Async", 
+                new Tuple<string, Func<TestReadOnlyService, CompanyFile, string>>("Delegate", 
                     (service, cf) =>
                     {
                         string received = null;
@@ -126,8 +137,12 @@ namespace SDK.Test.Services
                     {
                         return service.Update(cf, new UserContract() { UID = UID }, null);
                     }),
+                new Tuple<string, Func<TestReadOnlyService, CompanyFile, string>>("Async", 
+                    (service, cf) =>
+                    {
+                        return service.UpdateAsync(cf, new UserContract() { UID = UID }, null).Result;
+                    }),
             };
-
 
         [Test]
         public void WePutContactUsingCompanyFileBaseUrl([ValueSource("_putActions")] Tuple<string, Func<TestReadOnlyService, CompanyFile, string>> action)

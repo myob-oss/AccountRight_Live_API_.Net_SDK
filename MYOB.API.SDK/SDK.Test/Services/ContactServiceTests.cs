@@ -42,7 +42,7 @@ namespace SDK.Test.Services
 
         private readonly Tuple<string, Func<ContactService, CompanyFile, byte[]>>[] _getPhotoActions = new[]
             {
-                new Tuple<string, Func<ContactService, CompanyFile, byte[]>>("Async", 
+                new Tuple<string, Func<ContactService, CompanyFile, byte[]>>("Delegate", 
                     (service, cf) =>
                     {
                         byte[] received = null;
@@ -53,6 +53,11 @@ namespace SDK.Test.Services
                     (service, cf) =>
                     {
                         return service.GetPhoto(cf, _uid, null);
+                    }),
+                new Tuple<string, Func<ContactService, CompanyFile, byte[]>>("Async", 
+                    (service, cf) =>
+                    {
+                        return service.GetPhotoAsync(cf, _uid, null).Result;
                     }),
             };
 

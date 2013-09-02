@@ -42,6 +42,28 @@ namespace SDK.Test.Communication
         }
 
         [Test]
+        async public void DuringGetRequest_Async_ExpectedHeadersAreAttached()
+        {
+            // arrange
+            var factory = new TestWebRequestFactory();
+            factory.RegisterResultForUri("http://localhost", new UserContract() { Name = "David" }.ToJson());
+            var request = factory.Create(new Uri("http://localhost"));
+
+            var handler = new ApiRequestHandler(new ApiConfiguration("<<clientid>>", "<<clientsecret>>", "<<redirecturl>>"), new CompanyFileCredentials("user", "pass"));
+
+            // act
+            var res = await handler.GetAsync<UserContract>(request);
+
+            // assert
+            Assert.IsTrue(request.Headers[HttpRequestHeader.Authorization].StartsWith("Bearer"));
+            Assert.IsTrue(request.Headers[HttpRequestHeader.AcceptEncoding].Split(new[] { ',' }).Contains("gzip"));
+
+            Assert.AreEqual("<<clientid>>", request.Headers["x-myobapi-key"]);
+            Assert.AreEqual("v2", request.Headers["x-myobapi-version"]);
+            Assert.AreEqual(Convert.ToBase64String(Encoding.UTF8.GetBytes("user:pass")), request.Headers["x-myobapi-cftoken"]);
+        }
+
+        [Test]
         public void DuringDeleteRequestExpectedHeadersAreAttached()
         {
             // arrange
@@ -53,6 +75,29 @@ namespace SDK.Test.Communication
 
             // act
             handler.Delete(request, (code) => { }, (uri, exception) => Assert.Fail(exception.Message));
+
+            // assert
+            Assert.AreEqual("DELETE", request.Method);
+            Assert.IsTrue(request.Headers[HttpRequestHeader.Authorization].StartsWith("Bearer"));
+            Assert.IsTrue(request.Headers[HttpRequestHeader.AcceptEncoding].Split(new[] { ',' }).Contains("gzip"));
+
+            Assert.AreEqual("<<clientid>>", request.Headers["x-myobapi-key"]);
+            Assert.AreEqual("v2", request.Headers["x-myobapi-version"]);
+            Assert.AreEqual(Convert.ToBase64String(Encoding.UTF8.GetBytes("user:pass")), request.Headers["x-myobapi-cftoken"]);
+        }
+
+        [Test]
+        async public void DuringDeleteRequest_Async_ExpectedHeadersAreAttached()
+        {
+            // arrange
+            var factory = new TestWebRequestFactory();
+            factory.RegisterResultForUri("http://localhost", "");
+            var request = factory.Create(new Uri("http://localhost"));
+
+            var handler = new ApiRequestHandler(new ApiConfiguration("<<clientid>>", "<<clientsecret>>", "<<redirecturl>>"), new CompanyFileCredentials("user", "pass"));
+
+            // act
+            await handler.DeleteAsync(request);
 
             // assert
             Assert.AreEqual("DELETE", request.Method);
@@ -88,6 +133,29 @@ namespace SDK.Test.Communication
         }
 
         [Test]
+        async public void DuringPutRequest_Async_ExpectedHeadersAreAttached()
+        {
+            // arrange
+            var factory = new TestWebRequestFactory();
+            factory.RegisterResultForUri("http://localhost", "");
+            var request = factory.Create(new Uri("http://localhost"));
+
+            var handler = new ApiRequestHandler(new ApiConfiguration("<<clientid>>", "<<clientsecret>>", "<<redirecturl>>"), new CompanyFileCredentials("user", "pass"));
+
+            // act
+            await handler.PutAsync(request, new UserContract() { Name = "Paul" });
+
+            // assert
+            Assert.AreEqual("PUT", request.Method);
+            Assert.IsTrue(request.Headers[HttpRequestHeader.Authorization].StartsWith("Bearer"));
+            Assert.IsTrue(request.Headers[HttpRequestHeader.AcceptEncoding].Split(new[] { ',' }).Contains("gzip"));
+
+            Assert.AreEqual("<<clientid>>", request.Headers["x-myobapi-key"]);
+            Assert.AreEqual("v2", request.Headers["x-myobapi-version"]);
+            Assert.AreEqual(Convert.ToBase64String(Encoding.UTF8.GetBytes("user:pass")), request.Headers["x-myobapi-cftoken"]);
+        }
+
+        [Test]
         public void DuringPostRequestExpectedHeadersAreAttached()
         {
             // arrange
@@ -99,6 +167,29 @@ namespace SDK.Test.Communication
 
             // act
             handler.Post(request, new UserContract() { Name = "Paul" }, (code, location) => { }, (uri, exception) => Assert.Fail(exception.Message));
+
+            // assert
+            Assert.AreEqual("POST", request.Method);
+            Assert.IsTrue(request.Headers[HttpRequestHeader.Authorization].StartsWith("Bearer"));
+            Assert.IsTrue(request.Headers[HttpRequestHeader.AcceptEncoding].Split(new[] { ',' }).Contains("gzip"));
+
+            Assert.AreEqual("<<clientid>>", request.Headers["x-myobapi-key"]);
+            Assert.AreEqual("v2", request.Headers["x-myobapi-version"]);
+            Assert.AreEqual(Convert.ToBase64String(Encoding.UTF8.GetBytes("user:pass")), request.Headers["x-myobapi-cftoken"]);
+        }
+
+        [Test]
+        async public void DuringPostRequest_Async_ExpectedHeadersAreAttached()
+        {
+            // arrange
+            var factory = new TestWebRequestFactory();
+            factory.RegisterResultForUri("http://localhost", "");
+            var request = factory.Create(new Uri("http://localhost"));
+
+            var handler = new ApiRequestHandler(new ApiConfiguration("<<clientid>>", "<<clientsecret>>", "<<redirecturl>>"), new CompanyFileCredentials("user", "pass"));
+
+            // act
+            await handler.PostAsync(request, new UserContract() { Name = "Paul" });
 
             // assert
             Assert.AreEqual("POST", request.Method);
@@ -134,6 +225,29 @@ namespace SDK.Test.Communication
         }
 
         [Test]
+        async public void TheEntityIsPlacedOnTheOutgoingStreamInJsonFormatDuringPutAsync()
+        {
+            // arrange
+            var factory = new TestWebRequestFactory();
+            factory.RegisterResultForUri("http://localhost", "");
+            var request = factory.Create(new Uri("http://localhost"));
+
+            var stream = new MemoryStream();
+            request.EndGetRequestStream(Arg.Any<IAsyncResult>()).Returns(c => stream);
+
+            var handler = new ApiRequestHandler(new ApiConfiguration("<<clientid>>", "<<clientsecret>>", "<<redirecturl>>"), null);
+
+            // act
+            await handler.PutAsync(request, new UserContract() { Name = "Paul" });
+
+            // assert
+            var reader = new StreamReader(new MemoryStream(stream.ToArray()));
+            var data = reader.ReadToEnd().FromJson<UserContract>();
+
+            Assert.AreEqual("Paul", data.Name);
+        }
+
+        [Test]
         public void TheEntityIsPlacedOnTheOutgoingStreamInJsonFormatDuringPost()
         {
             // arrange
@@ -148,6 +262,29 @@ namespace SDK.Test.Communication
 
             // act
             handler.Post(request, new UserContract() { Name = "Paul" }, (code, location) => { }, (uri, exception) => Assert.Fail(exception.Message));
+
+            // assert
+            var reader = new StreamReader(new MemoryStream(stream.ToArray()));
+            var data = reader.ReadToEnd().FromJson<UserContract>();
+
+            Assert.AreEqual("Paul", data.Name);
+        }
+
+        [Test]
+        async public void TheEntityIsPlacedOnTheOutgoingStreamInJsonFormatDuringPostAsync()
+        {
+            // arrange
+            var factory = new TestWebRequestFactory();
+            factory.RegisterResultForUri("http://localhost", "");
+            var request = factory.Create(new Uri("http://localhost"));
+
+            var stream = new MemoryStream();
+            request.EndGetRequestStream(Arg.Any<IAsyncResult>()).Returns(c => stream);
+
+            var handler = new ApiRequestHandler(new ApiConfiguration("<<clientid>>", "<<clientsecret>>", "<<redirecturl>>"), null);
+
+            // act
+            await handler.PostAsync(request, new UserContract() { Name = "Paul" });
 
             // assert
             var reader = new StreamReader(new MemoryStream(stream.ToArray()));
@@ -178,6 +315,66 @@ namespace SDK.Test.Communication
             Assert.AreEqual("http://localhost/ABC", savedLocation);
         }
 
+        [Test]
+        async public void TheLocationIsReturnedAfterASuccesfulPostAsync()
+        {
+            // arrange
+            var factory = new TestWebRequestFactory();
+            factory.RegisterResultForUri("http://localhost", "", HttpStatusCode.OK, "http://localhost/ABC");
+            var request = factory.Create(new Uri("http://localhost"));
 
+            var stream = new MemoryStream();
+            request.EndGetRequestStream(Arg.Any<IAsyncResult>()).Returns(c => stream);
+
+            var handler = new ApiRequestHandler(new ApiConfiguration("<<clientid>>", "<<clientsecret>>", "<<redirecturl>>"), null);
+
+            // act
+            var res = await handler.PostAsync(request, new UserContract() { Name = "Paul" });
+
+            // assert
+            Assert.AreEqual("http://localhost/ABC", res);
+        }
+
+        [Test]
+        public void TheLocationIsReturnedAfterASuccesfulPut()
+        {
+            // arrange
+            var factory = new TestWebRequestFactory();
+            factory.RegisterResultForUri("http://localhost", "", HttpStatusCode.OK, "http://localhost/ABC");
+            var request = factory.Create(new Uri("http://localhost"));
+
+            var stream = new MemoryStream();
+            request.EndGetRequestStream(Arg.Any<IAsyncResult>()).Returns(c => stream);
+
+            var handler = new ApiRequestHandler(new ApiConfiguration("<<clientid>>", "<<clientsecret>>", "<<redirecturl>>"), null);
+            string savedLocation = null;
+
+            // act
+            handler.Put(request, new UserContract() { Name = "Paul" }, (code, location) =>
+            { savedLocation = location; }, (uri, exception) => Assert.Fail(exception.Message));
+
+            // assert
+            Assert.AreEqual("http://localhost/ABC", savedLocation);
+        }
+
+        [Test]
+        async public void TheLocationIsReturnedAfterASuccesfulPutAsync()
+        {
+            // arrange
+            var factory = new TestWebRequestFactory();
+            factory.RegisterResultForUri("http://localhost", "", HttpStatusCode.OK, "http://localhost/ABC");
+            var request = factory.Create(new Uri("http://localhost"));
+
+            var stream = new MemoryStream();
+            request.EndGetRequestStream(Arg.Any<IAsyncResult>()).Returns(c => stream);
+
+            var handler = new ApiRequestHandler(new ApiConfiguration("<<clientid>>", "<<clientsecret>>", "<<redirecturl>>"), null);
+
+            // act
+            var res = await handler.PutAsync(request, new UserContract() { Name = "Paul" });
+
+            // assert
+            Assert.AreEqual("http://localhost/ABC", res);
+        }
     }
 }

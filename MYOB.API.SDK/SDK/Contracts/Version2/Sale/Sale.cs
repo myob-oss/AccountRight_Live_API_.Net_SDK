@@ -5,13 +5,39 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
 {
     public class Sale : BaseEntity
     {
+        /// <summary>
+        /// Sales invoice number
+        /// </summary>
         public string Number { get; set; }
-        public DateTime Date { get; set; }
-        public string CustomerPurchaseOrderNumber { get; set; }
-        public CardLink Customer { get; set; }
-        public DateTime? PromisedDate { get; set; }
-        public decimal BalanceDueAmount { get; set; }
-        public SaleStatus Status { get; set; }
 
+        /// <summary>
+        /// Transaction date entry
+        /// </summary>
+        public DateTime Date { get; set; }
+
+        /// <summary>
+        /// Customer PO number
+        /// </summary>
+        public string CustomerPurchaseOrderNumber { get; set; }
+
+        /// <summary>
+        /// The customer
+        /// </summary>
+        public CardLink Customer { get; set; }
+
+        /// <summary>
+        /// Transaction promised date
+        /// </summary>
+        public DateTime? PromisedDate { get; set; }
+
+        /// <summary>
+        /// Amount still payable on the sales invoice
+        /// </summary>
+        public decimal BalanceDueAmount { get; set; }
+
+        /// <summary>
+        /// Invoice status
+        /// </summary>
+        public SaleStatus Status { get; set; }
     }
 }

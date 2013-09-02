@@ -28,5 +28,16 @@ namespace MYOB.AccountRight.SDK.Services.GeneralLedger
         {
             base.GetRange(cf, null, credentials, (code, collection) => onComplete(code, collection.Items.Maybe(_ => _[0])), onError);
         }
+
+#if ASYNC
+		public override System.Threading.Tasks.Task<AccountingProperties> GetAsync(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials)
+        {
+            return base.GetRangeAsync(cf, null, credentials).ContinueWith<AccountingProperties>(t =>
+                {
+                    return t.Result.Items[0];
+                });
+        }  
+#endif   
+ 
     }
 }

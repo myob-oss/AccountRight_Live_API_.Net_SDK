@@ -11,6 +11,7 @@ The official release of the SDK can be found on [NUGET](http://www.nuget.org/pac
 The supplied batch file file `build.bat` can be used from a command prompt to build and test the SDK and will do the following:
 
 1. Pull all required Nuget packages,
+2. Generate a snk for personal use if one does not exist
 2. Compile the SDK and test suite,
 3. Execute all tests and generate coverage report.
 
@@ -39,4 +40,4 @@ The MYOB SDK uses the following 3rd party (via NUGET) packages
 
 1. [SharpCompress](https://github.com/adamhathcock/sharpcompress)
 2. [JSON.NET](http://james.newtonking.com/projects/json-net.aspx)
-3. [PCLWebUtility](http://axilis.hr/webutility-portable-class-library)
+3. [Bcl.Async](https://www.nuget.org/packages/Microsoft.Bcl.Async)

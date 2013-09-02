@@ -23,11 +23,20 @@ namespace SDK.Test.Services
         }
 
         [Test]
-        public void PutAsyncIsNotSupported()
+        public void PutDelegateIsNotSupported()
         {
             var service = new CustomerPaymentService(null, null);
 
             Assert.Throws<NotSupportedException>(() => service.Update(null, null, null, (code, s) => {}, (uri, exception) => {}));
+        }
+
+        [Test]
+        public void PutAsyncIsNotSupported()
+        {
+            var service = new CustomerPaymentService(null, null);
+
+            var ex = Assert.Throws<AggregateException>(() => service.UpdateAsync(null, null, null).Wait());
+            Assert.IsInstanceOf<NotSupportedException>(ex.InnerException);
         }
     }
 }
