@@ -77,5 +77,63 @@ namespace SDK.Test.Communication
             Assert.AreEqual("<<refreshtoken>>", nvc["refresh_token"]);
             Assert.AreEqual("refresh_token", nvc["grant_type"]);
         }
+
+        [Test]
+        async public void WhenMakingAnOauthRequest_Async_TheCorrectTokensAreAddedToTheRequestBody()
+        {
+            // arrange
+            var uri = OAuthRequestHandler.OAuthRequestUri;
+            var factory = new TestWebRequestFactory();
+            factory.RegisterResultForUri(uri.AbsoluteUri, "null");
+            var request = factory.Create(uri);
+
+            var stream = new MemoryStream();
+            request.EndGetRequestStream(Arg.Any<IAsyncResult>()).Returns(c => stream);
+
+            var handler = new OAuthRequestHandler(new ApiConfiguration("<<clientid>>", "<<clientsecret>>", "http://desktop/"));
+
+            // act
+            var tokens = await handler.GetOAuthTokensAsync(request, "<<code>>");
+
+            // assert
+            var reader = new StreamReader(new MemoryStream(stream.ToArray()));
+            var data = reader.ReadToEnd();
+            var nvc = HttpUtility.ParseQueryString(data);
+
+            Assert.AreEqual("<<clientid>>", nvc["client_id"]);
+            Assert.AreEqual("<<clientsecret>>", nvc["client_secret"]);
+            Assert.AreEqual("http://desktop/", nvc["redirect_uri"]);
+            Assert.AreEqual("<<code>>", nvc["code"]);
+            Assert.AreEqual("CompanyFile", nvc["scope"]);
+            Assert.AreEqual("authorization_code", nvc["grant_type"]);
+        }
+
+        [Test]
+        async public void WhenMakingAnOauthRequestRenewal_Async_TheCorrectTokensAreAddedToTheRequestBody()
+        {
+            // arrange
+            var uri = OAuthRequestHandler.OAuthRequestUri;
+            var factory = new TestWebRequestFactory();
+            factory.RegisterResultForUri(uri.AbsoluteUri, "null");
+            var request = factory.Create(uri);
+
+            var stream = new MemoryStream();
+            request.EndGetRequestStream(Arg.Any<IAsyncResult>()).Returns(c => stream);
+
+            var handler = new OAuthRequestHandler(new ApiConfiguration("<<clientid>>", "<<clientsecret>>", "<<redirecturl>>"));
+
+            // act
+            var tokens = await handler.RenewOAuthTokensAsync(request, new OAuthTokens() { RefreshToken = "<<refreshtoken>>" });
+
+            // assert
+            var reader = new StreamReader(new MemoryStream(stream.ToArray()));
+            var data = reader.ReadToEnd();
+            var nvc = HttpUtility.ParseQueryString(data);
+
+            Assert.AreEqual("<<clientid>>", nvc["client_id"]);
+            Assert.AreEqual("<<clientsecret>>", nvc["client_secret"]);
+            Assert.AreEqual("<<refreshtoken>>", nvc["refresh_token"]);
+            Assert.AreEqual("refresh_token", nvc["grant_type"]);
+        }
     }
 }

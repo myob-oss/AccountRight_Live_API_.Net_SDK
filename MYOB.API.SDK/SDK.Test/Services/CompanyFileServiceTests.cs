@@ -32,7 +32,7 @@ namespace SDK.Test.Services
 
         private readonly Tuple<string, Func<CompanyFileService, CompanyFile[]>>[] _companyFileActions = new[]
             {
-                new Tuple<string, Func<CompanyFileService, CompanyFile[]>>("Async", 
+                new Tuple<string, Func<CompanyFileService, CompanyFile[]>>("Delegate", 
                     service =>
                     {
                         CompanyFile[] received = null;
@@ -43,6 +43,11 @@ namespace SDK.Test.Services
                     service =>
                     {
                         return service.GetRange();
+                    }),
+                new Tuple<string, Func<CompanyFileService, CompanyFile[]>>("Async", 
+                    service =>
+                    {
+                        return service.GetRangeAsync().Result;
                     }),
             };
 
@@ -64,7 +69,7 @@ namespace SDK.Test.Services
 
         private readonly Tuple<string, Func<CompanyFileService, CompanyFile, CompanyFileWithResources>>[] _companyFileWithResourceActions = new[]
             {
-                new Tuple<string, Func<CompanyFileService, CompanyFile, CompanyFileWithResources>>("Async", 
+                new Tuple<string, Func<CompanyFileService, CompanyFile, CompanyFileWithResources>>("Delegate", 
                     (service, cf) =>
                     {
                         CompanyFileWithResources received = null;
@@ -76,6 +81,11 @@ namespace SDK.Test.Services
                     {
                         return service.Get(cf, null);
                     }),
+                new Tuple<string, Func<CompanyFileService, CompanyFile, CompanyFileWithResources>>("Async", 
+                    (service, cf) =>
+                    {
+                        return service.GetAsync(cf, null).Result;
+                    })
             };
 
         [Test]
@@ -95,7 +105,7 @@ namespace SDK.Test.Services
 
         private readonly Tuple<string, Func<CompanyFileService, CompanyFile[]>>[] _getRangeQueryActions = new[]
             {
-                new Tuple<string, Func<CompanyFileService, CompanyFile[]>>("Async", 
+                new Tuple<string, Func<CompanyFileService, CompanyFile[]>>("Delegate", 
                     (service) =>
                     {
                         CompanyFile[] received = null;
@@ -107,6 +117,11 @@ namespace SDK.Test.Services
                     {
                         return service.GetRange("$filter=Id eq guid'2BB63466-1A6C-4757-B3B8-D8B799D641E9'");
                     }),
+                new Tuple<string, Func<CompanyFileService, CompanyFile[]>>("Sync", 
+                    (service) =>
+                    {
+                        return service.GetRangeAsync("$filter=Id eq guid'2BB63466-1A6C-4757-B3B8-D8B799D641E9'").Result;
+                    })
             };
 
         [Test]

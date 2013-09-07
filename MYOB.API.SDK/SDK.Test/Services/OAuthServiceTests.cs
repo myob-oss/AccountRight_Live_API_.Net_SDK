@@ -27,7 +27,7 @@ namespace SDK.Test.Services
         }
 
         [Test]
-        public void WhenIGetTokensAsyncIReceiveDeserializedTokens()
+        public void WhenIGetTokensDelegateIReceiveDeserializedTokens()
         {
             var uriOauth = OAuthRequestHandler.OAuthRequestUri;
             var factory = new TestWebRequestFactory();
@@ -44,7 +44,7 @@ namespace SDK.Test.Services
         }
 
         [Test]
-        public void WhenIRenewTokensAsyncIReceiveDeserializedTokens()
+        public void WhenIRenewTokensDelegateIReceiveDeserializedTokens()
         {
             var uriOauth = OAuthRequestHandler.OAuthRequestUri;
             var factory = new TestWebRequestFactory();
@@ -77,6 +77,22 @@ namespace SDK.Test.Services
         }
 
         [Test]
+        public void WhenIGetTokensAsyncIReceiveDeserializedTokens()
+        {
+            var uriOauth = OAuthRequestHandler.OAuthRequestUri;
+            var factory = new TestWebRequestFactory();
+            factory.RegisterResultForUri(uriOauth.AbsoluteUri, "{\"access_token\": \"<<token>>\"}");
+
+            var service = new OAuthService(_configuration, factory);
+
+            OAuthTokens received = service.GetTokensAsync("code").Result;
+
+            Assert.IsNotNull(received);
+            Assert.AreEqual("<<token>>", received.AccessToken);
+
+        }
+
+        [Test]
         public void WhenIRenewTokensSyncIReceiveDeserializedTokens()
         {
             var uriOauth = OAuthRequestHandler.OAuthRequestUri;
@@ -86,6 +102,21 @@ namespace SDK.Test.Services
             var service = new OAuthService(_configuration, factory);
 
             OAuthTokens received = service.RenewTokens(new OAuthTokens());
+
+            Assert.IsNotNull(received);
+            Assert.AreEqual("<<token>>", received.AccessToken);
+        }
+
+        [Test]
+        public void WhenIRenewTokensAsyncIReceiveDeserializedTokens()
+        {
+            var uriOauth = OAuthRequestHandler.OAuthRequestUri;
+            var factory = new TestWebRequestFactory();
+            factory.RegisterResultForUri(uriOauth.AbsoluteUri, "{\"access_token\": \"<<token>>\"}");
+
+            var service = new OAuthService(_configuration, factory);
+
+            OAuthTokens received = service.RenewTokensAsync(new OAuthTokens()).Result;
 
             Assert.IsNotNull(received);
             Assert.AreEqual("<<token>>", received.AccessToken);

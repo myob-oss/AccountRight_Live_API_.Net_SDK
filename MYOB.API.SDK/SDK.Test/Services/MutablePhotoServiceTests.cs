@@ -64,6 +64,11 @@ namespace SDK.Test.Services
                     {
                         return service.GetPhoto(cf, _uid, null);
                     }),
+                new Tuple<string, Func<TestPhotoService, CompanyFile, byte[]>>("Async", 
+                    (service, cf) =>
+                    {
+                        return service.GetPhotoAsync(cf, _uid, null).Result;
+                    }),
             };
 
 
@@ -86,15 +91,21 @@ namespace SDK.Test.Services
             {
                 new Tuple<string, Func<TestPhotoService, CompanyFile, bool>>("Async", 
                     (service, cf) =>
-                        {
-                            var ret = false;
-                            service.DeletePhoto(cf, _uid, null, (code) => { ret = true; }, (uri, exception) => Assert.Fail(exception.Message));
-                            return ret;
-                        }),
+                    {
+                        var ret = false;
+                        service.DeletePhoto(cf, _uid, null, (code) => { ret = true; }, (uri, exception) => Assert.Fail(exception.Message));
+                        return ret;
+                    }),
                 new Tuple<string, Func<TestPhotoService, CompanyFile, bool>>("Sync", 
                     (service, cf) =>
                     {
                         service.DeletePhoto(cf, _uid, null);
+                        return true;
+                    }),
+                new Tuple<string, Func<TestPhotoService, CompanyFile, bool>>("Async", 
+                    (service, cf) =>
+                    {
+                        service.DeletePhotoAsync(cf, _uid, null).Wait();
                         return true;
                     }),
             };
@@ -127,6 +138,11 @@ namespace SDK.Test.Services
                     (service, cf) =>
                     {
                         return service.SavePhoto(cf, UID, ImageData, null);
+                    }),
+                new Tuple<string, Func<TestPhotoService, CompanyFile, string>>("Async", 
+                    (service, cf) =>
+                    {
+                        return service.SavePhotoAsync(cf, UID, ImageData, null).Result;
                     }),
             };
 

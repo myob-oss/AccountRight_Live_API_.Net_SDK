@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Net;
 using System.Threading;
+#if ASYNC
+using System.Threading.Tasks; 
+#endif
 using MYOB.AccountRight.SDK.Communication;
 using MYOB.AccountRight.SDK.Contracts;
 using MYOB.AccountRight.SDK.Extensions;
@@ -40,7 +43,19 @@ namespace MYOB.AccountRight.SDK.Services
             }
         }
 
-        protected void MakeApiGetRequestAsync<T>(Uri uri, ICompanyFileCredentials credentials, Action<HttpStatusCode, T> onComplete, Action<Uri, Exception> onError) where T : class
+#if ASYNC
+        private async Task RenewOAuthTokensAsync()
+        {
+            if (_keyService != null && _keyService.OAuthResponse.Maybe(_ => _.HasExpired))
+            {
+                var oauth = new OAuthRequestHandler(Configuration);
+                var task = await oauth.RenewOAuthTokensAsync(WebRequestFactory.Create(OAuthRequestHandler.OAuthRequestUri), _keyService.OAuthResponse);
+                _keyService.OAuthResponse = task.Item2;
+            }
+        } 
+#endif
+
+        protected void MakeApiGetRequestDelegate<T>(Uri uri, ICompanyFileCredentials credentials, Action<HttpStatusCode, T> onComplete, Action<Uri, Exception> onError) where T : class
         {
             WrapApiRequestWithOAuthRenew(response =>
             {
@@ -49,6 +64,18 @@ namespace MYOB.AccountRight.SDK.Services
             }, onError);
         }
 
+#if ASYNC
+        async protected Task<T> MakeApiGetRequestAsync<T>(Uri uri, ICompanyFileCredentials credentials) where T : class
+        {
+            return await RenewOAuthTokensAsync().ContinueWith(async t =>
+                {
+                    var api = new ApiRequestHandler(Configuration, credentials, _keyService.Maybe(_ => _.OAuthResponse));
+                    var data = await api.GetAsync<T>(WebRequestFactory.Create(uri));
+                    return data.Item2;
+                }).Result;
+        } 
+#endif
+
         protected T MakeApiGetRequestSync<T>(Uri uri, ICompanyFileCredentials credentials) where T : class
         {
             var wait = new AutoResetEvent(false);
@@ -56,7 +83,7 @@ namespace MYOB.AccountRight.SDK.Services
             var entity = default(T);
             var requestUri = default(Uri);
 
-            MakeApiGetRequestAsync<T>(
+            MakeApiGetRequestDelegate<T>(
                 uri, credentials,
                 (code, data) =>
                     {
@@ -79,7 +106,7 @@ namespace MYOB.AccountRight.SDK.Services
         }
 
         
-        protected void MakeApiDeleteRequestAsync(Uri uri, ICompanyFileCredentials credentials, Action<HttpStatusCode> onComplete, Action<Uri, Exception> onError)
+        protected void MakeApiDeleteRequestDelegate(Uri uri, ICompanyFileCredentials credentials, Action<HttpStatusCode> onComplete, Action<Uri, Exception> onError)
         {
             WrapApiRequestWithOAuthRenew(response =>
             {
@@ -88,13 +115,24 @@ namespace MYOB.AccountRight.SDK.Services
             }, onError);
         }
 
+#if ASYNC
+        async protected Task MakeApiDeleteRequestAsync(Uri uri, ICompanyFileCredentials credentials)
+        {
+            await RenewOAuthTokensAsync().ContinueWith(async t =>
+                {
+                    var api = new ApiRequestHandler(Configuration, credentials, _keyService.Maybe(_ => _.OAuthResponse));
+                    await api.DeleteAsync(WebRequestFactory.Create(uri));
+                });
+        } 
+#endif
+
         protected void MakeApiDeleteRequestSync(Uri uri, ICompanyFileCredentials credentials)
         {
             var wait = new AutoResetEvent(false);
             Exception ex = null;
             var requestUri = default(Uri);
 
-            MakeApiDeleteRequestAsync(
+            MakeApiDeleteRequestDelegate(
                 uri, credentials,
                 (code) =>
                     {
@@ -113,7 +151,7 @@ namespace MYOB.AccountRight.SDK.Services
             }
         }
 
-        protected void MakeApiPostRequestAsync<T>(Uri uri, T entity, ICompanyFileCredentials credentials, Action<HttpStatusCode, string> onComplete, Action<Uri, Exception> onError) 
+        protected void MakeApiPostRequestDelegate<T>(Uri uri, T entity, ICompanyFileCredentials credentials, Action<HttpStatusCode, string> onComplete, Action<Uri, Exception> onError) 
             where T : class
         {
             WrapApiRequestWithOAuthRenew(response =>
@@ -123,6 +161,18 @@ namespace MYOB.AccountRight.SDK.Services
             }, onError);
         }
 
+#if ASYNC
+        async protected Task<string> MakeApiPostRequestAsync<T>(Uri uri, T entity, ICompanyFileCredentials credentials) where T : class
+        {
+            return await RenewOAuthTokensAsync().ContinueWith(async t =>
+                {
+                    var api = new ApiRequestHandler(Configuration, credentials, _keyService.Maybe(_ => _.OAuthResponse));
+                    var res = await api.PostAsync(WebRequestFactory.Create(uri), entity);
+                    return res;
+                }).Result;
+        } 
+#endif
+
         protected string MakeApiPostRequestSync<T>(Uri uri, T entity, ICompanyFileCredentials credentials) where T : class
         {
             var wait = new AutoResetEvent(false);
@@ -130,7 +180,7 @@ namespace MYOB.AccountRight.SDK.Services
             var requestUri = default(Uri);
             string retlocation = null;
 
-            MakeApiPostRequestAsync(
+            MakeApiPostRequestDelegate(
                 uri, entity, credentials,
                 (code, location) =>
                     {
@@ -152,7 +202,7 @@ namespace MYOB.AccountRight.SDK.Services
             return retlocation;
         }
 
-        protected void MakeApiPutRequestAsync<T>(Uri uri, T entity, ICompanyFileCredentials credentials, Action<HttpStatusCode, string> onComplete, Action<Uri, Exception> onError)
+        protected void MakeApiPutRequestDelegate<T>(Uri uri, T entity, ICompanyFileCredentials credentials, Action<HttpStatusCode, string> onComplete, Action<Uri, Exception> onError)
             where T : class
         {
             WrapApiRequestWithOAuthRenew(response =>
@@ -162,6 +212,18 @@ namespace MYOB.AccountRight.SDK.Services
             }, onError);
         }
 
+#if ASYNC
+        async protected Task<string> MakeApiPutRequestAsync<T>(Uri uri, T entity, ICompanyFileCredentials credentials) where T : class
+        {
+            return await RenewOAuthTokensAsync().ContinueWith(async t =>
+                {
+                    var api = new ApiRequestHandler(Configuration, credentials, _keyService.Maybe(_ => _.OAuthResponse));
+                    var res = await api.PutAsync(WebRequestFactory.Create(uri), entity);
+                    return res;
+                }).Result;
+        } 
+#endif
+
         protected string MakeApiPutRequestSync<T>(Uri uri, T entity, ICompanyFileCredentials credentials) where T : class
         {
             var wait = new AutoResetEvent(false);
@@ -169,7 +231,7 @@ namespace MYOB.AccountRight.SDK.Services
             var requestUri = default(Uri);
             string retlocation = null;
 
-            MakeApiPutRequestAsync(
+            MakeApiPutRequestDelegate(
                 uri, entity, credentials,
                 (code, location) =>
                     {

@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Net;
 using System.Text.RegularExpressions;
+#if ASYNC
+using System.Threading.Tasks; 
+#endif
 using MYOB.AccountRight.SDK.Communication;
 using MYOB.AccountRight.SDK.Contracts;
 using MYOB.AccountRight.SDK.Contracts.Version2;
@@ -12,7 +15,7 @@ namespace MYOB.AccountRight.SDK.Services
     {
         public abstract string Route { get; }
 
-        protected ReadableService(IApiConfiguration configuration, IWebRequestFactory webRequestFactory, IOAuthKeyService keyService) 
+        protected ReadableService(IApiConfiguration configuration, IWebRequestFactory webRequestFactory, IOAuthKeyService keyService)
             : base(configuration, webRequestFactory, keyService)
         {
         }
@@ -41,7 +44,7 @@ namespace MYOB.AccountRight.SDK.Services
 
         public virtual void Get(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, Action<HttpStatusCode, T> onComplete, Action<Uri, Exception> onError)
         {
-            MakeApiGetRequestAsync(BuildUri(cf, uid), credentials, onComplete, onError);
+            MakeApiGetRequestDelegate(BuildUri(cf, uid), credentials, onComplete, onError);
         }
 
         public virtual T Get(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials)
@@ -49,19 +52,33 @@ namespace MYOB.AccountRight.SDK.Services
             return MakeApiGetRequestSync<T>(BuildUri(cf, uid), credentials);
         }
 
+#if ASYNC
+        public virtual Task<T> GetAsync(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials)
+        {
+            return MakeApiGetRequestAsync<T>(BuildUri(cf, uid), credentials);
+        } 
+#endif
+
         public virtual void Get(CompanyFile cf, Uri uri, ICompanyFileCredentials credentials, Action<HttpStatusCode, T> onComplete, Action<Uri, Exception> onError)
         {
-            MakeApiGetRequestAsync(ValidateUri(cf, uri), credentials, onComplete, onError);
+            MakeApiGetRequestDelegate(ValidateUri(cf, uri), credentials, onComplete, onError);
         }
 
         public virtual T Get(CompanyFile cf, Uri uri, ICompanyFileCredentials credentials)
         {
-            return MakeApiGetRequestSync<T>(ValidateUri(cf,uri), credentials);
+            return MakeApiGetRequestSync<T>(ValidateUri(cf, uri), credentials);
         }
+
+#if ASYNC
+        public virtual Task<T> GetAsync(CompanyFile cf, Uri uri, ICompanyFileCredentials credentials)
+        {
+            return MakeApiGetRequestAsync<T>(ValidateUri(cf, uri), credentials);
+        } 
+#endif
 
         public virtual void GetRange(CompanyFile cf, string queryString, ICompanyFileCredentials credentials, Action<HttpStatusCode, PagedCollection<T>> onComplete, Action<Uri, Exception> onError)
         {
-            MakeApiGetRequestAsync(BuildUri(cf, null, queryString.Maybe(_ => "?" + _.TrimStart(new[] { '?' }))), credentials, onComplete, onError);
+            MakeApiGetRequestDelegate(BuildUri(cf, null, queryString.Maybe(_ => "?" + _.TrimStart(new[] { '?' }))), credentials, onComplete, onError);
         }
 
         public virtual PagedCollection<T> GetRange(CompanyFile cf, string queryString, ICompanyFileCredentials credentials)
@@ -69,5 +86,11 @@ namespace MYOB.AccountRight.SDK.Services
             return MakeApiGetRequestSync<PagedCollection<T>>(BuildUri(cf, null, queryString.Maybe(_ => "?" + _.TrimStart(new[] { '?' }))), credentials);
         }
 
+#if ASYNC
+        public virtual Task<PagedCollection<T>> GetRangeAsync(CompanyFile cf, string queryString, ICompanyFileCredentials credentials)
+        {
+            return MakeApiGetRequestAsync<PagedCollection<T>>(BuildUri(cf, null, queryString.Maybe(_ => "?" + _.TrimStart(new[] { '?' }))), credentials);
+        } 
+#endif
     }
 }
