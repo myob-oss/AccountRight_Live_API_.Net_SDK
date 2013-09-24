@@ -52,6 +52,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Net" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Threading.Tasks" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -70,6 +71,7 @@
     <Compile Include="Contracts\Version2\AccountTests.cs" />
     <Compile Include="Contracts\Version2\CategoryTests.cs" />
     <Compile Include="Contracts\Version2\ContactTests.cs" />
+    <Compile Include="Contracts\Version2\SupplierPaymentTests.cs" />
     <Compile Include="Contracts\Version2\CustomerPaymentTests.cs" />
     <Compile Include="Contracts\Version2\MiscellaneousInvoiceTests.cs" />
     <Compile Include="Contracts\Version2\ItemInvoiceTests.cs" />
@@ -78,8 +80,10 @@
     <Compile Include="Extensions\JsonExtensionTests.cs" />
     <Compile Include="Services\AccountRegisterServiceTests.cs" />
     <Compile Include="Services\AccountServiceTests.cs" />
+    <Compile Include="Services\BillServiceTests.cs" />
     <Compile Include="Services\CategoryRegisterServiceTests.cs" />
     <Compile Include="Services\CategoryServiceTests.cs" />
+    <Compile Include="Services\ItemBillServiceTests.cs" />
     <Compile Include="Services\MutablePhotoServiceTests.cs" />
     <Compile Include="Services\CustomerPaymentServiceTests.cs" />
     <Compile Include="Services\GeneralJournalServiceTests.cs" />
@@ -98,8 +102,10 @@
     <Compile Include="Services\CustomerServiceTests.cs" />
     <Compile Include="Services\EmployeeServiceTests.cs" />
     <Compile Include="Services\PersonalServiceTests.cs" />
+    <Compile Include="Services\SupplierPaymentServiceTests.cs" />
     <Compile Include="Services\SupplierServiceTests.cs" />
     <Compile Include="Services\TaxCodeServiceTests.cs" />
+    <Compile Include="Services\VersionInfoServiceTests.cs" />
     <Compile Include="UserContract.cs" />
     <Compile Include="Helper\TestWebRequestFactory.cs" />
     <Compile Include="Communication\WebRequestFactoryTests.cs" />
@@ -112,9 +118,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="MYOB.API.SDK.TEST.snk" />
-    <None Include="packages.config">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
