@@ -7,6 +7,7 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
         public decimal ShipQuantity { get; set; }
         public decimal UnitPrice { get; set; }
         public decimal DiscountPercent { get; set; }
+        public decimal CostOfGoodsSold { get; set; }
         public ItemLink Item { get; set; }
     }
 }

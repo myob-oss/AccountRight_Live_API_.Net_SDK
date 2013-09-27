@@ -129,8 +129,25 @@
     <Compile Include="Contracts\Version2\Inventory\ItemLink.cs" />
     <Compile Include="Contracts\Version2\PagedCollection.cs" />
     <Compile Include="Contracts\Version2\Photo.cs" />
+    <Compile Include="Contracts\Version2\Purchase\Bill.cs" />
+    <Compile Include="Contracts\Version2\Purchase\BillLine.cs" />
+    <Compile Include="Contracts\Version2\Purchase\BillType.cs" />
+    <Compile Include="Contracts\Version2\Purchase\BillWithLines.cs" />
+    <Compile Include="Contracts\Version2\Purchase\ItemBill.cs" />
+    <Compile Include="Contracts\Version2\Purchase\ItemBillLine.cs" />
+    <Compile Include="Contracts\Version2\Purchase\MiscellaneousBill.cs" />
+    <Compile Include="Contracts\Version2\Purchase\MiscellaneousBillLine.cs" />
+    <Compile Include="Contracts\Version2\Purchase\PayFrom.cs" />
+    <Compile Include="Contracts\Version2\Purchase\ProfessionalBill.cs" />
+    <Compile Include="Contracts\Version2\Purchase\ProfessionalBillLine.cs" />
+    <Compile Include="Contracts\Version2\Purchase\PurchaseStatus.cs" />
+    <Compile Include="Contracts\Version2\Purchase\ServiceBill.cs" />
+    <Compile Include="Contracts\Version2\Purchase\ServiceBillLine.cs" />
+    <Compile Include="Contracts\Version2\Purchase\SupplierPayment.cs" />
+    <Compile Include="Contracts\Version2\Purchase\SupplierPaymentLine.cs" />
     <Compile Include="Contracts\Version2\Sale\CustomerPayment.cs" />
     <Compile Include="Contracts\Version2\Sale\CustomerPaymentLine.cs" />
+    <Compile Include="Contracts\Version2\Sale\CustomerPaymentLineType.cs" />
     <Compile Include="Contracts\Version2\Sale\DepositTo.cs" />
     <Compile Include="Contracts\Version2\Sale\DocumentAction.cs" />
     <Compile Include="Contracts\Version2\Sale\Invoice.cs" />
@@ -151,6 +168,8 @@
     <Compile Include="Contracts\Version2\Sale\ServiceInvoiceLine.cs" />
     <Compile Include="Contracts\Version2\Terms.cs" />
     <Compile Include="Contracts\Version2\TermsPaymentType.cs" />
+    <Compile Include="Contracts\VersionInfo.cs" />
+    <Compile Include="Contracts\VersionMap.cs" />
     <Compile Include="Extensions\ExceptionExtensions.cs" />
     <Compile Include="Extensions\FunctionalExtensions.cs" />
     <Compile Include="Extensions\JsonExtensions.cs" />
@@ -186,6 +205,12 @@
     <Compile Include="Services\Version2\IReadablePhoto.cs" />
     <Compile Include="Services\Version2\MutablePhotoService.cs" />
     <Compile Include="Services\Version2\MutableService.cs" />
+    <Compile Include="Services\Version2\Purchase\BillService.cs" />
+    <Compile Include="Services\Version2\Purchase\ItemBillService.cs" />
+    <Compile Include="Services\Version2\Purchase\MiscellaneousBillService.cs" />
+    <Compile Include="Services\Version2\Purchase\ProfessionalBillService.cs" />
+    <Compile Include="Services\Version2\Purchase\ServiceBillService.cs" />
+    <Compile Include="Services\Version2\Purchase\SupplierPaymentService.cs" />
     <Compile Include="Services\Version2\ReadableService.cs" />
     <Compile Include="Services\Version2\Sale\CustomerPaymentService.cs" />
     <Compile Include="Services\Version2\Sale\InvoiceService.cs" />
@@ -193,6 +218,7 @@
     <Compile Include="Services\Version2\Sale\MiscellaneousInvoiceService.cs" />
     <Compile Include="Services\Version2\Sale\ProfessionalInvoiceService.cs" />
     <Compile Include="Services\Version2\Sale\ServiceInvoiceService.cs" />
+    <Compile Include="Services\VersionInfoService.cs" />
     <Compile Include="SimpleOAuthKeyService.cs" />
   </ItemGroup>
   <ItemGroup>

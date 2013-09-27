@@ -1,15 +1,15 @@
-﻿using MYOB.AccountRight.SDK.Services.Sale;
+﻿using MYOB.AccountRight.SDK.Services.Purchase;
 using NUnit.Framework;
 
 namespace SDK.Test.Services
 {
     [TestFixture]
-    public class InvoiceServiceTests
+    public class BillServiceTests
     {
         [Test]
         public void ServiceHasTheExpectedRoute()
         {
-            Assert.AreEqual("Sale/Invoice", new InvoiceService(null, null).Route);
+            Assert.AreEqual("Purchase/Bill", new BillService(null, null).Route);
         }
     }
 }

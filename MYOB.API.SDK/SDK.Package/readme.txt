@@ -68,6 +68,7 @@ to store your data in a location other than memory i.e. SessionState, IsolatedSt
 		var oauthService = new OAuthService(configuration);
 		var tokens = oauthService.GetTokens(code); 
 		var keystore = new SimpleOAuthKeyService(); // SimpleOAuthKeyService must implement IOAuthKeyService
+		keystore.OAuthResponse = tokens;
 
 	VB.Net Example:
 
@@ -79,6 +80,7 @@ to store your data in a location other than memory i.e. SessionState, IsolatedSt
 		Dim oauthService = New OAuthService(configuration)
 		Dim tokens = oauthService.GetTokens(code)
 		Dim keystore = new SimpleOAuthKeyService() ' SimpleOAuthKeyService must implement IOAuthKeyService
+		keystore.OAuthResponse = tokens
 
 
 4. Use the OAuthToken to access the customer's data
