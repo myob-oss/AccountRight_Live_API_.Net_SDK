@@ -67,6 +67,11 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
         public decimal TotalAmount { get; set; }
 
         /// <summary>
+        /// The category assocated with the Invoice
+        /// </summary>
+        public CategoryLink Category { get; set; }
+
+        /// <summary>
         /// The employee contact
         /// </summary>
         public CardLink Salesperson { get; set; }

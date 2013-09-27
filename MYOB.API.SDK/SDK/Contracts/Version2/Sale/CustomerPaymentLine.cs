@@ -9,6 +9,7 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
         public Guid UID { get; set; }
         public decimal AmountApplied { get; set; }
         public decimal DiscountApplied { get; set; }
+        public CustomerPaymentLineType Type { get; set; }
         public Uri Uri { get; set; }
     }
 }
