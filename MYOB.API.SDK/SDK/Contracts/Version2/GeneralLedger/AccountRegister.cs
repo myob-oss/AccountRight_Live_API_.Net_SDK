@@ -1,5 +1,8 @@
 ﻿namespace MYOB.AccountRight.SDK.Contracts.Version2.GeneralLedger
 {
+    /// <summary>
+    /// Describes the Account Register resource
+    /// </summary>
     public class AccountRegister : BaseEntity
     {
         /// <summary>

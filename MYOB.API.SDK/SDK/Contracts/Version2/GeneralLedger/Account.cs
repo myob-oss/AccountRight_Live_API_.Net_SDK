@@ -1,12 +1,12 @@
 ﻿namespace MYOB.AccountRight.SDK.Contracts.Version2.GeneralLedger
 {
     /// <summary>
-    /// Account
+    /// Describes an Account resource
     /// </summary>
     public class Account : BaseEntity
     {
         /// <summary>
-        /// Account
+        /// Initialises an account resource
         /// </summary>
         public Account()
         {

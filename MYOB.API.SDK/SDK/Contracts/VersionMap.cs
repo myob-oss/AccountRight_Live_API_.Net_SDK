@@ -24,5 +24,10 @@
         /// The company file version this resource is supported to
         /// </summary>
         public string ToProductVersion { get; set; }
+        
+        /// <summary>
+        /// The comapny file version this resource for Mininum Product Level
+        /// </summary>
+        public ProductLevel MinimumProductLevel { get; set; }
     }
 }

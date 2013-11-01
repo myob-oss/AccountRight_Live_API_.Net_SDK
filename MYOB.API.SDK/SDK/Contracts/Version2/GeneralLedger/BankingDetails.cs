@@ -25,7 +25,7 @@
         public string BankAccountName { get; set; }
 
         /// <summary>
-        /// Company tradting name if applicable for bank account
+        /// Company trading name if applicable for bank account
         /// </summary>
         public string CompanyTradingName { get; set; }
 

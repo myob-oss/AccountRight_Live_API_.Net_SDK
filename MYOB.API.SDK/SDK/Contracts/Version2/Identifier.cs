@@ -1,6 +1,8 @@
 ﻿namespace MYOB.AccountRight.SDK.Contracts.Version2
 {
-
+    /// <summary>
+    /// Describes an identifier
+    /// </summary>
     public class Identifier
     {
         /// <summary>

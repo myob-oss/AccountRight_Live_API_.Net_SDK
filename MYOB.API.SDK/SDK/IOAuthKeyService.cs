@@ -2,10 +2,13 @@
 
 namespace MYOB.AccountRight.SDK
 {
+    /// <summary>
+    /// Interface for classes that will store and retrieve OAuthTokens
+    /// </summary>
     public interface IOAuthKeyService
     {
         /// <summary>
-        /// The oauth tokens
+        /// The OAuth tokens
         /// </summary>
         OAuthTokens OAuthResponse { get; set; }
     }

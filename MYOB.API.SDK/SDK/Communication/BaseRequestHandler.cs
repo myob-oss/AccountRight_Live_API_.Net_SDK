@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text;
 using MYOB.AccountRight.SDK.Extensions;
 
 #if ASYNC
@@ -11,7 +8,6 @@ using System.Threading.Tasks;
 #endif
 
 #if PORTABLE
-using System.Runtime.Serialization.Json;
 #endif
 
 #if COMPRESSION
@@ -25,6 +21,13 @@ namespace MYOB.AccountRight.SDK.Communication
 {
     internal abstract class BaseRequestHandler
     {
+        protected readonly IApiRequestHelper ApiRequestHelper;
+
+        protected BaseRequestHandler(IApiRequestHelper apiRequestHelper)
+        {
+            ApiRequestHelper = apiRequestHelper;
+        }
+
         protected class RequestContext<T, TR>
         {
             public WebRequest Request { get; set; }
@@ -34,22 +37,22 @@ namespace MYOB.AccountRight.SDK.Communication
         }
 
 #if ASYNC
-        protected static async Task<Tuple<HttpStatusCode, string, T>> GetResponseTask<T>(WebRequest request) where T : class
+        protected async Task<Tuple<HttpStatusCode, string, T>> GetResponseTask<T>(WebRequest request) where T : class
         {
             var response = await request.GetResponseAsync();
             var location = response.Headers["Location"];
             var statusCode = (response as HttpWebResponse).Maybe(_ => _.StatusCode);
-            if (response.Headers["Content-Encoding"] != null && response.Headers["Content-Encoding"].Contains("gzip"))
+            if (ApiRequestHelper.IsGZipped((HttpWebResponse)response))
             {
-                var entityCompressed = ExtractCompressedEntity<T>(response);
+                var entityCompressed = ExtractJSonCompressedEntity<T>(response);
                 return new Tuple<HttpStatusCode, string, T>(statusCode, location, entityCompressed);
             }
-            var entityNormal = ExtractEntity<T>(response);
+            var entityNormal = ExtractJSonEntity<T>(response);
             return new Tuple<HttpStatusCode, string, T>(statusCode, location, entityNormal);
         }
 #endif
 
-        protected static void HandleResponseCallback<T, TReq, TResp>(IAsyncResult asynchronousResult)
+        protected void HandleResponseCallback<T, TReq, TResp>(IAsyncResult asynchronousResult)
             where T : RequestContext<TReq, TResp>
             where TResp : class
         {
@@ -62,14 +65,14 @@ namespace MYOB.AccountRight.SDK.Communication
                 var response = (HttpWebResponse)request.EndGetResponse(asynchronousResult);
                 var location = response.Headers["Location"];
 
-                if (response.Headers["Content-Encoding"] != null && response.Headers["Content-Encoding"].Contains("gzip"))
+                if (ApiRequestHelper.IsGZipped(response))
                 {
-                    var entity = ExtractCompressedEntity<TResp>(response);
+                    var entity = ExtractJSonCompressedEntity<TResp>(response);
                     requestData.OnComplete(response.StatusCode, location, entity);
                 }
                 else
                 {
-                    var entity = ExtractEntity<TResp>(response);
+                    var entity = ExtractJSonEntity<TResp>(response);
                     requestData.OnComplete(response.StatusCode, location, entity);
                 }
             }
@@ -88,12 +91,12 @@ namespace MYOB.AccountRight.SDK.Communication
             }
         }
 
-        private static TResp ExtractEntity<TResp>(WebResponse response)
+        private static TResp ExtractJSonEntity<TResp>(WebResponse response)
         {
            return ExtractBody(response).FromJson<TResp>();
         }
 
-        private static TResp ExtractCompressedEntity<TResp>(WebResponse response)
+        private static TResp ExtractJSonCompressedEntity<TResp>(WebResponse response)
         {
             var responseStream = response.GetResponseStream();
             using (var decompress = new GZipStream(responseStream, CompressionMode.Decompress))

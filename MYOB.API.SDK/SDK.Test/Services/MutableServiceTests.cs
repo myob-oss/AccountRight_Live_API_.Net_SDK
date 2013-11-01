@@ -25,7 +25,7 @@ namespace SDK.Test.Services
             {
             }
 
-            public override string Route
+            internal override string Route
             {
                 get { return "Test/User/Contract"; }
             }
@@ -75,7 +75,7 @@ namespace SDK.Test.Services
         {
             // arrange
             var cf = new CompanyFile() { Uri = new Uri("https://dc1.api.myob.com/accountright/7D5F5516-AF68-4C5B-844A-3F054E00DF10") };
-            _webFactory.RegisterResultForUri(cf.Uri.AbsoluteUri + "/Test/User/Contract/" + _uid, null);
+            _webFactory.RegisterResultForUri(cf.Uri.AbsoluteUri + "/Test/User/Contract/" + _uid, (string) null);
 
             // act
             var ret = action.Item2(_service, cf);
@@ -112,7 +112,7 @@ namespace SDK.Test.Services
             // arrange
             var cf = new CompanyFile() { Uri = new Uri("https://dc1.api.myob.com/accountright/7D5F5516-AF68-4C5B-844A-3F054E00DF10") };
             var location = cf.Uri.AbsoluteUri + "/Test/User/Contract/" + UID;
-            _webFactory.RegisterResultForUri(cf.Uri.AbsoluteUri + "/Test/User/Contract", null, HttpStatusCode.OK, location);
+            _webFactory.RegisterResultForUri(cf.Uri.AbsoluteUri + "/Test/User/Contract", (string) null, HttpStatusCode.OK, location);
 
             // act
             var received = action.Item2(_service, cf);
@@ -150,7 +150,7 @@ namespace SDK.Test.Services
             // arrange
             var cf = new CompanyFile() { Uri = new Uri("https://dc1.api.myob.com/accountright/7D5F5516-AF68-4C5B-844A-3F054E00DF10") };
             var location = cf.Uri.AbsoluteUri + "/Test/User/Contract/" + UID;
-            _webFactory.RegisterResultForUri(cf.Uri.AbsoluteUri + "/Test/User/Contract/" + UID, null, HttpStatusCode.OK, location);
+            _webFactory.RegisterResultForUri(cf.Uri.AbsoluteUri + "/Test/User/Contract/" + UID, (string) null, HttpStatusCode.OK, location);
 
             // act
             var received = action.Item2(_service, cf);

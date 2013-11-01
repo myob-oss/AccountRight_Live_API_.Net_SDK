@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 using MYOB.AccountRight.SDK;
 using MYOB.AccountRight.SDK.Communication;
-using MYOB.AccountRight.SDK.Contracts;
-using MYOB.AccountRight.SDK.Contracts.Version2;
+using MYOB.AccountRight.SDK.Contracts.Version2.Purchase;
 using MYOB.AccountRight.SDK.Extensions;
 using NSubstitute;
 using NUnit.Framework;
@@ -178,6 +175,32 @@ namespace SDK.Test.Communication
             Assert.AreEqual(Convert.ToBase64String(Encoding.UTF8.GetBytes("user:pass")), request.Headers["x-myobapi-cftoken"]);
         }
 
+        private class ExpectedResult
+        {
+            public Guid UID { get; set; }
+        }
+
+        private class Parameter { }
+
+        [Test]
+        public void PostRequest_Return_Response()
+        {
+            // arrange
+            var expected = new ExpectedResult { UID = Guid.NewGuid() };
+            var factory = new TestWebRequestFactory();
+            factory.RegisterResultForUri("http://localhost", expected.ToJson());
+            var request = factory.Create(new Uri("http://localhost"));
+
+            var handler = new ApiRequestHandler(new ApiConfiguration("<<clientid>>", "<<clientsecret>>", "<<redirecturl>>"), new CompanyFileCredentials("user", "pass"));
+
+            // act
+            ExpectedResult receivedEntity = null;
+            handler.Post<Parameter, ExpectedResult>(request, new Parameter(), (code, location, response) => { receivedEntity = response; }, (uri, exception) => Assert.Fail(exception.Message));
+
+            // assert
+            Assert.AreEqual(expected.UID, receivedEntity.UID);
+        }
+
         [Test]
         async public void DuringPostRequest_Async_ExpectedHeadersAreAttached()
         {
@@ -199,6 +222,24 @@ namespace SDK.Test.Communication
             Assert.AreEqual("<<clientid>>", request.Headers["x-myobapi-key"]);
             Assert.AreEqual("v2", request.Headers["x-myobapi-version"]);
             Assert.AreEqual(Convert.ToBase64String(Encoding.UTF8.GetBytes("user:pass")), request.Headers["x-myobapi-cftoken"]);
+        }
+
+        [Test]
+        public void PostAsyncRequest_Return_Response()
+        {
+            // arrange
+            var expected = new ExpectedResult { UID = Guid.NewGuid() };
+            var factory = new TestWebRequestFactory();
+            factory.RegisterResultForUri("http://localhost", expected.ToJson());
+            var request = factory.Create(new Uri("http://localhost"));
+
+            var handler = new ApiRequestHandler(new ApiConfiguration("<<clientid>>", "<<clientsecret>>", "<<redirecturl>>"), new CompanyFileCredentials("user", "pass"));
+
+            // act
+            var receivedEntity = handler.PostAsync<Parameter, ExpectedResult>(request, new Parameter()).Result;
+
+            // assert
+            Assert.AreEqual(expected.UID, receivedEntity.UID);
         }
 
         [Test]

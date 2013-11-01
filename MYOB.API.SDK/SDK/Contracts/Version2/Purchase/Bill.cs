@@ -5,25 +5,29 @@ using MYOB.AccountRight.SDK.Contracts.Version2.Sale;
 
 namespace MYOB.AccountRight.SDK.Contracts.Version2.Purchase
 {
+    /// <summary>
+    /// Describe the Purchase/Bill resource
+    /// </summary>
     public class Bill : BaseEntity
     {
         /// <summary>
-        /// 
+        /// Purchase bill number
         /// </summary>
         public string Number { get; set; }
         
         /// <summary>
-        /// 
+        /// Transaction date entry, format YYYY-MM-DD HH:MM:SS
+        /// <remarks>{ 'Date': '2013-08-11 13:33:02' }</remarks>
         /// </summary>
         public DateTime Date { get; set; }
         
         /// <summary>
-        /// 
+        /// Supplier invoice number.
         /// </summary>
         public string SupplierInvoiceNumber { get; set; }
         
         /// <summary>
-        /// 
+        /// Supplier of the purchase bill.
         /// </summary>
         public SupplierLink Supplier { get; set; }
         
@@ -38,14 +42,14 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Purchase
         public Terms Terms { get; set; }
 
         /// <summary>
-        /// True indicates the transaction is set to tax inclusive.
-        /// False indicates the transaction is not tax inclusive.
+        /// <para>True indicates the transaction is set to tax inclusive.</para>
+        /// <para>False indicates the transaction is not tax inclusive.</para>
         /// </summary>
         public bool IsTaxInclusive { get; set; }
 
         /// <summary>
-        /// True indicates the transaction is taxable.
-        /// False indicates the transaction is not taxable.
+        /// <para>True indicates the transaction is taxable.</para>
+        /// <para>False indicates the transaction is not taxable.</para>
         /// </summary>
         public bool? IsReportable { get; set; }
 

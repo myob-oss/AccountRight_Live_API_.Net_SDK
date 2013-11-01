@@ -15,7 +15,7 @@ namespace SDK.Test.Communication
     {
         private readonly IWebRequestFactory _webRequestFactory;
 
-        public TestBaseRequestHandler(IWebRequestFactory webRequestFactory)
+        public TestBaseRequestHandler(IWebRequestFactory webRequestFactory) : base(new ApiRequestHelper())
         {
             _webRequestFactory = webRequestFactory;
         }

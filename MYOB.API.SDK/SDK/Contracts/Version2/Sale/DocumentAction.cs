@@ -1,6 +1,8 @@
 ﻿namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
 {
-
+    /// <summary>
+    /// Type of document action
+    /// </summary>
     public enum DocumentAction
     {
         /// <summary>

@@ -26,8 +26,9 @@
     <DefineConstants>TRACE;DEBUG;PORTABLE,ASYNC</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>
-    </DocumentationFile>
+    <DocumentationFile>..\..\Artefacts\SDK\Ship\MYOB.AccountRight.SDK.XML</DocumentationFile>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -36,6 +37,7 @@
     <DefineConstants>TRACE;PORTABLE,ASYNC</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>..\..\Artefacts\SDK\Ship\MYOB.AccountRight.SDK.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
@@ -46,7 +48,76 @@
   <ItemGroup>
     <Compile Include="ApiCommunicationException.cs" />
     <Compile Include="Communication\ApiRequestHandler.cs" />
+    <Compile Include="Communication\ApiRequestHelper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Communication\ApiStreamRequestHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Communication\WebRequestFactory.cs" />
+    <Compile Include="Contracts\Company.cs" />
+    <Compile Include="Contracts\ProductLevel.cs" />
+    <Compile Include="Contracts\Version2\Company\CategoryTracking.cs" />
+    <Compile Include="Contracts\Version2\Company\CompanyBankingPreferences.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Contracts\Version2\Company\CompanyPreferences.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Contracts\Version2\Company\CompanyPurchasesPreferences.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Contracts\Version2\Company\CompanyPurchasesPreferencesTerms.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Contracts\Version2\Company\CompanyReportsAndFormsPreferences.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Contracts\Version2\Company\CompanySalesPreferences.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Contracts\Version2\Company\CompanySalesPreferencesTerms.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Contracts\Version2\Company\CompanySystemPreferences.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Contracts\Version2\Company\PriceLevel.cs" />
+    <Compile Include="Contracts\Version2\Purchase\CalculateDiscountsItem.cs" />
+    <Compile Include="Contracts\Version2\Purchase\CalculateDiscountsPurchase.cs" />
+    <Compile Include="Contracts\Version2\Purchase\CalculateDiscountsPurchaseType.cs" />
+    <Compile Include="Contracts\Version2\Purchase\CalculateDiscountsResponseItem.cs" />
+    <Compile Include="Contracts\Version2\Purchase\CalculateDiscounts.cs" />
+    <Compile Include="Contracts\Version2\Purchase\CalculateDiscountsResponse.cs" />
+    <Compile Include="Contracts\Version2\Purchase\DebitRefund.cs" />
+    <Compile Include="Contracts\Version2\Purchase\DebitSettlement.cs" />
+    <Compile Include="Contracts\Version2\Purchase\BillLink.cs" />
+    <Compile Include="Contracts\Version2\Purchase\DebitSettlementLine.cs" />
+    <Compile Include="Contracts\Version2\Purchase\DebitSettlementLineType.cs" />
+    <Compile Include="Contracts\Version2\Purchase\DebitSettlementLink.cs" />
+    <Compile Include="Contracts\Version2\Purchase\PurchaseLink.cs" />
+    <Compile Include="Contracts\Version2\Purchase\SupplierPaymentLineType.cs" />
+    <Compile Include="Contracts\Version2\Purchase\SupplierPaymentLink.cs" />
+    <Compile Include="Contracts\Version2\Purchase\SupplierPaymentRecordWithDiscountsAndFees.cs" />
+    <Compile Include="Contracts\Version2\Purchase\SupplierPaymentRecordWithDiscountsAndFeesLine.cs" />
+    <Compile Include="Contracts\Version2\Purchase\SupplierPaymentRecordWithDiscountsAndFeesResponse.cs" />
+    <Compile Include="Contracts\Version2\Sale\CalculateDiscountsFees.cs" />
+    <Compile Include="Contracts\Version2\Sale\CalculateDiscountsFeesItem.cs" />
+    <Compile Include="Contracts\Version2\Sale\CalculateDiscountsFeesResponse.cs" />
+    <Compile Include="Contracts\Version2\Sale\CalculateDiscountsFeesResponseItem.cs" />
+    <Compile Include="Contracts\Version2\Sale\CalculateDiscountsFeesSale.cs" />
+    <Compile Include="Contracts\Version2\Sale\CalculateDiscountsFeesSaleType.cs" />
+    <Compile Include="Contracts\Version2\Sale\CreditRefund.cs" />
+    <Compile Include="Contracts\Version2\Sale\CreditSettlement.cs" />
+    <Compile Include="Contracts\Version2\Sale\CreditSettlementLine.cs" />
+    <Compile Include="Contracts\Version2\Sale\CreditSettlementLineType.cs" />
+    <Compile Include="Contracts\Version2\Sale\CreditSettlementLink.cs" />
+    <Compile Include="Contracts\Version2\Sale\CustomerPaymentLink.cs" />
+    <Compile Include="Contracts\Version2\Sale\CustomerPaymentRecordWithDiscountsAndFees.cs" />
+    <Compile Include="Contracts\Version2\Sale\CustomerPaymentRecordWithDiscountsAndFeesLine.cs" />
+    <Compile Include="Contracts\Version2\Sale\CustomerPaymentRecordWithDiscountsAndFeesResponse.cs" />
+    <Compile Include="Contracts\Version2\Sale\InvoiceLink.cs" />
+    <Compile Include="Contracts\Version2\Sale\SaleLink.cs" />
     <Compile Include="Contracts\VersionInfo.cs" />
     <Compile Include="Contracts\Version2\GeneralLedger\AccountingProperties.cs" />
     <Compile Include="Contracts\Version2\GeneralLedger\AccountRegister.cs" />
@@ -123,7 +194,6 @@
     <Compile Include="Contracts\Version2\Sale\ProfessionalInvoice.cs" />
     <Compile Include="Contracts\Version2\Contact\PurchaseLayoutType.cs" />
     <Compile Include="Contracts\Version2\Contact\SupplierRefundDetails.cs" />
-    <Compile Include="Contracts\Version2\Contact\SupplierSellingDetails.cs" />
     <Compile Include="Contracts\Version2\Sale\ServiceInvoice.cs" />
     <Compile Include="Contracts\Version2\Contact\Supplier.cs" />
     <Compile Include="Contracts\Version2\Contact\SupplierCredit.cs" />
@@ -133,6 +203,8 @@
     <Compile Include="Contracts\Version2\Terms.cs" />
     <Compile Include="Contracts\Version2\TermsPaymentType.cs" />
     <Compile Include="Contracts\VersionMap.cs" />
+    <Compile Include="Error.cs" />
+    <Compile Include="Extensions\ContractExtensions.cs" />
     <Compile Include="Extensions\ExceptionExtensions.cs" />
     <Compile Include="Extensions\FunctionalExtensions.cs" />
     <Compile Include="Extensions\JsonExtensions.cs" />
@@ -152,7 +224,10 @@
     <Compile Include="Contracts\Version2\BaseEntity.cs" />
     <Compile Include="Contracts\Version2\GeneralLedger\Account.cs" />
     <Compile Include="Contracts\Version2\GeneralLedger\TaxCodeLink.cs" />
+    <Compile Include="Services\CompanyService.cs" />
     <Compile Include="Services\IOAuthService.cs" />
+    <Compile Include="Services\Version2\Company\CompanyPreferencesService.cs" />
+    <Compile Include="Services\Version2\Contact\ContactService.cs" />
     <Compile Include="Services\Version2\GeneralLedger\AccountingPropertiesService.cs" />
     <Compile Include="Services\Version2\GeneralLedger\AccountRegisterService.cs" />
     <Compile Include="Services\Version2\GeneralLedger\AccountService.cs" />
@@ -160,12 +235,22 @@
     <Compile Include="Services\Version2\GeneralLedger\CategoryService.cs" />
     <Compile Include="Services\CompanyFileService.cs" />
     <Compile Include="IOAuthKeyService.cs" />
+    <Compile Include="Services\Version2\GetOnlyService.cs" />
+    <Compile Include="Services\Version2\IGetOnlyService.cs" />
     <Compile Include="Services\Version2\Purchase\BillService.cs" />
+    <Compile Include="Services\Version2\Purchase\CalculateDiscountsService.cs" />
+    <Compile Include="Services\Version2\Purchase\DebitRefundService.cs" />
+    <Compile Include="Services\Version2\Purchase\DebitSettlementService.cs" />
     <Compile Include="Services\Version2\Purchase\ItemBillService.cs" />
     <Compile Include="Services\Version2\Purchase\MiscellaneousBillService.cs" />
     <Compile Include="Services\Version2\Purchase\ProfessionalBillService.cs" />
     <Compile Include="Services\Version2\Purchase\ServiceBillService.cs" />
+    <Compile Include="Services\Version2\Purchase\SupplierPaymentRecordWithDiscountsAndFeesService.cs" />
     <Compile Include="Services\Version2\Purchase\SupplierPaymentService.cs" />
+    <Compile Include="Services\Version2\Sale\CalculateDiscountsFeesService.cs" />
+    <Compile Include="Services\Version2\Sale\CreditRefundService.cs" />
+    <Compile Include="Services\Version2\Sale\CreditSettlementService.cs" />
+    <Compile Include="Services\Version2\Sale\CustomerPaymentRecordWithDiscountsAndFeesService.cs" />
     <Compile Include="Services\Version2\Sale\CustomerPaymentService.cs" />
     <Compile Include="Services\Version2\Contact\CustomerService.cs" />
     <Compile Include="Services\Version2\Contact\EmployeeService.cs" />
@@ -176,6 +261,8 @@
     <Compile Include="Services\Version2\Sale\InvoiceService.cs" />
     <Compile Include="Services\Version2\IReadable.cs" />
     <Compile Include="Services\Version2\IReadablePhoto.cs" />
+    <Compile Include="Services\Version2\IPdfService.cs" />
+    <Compile Include="Services\Version2\IOperation.cs" />
     <Compile Include="Services\Version2\Sale\ItemInvoiceService.cs" />
     <Compile Include="Services\Version2\Inventory\ItemService.cs" />
     <Compile Include="Services\Version2\GeneralLedger\JobRegisterService.cs" />
@@ -187,12 +274,14 @@
     <Compile Include="Services\Version2\MutableService.cs" />
     <Compile Include="Services\OAuthService.cs" />
     <Compile Include="Services\Version2\Contact\PersonalService.cs" />
+    <Compile Include="Services\Version2\Sale\PdfInvoiceServiceBase.cs" />
     <Compile Include="Services\Version2\Sale\ProfessionalInvoiceService.cs" />
     <Compile Include="Services\Version2\ReadableService.cs" />
     <Compile Include="Services\ServiceBase.cs" />
     <Compile Include="Services\Version2\Sale\ServiceInvoiceService.cs" />
     <Compile Include="Services\Version2\Contact\SupplierService.cs" />
     <Compile Include="Services\Version2\GeneralLedger\TaxCodeService.cs" />
+    <Compile Include="Services\Version2\UriHelper.cs" />
     <Compile Include="Services\VersionInfoService.cs" />
     <Compile Include="SimpleOAuthKeyService.cs" />
   </ItemGroup>

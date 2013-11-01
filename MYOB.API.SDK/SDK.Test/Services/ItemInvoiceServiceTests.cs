@@ -1,4 +1,4 @@
-﻿using MYOB.AccountRight.SDK.Services;
+﻿using System.Collections.Generic;
 using MYOB.AccountRight.SDK.Services.Sale;
 using NUnit.Framework;
 

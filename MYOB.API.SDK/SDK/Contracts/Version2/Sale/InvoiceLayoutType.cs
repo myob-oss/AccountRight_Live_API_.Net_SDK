@@ -1,5 +1,8 @@
 ﻿namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
 {
+    /// <summary>
+    /// Type of Invoice
+    /// </summary>
     public enum InvoiceLayoutType
     {
         /// <summary>

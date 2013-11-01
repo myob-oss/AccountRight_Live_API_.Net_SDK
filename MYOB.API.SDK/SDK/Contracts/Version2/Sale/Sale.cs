@@ -3,6 +3,9 @@ using MYOB.AccountRight.SDK.Contracts.Version2.Contact;
 
 namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
 {
+    /// <summary>
+    /// Common class for sale Professional, Miscelleneous, Service and Item invoice resource
+    /// </summary>
     public class Sale : BaseEntity
     {
         /// <summary>
