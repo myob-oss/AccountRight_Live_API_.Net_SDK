@@ -7,13 +7,16 @@ using MYOB.AccountRight.SDK.Contracts;
 
 namespace MYOB.AccountRight.SDK.Services
 {
+    /// <summary>
+    /// Describes the methods exposed by the <see cref="CompanyFileService"/>
+    /// </summary>
     public interface ICompanyFileService
     {
         /// <summary>
         /// Get list of available company fies
         /// </summary>
-        /// <param name="onComplete"></param>
-        /// <param name="onError"></param>
+        /// <param name="onComplete">The action to call when the operation is complete</param>
+        /// <param name="onError">The action to call when the operation has an error</param>
         void GetRange(Action<HttpStatusCode, CompanyFile[]> onComplete, Action<Uri, Exception> onError);
 
         /// <summary>
@@ -33,9 +36,9 @@ namespace MYOB.AccountRight.SDK.Services
         /// <summary>
         /// Get list of available company fies
         /// </summary>
-        /// <param name="queryString">An odata filter</param>
-        /// <param name="onComplete"></param>
-        /// <param name="onError"></param>
+        /// <param name="queryString">e.g. An ODATA filter</param>
+        /// <param name="onComplete">The action to call when the operation is complete</param>
+        /// <param name="onError">The action to call when the operation has an error</param>
         void GetRange(string queryString, Action<HttpStatusCode, CompanyFile[]> onComplete, Action<Uri, Exception> onError);
 
         /// <summary>
@@ -49,7 +52,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <summary>
         /// Get list of available company fies
         /// </summary>
-        /// <param name="queryString">An odata filter</param>
+        /// <param name="queryString">e.g. An ODATA filter</param>
         /// <returns></returns>
         Task<CompanyFile[]> GetRangeAsync(string queryString);        
 #endif
@@ -58,8 +61,8 @@ namespace MYOB.AccountRight.SDK.Services
         /// </summary>
         /// <param name="cf">A company file that has been retrieved</param>
         /// <param name="credentials">The credentials to access the company file</param>
-        /// <param name="onComplete"></param>
-        /// <param name="onError"></param>
+        /// <param name="onComplete">The action to call when the operation is complete</param>
+        /// <param name="onError">The action to call when the operation has an error</param>
         void Get(CompanyFile cf, ICompanyFileCredentials credentials, Action<HttpStatusCode, CompanyFileWithResources> onComplete, Action<Uri, Exception> onError);
 
         /// <summary>

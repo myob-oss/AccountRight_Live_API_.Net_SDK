@@ -14,14 +14,14 @@ namespace MYOB.AccountRight.SDK.Communication
 {
     internal class OAuthRequestHandler : BaseRequestHandler
     {
-        private readonly IApiConfiguration _configuration;
-
         /// <summary>
         /// https://secure.myob.com/oauth2/v1/authorize
         /// </summary>
         public static Uri OAuthRequestUri = new Uri("https://secure.myob.com/oauth2/v1/authorize");
 
-        public OAuthRequestHandler(IApiConfiguration configuration)
+        private readonly IApiConfiguration _configuration;
+
+        public OAuthRequestHandler(IApiConfiguration configuration) : base(new ApiRequestHelper())
         {
             _configuration = configuration;
         }
@@ -100,7 +100,7 @@ namespace MYOB.AccountRight.SDK.Communication
         }
 #endif
 
-        private static void BeginRequest(WebRequest request, Action<HttpStatusCode, string, OAuthTokens> onComplete, Action<Uri, Exception> onError, string data)
+        private void BeginRequest(WebRequest request, Action<HttpStatusCode, string, OAuthTokens> onComplete, Action<Uri, Exception> onError, string data)
         {
             request.Method = "POST";
             request.ContentType = "application/x-www-form-urlencoded";
@@ -115,7 +115,7 @@ namespace MYOB.AccountRight.SDK.Communication
         }
 
 #if ASYNC
-        async private static Task<Tuple<HttpStatusCode, string, OAuthTokens>> BeginRequestAsync(WebRequest request, string data)
+        async private Task<Tuple<HttpStatusCode, string, OAuthTokens>> BeginRequestAsync(WebRequest request, string data)
         {
             return await GetResponseTask<OAuthTokens>(await GetRequestStreamTask<string>(request, data));
         }
@@ -133,7 +133,7 @@ namespace MYOB.AccountRight.SDK.Communication
         }
 #endif
 
-        private static void HandleRequestCallback(IAsyncResult asynchronousResult)
+        private void HandleRequestCallback(IAsyncResult asynchronousResult)
         {
             var requestData = (RequestContext<string, OAuthTokens>)asynchronousResult.AsyncState;
 

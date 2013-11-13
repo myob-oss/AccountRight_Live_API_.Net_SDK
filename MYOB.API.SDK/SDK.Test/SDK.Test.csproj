@@ -48,6 +48,10 @@
     <Reference Include="nunit.framework">
       <HintPath>..\..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="SharpCompress, Version=0.10.1.3, Culture=neutral, PublicKeyToken=beaf6f427e128133, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\sharpcompress.0.10.1.3\lib\net40\SharpCompress.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net" />
@@ -61,13 +65,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\SDK\Services\Version2\Contact\ContactService.cs">
-      <Link>Services\ContactService.cs</Link>
-    </Compile>
     <Compile Include="ApiConfigurationTests.cs" />
     <Compile Include="Communication\ApiRequestHandlerTests.cs" />
     <Compile Include="Communication\BaseRequestHandlerTests.cs" />
     <Compile Include="Communication\OAuthRequestHandlerTests.cs" />
+    <Compile Include="Contracts\ProductLevelTests.cs" />
     <Compile Include="Contracts\Version2\AccountTests.cs" />
     <Compile Include="Contracts\Version2\CategoryTests.cs" />
     <Compile Include="Contracts\Version2\ContactTests.cs" />
@@ -77,12 +79,22 @@
     <Compile Include="Contracts\Version2\ItemInvoiceTests.cs" />
     <Compile Include="Contracts\Version2\ProfessionalInvoiceTests.cs" />
     <Compile Include="Contracts\Version2\ServiceInvoiceTests.cs" />
+    <Compile Include="Extensions\ContractExtensionsTests.cs" />
+    <Compile Include="Extensions\ExceptionExtensionsTests.cs" />
     <Compile Include="Extensions\JsonExtensionTests.cs" />
     <Compile Include="Services\AccountRegisterServiceTests.cs" />
     <Compile Include="Services\AccountServiceTests.cs" />
     <Compile Include="Services\BillServiceTests.cs" />
+    <Compile Include="Services\CalculateDiscountsFeesServiceTests.cs" />
+    <Compile Include="Services\CalculateDiscountsServiceTests.cs" />
     <Compile Include="Services\CategoryRegisterServiceTests.cs" />
     <Compile Include="Services\CategoryServiceTests.cs" />
+    <Compile Include="Services\CompanyPreferencesServiceTests.cs" />
+    <Compile Include="Services\CompanyServiceTests.cs" />
+    <Compile Include="Services\DebitRefundServiceTests.cs" />
+    <Compile Include="Services\CreditSettlementServiceTests.cs" />
+    <Compile Include="Services\CreditRefundServiceTests.cs" />
+    <Compile Include="Services\DebitSettlementServiceTests.cs" />
     <Compile Include="Services\ItemBillServiceTests.cs" />
     <Compile Include="Services\MutablePhotoServiceTests.cs" />
     <Compile Include="Services\CustomerPaymentServiceTests.cs" />
@@ -90,6 +102,7 @@
     <Compile Include="Services\ItemInvoiceServiceTests.cs" />
     <Compile Include="Services\MiscellaneousInvoiceServiceTests.cs" />
     <Compile Include="Services\OAuthServiceTests.cs" />
+    <Compile Include="Services\PdfInvoiceServiceBaseTests.cs" />
     <Compile Include="Services\ProfessionalInvoiceServiceTests.cs" />
     <Compile Include="Services\ServiceInvoiceServiceTests.cs" />
     <Compile Include="Services\InvoiceServiceTests.cs" />
@@ -102,10 +115,11 @@
     <Compile Include="Services\CustomerServiceTests.cs" />
     <Compile Include="Services\EmployeeServiceTests.cs" />
     <Compile Include="Services\PersonalServiceTests.cs" />
+    <Compile Include="Services\SupplierPaymentRecordWithDiscountsAndFeesServiceTests.cs" />
     <Compile Include="Services\SupplierPaymentServiceTests.cs" />
     <Compile Include="Services\SupplierServiceTests.cs" />
     <Compile Include="Services\TaxCodeServiceTests.cs" />
-    <Compile Include="Services\VersionInfoServiceTests.cs" />
+    <Compile Include="Services\UriHelperTests.cs" />
     <Compile Include="UserContract.cs" />
     <Compile Include="Helper\TestWebRequestFactory.cs" />
     <Compile Include="Communication\WebRequestFactoryTests.cs" />

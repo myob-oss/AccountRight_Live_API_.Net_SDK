@@ -8,6 +8,10 @@ using MYOB.AccountRight.SDK.Contracts.Version2;
 
 namespace MYOB.AccountRight.SDK.Services
 {
+    /// <summary>
+    /// Describes the operations available to read a photo/image resource
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public interface IReadablePhoto<T> : IReadable<T> where T : BaseEntity
     {
         /// <summary>
@@ -16,8 +20,8 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="cf">A company file that has been retrieved</param>
         /// <param name="uid">The identifier of the entity to retrieve</param>
         /// <param name="credentials">The credentials to access the company file</param>
-        /// <param name="onComplete"></param>
-        /// <param name="onError"></param>
+        /// <param name="onComplete">The action to call when the operation is complete</param>
+        /// <param name="onError">The action to call when the operation has an error</param>
         void GetPhoto(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, Action<HttpStatusCode, byte[]> onComplete, Action<Uri, Exception> onError);
 
         /// <summary>

@@ -1,8 +1,8 @@
-﻿using MYOB.AccountRight.SDK.Contracts.Version2.Contact;
-using MYOB.AccountRight.SDK.Contracts.Version2.GeneralLedger;
-
-namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
+﻿namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
 {
+    /// <summary>
+    /// Describe the Sale/Invoice/Service resource
+    /// </summary>
     public class ServiceInvoice : InvoiceWithLines<ServiceInvoiceLine>
     {
     }

@@ -1,5 +1,8 @@
 ﻿namespace MYOB.AccountRight.SDK
 {
+    /// <summary>
+    /// Interface for classes that will provide Company File credentials 
+    /// </summary>
     public interface ICompanyFileCredentials
     {
         /// <summary>

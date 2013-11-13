@@ -1,9 +1,12 @@
 ﻿namespace MYOB.AccountRight.SDK
 {
+    /// <summary>
+    /// An interface for the API configuration
+    /// </summary>
     public interface IApiConfiguration
     {
         /// <summary>
-        /// The clientDd
+        /// The clientId
         /// </summary>
         string ClientId { get; }
 

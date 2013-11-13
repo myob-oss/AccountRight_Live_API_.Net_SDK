@@ -6,7 +6,6 @@ using System.IO.Compression;
 using System.Net;
 using System.Text;
 using MYOB.AccountRight.SDK;
-using MYOB.AccountRight.SDK.Communication;
 using NSubstitute;
 
 namespace SDK.Test.Helper
@@ -20,7 +19,17 @@ namespace SDK.Test.Helper
             lookup.Add(uri.TrimEnd('/').ToLowerInvariant(), () => ReturnBody(resultBody, returnCode, location));
         }
 
+        public void RegisterResultForUri(string uri, Stream resultBody, HttpStatusCode returnCode = HttpStatusCode.OK, string location = null)
+        {
+            lookup.Add(uri.TrimEnd('/').ToLowerInvariant(), () => ReturnBody(resultBody, returnCode, location));
+        }
+
         public void RegisterCompressedResultForUri(string uri, string resultBody, HttpStatusCode returnCode = HttpStatusCode.OK)
+        {
+            lookup.Add(uri.TrimEnd('/').ToLowerInvariant(), () => ReturnCompressedBody(resultBody, returnCode));
+        }
+
+        public void RegisterCompressedResultForUri(string uri, Stream resultBody, HttpStatusCode returnCode = HttpStatusCode.OK)
         {
             lookup.Add(uri.TrimEnd('/').ToLowerInvariant(), () => ReturnCompressedBody(resultBody, returnCode));
         }
@@ -33,35 +42,43 @@ namespace SDK.Test.Helper
 
         static WebResponse ReturnBody(string body, HttpStatusCode returnCode, string location)
         {
-            var response = Substitute.For<HttpWebResponse>();
             var byteArray = Encoding.ASCII.GetBytes(body ?? string.Empty);
-            response.GetResponseStream().Returns(new MemoryStream(byteArray));
+            return ReturnBody(new MemoryStream(byteArray), returnCode, location);
+        }
+
+        private static WebResponse ReturnBody(Stream resultBody, HttpStatusCode returnCode, string location)
+        {
+            var response = Substitute.For<HttpWebResponse>();
+            response.GetResponseStream().Returns(resultBody);
             response.StatusCode.Returns(returnCode);
-            response.Headers.Returns(location != null ? new WebHeaderCollection() {{"Location", location}} : new WebHeaderCollection());
+            response.Headers.Returns(location != null ? new WebHeaderCollection { { "Location", location } } : new WebHeaderCollection());
             return response;
         }
 
         private static WebResponse ReturnCompressedBody(string body, HttpStatusCode returnCode)
         {
-            var response = Substitute.For<HttpWebResponse>();
             var byteArray = Encoding.ASCII.GetBytes(body);
+            return ReturnCompressedBody(new MemoryStream(byteArray), returnCode);
+        }
+
+        private static WebResponse ReturnCompressedBody(Stream resultBody, HttpStatusCode returnCode)
+        {
+            var response = Substitute.For<HttpWebResponse>();
             var outStream = new MemoryStream();
-            using (var stream = new MemoryStream(byteArray))
+            using (var zip = new GZipStream(outStream, CompressionMode.Compress))
             {
-                using (var zip = new GZipStream(outStream, CompressionMode.Compress))
-                {
-                    stream.CopyTo(zip);
-                }
+                resultBody.CopyTo(zip);
             }
             response.GetResponseStream().Returns(new MemoryStream(outStream.ToArray()));
             response.StatusCode.Returns(returnCode);
-            response.Headers.Returns(new WebHeaderCollection() {{HttpRequestHeader.ContentEncoding, "gzip"}});
+            response.Headers.Returns(new WebHeaderCollection() { { HttpRequestHeader.ContentEncoding, "gzip" } });
             return response;
         }
 
-        public WebRequest Create(Uri requestUri)
+        public WebRequest Create(Uri requestUri, string acceptEncoding = null)
         {
             var uri = requestUri.ToString().TrimEnd('/').ToLowerInvariant();
+
             if (lookup.ContainsKey(uri))
                 return CreateWebRequest(new Uri(uri), lookup[uri]);
 
@@ -70,13 +87,12 @@ namespace SDK.Test.Helper
             return null;
         }
 
-        private static WebRequest CreateWebRequest(Uri uri, Func<WebResponse> toReturn)
+        private static HttpWebRequest CreateWebRequest(Uri uri, Func<WebResponse> toReturn)
         {
-            var request = Substitute.For<WebRequest>();
+            var request = Substitute.For<HttpWebRequest>();
             var asyncResult = Substitute.For<IAsyncResult>();
 
             request.RequestUri.Returns(uri);
-
             request.Headers.Returns(new WebHeaderCollection());
 
             request.BeginGetResponse(Arg.Any<AsyncCallback>(), Arg.Any<object>())

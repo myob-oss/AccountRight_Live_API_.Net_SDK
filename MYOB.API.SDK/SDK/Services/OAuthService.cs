@@ -24,7 +24,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <summary>
         /// Instantiate with OAuth configuration 
         /// </summary>
-        /// <param name="configuration"></param>
+        /// <param name="configuration">The configuration required to communicate with the API service</param>
         /// <param name="factory">A custom IWebRequestFactory implementation, defaults to WebRequestFactory if not supplied.</param>
         public OAuthService(IApiConfiguration configuration, IWebRequestFactory factory = null)
         {
@@ -32,6 +32,12 @@ namespace MYOB.AccountRight.SDK.Services
             _factory = factory ?? new WebRequestFactory();
         }
 
+        /// <summary>
+        /// Get the OAuth tokens required to access the cloud based API (Delegate)
+        /// </summary>
+        /// <param name="code">The code received after the user has given the application permission to access their company files</param>
+        /// <param name="onComplete">The action to call when the operation is complete</param>
+        /// <param name="onError">The action to call when the operation has an error</param>
         public void GetTokens(string code, Action<HttpStatusCode, OAuthTokens> onComplete, Action<Uri, Exception> onError)
         {
             var handler = new OAuthRequestHandler(_configuration);
@@ -39,6 +45,11 @@ namespace MYOB.AccountRight.SDK.Services
             handler.GetOAuthTokens(request, code, onComplete, onError);
         }
 
+        /// <summary>
+        /// Get the OAuth tokens required to access the cloud based API (Synchronous)
+        /// </summary>
+        /// <param name="code">The code received after the user has given the application permission to access their company files</param>
+        /// <returns>The tokens that are required to access the user's company files</returns>
         public OAuthTokens GetTokens(string code)
         {
             var wait = new ManualResetEvent(false);
@@ -68,6 +79,11 @@ namespace MYOB.AccountRight.SDK.Services
         }
 
 #if ASYNC
+        /// <summary>
+        /// Get the OAuth tokens required to access the cloud based API (Synchronous)
+        /// </summary>
+        /// <param name="code">The code received after the user has given the application permission to access their company files</param>
+        /// <returns>The tokens that are required to access the user's company files</returns>
         async public Task<OAuthTokens> GetTokensAsync(string code)
         {
             var handler = new OAuthRequestHandler(_configuration);
@@ -77,6 +93,12 @@ namespace MYOB.AccountRight.SDK.Services
         } 
 #endif
 
+        /// <summary>
+        /// Renew the OAuth tokens required to access the cloud based API (Delegate)
+        /// </summary>
+        /// <param name="oauthTokens">The tokens that are required to access the user's company files</param>
+        /// <param name="onComplete">The action to call when the operation is complete</param>
+        /// <param name="onError">The action to call when the operation has an error</param>
         public void RenewTokens(OAuthTokens oauthTokens, Action<HttpStatusCode, OAuthTokens> onComplete, Action<Uri, Exception> onError)
         {
             var handler = new OAuthRequestHandler(_configuration);
@@ -84,6 +106,11 @@ namespace MYOB.AccountRight.SDK.Services
             handler.RenewOAuthTokens(request, oauthTokens, onComplete, onError);
         }
 
+        /// <summary>
+        /// Renew the OAuth tokens required to access the cloud based API (Synchronous)
+        /// </summary>
+        /// <param name="oauthTokens">The tokens that are required to access the user's company files</param>
+        /// <returns></returns>
         public OAuthTokens RenewTokens(OAuthTokens oauthTokens)
         {
             var wait = new ManualResetEvent(false);
@@ -114,6 +141,11 @@ namespace MYOB.AccountRight.SDK.Services
         }
 
 #if ASYNC
+        /// <summary>
+        /// Renew the OAuth tokens required to access the cloud based API (Synchronous)
+        /// </summary>
+        /// <param name="oauthTokens">The tokens that are required to access the user's company files</param>
+        /// <returns></returns>
         async public Task<OAuthTokens> RenewTokensAsync(OAuthTokens oauthTokens)
         {
             var handler = new OAuthRequestHandler(_configuration);

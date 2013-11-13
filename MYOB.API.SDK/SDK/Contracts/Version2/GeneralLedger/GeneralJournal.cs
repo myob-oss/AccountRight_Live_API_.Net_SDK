@@ -8,6 +8,9 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.GeneralLedger
     /// </summary>
     public class GeneralJournal : BaseEntity
     {
+        /// <summary>
+        /// The display ID
+        /// </summary>
         public string DisplayID { get; set; }
 
         /// <summary>

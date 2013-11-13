@@ -48,7 +48,7 @@
 
         /// <summary>
         ///  Tax Amount
-        ///  The value written in Tax Amount is only taken into account if <see cref="OverrideTaxAmount"/> equals True
+        ///  The value written in Tax Amount is only taken into account if <see cref="IsOverriddenTaxAmount"/> equals True
         /// </summary>
         public decimal TaxAmount { get; set; }
 

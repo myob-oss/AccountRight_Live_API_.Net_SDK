@@ -7,7 +7,7 @@
     public class TaxCodeLink : BaseLink
     {
         /// <summary>
-        /// 3 didgit tax code.
+        /// 3 digit tax code.
         /// </summary>
         public string Code { get; set; }
     }

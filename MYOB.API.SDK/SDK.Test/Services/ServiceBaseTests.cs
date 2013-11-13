@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
 using System.Threading.Tasks;
 using MYOB.AccountRight.SDK;
 using MYOB.AccountRight.SDK.Communication;
 using MYOB.AccountRight.SDK.Contracts;
 using MYOB.AccountRight.SDK.Services;
 using NUnit.Framework;
-using SDK.Test.Communication;
 using SDK.Test.Helper;
 using MYOB.AccountRight.SDK.Extensions;
 
@@ -18,6 +14,11 @@ namespace SDK.Test.Services
     [TestFixture]
     public class ServiceBaseTests
     {
+        public class TestContract
+        {
+            public Guid UID { get; set; }
+        }
+
         public class TestServiceBase : ServiceBase
         {
             public TestServiceBase(IApiConfiguration configuration, IWebRequestFactory webRequestFactory, IOAuthKeyService keyService) 
@@ -45,6 +46,11 @@ namespace SDK.Test.Services
                 return MakeApiPostRequestSync(uri, new UserContract(), null);
             }
 
+            public TestContract Post(Uri uri, UserContract contract)
+            {
+                return MakeApiPostRequestSync<UserContract, TestContract>(uri, contract, null).Value;
+            }
+
             async public Task<UserContract> GetAsync(Uri uri)
             {
                 return await MakeApiGetRequestAsync<UserContract>(uri, null);
@@ -63,6 +69,11 @@ namespace SDK.Test.Services
             async public Task<string> PostAsync(Uri uri)
             {
                 return await MakeApiPostRequestAsync(uri, new UserContract(), null);
+            }
+
+            async public Task<TestContract> PostAsync(Uri uri, UserContract contract)
+            {
+                return await MakeApiPostRequestAsync<UserContract, TestContract>(uri, contract, null);
             }
         }
 
@@ -107,10 +118,12 @@ namespace SDK.Test.Services
                 new Tuple<Action<TestServiceBase, Uri>, string, bool>((@base, uri) => @base.Delete(uri), null, true),
                 new Tuple<Action<TestServiceBase, Uri>, string, bool>((@base, uri) => @base.Put(uri), null, true),
                 new Tuple<Action<TestServiceBase, Uri>, string, bool>((@base, uri) => @base.Post(uri), null, true),
+                new Tuple<Action<TestServiceBase, Uri>, string, bool>((@base, uri) => @base.Post(uri, new UserContract()), null, true),
                 new Tuple<Action<TestServiceBase, Uri>, string, bool>((@base, uri) => @base.GetAsync(uri).Wait(), new UserContract() { Name = "User" }.ToJson(), false),
                 new Tuple<Action<TestServiceBase, Uri>, string, bool>((@base, uri) => @base.DeleteAsync(uri).Wait(), null, false),
                 new Tuple<Action<TestServiceBase, Uri>, string, bool>((@base, uri) => @base.PutAsync(uri).Wait(), null, false),
                 new Tuple<Action<TestServiceBase, Uri>, string, bool>((@base, uri) => @base.PostAsync(uri).Wait(), null, false),
+                new Tuple<Action<TestServiceBase, Uri>, string, bool>((@base, uri) => @base.PostAsync(uri, new UserContract()).Wait(), null, false),
             };
 
         [Test]

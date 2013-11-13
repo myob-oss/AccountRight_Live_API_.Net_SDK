@@ -3,8 +3,14 @@ using MYOB.AccountRight.SDK.Contracts.Version2.GeneralLedger;
 
 namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
 {
+    /// <summary>
+    /// Describe the Sale/Invoice resource
+    /// </summary>
     public class Invoice : Sale
     {
+        /// <summary>
+        /// Initialise
+        /// </summary>
         public Invoice()
         {
             IsTaxInclusive = true;

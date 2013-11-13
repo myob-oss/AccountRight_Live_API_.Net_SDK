@@ -29,6 +29,11 @@ namespace MYOB.AccountRight.SDK.Contracts
         public string ProductVersion { get; set; }
 
         /// <summary>
+        ///   Account Right Live product level of the CompanyFile
+        /// </summary>
+        public ProductLevel ProductLevel { get; set; }
+
+        /// <summary>
         /// Uri of the resource
         /// </summary>
         public Uri Uri { get; set; }
