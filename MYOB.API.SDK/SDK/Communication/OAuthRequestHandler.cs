@@ -75,6 +75,7 @@ namespace MYOB.AccountRight.SDK.Communication
         {
             var data = BuildRenewTokenData(oAuthResponse);
 
+            ConfigureRequest(request);
             BeginRequest(request, (statusCode, s, response) => onComplete(statusCode, response), onError, data);
         }
 
@@ -83,6 +84,12 @@ namespace MYOB.AccountRight.SDK.Communication
             var data = string.Format("client_id={0}&client_secret={1}&refresh_token={2}&grant_type=refresh_token",
                                      _configuration.ClientId, _configuration.ClientSecret, oAuthResponse.RefreshToken);
             return data;
+        }
+
+        private void ConfigureRequest(WebRequest request)
+        {
+            request.Method = "POST";
+            request.ContentType = "application/x-www-form-urlencoded";
         }
 
 #if ASYNC
@@ -95,6 +102,7 @@ namespace MYOB.AccountRight.SDK.Communication
         {
             var data = BuildRenewTokenData(oAuthResponse);
 
+            ConfigureRequest(request);
             var get = await BeginRequestAsync(request, data);
             return new Tuple<HttpStatusCode, OAuthTokens>(get.Item1, get.Item3);
         }
@@ -102,8 +110,6 @@ namespace MYOB.AccountRight.SDK.Communication
 
         private void BeginRequest(WebRequest request, Action<HttpStatusCode, string, OAuthTokens> onComplete, Action<Uri, Exception> onError, string data)
         {
-            request.Method = "POST";
-            request.ContentType = "application/x-www-form-urlencoded";
             request.BeginGetRequestStream(HandleRequestCallback,
                                            new RequestContext<string, OAuthTokens>
                                            {
