@@ -36,7 +36,7 @@ namespace MYOB.AccountRight.SDK.Communication
         public void GetOAuthTokens(WebRequest request, string code, Action<HttpStatusCode, OAuthTokens> onComplete, Action<Uri, Exception> onError)
         {
             var data = BuildRequestTokenData(code);
-
+            ConfigureRequest(request);
             BeginRequest(request, (statusCode, s, response) => onComplete(statusCode, response), onError, data);
         }
 
@@ -44,8 +44,6 @@ namespace MYOB.AccountRight.SDK.Communication
         {
             var data = string.Format("client_id={0}&client_secret={1}&redirect_uri={2}&scope=CompanyFile&code={3}&grant_type=authorization_code",
                     _configuration.ClientId, _configuration.ClientSecret, Uri.EscapeDataString(_configuration.RedirectUrl), code);
-
-            
 
             return data;
         }
@@ -59,7 +57,7 @@ namespace MYOB.AccountRight.SDK.Communication
         async public Task<Tuple<HttpStatusCode, OAuthTokens>> GetOAuthTokensAsync(WebRequest request, string code)
         {
             var data = BuildRequestTokenData(code);
-
+            ConfigureRequest(request);
             var get = await BeginRequestAsync(request, data);
             return new Tuple<HttpStatusCode, OAuthTokens>(get.Item1, get.Item3);
         }
@@ -74,7 +72,6 @@ namespace MYOB.AccountRight.SDK.Communication
         public void RenewOAuthTokens(WebRequest request, OAuthTokens oAuthResponse, Action<HttpStatusCode, OAuthTokens> onComplete, Action<Uri, Exception> onError)
         {
             var data = BuildRenewTokenData(oAuthResponse);
-
             ConfigureRequest(request);
             BeginRequest(request, (statusCode, s, response) => onComplete(statusCode, response), onError, data);
         }
@@ -86,7 +83,7 @@ namespace MYOB.AccountRight.SDK.Communication
             return data;
         }
 
-        private void ConfigureRequest(WebRequest request)
+        private static void ConfigureRequest(WebRequest request)
         {
             request.Method = "POST";
             request.ContentType = "application/x-www-form-urlencoded";
@@ -101,7 +98,6 @@ namespace MYOB.AccountRight.SDK.Communication
         async public Task<Tuple<HttpStatusCode, OAuthTokens>> RenewOAuthTokensAsync(WebRequest request, OAuthTokens oAuthResponse)
         {
             var data = BuildRenewTokenData(oAuthResponse);
-
             ConfigureRequest(request);
             var get = await BeginRequestAsync(request, data);
             return new Tuple<HttpStatusCode, OAuthTokens>(get.Item1, get.Item3);

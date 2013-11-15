@@ -158,7 +158,7 @@ namespace SDK.Test.Services
             Assert.AreEqual(OAuthRequestHandler.OAuthRequestUri, ex.URI);
         }
 
-        [Test]
+        [Test, Category("IntegrationTest")]
         public void ServiceWillUseDefaultFactoryIfNotSupplied()
         {
             // arrange
