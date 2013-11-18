@@ -20,25 +20,35 @@ namespace SDK.Test.Communication
     [TestFixture]
     public class OAuthRequestHandlerTests
     {
+        private WebRequest _request;
+        private MemoryStream _stream;
+        private OAuthRequestHandler _handler;
+
+        [SetUp]
+        public void SetUp()
+        {
+            var uri = OAuthRequestHandler.OAuthRequestUri;
+            var factory = new TestWebRequestFactory();
+            factory.RegisterResultForUri(uri.AbsoluteUri, "null");
+            _request = factory.Create(uri);
+
+            _stream = new MemoryStream();
+            _request.EndGetRequestStream(Arg.Any<IAsyncResult>()).Returns(c => _stream);
+
+            _handler = new OAuthRequestHandler(new ApiConfiguration("<<clientid>>", "<<clientsecret>>", "http://desktop/"));
+
+        }
+
         [Test]
         public void WhenMakingAnOauthRequestTheCorrectTokensAreAddedToTheRequestBody()
         {
             // arrange
-            var uri = OAuthRequestHandler.OAuthRequestUri;
-            var factory = new TestWebRequestFactory();
-            factory.RegisterResultForUri(uri.AbsoluteUri, "null");
-            var request = factory.Create(uri);
-
-            var stream = new MemoryStream();
-            request.EndGetRequestStream(Arg.Any<IAsyncResult>()).Returns(c => stream);
-
-            var handler = new OAuthRequestHandler(new ApiConfiguration("<<clientid>>", "<<clientsecret>>", "http://desktop/"));
             
             // act
-            handler.GetOAuthTokens(request, "<<code>>", (code, response) => { }, (exuri, exception) => Assert.Fail(exception.Message));
+            _handler.GetOAuthTokens(_request, "<<code>>", (code, response) => { }, (exuri, exception) => Assert.Fail(exception.Message));
 
             // assert
-            var reader = new StreamReader(new MemoryStream(stream.ToArray()));
+            var reader = new StreamReader(new MemoryStream(_stream.ToArray()));
             var data = reader.ReadToEnd();
             var nvc = HttpUtility.ParseQueryString(data);
 
@@ -54,21 +64,12 @@ namespace SDK.Test.Communication
         public void WhenMakingAnOauthRequestRenewalTheCorrectTokensAreAddedToTheRequestBody()
         {
             // arrange
-            var uri = OAuthRequestHandler.OAuthRequestUri;
-            var factory = new TestWebRequestFactory();
-            factory.RegisterResultForUri(uri.AbsoluteUri, "null");
-            var request = factory.Create(uri);
-
-            var stream = new MemoryStream();
-            request.EndGetRequestStream(Arg.Any<IAsyncResult>()).Returns(c => stream);
-
-            var handler = new OAuthRequestHandler(new ApiConfiguration("<<clientid>>", "<<clientsecret>>", "<<redirecturl>>"));
 
             // act
-            handler.RenewOAuthTokens(request, new OAuthTokens() { RefreshToken = "<<refreshtoken>>" }, (code, response) => { }, (exuri, exception) => Assert.Fail(exception.Message));
+            _handler.RenewOAuthTokens(_request, new OAuthTokens() { RefreshToken = "<<refreshtoken>>" }, (code, response) => { }, (exuri, exception) => Assert.Fail(exception.Message));
 
             // assert
-            var reader = new StreamReader(new MemoryStream(stream.ToArray()));
+            var reader = new StreamReader(new MemoryStream(_stream.ToArray()));
             var data = reader.ReadToEnd();
             var nvc = HttpUtility.ParseQueryString(data);
 
@@ -82,21 +83,12 @@ namespace SDK.Test.Communication
         async public void WhenMakingAnOauthRequest_Async_TheCorrectTokensAreAddedToTheRequestBody()
         {
             // arrange
-            var uri = OAuthRequestHandler.OAuthRequestUri;
-            var factory = new TestWebRequestFactory();
-            factory.RegisterResultForUri(uri.AbsoluteUri, "null");
-            var request = factory.Create(uri);
-
-            var stream = new MemoryStream();
-            request.EndGetRequestStream(Arg.Any<IAsyncResult>()).Returns(c => stream);
-
-            var handler = new OAuthRequestHandler(new ApiConfiguration("<<clientid>>", "<<clientsecret>>", "http://desktop/"));
 
             // act
-            var tokens = await handler.GetOAuthTokensAsync(request, "<<code>>");
+            var tokens = await _handler.GetOAuthTokensAsync(_request, "<<code>>");
 
             // assert
-            var reader = new StreamReader(new MemoryStream(stream.ToArray()));
+            var reader = new StreamReader(new MemoryStream(_stream.ToArray()));
             var data = reader.ReadToEnd();
             var nvc = HttpUtility.ParseQueryString(data);
 
@@ -112,21 +104,12 @@ namespace SDK.Test.Communication
         async public void WhenMakingAnOauthRequestRenewal_Async_TheCorrectTokensAreAddedToTheRequestBody()
         {
             // arrange
-            var uri = OAuthRequestHandler.OAuthRequestUri;
-            var factory = new TestWebRequestFactory();
-            factory.RegisterResultForUri(uri.AbsoluteUri, "null");
-            var request = factory.Create(uri);
-
-            var stream = new MemoryStream();
-            request.EndGetRequestStream(Arg.Any<IAsyncResult>()).Returns(c => stream);
-
-            var handler = new OAuthRequestHandler(new ApiConfiguration("<<clientid>>", "<<clientsecret>>", "<<redirecturl>>"));
 
             // act
-            var tokens = await handler.RenewOAuthTokensAsync(request, new OAuthTokens() { RefreshToken = "<<refreshtoken>>" });
+            var tokens = await _handler.RenewOAuthTokensAsync(_request, new OAuthTokens() { RefreshToken = "<<refreshtoken>>" });
 
             // assert
-            var reader = new StreamReader(new MemoryStream(stream.ToArray()));
+            var reader = new StreamReader(new MemoryStream(_stream.ToArray()));
             var data = reader.ReadToEnd();
             var nvc = HttpUtility.ParseQueryString(data);
 
@@ -134,6 +117,42 @@ namespace SDK.Test.Communication
             Assert.AreEqual("<<clientsecret>>", nvc["client_secret"]);
             Assert.AreEqual("<<refreshtoken>>", nvc["refresh_token"]);
             Assert.AreEqual("refresh_token", nvc["grant_type"]);
+        }
+
+        [Test]
+        public void WhenMakingAnOauthRequestTheCorrectHeadersAreAdded()
+        {
+            _handler.GetOAuthTokens(_request, "<<code>>", (code, response) => { }, (exuri, exception) => Assert.Fail(exception.Message));
+            
+            Assert.AreEqual("POST", _request.Method);
+            Assert.AreEqual("application/x-www-form-urlencoded", _request.ContentType);
+        }
+
+        [Test]
+        public async void WhenMakingAnOauthRequest_Async_TheCorrectHeadersAreAdded()
+        {
+            await _handler.GetOAuthTokensAsync(_request, "<<code>>");
+
+            Assert.AreEqual("POST", _request.Method);
+            Assert.AreEqual("application/x-www-form-urlencoded", _request.ContentType);
+        }
+
+        [Test]
+        public void WhenMakingAnOauthRequestRenewalTheCorrectHeadersAreAdded()
+        {
+            _handler.RenewOAuthTokens(_request, new OAuthTokens() { RefreshToken = "<<refreshtoken>>" }, (code, response) => { }, (exuri, exception) => Assert.Fail(exception.Message));
+
+            Assert.AreEqual("POST", _request.Method);
+            Assert.AreEqual("application/x-www-form-urlencoded", _request.ContentType);
+        }
+
+        [Test]
+        public async void WhenMakingAnOauthRequestRenewal_Async_TheCorrectHeadersAreAdded()
+        {
+            await _handler.RenewOAuthTokensAsync(_request, new OAuthTokens() { RefreshToken = "<<refreshtoken>>" });
+
+            Assert.AreEqual("POST", _request.Method);
+            Assert.AreEqual("application/x-www-form-urlencoded", _request.ContentType);
         }
     }
 }
