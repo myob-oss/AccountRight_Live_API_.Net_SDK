@@ -10,6 +10,10 @@ using MYOB.AccountRight.SDK.Contracts.Version2.Sale;
 
 namespace MYOB.AccountRight.SDK.Services.Sale
 {
+    using System.Threading;
+
+    using MYOB.AccountRight.SDK.Contracts;
+
     /// <summary>
     /// A service that provides access to the <see cref="CustomerPayment"/> resource
     /// </summary>
@@ -63,8 +67,9 @@ namespace MYOB.AccountRight.SDK.Services.Sale
         /// <param name="cf"></param>
         /// <param name="entity"></param>
         /// <param name="credentials"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public override Task<string> UpdateAsync(Contracts.CompanyFile cf, CustomerPayment entity, ICompanyFileCredentials credentials)
+        public override Task<string> UpdateAsync(CompanyFile cf, CustomerPayment entity, ICompanyFileCredentials credentials, CancellationToken cancellationToken)
         {
             return Task.Factory.StartNew<string>(() => { throw new NotSupportedException(); });       
         }

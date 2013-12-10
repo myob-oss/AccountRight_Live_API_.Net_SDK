@@ -2,6 +2,11 @@
 using MYOB.AccountRight.SDK.Communication;
 using MYOB.AccountRight.SDK.Contracts.Version2;
 using MYOB.AccountRight.SDK.Contracts.Version2.GeneralLedger;
+using MYOB.AccountRight.SDK.Contracts;
+#if ASYNC
+using System.Threading;
+using System.Threading.Tasks;
+#endif
 
 namespace MYOB.AccountRight.SDK.Services.GeneralLedger
 {
@@ -57,8 +62,9 @@ namespace MYOB.AccountRight.SDK.Services.GeneralLedger
         /// <param name="cf"></param>
         /// <param name="uid"></param>
         /// <param name="credentials"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public override System.Threading.Tasks.Task DeleteAsync(Contracts.CompanyFile cf, Guid uid, ICompanyFileCredentials credentials)
+        public override Task DeleteAsync(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, CancellationToken cancellationToken)
         {
             throw new NotSupportedException();
         }
@@ -96,8 +102,9 @@ namespace MYOB.AccountRight.SDK.Services.GeneralLedger
         /// <param name="cf"></param>
         /// <param name="entity"></param>
         /// <param name="credentials"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public override System.Threading.Tasks.Task<string> InsertAsync(Contracts.CompanyFile cf, LinkedAccount entity, ICompanyFileCredentials credentials)
+        public override Task<string> InsertAsync(CompanyFile cf, LinkedAccount entity, ICompanyFileCredentials credentials, CancellationToken cancellationToken)
         {
             throw new NotSupportedException();
         }

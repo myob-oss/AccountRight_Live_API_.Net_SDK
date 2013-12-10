@@ -8,6 +8,8 @@ using MYOB.AccountRight.SDK.Contracts;
 
 namespace MYOB.AccountRight.SDK.Services
 {
+    using System.Threading;
+
     /// <summary>
     /// A base class that only allows access to a resource that only supports a single read-only entity
     /// </summary>
@@ -59,7 +61,19 @@ namespace MYOB.AccountRight.SDK.Services
         /// <returns></returns>
         public Task<T> GetAsync(CompanyFile companyFile, ICompanyFileCredentials credentials)
         {
-            return MakeApiGetRequestAsync<T>(BuildUri(companyFile), credentials);
+            return this.GetAsync(companyFile, credentials, CancellationToken.None);
+        }
+
+        /// <summary>
+        /// Get a resource
+        /// </summary>
+        /// <param name="companyFile">The company file</param>
+        /// <param name="credentials">The company file credentials</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task<T> GetAsync(CompanyFile companyFile, ICompanyFileCredentials credentials, CancellationToken cancellationToken)
+        {
+            return this.MakeApiGetRequestAsync<T>(this.BuildUri(companyFile), credentials, cancellationToken);
         }
 #endif
         /// <exclude/>

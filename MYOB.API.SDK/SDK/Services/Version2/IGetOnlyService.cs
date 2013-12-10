@@ -7,6 +7,8 @@ using MYOB.AccountRight.SDK.Contracts;
 
 namespace MYOB.AccountRight.SDK.Services
 {
+    using System.Threading;
+
     /// <summary>
     /// An interface that describes a service that supports a single read-only entity
     /// </summary>
@@ -36,8 +38,9 @@ namespace MYOB.AccountRight.SDK.Services
         /// </summary>
         /// <param name="companyFile">The company file</param>
         /// <param name="credentials">The company file credentials</param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<T> GetAsync(CompanyFile companyFile, ICompanyFileCredentials credentials);
+        Task<T> GetAsync(CompanyFile companyFile, ICompanyFileCredentials credentials, CancellationToken cancellationToken);
 #endif
     }
 }

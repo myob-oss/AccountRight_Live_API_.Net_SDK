@@ -8,6 +8,8 @@ using MYOB.AccountRight.SDK.Contracts.Version2;
 
 namespace MYOB.AccountRight.SDK.Services
 {
+    using System.Threading;
+
     /// <summary>
     /// Describes a resource that has photo/image attachments
     /// </summary>
@@ -39,8 +41,9 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="cf">A company file that has been retrieved</param>
         /// <param name="uid">The identifier of the entity to retrieve</param>
         /// <param name="credentials">The credentials to access the company file</param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task DeletePhotoAsync(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials); 
+        Task DeletePhotoAsync(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, CancellationToken cancellationToken); 
 #endif
 
         /// <summary>
@@ -72,8 +75,9 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="uid">The identifier of the entity to retrieve</param>
         /// <param name="photoData">The image binary</param>
         /// <param name="credentials">The credentials to access the company file</param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<string> SavePhotoAsync(CompanyFile cf, Guid uid, byte[] photoData, ICompanyFileCredentials credentials); 
+        Task<string> SavePhotoAsync(CompanyFile cf, Guid uid, byte[] photoData, ICompanyFileCredentials credentials, CancellationToken cancellationToken); 
 #endif
     }
 }

@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Net;
 #if ASYNC
-using System.Threading.Tasks; 
+using System.Threading.Tasks;
+using System.Threading;
 #endif
 using MYOB.AccountRight.SDK.Communication;
 using MYOB.AccountRight.SDK.Contracts;
@@ -52,7 +53,17 @@ namespace MYOB.AccountRight.SDK.Services
         /// <returns></returns>
         public Task<CompanyFile[]> GetRangeAsync()
         {
-            return MakeApiGetRequestAsync<CompanyFile[]>(new Uri(Configuration.ApiBaseUrl), null);
+            return this.GetRangeAsync(CancellationToken.None);
+        } 
+
+        /// <summary>
+        /// Get list of available company fies
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task<CompanyFile[]> GetRangeAsync(CancellationToken cancellationToken)
+        {
+            return this.MakeApiGetRequestAsync<CompanyFile[]>(new Uri(this.Configuration.ApiBaseUrl), null, cancellationToken);
         } 
 #endif
         /// <summary>
@@ -84,7 +95,18 @@ namespace MYOB.AccountRight.SDK.Services
         /// <returns></returns>
         public Task<CompanyFile[]> GetRangeAsync(string queryString)
         {
-            return MakeApiGetRequestAsync<CompanyFile[]>(BuildUri(queryString.Maybe(_ => "?" + _.TrimStart(new[] { '?' }))), null);
+            return this.GetRangeAsync(queryString, CancellationToken.None);
+        } 
+
+        /// <summary>
+        /// Get list of available company fies
+        /// </summary>
+        /// <param name="queryString">e.g. An ODATA filter</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task<CompanyFile[]> GetRangeAsync(string queryString, CancellationToken cancellationToken)
+        {
+            return this.MakeApiGetRequestAsync<CompanyFile[]>(this.BuildUri(queryString.Maybe(_ => "?" + _.TrimStart(new[] { '?' }))), null, cancellationToken);
         } 
 #endif
         /// <summary>
@@ -119,7 +141,19 @@ namespace MYOB.AccountRight.SDK.Services
         /// <returns></returns>
         public Task<CompanyFileWithResources> GetAsync(CompanyFile cf, ICompanyFileCredentials credentials)
         {
-            return MakeApiGetRequestAsync<CompanyFileWithResources>(cf.Uri, credentials);
+            return this.GetAsync(cf, credentials, CancellationToken.None);
+        }
+
+        /// <summary>
+        /// Get a company file entry with the list of available resources
+        /// </summary>
+        /// <param name="cf">A company file that has been retrieved</param>
+        /// <param name="credentials">The credentials to access the company file</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task<CompanyFileWithResources> GetAsync(CompanyFile cf, ICompanyFileCredentials credentials, CancellationToken cancellationToken)
+        {
+            return this.MakeApiGetRequestAsync<CompanyFileWithResources>(cf.Uri, credentials, cancellationToken);
         } 
 #endif
 

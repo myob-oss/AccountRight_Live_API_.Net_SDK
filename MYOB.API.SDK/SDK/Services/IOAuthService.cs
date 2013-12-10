@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Net;
 #if ASYNC
-using System.Threading.Tasks; 
+using System.Threading.Tasks;
+using System.Threading;
 #endif
 using MYOB.AccountRight.SDK.Contracts;
 
@@ -34,6 +35,14 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="code">The code received after the user has given the application permission to access their company files</param>
         /// <returns>The tokens that are required to access the user's company files</returns>
         Task<OAuthTokens> GetTokensAsync(string code); 
+
+        /// <summary>
+        /// Get the OAuth tokens required to access the cloud based API (Asynchronous)
+        /// </summary>
+        /// <param name="code">The code received after the user has given the application permission to access their company files</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>The tokens that are required to access the user's company files</returns>
+        Task<OAuthTokens> GetTokensAsync(string code, CancellationToken cancellationToken); 
 #endif
 
         /// <summary>
@@ -58,6 +67,14 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="oauthTokens">The tokens that are required to access the user's company files</param>
         /// <returns></returns>
         Task<OAuthTokens> RenewTokensAsync(OAuthTokens oauthTokens); 
+
+        /// <summary>
+        /// Renew the OAuth tokens required to access the cloud based API (Asynchronous)
+        /// </summary>
+        /// <param name="oauthTokens">The tokens that are required to access the user's company files</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        Task<OAuthTokens> RenewTokensAsync(OAuthTokens oauthTokens, CancellationToken cancellationToken); 
 #endif
     }
 }

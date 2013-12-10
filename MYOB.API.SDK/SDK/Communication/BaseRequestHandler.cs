@@ -5,6 +5,7 @@ using MYOB.AccountRight.SDK.Extensions;
 
 #if ASYNC
 using System.Threading.Tasks;
+using System.Threading;
 #endif
 
 #if PORTABLE
@@ -37,9 +38,14 @@ namespace MYOB.AccountRight.SDK.Communication
         }
 
 #if ASYNC
-        protected async Task<Tuple<HttpStatusCode, string, T>> GetResponseTask<T>(WebRequest request) where T : class
+        protected Task<Tuple<HttpStatusCode, string, T>> GetResponseTask<T>(WebRequest request) where T : class
         {
-            var response = await request.GetResponseAsync();
+            return this.GetResponseTask<T>(request, CancellationToken.None);
+        }
+
+        protected async Task<Tuple<HttpStatusCode, string, T>> GetResponseTask<T>(WebRequest request, CancellationToken cancellationToken) where T : class
+        {
+            var response = await request.GetResponseAsync(cancellationToken);
             var location = response.Headers["Location"];
             var statusCode = (response as HttpWebResponse).Maybe(_ => _.StatusCode);
             if (ApiRequestHelper.IsGZipped((HttpWebResponse)response))

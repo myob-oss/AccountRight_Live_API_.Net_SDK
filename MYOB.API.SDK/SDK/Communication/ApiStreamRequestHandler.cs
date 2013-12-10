@@ -6,6 +6,7 @@ using MYOB.AccountRight.SDK.Extensions;
 
 #if ASYNC
 using System.Threading.Tasks;
+using System.Threading;
 #endif
 
 namespace MYOB.AccountRight.SDK.Communication
@@ -48,10 +49,10 @@ namespace MYOB.AccountRight.SDK.Communication
         }
 
 #if ASYNC
-        async public Task<Tuple<HttpStatusCode, Stream>> GetAsync(WebRequest request)
+        async public Task<Tuple<HttpStatusCode, Stream>> GetAsync(WebRequest request, CancellationToken cancellationToken)
         {
             SetStandardHeaders(request);
-            var get = await GetResponseTask(request);
+            var get = await GetResponseTask(request, cancellationToken);
             return new Tuple<HttpStatusCode, Stream>(get.Item1, get.Item3);
         }
 #endif
@@ -63,9 +64,9 @@ namespace MYOB.AccountRight.SDK.Communication
         }
 
 #if ASYNC
-        protected async Task<Tuple<HttpStatusCode, string, Stream>> GetResponseTask(WebRequest request)
+        protected async Task<Tuple<HttpStatusCode, string, Stream>> GetResponseTask(WebRequest request, CancellationToken cancellationToken)
         {
-            var response = await request.GetResponseAsync();
+            var response = await request.GetResponseAsync(cancellationToken);
             var location = response.Headers[LocationHeader];
             var statusCode = (response as HttpWebResponse).Maybe(_ => _.StatusCode);
             if (_helper.IsGZipped((HttpWebResponse)response))

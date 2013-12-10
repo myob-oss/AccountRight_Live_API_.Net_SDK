@@ -5,6 +5,10 @@ using MYOB.AccountRight.SDK.Contracts;
 using MYOB.AccountRight.SDK.Contracts.Version2;
 using MYOB.AccountRight.SDK.Contracts.Version2.GeneralLedger;
 using MYOB.AccountRight.SDK.Extensions;
+#if ASYNC
+using System.Threading;
+using System.Threading.Tasks;
+#endif
 
 namespace MYOB.AccountRight.SDK.Services.GeneralLedger
 {
@@ -61,13 +65,12 @@ namespace MYOB.AccountRight.SDK.Services.GeneralLedger
         /// <param name="cf">A company file reference that has been retrieved</param>
         /// <param name="uid">The identifier of the entity to retrieve</param>
         /// <param name="credentials">The credentials to access the company file</param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
-		public override System.Threading.Tasks.Task<AccountingProperties> GetAsync(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials)
+        public async override Task<AccountingProperties> GetAsync(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, CancellationToken cancellationToken)
         {
-            return base.GetRangeAsync(cf, null, credentials).ContinueWith<AccountingProperties>(t =>
-                {
-                    return t.Result.Items[0];
-                });
+            var res = await base.GetRangeAsync(cf, null, credentials, cancellationToken);
+            return res.Items[0];
         }  
 #endif   
  

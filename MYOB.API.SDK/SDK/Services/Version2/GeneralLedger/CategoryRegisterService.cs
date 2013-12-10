@@ -8,6 +8,10 @@ using MYOB.AccountRight.SDK.Contracts.Version2.GeneralLedger;
 
 namespace MYOB.AccountRight.SDK.Services.GeneralLedger
 {
+    using System.Threading;
+
+    using MYOB.AccountRight.SDK.Contracts;
+
     /// <summary>
     /// A service that provides access to the <see cref="CategoryRegister"/> resource
     /// </summary>
@@ -86,8 +90,9 @@ namespace MYOB.AccountRight.SDK.Services.GeneralLedger
         /// <param name="cf">A company file reference that has been retrieved</param>
         /// <param name="uid">The identifier of the entity to retrieve</param>
         /// <param name="credentials">The credentials to access the company file</param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public override Task<CategoryRegister> GetAsync(Contracts.CompanyFile cf, Guid uid, ICompanyFileCredentials credentials)
+        public override Task<CategoryRegister> GetAsync(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, CancellationToken cancellationToken)
         {
             return Task.Factory.StartNew<CategoryRegister>(() => { throw new NotSupportedException(); });      
         }
@@ -98,8 +103,9 @@ namespace MYOB.AccountRight.SDK.Services.GeneralLedger
         /// <param name="cf">A company file reference that has been retrieved</param>
         /// <param name="uri">The uri of the entity to retrieve</param>
         /// <param name="credentials">The credentials to access the company file</param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public override Task<CategoryRegister> GetAsync(Contracts.CompanyFile cf, Uri uri, ICompanyFileCredentials credentials)
+        public override Task<CategoryRegister> GetAsync(CompanyFile cf, Uri uri, ICompanyFileCredentials credentials, CancellationToken cancellationToken)
         {
             return Task.Factory.StartNew<CategoryRegister>(() => { throw new NotSupportedException(); }); 
         }

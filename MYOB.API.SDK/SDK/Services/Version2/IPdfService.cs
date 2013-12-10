@@ -3,6 +3,7 @@ using System.IO;
 using System.Net;
 #if ASYNC
 using System.Threading.Tasks;
+using System.Threading;
 #endif
 using MYOB.AccountRight.SDK.Contracts;
 
@@ -44,8 +45,18 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="credentials"></param>
         /// <param name="template"></param>
         /// <returns></returns>
-        Task<Stream> GetInvoiceFormAsPdfAsync(CompanyFile cf, Guid invoiceUid,
-                                              ICompanyFileCredentials credentials, string template);
+        Task<Stream> GetInvoiceFormAsPdfAsync(CompanyFile cf, Guid invoiceUid, ICompanyFileCredentials credentials, string template);
+
+        /// <summary>
+        /// Gets an Invoice as Pdf Async
+        /// </summary>
+        /// <param name="cf"></param>
+        /// <param name="invoiceUid"></param>
+        /// <param name="credentials"></param>
+        /// <param name="template"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        Task<Stream> GetInvoiceFormAsPdfAsync(CompanyFile cf, Guid invoiceUid, ICompanyFileCredentials credentials, string template, CancellationToken cancellationToken);
 #endif
 
     }

@@ -1,4 +1,5 @@
-﻿using MYOB.AccountRight.SDK.Communication;
+﻿using System;
+using MYOB.AccountRight.SDK.Communication;
 using MYOB.AccountRight.SDK.Contracts.Version2.Sale;
 
 namespace MYOB.AccountRight.SDK.Services.Sale
@@ -6,7 +7,7 @@ namespace MYOB.AccountRight.SDK.Services.Sale
     /// <summary>
     /// A service that provides access to the <see cref="CreditRefund"/> resource
     /// </summary>
-    public sealed class CreditRefundService : ReadableService<CreditRefund>
+    public sealed class CreditRefundService : MutableService<CreditRefund>
     {
         /// <summary>
         /// Initialise a service that can use <see cref="CreditRefund"/> resources

@@ -9,6 +9,8 @@ using MYOB.AccountRight.SDK.Contracts.Version2.Purchase;
 
 namespace MYOB.AccountRight.SDK.Services.Purchase
 {
+    using System.Threading;
+
     /// <summary>
     /// A service that provides access to the <see cref="CalculateDiscounts"/> operation
     /// </summary>
@@ -60,7 +62,20 @@ namespace MYOB.AccountRight.SDK.Services.Purchase
         /// <returns>The operation response</returns>
         public Task<CalculateDiscountsResponse> ExecuteAsync(CompanyFile cf, CalculateDiscounts entity, ICompanyFileCredentials credentials)
         {
-            return MakeApiPostRequestAsync<CalculateDiscounts, CalculateDiscountsResponse>(BuildUri(cf), entity, credentials);
+            return this.ExecuteAsync(cf, entity, credentials, CancellationToken.None);
+        }
+
+        /// <summary>
+        /// Perform an asynchronous operation and await the response
+        /// </summary>
+        /// <param name="cf">A reference to a company file</param>
+        /// <param name="entity">The entity to send</param>
+        /// <param name="credentials">The company file credentials</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>The operation response</returns>
+        public Task<CalculateDiscountsResponse> ExecuteAsync(CompanyFile cf, CalculateDiscounts entity, ICompanyFileCredentials credentials, CancellationToken cancellationToken)
+        {
+            return this.MakeApiPostRequestAsync<CalculateDiscounts, CalculateDiscountsResponse>(this.BuildUri(cf), entity, credentials, cancellationToken);
         }
 #endif
 

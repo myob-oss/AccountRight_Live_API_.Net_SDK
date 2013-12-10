@@ -11,6 +11,8 @@ using MYOB.AccountRight.SDK.Extensions;
 
 namespace MYOB.AccountRight.SDK.Services
 {
+    using System.Threading;
+
     /// <summary>
     /// A base class that provides the support required for a service that supports GET operations for its resource
     /// </summary>
@@ -84,7 +86,20 @@ namespace MYOB.AccountRight.SDK.Services
         /// <returns></returns>
         public virtual Task<T> GetAsync(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials)
         {
-            return MakeApiGetRequestAsync<T>(BuildUri(cf, uid), credentials);
+            return this.GetAsync(cf, uid, credentials, CancellationToken.None);
+        } 
+
+        /// <summary>
+        /// Retrieve an entity
+        /// </summary>
+        /// <param name="cf">A company file that has been retrieved</param>
+        /// <param name="uid">The identifier of the entity to retrieve</param>
+        /// <param name="credentials">The credentials to access the company file</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public virtual Task<T> GetAsync(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, CancellationToken cancellationToken)
+        {
+            return this.MakeApiGetRequestAsync<T>(this.BuildUri(cf, uid), credentials, cancellationToken);
         } 
 #endif
 
@@ -123,7 +138,20 @@ namespace MYOB.AccountRight.SDK.Services
         /// <returns></returns>
         public virtual Task<T> GetAsync(CompanyFile cf, Uri uri, ICompanyFileCredentials credentials)
         {
-            return MakeApiGetRequestAsync<T>(ValidateUri(cf, uri), credentials);
+            return this.GetAsync(cf, uri, credentials, CancellationToken.None);
+        }
+
+        /// <summary>
+        /// Retrieve an entity
+        /// </summary>
+        /// <param name="cf">A company file that has been retrieved</param>
+        /// <param name="uri">The uri of the entity to retrieve</param>
+        /// <param name="credentials">The credentials to access the company file</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public virtual Task<T> GetAsync(CompanyFile cf, Uri uri, ICompanyFileCredentials credentials, CancellationToken cancellationToken)
+        {
+            return this.MakeApiGetRequestAsync<T>(this.ValidateUri(cf, uri), credentials, cancellationToken);
         } 
 #endif
 
@@ -162,7 +190,20 @@ namespace MYOB.AccountRight.SDK.Services
         /// <returns></returns>
         public virtual Task<PagedCollection<T>> GetRangeAsync(CompanyFile cf, string queryString, ICompanyFileCredentials credentials)
         {
-            return MakeApiGetRequestAsync<PagedCollection<T>>(BuildUri(cf, null, queryString.Maybe(_ => "?" + _.TrimStart(new[] { '?' }))), credentials);
+            return this.GetRangeAsync(cf, queryString, credentials, CancellationToken.None);
+        } 
+
+        /// <summary>
+        /// Retrieve a paged list of entities
+        /// </summary>
+        /// <param name="cf">A company file that has been retrieved</param>
+        /// <param name="queryString">An odata filter</param>
+        /// <param name="credentials">The credentials to access the company file</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public virtual Task<PagedCollection<T>> GetRangeAsync(CompanyFile cf, string queryString, ICompanyFileCredentials credentials, CancellationToken cancellationToken)
+        {
+            return this.MakeApiGetRequestAsync<PagedCollection<T>>(this.BuildUri(cf, null, queryString.Maybe(_ => "?" + _.TrimStart(new[] { '?' }))), credentials, cancellationToken);
         } 
 #endif
     }

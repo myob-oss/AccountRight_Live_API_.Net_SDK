@@ -6,6 +6,7 @@ using System.Net;
 using System.Text;
 #if ASYNC
 using System.Threading.Tasks;
+using System.Threading;
 #endif
 using MYOB.AccountRight.SDK.Contracts;
 using MYOB.AccountRight.SDK.Extensions;
@@ -49,10 +50,15 @@ namespace MYOB.AccountRight.SDK.Communication
         }
 
 #if ASYNC
-        public async Task<Tuple<HttpStatusCode, T>> GetAsync<T>(WebRequest request) where T : class
+        public Task<Tuple<HttpStatusCode, T>> GetAsync<T>(WebRequest request) where T : class
+        {
+            return this.GetAsync<T>(request, CancellationToken.None);
+        }
+
+        public async Task<Tuple<HttpStatusCode, T>> GetAsync<T>(WebRequest request, CancellationToken cancellationToken) where T : class
         {
             ApiRequestHelper.SetStandardHeaders(request, _configuration, _credentials, _oauth);
-            var get = await GetResponseTask<T>(request);
+            var get = await GetResponseTask<T>(request, cancellationToken);
             return new Tuple<HttpStatusCode, T>(get.Item1, get.Item3);
         }
 #endif
@@ -71,11 +77,16 @@ namespace MYOB.AccountRight.SDK.Communication
         }
 
 #if ASYNC
-        public async Task DeleteAsync(WebRequest request)
+        public Task DeleteAsync(WebRequest request)
+        {
+            return this.DeleteAsync(request, CancellationToken.None);
+        }
+
+        public async Task DeleteAsync(WebRequest request, CancellationToken cancellationToken)
         {
             ApiRequestHelper.SetStandardHeaders(request, _configuration, _credentials, _oauth);
             request.Method = "DELETE";
-            await GetResponseTask<string>(request);
+            await GetResponseTask<string>(request, cancellationToken);
         }
 #endif
 
@@ -96,13 +107,19 @@ namespace MYOB.AccountRight.SDK.Communication
         }
 
 #if ASYNC
-        public async Task<string> PutAsync<T>(WebRequest request, T entity) where T : class
+        public Task<string> PutAsync<T>(WebRequest request, T entity) where T : class
+        {
+            return this.PutAsync(request, entity, CancellationToken.None);
+        }
+
+        public async Task<string> PutAsync<T>(WebRequest request, T entity, CancellationToken cancellationToken) where T : class
         {
             ApiRequestHelper.SetStandardHeaders(request, _configuration, _credentials, _oauth);
             request.Method = "PUT";
             request.ContentType = "application/json";
-            var res = await GetRequestStreamTask(request, entity).ContinueWith(t => GetResponseTask<T>(t.Result));
-            return res.Result.Item2;
+            var res = await GetRequestStreamTask(request, entity);
+
+            return (await GetResponseTask<T>(res, cancellationToken)).Item2;
         }
 #endif
 
@@ -132,25 +149,39 @@ namespace MYOB.AccountRight.SDK.Communication
         }
 
 #if ASYNC
-        public async Task<string> PostAsync<T>(WebRequest request, T entity) where T : class
+        public Task<string> PostAsync<T>(WebRequest request, T entity) where T : class
+        {
+            return this.PostAsync(request, entity, CancellationToken.None);
+        }
+
+        public async Task<string> PostAsync<T>(WebRequest request, T entity, CancellationToken cancellationToken) where T : class
         {
             ApiRequestHelper.SetStandardHeaders(request, _configuration, _credentials, _oauth);
             request.Method = "POST";
             request.ContentType = "application/json";
-            var res = await GetRequestStreamTask(request, entity).ContinueWith(t => GetResponseTask<T>(t.Result));
-            return res.Result.Item2;
+            var res = await GetRequestStreamTask(request, entity);
+
+            return (await GetResponseTask<T>(res, cancellationToken)).Item2;
         }
 
-        public async Task<TResponseEntity> PostAsync<TRequestEntity, TResponseEntity>(WebRequest request,
-                                                                                      TRequestEntity entity)
+        public Task<TResponseEntity> PostAsync<TRequestEntity, TResponseEntity>(WebRequest request, TRequestEntity entity)
+            where TRequestEntity : class
+            where TResponseEntity : class
+        {
+            return this.PostAsync<TRequestEntity, TResponseEntity>(request, entity, CancellationToken.None);
+        }
+
+        public async Task<TResponseEntity> PostAsync<TRequestEntity, TResponseEntity>(WebRequest request, TRequestEntity entity, CancellationToken cancellationToken)
             where TRequestEntity : class
             where TResponseEntity : class
         {
             ApiRequestHelper.SetStandardHeaders(request, _configuration, _credentials, _oauth);
             request.Method = "POST";
             request.ContentType = "application/json";
-            var res = await GetRequestStreamTask(request, entity).ContinueWith(t => GetResponseTask<TResponseEntity>(t.Result));
-            return res.Result.Item3;
+
+            var res = await GetRequestStreamTask(request, entity);
+            
+            return (await GetResponseTask<TResponseEntity>(res, cancellationToken)).Item3;
         }
 #endif
 
