@@ -158,19 +158,15 @@ namespace SDK.Test.Services
             Assert.AreEqual(OAuthRequestHandler.OAuthRequestUri, ex.URI);
         }
 
-        [Test, Category("IntegrationTest")]
+        [Test]
         public void ServiceWillUseDefaultFactoryIfNotSupplied()
         {
             // arrange
+            // act
             var service = new OAuthService(_configuration);
 
-            // act
-            var ex = Assert.Throws<ApiCommunicationException>(() => service.GetTokens("0123456789")); // should throw a BadRequest
-
             // assert
-            Assert.AreEqual(HttpStatusCode.BadRequest, ex.StatusCode);
-            Assert.AreEqual(OAuthRequestHandler.OAuthRequestUri, ex.URI);
-
+            Assert.IsInstanceOf<WebRequestFactory>(service.Factory);
         }
     }
 }

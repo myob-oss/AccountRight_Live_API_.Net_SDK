@@ -21,9 +21,19 @@
         public string BankAccountName { get; set; }
 
         /// <summary>
-        /// Default statement text.
+        /// Default statement text. (NZ this is known as statement particulars)
         /// </summary>
         public string StatementText { get; set; }
+
+        /// <summary>
+        /// Default statement code. (NZ only)
+        /// </summary>
+        public string StatementCode { get; set; }
+
+        /// <summary>
+        /// Default statement text. (NZ only)
+        /// </summary>
+        public string StatementReference { get; set; }
 
         /// <summary>
         /// The refund details

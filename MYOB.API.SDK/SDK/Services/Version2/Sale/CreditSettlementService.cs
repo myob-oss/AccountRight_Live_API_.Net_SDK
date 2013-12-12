@@ -6,7 +6,7 @@ namespace MYOB.AccountRight.SDK.Services.Sale
     /// <summary>
     /// A service that provides access to the <see cref="CreditSettlement"/> resource
     /// </summary>
-    public sealed class CreditSettlementService : ReadableService<CreditSettlement>
+    public sealed class CreditSettlementService : MutableService<CreditSettlement>
     {
         /// <summary>
         /// Initialise a service that can use <see cref="CreditSettlement"/> resources

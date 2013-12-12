@@ -1,4 +1,5 @@
-﻿using MYOB.AccountRight.SDK.Communication;
+﻿using System;
+using MYOB.AccountRight.SDK.Communication;
 using MYOB.AccountRight.SDK.Contracts.Version2.Purchase;
 
 namespace MYOB.AccountRight.SDK.Services.Purchase
@@ -6,7 +7,7 @@ namespace MYOB.AccountRight.SDK.Services.Purchase
     /// <summary>
     /// A service that provides access to the <see cref="DebitRefund"/> resource
     /// </summary>
-    public sealed class DebitRefundService : ReadableService<DebitRefund>
+    public sealed class DebitRefundService : MutableService<DebitRefund>
     {
         /// <summary>
         /// Initialise a service that can use <see cref="DebitRefund"/> resources
@@ -23,5 +24,44 @@ namespace MYOB.AccountRight.SDK.Services.Purchase
         {
             get { return "Purchase/DebitRefund"; }
         }
+
+        /// <summary>
+        /// The Update method is not supported
+        /// </summary>
+        /// <param name="cf">A company file that has been retrieved</param>
+        /// <param name="entity">The entity to update</param>
+        /// <param name="credentials">The credentials to access the company file</param>
+        /// <returns></returns>
+        public override string Update(Contracts.CompanyFile cf, DebitRefund entity, ICompanyFileCredentials credentials)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>
+        /// The Update method is not supported
+        /// </summary>
+        /// <param name="cf">A company file that has been retrieved</param>
+        /// <param name="entity">The entity to update</param>
+        /// <param name="credentials">The credentials to access the company file</param>
+        /// <param name="onComplete">The action to call when the operation is complete</param>
+        /// <param name="onError">The action to call when the operation has an error</param>
+        public override void Update(Contracts.CompanyFile cf, DebitRefund entity, ICompanyFileCredentials credentials, Action<System.Net.HttpStatusCode, string> onComplete, Action<Uri, Exception> onError)
+        {
+            throw new NotSupportedException();
+        }
+
+#if ASYNC
+        /// <summary>
+        /// The Update method is not supported
+        /// </summary>
+        /// <param name="cf">A company file that has been retrieved</param>
+        /// <param name="entity">The entity to update</param>
+        /// <param name="credentials">The credentials to access the company file</param>
+        /// <returns></returns>
+        public override System.Threading.Tasks.Task<string> UpdateAsync(Contracts.CompanyFile cf, DebitRefund entity, ICompanyFileCredentials credentials)
+        {
+            throw new NotSupportedException();
+        }
+#endif
     }
 }

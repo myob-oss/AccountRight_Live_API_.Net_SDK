@@ -26,11 +26,6 @@ namespace MYOB.AccountRight.SDK.Contracts
         /// Premier
         /// </summary>
         Premier = 50,
-
-        /// <summary>
-        /// Premier Enterprise
-        /// </summary>
-        PremierEnterprise = 60,
     }
 
 

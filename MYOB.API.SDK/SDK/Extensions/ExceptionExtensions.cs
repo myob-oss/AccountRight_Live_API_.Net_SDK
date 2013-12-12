@@ -25,7 +25,7 @@ namespace MYOB.AccountRight.SDK.Extensions
             {
                 var statusCode = (webEx.Response as HttpWebResponse).Maybe(_ => _.StatusCode);
                 IList<Error> errList = null;
-                string info = string.Empty;
+                var info = string.Empty;
                 if (webEx.Response != null)
                 {
                     using (var stream = webEx.Response.GetResponseStream())
@@ -35,17 +35,16 @@ namespace MYOB.AccountRight.SDK.Extensions
                             var output = reader.ReadToEnd();
                             try
                             {
-                                var list = output.FromJson<ErrorList>();
-                                errList = list.Errors;
-                                info = list.Information;
+                                if (statusCode == HttpStatusCode.BadRequest)
+                                {
+                                    var list = output.FromJson<ErrorList>();
+                                    errList = list.Errors;
+                                    info = list.Information;
+                                }
                             }
-                            catch (JsonReaderException) //If output is invalid number string without quote, then it would assume is number and return this exception.
+                            catch (Exception) 
                             {
                                 info = output;
-                            }
-                            catch (JsonSerializationException)
-                            {
-                                info = output; 
                             }
                         }
                     }

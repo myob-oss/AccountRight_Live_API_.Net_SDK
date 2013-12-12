@@ -74,6 +74,10 @@
     <Compile Include="Contracts\CompanyFileWithResources.cs" />
     <Compile Include="Contracts\OAuthTokens.cs" />
     <Compile Include="Contracts\ProductLevel.cs" />
+    <Compile Include="Contracts\Version2\Banking\ReceiveMoneyTxn.cs" />
+    <Compile Include="Contracts\Version2\Banking\ReceiveMoneyTxnLine.cs" />
+    <Compile Include="Contracts\Version2\Banking\SpendMoneyTxn.cs" />
+    <Compile Include="Contracts\Version2\Banking\SpendMoneyTxnLine.cs" />
     <Compile Include="Contracts\Version2\BaseEntity.cs" />
     <Compile Include="Contracts\Version2\BaseLink.cs" />
     <Compile Include="Contracts\Version2\Company\CategoryTracking.cs" />
@@ -130,8 +134,12 @@
     <Compile Include="Contracts\Version2\GeneralLedger\TaxCode.cs" />
     <Compile Include="Contracts\Version2\GeneralLedger\TaxCodeLink.cs" />
     <Compile Include="Contracts\Version2\Identifier.cs" />
+    <Compile Include="Contracts\Version2\Inventory\InventoryAdjustment.cs" />
     <Compile Include="Contracts\Version2\Inventory\Item.cs" />
     <Compile Include="Contracts\Version2\Inventory\ItemLink.cs" />
+    <Compile Include="Contracts\Version2\Inventory\ItemPriceMatrix.cs" />
+    <Compile Include="Contracts\Version2\Inventory\Levels.cs" />
+    <Compile Include="Contracts\Version2\Inventory\SellingPrice.cs" />
     <Compile Include="Contracts\Version2\PagedCollection.cs" />
     <Compile Include="Contracts\Version2\Photo.cs" />
     <Compile Include="Contracts\Version2\Purchase\Bill.cs" />
@@ -215,6 +223,7 @@
     <Compile Include="Extensions\ExceptionExtensions.cs" />
     <Compile Include="Extensions\FunctionalExtensions.cs" />
     <Compile Include="Extensions\JsonExtensions.cs" />
+    <Compile Include="Extensions\WebRequestExtensions.cs" />
     <Compile Include="IApiConfiguration.cs" />
     <Compile Include="ICompanyFileCredentials.cs" />
     <Compile Include="IOAuthKeyService.cs" />
@@ -226,6 +235,8 @@
     <Compile Include="Services\IOAuthService.cs" />
     <Compile Include="Services\OAuthService.cs" />
     <Compile Include="Services\ServiceBase.cs" />
+    <Compile Include="Services\Version2\Banking\ReceiveMoneyTxnService.cs" />
+    <Compile Include="Services\Version2\Banking\SpendMoneyTxnService.cs" />
     <Compile Include="Services\Version2\Company\CompanyPreferencesService.cs" />
     <Compile Include="Services\Version2\Contact\ContactService.cs" />
     <Compile Include="Services\Version2\Contact\CustomerService.cs" />
@@ -247,6 +258,8 @@
     <Compile Include="Services\Version2\IGetOnlyService.cs" />
     <Compile Include="Services\Version2\IMutable.cs" />
     <Compile Include="Services\Version2\IMutablePhoto.cs" />
+    <Compile Include="Services\Version2\Inventory\InventoryAdjustmentService.cs" />
+    <Compile Include="Services\Version2\Inventory\ItemPriceMatrixService.cs" />
     <Compile Include="Services\Version2\Inventory\ItemService.cs" />
     <Compile Include="Services\Version2\IOperation.cs" />
     <Compile Include="Services\Version2\IPdfService.cs" />

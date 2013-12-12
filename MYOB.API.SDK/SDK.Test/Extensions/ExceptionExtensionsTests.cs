@@ -40,6 +40,8 @@ namespace SDK.Test.Extensions
             using (Stream responsestream = GetStream(mesg))
             {
                 var wex = GetWebException(responsestream);
+                (wex.Response as HttpWebResponse).StatusCode.Returns(HttpStatusCode.BadRequest);
+
                 var uri = new Uri("http://dc1.api.myob.com/");
                 var apiCommunicationEx = Assert.Throws<ApiCommunicationException>(() => wex.ProcessException(uri));
                 Assert.IsNull(apiCommunicationEx.Errors);
@@ -51,9 +53,12 @@ namespace SDK.Test.Extensions
         public void ProcessException_MessageIsInvalidNumber_ExceptionReturnWithoutValidErrors()
         {
             var mesg = "ND12d345";
+            
             using (Stream responsestream = GetStream(mesg))
             {
                 var wex = GetWebException(responsestream);
+                (wex.Response as HttpWebResponse).StatusCode.Returns(HttpStatusCode.BadRequest);
+
                 var uri = new Uri("http://dc1.api.myob.com/");
                 var apiCommunicationEx = Assert.Throws<ApiCommunicationException>(() => wex.ProcessException(uri));
                 Assert.IsNull(apiCommunicationEx.Errors);
@@ -75,6 +80,8 @@ namespace SDK.Test.Extensions
             using (Stream responsestream = GetStream(mesg))
             {
                 var wex = GetWebException(responsestream);
+                (wex.Response as HttpWebResponse).StatusCode.Returns(HttpStatusCode.BadRequest);
+                
                 var uri = new Uri("http://dc1.api.myob.com/");
                 var apiCommunicationEx = Assert.Throws<ApiCommunicationException>(() => wex.ProcessException(uri));
                 Assert.IsNotNull(apiCommunicationEx.Errors[0]);

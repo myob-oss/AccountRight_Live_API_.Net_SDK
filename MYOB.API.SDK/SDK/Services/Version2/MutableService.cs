@@ -9,6 +9,8 @@ using MYOB.AccountRight.SDK.Contracts.Version2;
 
 namespace MYOB.AccountRight.SDK.Services
 {
+    using System.Threading;
+
     /// <summary>
     /// Base class for resources that support mutable operations such as POST, PUT and DELETE
     /// </summary>
@@ -47,7 +49,20 @@ namespace MYOB.AccountRight.SDK.Services
         /// <returns></returns>
         public virtual Task DeleteAsync(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials)
         {
-            return MakeApiDeleteRequestAsync(BuildUri(cf, uid), credentials);
+            return this.DeleteAsync(cf, uid, credentials, CancellationToken.None);
+        }
+
+        /// <summary>
+        /// Delete an entity
+        /// </summary>
+        /// <param name="cf">A company file that has been retrieved</param>
+        /// <param name="uid">The identifier of the entity to retrieve</param>
+        /// <param name="credentials">The credentials to access the company file</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public virtual Task DeleteAsync(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, CancellationToken cancellationToken)
+        {
+            return this.MakeApiDeleteRequestAsync(this.BuildUri(cf, uid), credentials, cancellationToken);
         }
 #endif
         /// <summary>
@@ -85,7 +100,20 @@ namespace MYOB.AccountRight.SDK.Services
         /// <returns></returns>
         public virtual Task<string> UpdateAsync(CompanyFile cf, T entity, ICompanyFileCredentials credentials)
         {
-            return MakeApiPutRequestAsync(BuildUri(cf, entity.UID), entity, credentials);
+            return this.UpdateAsync(cf, entity, credentials, CancellationToken.None);
+        }
+
+        /// <summary>
+        /// Update an existing entity
+        /// </summary>
+        /// <param name="cf">A company file that has been retrieved</param>
+        /// <param name="entity">The entity to update</param>
+        /// <param name="credentials">The credentials to access the company file</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public virtual Task<string> UpdateAsync(CompanyFile cf, T entity, ICompanyFileCredentials credentials, CancellationToken cancellationToken)
+        {
+            return this.MakeApiPutRequestAsync(this.BuildUri(cf, entity.UID), entity, credentials, cancellationToken);
         }
 #endif
         /// <summary>
@@ -136,7 +164,20 @@ namespace MYOB.AccountRight.SDK.Services
         /// <returns></returns>
         public virtual Task<string> InsertAsync(CompanyFile cf, T entity, ICompanyFileCredentials credentials)
         {
-            return MakeApiPostRequestAsync(BuildUri(cf), entity, credentials);
+            return this.InsertAsync(cf, entity, credentials, CancellationToken.None);
+        }
+
+        /// <summary>
+        /// Insert a new entity
+        /// </summary>
+        /// <param name="cf">A company file that has been retrieved</param>
+        /// <param name="entity">The entity to update</param>
+        /// <param name="credentials">The credentials to access the company file</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public virtual Task<string> InsertAsync(CompanyFile cf, T entity, ICompanyFileCredentials credentials, CancellationToken cancellationToken)
+        {
+            return this.MakeApiPostRequestAsync(this.BuildUri(cf), entity, credentials, cancellationToken);
         }
 #endif
     }

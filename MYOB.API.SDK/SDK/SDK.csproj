@@ -57,6 +57,10 @@
     <Compile Include="Communication\WebRequestFactory.cs" />
     <Compile Include="Contracts\Company.cs" />
     <Compile Include="Contracts\ProductLevel.cs" />
+    <Compile Include="Contracts\Version2\Banking\ReceiveMoneyTxnLine.cs" />
+    <Compile Include="Contracts\Version2\Banking\ReceiveMoneyTxn.cs" />
+    <Compile Include="Contracts\Version2\Banking\SpendMoneyTxn.cs" />
+    <Compile Include="Contracts\Version2\Banking\SpendMoneyTxnLine.cs" />
     <Compile Include="Contracts\Version2\Company\CategoryTracking.cs" />
     <Compile Include="Contracts\Version2\Company\CompanyBankingPreferences.cs">
       <SubType>Code</SubType>
@@ -83,6 +87,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Contracts\Version2\Company\PriceLevel.cs" />
+    <Compile Include="Contracts\Version2\Inventory\InventoryAdjustment.cs" />
+    <Compile Include="Contracts\Version2\Inventory\ItemPriceMatrix.cs" />
+    <Compile Include="Contracts\Version2\Inventory\Levels.cs" />
+    <Compile Include="Contracts\Version2\Inventory\SellingPrice.cs" />
     <Compile Include="Contracts\Version2\Purchase\CalculateDiscountsItem.cs" />
     <Compile Include="Contracts\Version2\Purchase\CalculateDiscountsPurchase.cs" />
     <Compile Include="Contracts\Version2\Purchase\CalculateDiscountsPurchaseType.cs" />
@@ -208,6 +216,7 @@
     <Compile Include="Extensions\ExceptionExtensions.cs" />
     <Compile Include="Extensions\FunctionalExtensions.cs" />
     <Compile Include="Extensions\JsonExtensions.cs" />
+    <Compile Include="Extensions\WebRequestExtensions.cs" />
     <Compile Include="IApiConfiguration.cs" />
     <Compile Include="IWebRequestFactory.cs" />
     <Compile Include="ApiConfiguration.cs" />
@@ -226,6 +235,8 @@
     <Compile Include="Contracts\Version2\GeneralLedger\TaxCodeLink.cs" />
     <Compile Include="Services\CompanyService.cs" />
     <Compile Include="Services\IOAuthService.cs" />
+    <Compile Include="Services\Version2\Banking\ReceiveMoneyTxnService.cs" />
+    <Compile Include="Services\Version2\Banking\SpendMoneyTxnService.cs" />
     <Compile Include="Services\Version2\Company\CompanyPreferencesService.cs" />
     <Compile Include="Services\Version2\Contact\ContactService.cs" />
     <Compile Include="Services\Version2\GeneralLedger\AccountingPropertiesService.cs" />
@@ -237,6 +248,8 @@
     <Compile Include="IOAuthKeyService.cs" />
     <Compile Include="Services\Version2\GetOnlyService.cs" />
     <Compile Include="Services\Version2\IGetOnlyService.cs" />
+    <Compile Include="Services\Version2\Inventory\InventoryAdjustmentService.cs" />
+    <Compile Include="Services\Version2\Inventory\ItemPriceMatrixService.cs" />
     <Compile Include="Services\Version2\Purchase\BillService.cs" />
     <Compile Include="Services\Version2\Purchase\CalculateDiscountsService.cs" />
     <Compile Include="Services\Version2\Purchase\DebitRefundService.cs" />

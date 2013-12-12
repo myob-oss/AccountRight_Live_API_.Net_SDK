@@ -25,6 +25,6 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2
         /// <summary>
         /// The number of items that can be retrieved
         /// </summary>
-        public int? Count { get; set; }
+        public long? Count { get; set; }
     }
 }

@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Net;
 #if ASYNC
-using System.Threading.Tasks; 
+using System.Threading.Tasks;
+using System.Threading;
 #endif
 using MYOB.AccountRight.SDK.Contracts;
 
@@ -31,6 +32,13 @@ namespace MYOB.AccountRight.SDK.Services
         /// </summary>
         /// <returns></returns>
         Task<CompanyFile[]> GetRangeAsync();
+
+        /// <summary>
+        /// Get list of available company fies
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        Task<CompanyFile[]> GetRangeAsync(CancellationToken cancellationToken);
         
 #endif
         /// <summary>
@@ -54,7 +62,15 @@ namespace MYOB.AccountRight.SDK.Services
         /// </summary>
         /// <param name="queryString">e.g. An ODATA filter</param>
         /// <returns></returns>
-        Task<CompanyFile[]> GetRangeAsync(string queryString);        
+        Task<CompanyFile[]> GetRangeAsync(string queryString);
+
+        /// <summary>
+        /// Get list of available company fies
+        /// </summary>
+        /// <param name="queryString">e.g. An ODATA filter</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        Task<CompanyFile[]> GetRangeAsync(string queryString, CancellationToken cancellationToken);        
 #endif
         /// <summary>
         /// Get a company file entry with the list of available resources
@@ -80,7 +96,16 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="cf">A company file that has been retrieved</param>
         /// <param name="credentials">The credentials to access the company file</param>
         /// <returns></returns>
-        Task<CompanyFileWithResources> GetAsync(CompanyFile cf, ICompanyFileCredentials credentials); 
+        Task<CompanyFileWithResources> GetAsync(CompanyFile cf, ICompanyFileCredentials credentials);
+
+        /// <summary>
+        /// Get a company file entry with the list of available resources
+        /// </summary>
+        /// <param name="cf">A company file that has been retrieved</param>
+        /// <param name="credentials">The credentials to access the company file</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        Task<CompanyFileWithResources> GetAsync(CompanyFile cf, ICompanyFileCredentials credentials, CancellationToken cancellationToken); 
 #endif
     }
 }

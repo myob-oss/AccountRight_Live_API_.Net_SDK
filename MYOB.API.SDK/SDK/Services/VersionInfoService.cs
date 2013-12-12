@@ -2,6 +2,7 @@
 using System.Net;
 #if ASYNC
 using System.Threading.Tasks;
+using System.Threading;
 #endif
 using MYOB.AccountRight.SDK.Communication;
 using MYOB.AccountRight.SDK.Contracts;
@@ -53,7 +54,18 @@ namespace MYOB.AccountRight.SDK.Services
         /// <returns></returns>
         public Task<VersionInfo> GetAsync(ICompanyFileCredentials credentials)
         {
-            return MakeApiGetRequestAsync<VersionInfo>(BuildUri(), credentials);
+            return this.GetAsync(credentials, CancellationToken.None);
+        }
+
+        /// <summary>
+        /// Get the <see cref="VersionMap"/> information
+        /// </summary>
+        /// <param name="credentials">The company file credentials</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task<VersionInfo> GetAsync(ICompanyFileCredentials credentials, CancellationToken cancellationToken)
+        {
+            return this.MakeApiGetRequestAsync<VersionInfo>(this.BuildUri(), credentials, cancellationToken);
         }
 #endif
 

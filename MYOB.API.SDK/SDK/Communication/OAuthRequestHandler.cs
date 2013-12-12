@@ -6,6 +6,7 @@ using System.Net;
 using System.Text;
 #if ASYNC
 using System.Threading.Tasks;
+using System.Threading;
 #endif
 using MYOB.AccountRight.SDK.Contracts;
 using MYOB.AccountRight.SDK.Extensions;
@@ -54,11 +55,22 @@ namespace MYOB.AccountRight.SDK.Communication
         /// </summary>
         /// <param name="request"></param>
         /// <param name="code">The code received from the authorization site</param>
-        async public Task<Tuple<HttpStatusCode, OAuthTokens>> GetOAuthTokensAsync(WebRequest request, string code)
+        public Task<Tuple<HttpStatusCode, OAuthTokens>> GetOAuthTokensAsync(WebRequest request, string code)
+        {
+            return this.GetOAuthTokensAsync(request, code, CancellationToken.None);
+        }
+
+        /// <summary>
+        /// Start the process of getting the OAuth tokens using the code received from the authorization site
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="code">The code received from the authorization site</param>
+        /// <param name="cancellationToken"></param>
+        async public Task<Tuple<HttpStatusCode, OAuthTokens>> GetOAuthTokensAsync(WebRequest request, string code, CancellationToken cancellationToken)
         {
             var data = BuildRequestTokenData(code);
             ConfigureRequest(request);
-            var get = await BeginRequestAsync(request, data);
+            var get = await this.BeginRequestAsync(request, data, cancellationToken);
             return new Tuple<HttpStatusCode, OAuthTokens>(get.Item1, get.Item3);
         }
 #endif
@@ -95,11 +107,22 @@ namespace MYOB.AccountRight.SDK.Communication
         /// </summary>
         /// <param name="request"></param>
         /// <param name="oAuthResponse">The current OAuth response object</param>
-        async public Task<Tuple<HttpStatusCode, OAuthTokens>> RenewOAuthTokensAsync(WebRequest request, OAuthTokens oAuthResponse)
+        public Task<Tuple<HttpStatusCode, OAuthTokens>> RenewOAuthTokensAsync(WebRequest request, OAuthTokens oAuthResponse)
+        {
+            return this.RenewOAuthTokensAsync(request, oAuthResponse, CancellationToken.None);
+        }
+
+        /// <summary>
+        /// Renew the OAuth tokens
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="oAuthResponse">The current OAuth response object</param>
+        /// <param name="cancellationToken"></param>
+        async public Task<Tuple<HttpStatusCode, OAuthTokens>> RenewOAuthTokensAsync(WebRequest request, OAuthTokens oAuthResponse, CancellationToken cancellationToken)
         {
             var data = BuildRenewTokenData(oAuthResponse);
             ConfigureRequest(request);
-            var get = await BeginRequestAsync(request, data);
+            var get = await this.BeginRequestAsync(request, data, cancellationToken);
             return new Tuple<HttpStatusCode, OAuthTokens>(get.Item1, get.Item3);
         }
 #endif
@@ -117,9 +140,9 @@ namespace MYOB.AccountRight.SDK.Communication
         }
 
 #if ASYNC
-        async private Task<Tuple<HttpStatusCode, string, OAuthTokens>> BeginRequestAsync(WebRequest request, string data)
+        async private Task<Tuple<HttpStatusCode, string, OAuthTokens>> BeginRequestAsync(WebRequest request, string data, CancellationToken cancellationToken)
         {
-            return await GetResponseTask<OAuthTokens>(await GetRequestStreamTask<string>(request, data));
+            return await GetResponseTask<OAuthTokens>(await GetRequestStreamTask<string>(request, data), cancellationToken);
         }
 
         private static async Task<WebRequest> GetRequestStreamTask<T>(WebRequest request, string data)

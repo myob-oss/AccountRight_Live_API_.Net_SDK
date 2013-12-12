@@ -6,7 +6,7 @@ namespace MYOB.AccountRight.SDK.Services.Purchase
     /// <summary>
     /// A service that provides access to the <see cref="DebitSettlement"/> resource
     /// </summary>
-    public sealed class DebitSettlementService : ReadableService<DebitSettlement>
+    public sealed class DebitSettlementService : MutableService<DebitSettlement>
     {
         /// <summary>
         /// Initialise a service that can use <see cref="DebitSettlement"/> resources

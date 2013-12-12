@@ -8,6 +8,8 @@ using MYOB.AccountRight.SDK.Contracts.Version2.Sale;
 
 namespace MYOB.AccountRight.SDK.Services
 {
+    using System.Threading;
+
     /// <summary>
     /// Describes a service that provides an operation (non-restful) via a POST action
     /// </summary>
@@ -43,8 +45,9 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="cf">A company file</param>
         /// <param name="entity">The data to send</param>
         /// <param name="credentials">The company file credentials</param>
+        /// <param name="cancellationToken"></param>
         /// <returns>The operation response</returns>
-        Task<TResp> ExecuteAsync(CompanyFile cf, TReq entity, ICompanyFileCredentials credentials);
+        Task<TResp> ExecuteAsync(CompanyFile cf, TReq entity, ICompanyFileCredentials credentials, CancellationToken cancellationToken);
 #endif
     }
 }

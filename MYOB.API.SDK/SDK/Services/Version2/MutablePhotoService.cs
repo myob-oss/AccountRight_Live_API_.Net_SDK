@@ -10,6 +10,8 @@ using MYOB.AccountRight.SDK.Extensions;
 
 namespace MYOB.AccountRight.SDK.Services
 {
+    using System.Threading;
+
     /// <summary>
     /// Base class for resources that support a photo resource that can be updated
     /// </summary>
@@ -63,7 +65,21 @@ namespace MYOB.AccountRight.SDK.Services
         /// <returns></returns>
         public virtual Task<byte[]> GetPhotoAsync(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials)
         {
-            return MakeApiGetRequestAsync<Photo>(BuildUri(cf, uid, "/Photo"), credentials).ContinueWith(t => t.Result.Maybe(_ => _.Data));
+            return this.GetPhotoAsync(cf, uid, credentials, CancellationToken.None);
+        } 
+
+        /// <summary>
+        /// Get the photo of an entity
+        /// </summary>
+        /// <param name="cf">A company file that has been retrieved</param>
+        /// <param name="uid">The identifier of the entity to retrieve</param>
+        /// <param name="credentials">The credentials to access the company file</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public async virtual Task<byte[]> GetPhotoAsync(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, CancellationToken cancellationToken)
+        {
+            var res = await this.MakeApiGetRequestAsync<Photo>(this.BuildUri(cf, uid, "/Photo"), credentials, cancellationToken);
+            return res.Maybe(_ => _.Data);
         } 
 #endif
 
@@ -100,7 +116,19 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="credentials">The credentials to access the company file</param>
         public Task DeletePhotoAsync(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials)
         {
-            return MakeApiDeleteRequestAsync(BuildUri(cf, uid, "/Photo"), credentials);
+            return this.DeletePhotoAsync(cf, uid, credentials, CancellationToken.None);
+        } 
+
+        /// <summary>
+        /// Delete a photo of an entity
+        /// </summary>
+        /// <param name="cf">A company file that has been retrieved</param>
+        /// <param name="uid">The identifier of the entity to retrieve</param>
+        /// <param name="credentials">The credentials to access the company file</param>
+        /// <param name="cancellationToken"></param>
+        public Task DeletePhotoAsync(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, CancellationToken cancellationToken)
+        {
+            return this.MakeApiDeleteRequestAsync(this.BuildUri(cf, uid, "/Photo"), credentials, cancellationToken);
         } 
 #endif
 
@@ -142,7 +170,21 @@ namespace MYOB.AccountRight.SDK.Services
         /// <returns></returns>
         public Task<string> SavePhotoAsync(CompanyFile cf, Guid uid, byte[] photoData, ICompanyFileCredentials credentials)
         {
-            return MakeApiPutRequestAsync(BuildUri(cf, uid, "/Photo"), new Photo() { Data = photoData }, credentials);
+            return this.SavePhotoAsync(cf, uid, photoData, credentials, CancellationToken.None);
+        } 
+
+        /// <summary>
+        /// Save/Update a photo of an entity
+        /// </summary>
+        /// <param name="cf">A company file that has been retrieved</param>
+        /// <param name="uid">The identifier of the entity to retrieve</param>
+        /// <param name="photoData">The image binary</param>
+        /// <param name="credentials">The credentials to access the company file</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task<string> SavePhotoAsync(CompanyFile cf, Guid uid, byte[] photoData, ICompanyFileCredentials credentials, CancellationToken cancellationToken)
+        {
+            return this.MakeApiPutRequestAsync(this.BuildUri(cf, uid, "/Photo"), new Photo() { Data = photoData }, credentials, cancellationToken);
         } 
 #endif
     }

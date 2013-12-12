@@ -29,7 +29,15 @@ namespace MYOB.AccountRight.SDK.Services
         public OAuthService(IApiConfiguration configuration, IWebRequestFactory factory = null)
         {
             _configuration = configuration;
-            _factory = factory ?? new WebRequestFactory();
+            this._factory = factory ?? new WebRequestFactory();
+        }
+
+        internal IWebRequestFactory Factory
+        {
+            get
+            {
+                return this._factory;
+            }
         }
 
         /// <summary>
@@ -41,7 +49,7 @@ namespace MYOB.AccountRight.SDK.Services
         public void GetTokens(string code, Action<HttpStatusCode, OAuthTokens> onComplete, Action<Uri, Exception> onError)
         {
             var handler = new OAuthRequestHandler(_configuration);
-            var request = _factory.Create(OAuthRequestHandler.OAuthRequestUri);
+            var request = this.Factory.Create(OAuthRequestHandler.OAuthRequestUri);
             handler.GetOAuthTokens(request, code, onComplete, onError);
         }
 
@@ -84,11 +92,22 @@ namespace MYOB.AccountRight.SDK.Services
         /// </summary>
         /// <param name="code">The code received after the user has given the application permission to access their company files</param>
         /// <returns>The tokens that are required to access the user's company files</returns>
-        async public Task<OAuthTokens> GetTokensAsync(string code)
+        public Task<OAuthTokens> GetTokensAsync(string code)
+        {
+            return this.GetTokensAsync(code, CancellationToken.None);
+        } 
+
+        /// <summary>
+        /// Get the OAuth tokens required to access the cloud based API (Synchronous)
+        /// </summary>
+        /// <param name="code">The code received after the user has given the application permission to access their company files</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>The tokens that are required to access the user's company files</returns>
+        async public Task<OAuthTokens> GetTokensAsync(string code, CancellationToken cancellationToken)
         {
             var handler = new OAuthRequestHandler(_configuration);
-            var request = _factory.Create(OAuthRequestHandler.OAuthRequestUri);
-            var tokens = await handler.GetOAuthTokensAsync(request, code);
+            var request = this.Factory.Create(OAuthRequestHandler.OAuthRequestUri);
+            var tokens = await handler.GetOAuthTokensAsync(request, code, cancellationToken);
             return tokens.Item2;
         } 
 #endif
@@ -102,7 +121,7 @@ namespace MYOB.AccountRight.SDK.Services
         public void RenewTokens(OAuthTokens oauthTokens, Action<HttpStatusCode, OAuthTokens> onComplete, Action<Uri, Exception> onError)
         {
             var handler = new OAuthRequestHandler(_configuration);
-            var request = _factory.Create(OAuthRequestHandler.OAuthRequestUri);
+            var request = this.Factory.Create(OAuthRequestHandler.OAuthRequestUri);
             handler.RenewOAuthTokens(request, oauthTokens, onComplete, onError);
         }
 
@@ -146,11 +165,22 @@ namespace MYOB.AccountRight.SDK.Services
         /// </summary>
         /// <param name="oauthTokens">The tokens that are required to access the user's company files</param>
         /// <returns></returns>
-        async public Task<OAuthTokens> RenewTokensAsync(OAuthTokens oauthTokens)
+        public Task<OAuthTokens> RenewTokensAsync(OAuthTokens oauthTokens)
+        {
+            return this.RenewTokensAsync(oauthTokens, CancellationToken.None);
+        } 
+
+        /// <summary>
+        /// Renew the OAuth tokens required to access the cloud based API (Synchronous)
+        /// </summary>
+        /// <param name="oauthTokens">The tokens that are required to access the user's company files</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        async public Task<OAuthTokens> RenewTokensAsync(OAuthTokens oauthTokens, CancellationToken cancellationToken)
         {
             var handler = new OAuthRequestHandler(_configuration);
-            var request = _factory.Create(OAuthRequestHandler.OAuthRequestUri);
-            var tokens = await handler.RenewOAuthTokensAsync(request, oauthTokens);
+            var request = this.Factory.Create(OAuthRequestHandler.OAuthRequestUri);
+            var tokens = await handler.RenewOAuthTokensAsync(request, oauthTokens, cancellationToken);
             return tokens.Item2;
         } 
 #endif

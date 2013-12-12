@@ -3,6 +3,67 @@
 namespace MYOB.AccountRight.SDK.Contracts.Version2.GeneralLedger
 {
     /// <summary>
+    /// The different tax code types
+    /// </summary>
+    public enum TaxCodeType
+    {
+        /// <summary>
+        /// Consolidated
+        /// </summary>
+        Consolidated,
+        
+        /// <summary>
+        /// ImportDuty
+        /// </summary>
+        ImportDuty,
+        
+        /// <summary>
+        /// SalesTax
+        /// </summary>
+        SalesTax,
+        
+        /// <summary>
+        /// GST_VAT (Goods and Services Tax)
+        /// </summary>
+        GST_VAT,
+        
+        /// <summary>
+        /// InputTaxed
+        /// </summary>
+        InputTaxed,
+        
+        /// <summary>
+        /// QST
+        /// </summary>
+        QST,
+        
+        /// <summary>
+        /// LuxuryCarTax
+        /// </summary>
+        LuxuryCarTax,
+        
+        /// <summary>
+        /// WithholdingsTax (negative rate)
+        /// </summary>
+        WithholdingsTax,
+        
+        /// <summary>
+        /// NoABN_TFN (negative rate)
+        /// </summary>
+        NoABN_TFN,
+        
+        /// <summary>
+        /// ECPurchVAT
+        /// </summary>
+        ECPurchVAT,
+        
+        /// <summary>
+        /// ECSalesVAT
+        /// </summary>
+        ECSalesVAT,
+    }
+
+    /// <summary>
     /// Describes a tax code resource
     /// </summary>
     public class TaxCode : BaseEntity
@@ -20,12 +81,17 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.GeneralLedger
         /// <summary>
         /// The tax types
         /// </summary>
-        public string Type { get; set; }
+        public TaxCodeType Type { get; set; }
 
         /// <summary>
         /// Rate of tax assigned
         /// </summary>
         public double Rate { get; set; }
+
+        /// <summary>
+        /// Indicates if the rate will be treated as a negative number i.e. see <see cref="TaxCodeType.WithholdingsTax"/> and <see cref="TaxCodeType.NoABN_TFN"/>
+        /// </summary>
+        public bool IsRateNegative { get; set; }
 
         /// <summary>
         /// A link to the <see cref="Account"/> resource to use for tax collected
@@ -42,12 +108,12 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.GeneralLedger
         /// A link to the <see cref="Account"/> resource to use for withholding credit
         /// </summary>
         /// </summary>
-        public AccountLink WithHoldingCreditAccount { get; set; }
+        public AccountLink WithholdingCreditAccount { get; set; }
 
         /// <summary>
         /// A link to the <see cref="Account"/> resource to use for withholding payable
         /// </summary>
-        public AccountLink WithHoldingPayableAccount { get; set; }
+        public AccountLink WithholdingPayableAccount { get; set; }
 
         /// <summary>
         /// A link to the <see cref="Account"/> resource to use for import duty payable

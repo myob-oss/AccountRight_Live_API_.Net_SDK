@@ -8,6 +8,8 @@ using MYOB.AccountRight.SDK.Contracts.Version2;
 
 namespace MYOB.AccountRight.SDK.Services
 {
+    using System.Threading;
+
     /// <summary>
     /// The interface describing services that support mutable resources
     /// </summary>
@@ -39,8 +41,9 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="cf">A company file that has been retrieved</param>
         /// <param name="uid">The identifier of the entity to retrieve</param>
         /// <param name="credentials">The credentials to access the company file</param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task DeleteAsync(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials);
+        Task DeleteAsync(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, CancellationToken cancellationToken);
 #endif
         /// <summary>
         /// Update an existing entity
@@ -68,8 +71,9 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="cf">A company file that has been retrieved</param>
         /// <param name="entity">The entity to update</param>
         /// <param name="credentials">The credentials to access the company file</param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<string> UpdateAsync(CompanyFile cf, T entity, ICompanyFileCredentials credentials);
+        Task<string> UpdateAsync(CompanyFile cf, T entity, ICompanyFileCredentials credentials, CancellationToken cancellationToken);
 #endif
 
         /// <summary>
@@ -98,8 +102,9 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="cf">A company file that has been retrieved</param>
         /// <param name="entity">The entity to update</param>
         /// <param name="credentials">The credentials to access the company file</param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<string> InsertAsync(CompanyFile cf, T entity, ICompanyFileCredentials credentials);
+        Task<string> InsertAsync(CompanyFile cf, T entity, ICompanyFileCredentials credentials, CancellationToken cancellationToken);
 #endif
     }
 }
