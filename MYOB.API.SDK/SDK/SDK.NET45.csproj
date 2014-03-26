@@ -78,6 +78,7 @@
     <Compile Include="Contracts\Version2\Banking\ReceiveMoneyTxnLine.cs" />
     <Compile Include="Contracts\Version2\Banking\SpendMoneyTxn.cs" />
     <Compile Include="Contracts\Version2\Banking\SpendMoneyTxnLine.cs" />
+    <Compile Include="Contracts\Version2\Banking\TransferMoneyTxn.cs" />
     <Compile Include="Contracts\Version2\BaseEntity.cs" />
     <Compile Include="Contracts\Version2\BaseLink.cs" />
     <Compile Include="Contracts\Version2\Company\CategoryTracking.cs" />
@@ -131,6 +132,7 @@
     <Compile Include="Contracts\Version2\GeneralLedger\JournalTransactionLine.cs" />
     <Compile Include="Contracts\Version2\GeneralLedger\JournalType.cs" />
     <Compile Include="Contracts\Version2\GeneralLedger\LinkedAccount.cs" />
+    <Compile Include="Contracts\Version2\GeneralLedger\SourceTransaction.cs" />
     <Compile Include="Contracts\Version2\GeneralLedger\TaxCode.cs" />
     <Compile Include="Contracts\Version2\GeneralLedger\TaxCodeLink.cs" />
     <Compile Include="Contracts\Version2\Identifier.cs" />
@@ -141,6 +143,14 @@
     <Compile Include="Contracts\Version2\Inventory\Levels.cs" />
     <Compile Include="Contracts\Version2\Inventory\SellingPrice.cs" />
     <Compile Include="Contracts\Version2\PagedCollection.cs" />
+    <Compile Include="Contracts\Version2\PayrollCategory\PayrollCategory.cs" />
+    <Compile Include="Contracts\Version2\PayrollCategory\PayrollCategoryDeduction.cs" />
+    <Compile Include="Contracts\Version2\PayrollCategory\PayrollCategoryEntitlement.cs" />
+    <Compile Include="Contracts\Version2\PayrollCategory\PayrollCategoryExpense.cs" />
+    <Compile Include="Contracts\Version2\PayrollCategory\PayrollCategoryLink.cs" />
+    <Compile Include="Contracts\Version2\PayrollCategory\PayrollCategorySuperannuation.cs" />
+    <Compile Include="Contracts\Version2\PayrollCategory\PayrollCategoryTax.cs" />
+    <Compile Include="Contracts\Version2\PayrollCategory\PayrollCategoryWage.cs" />
     <Compile Include="Contracts\Version2\Photo.cs" />
     <Compile Include="Contracts\Version2\Purchase\Bill.cs" />
     <Compile Include="Contracts\Version2\Purchase\BillLine.cs" />
@@ -237,12 +247,14 @@
     <Compile Include="Services\ServiceBase.cs" />
     <Compile Include="Services\Version2\Banking\ReceiveMoneyTxnService.cs" />
     <Compile Include="Services\Version2\Banking\SpendMoneyTxnService.cs" />
+    <Compile Include="Services\Version2\Banking\TransferMoneyTxnService.cs" />
     <Compile Include="Services\Version2\Company\CompanyPreferencesService.cs" />
     <Compile Include="Services\Version2\Contact\ContactService.cs" />
     <Compile Include="Services\Version2\Contact\CustomerService.cs" />
     <Compile Include="Services\Version2\Contact\EmployeeService.cs" />
     <Compile Include="Services\Version2\Contact\PersonalService.cs" />
     <Compile Include="Services\Version2\Contact\SupplierService.cs" />
+    <Compile Include="Services\Version2\ErrorLevel.cs" />
     <Compile Include="Services\Version2\GeneralLedger\AccountingPropertiesService.cs" />
     <Compile Include="Services\Version2\GeneralLedger\AccountRegisterService.cs" />
     <Compile Include="Services\Version2\GeneralLedger\AccountService.cs" />
@@ -267,6 +279,13 @@
     <Compile Include="Services\Version2\IReadablePhoto.cs" />
     <Compile Include="Services\Version2\MutablePhotoService.cs" />
     <Compile Include="Services\Version2\MutableService.cs" />
+    <Compile Include="Services\Version2\PayrollCategory\PayrollCategoryDeductionService.cs" />
+    <Compile Include="Services\Version2\PayrollCategory\PayrollCategoryEntitlementService.cs" />
+    <Compile Include="Services\Version2\PayrollCategory\PayrollCategoryExpenseService.cs" />
+    <Compile Include="Services\Version2\PayrollCategory\PayrollCategoryService.cs" />
+    <Compile Include="Services\Version2\PayrollCategory\PayrollCategorySuperannuationService.cs" />
+    <Compile Include="Services\Version2\PayrollCategory\PayrollCategoryTaxService.cs" />
+    <Compile Include="Services\Version2\PayrollCategory\PayrollCategoryWageService.cs" />
     <Compile Include="Services\Version2\Purchase\BillService.cs" />
     <Compile Include="Services\Version2\Purchase\CalculateDiscountsService.cs" />
     <Compile Include="Services\Version2\Purchase\DebitRefundService.cs" />
@@ -299,10 +318,10 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
-  <Import Project="..\..\packages\Microsoft.Bcl.Build.1.0.10\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\..\packages\Microsoft.Bcl.Build.1.0.10\tools\Microsoft.Bcl.Build.targets')" />
+  <Import Project="..\..\packages\Microsoft.Bcl.Build.1.0.13\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\..\packages\Microsoft.Bcl.Build.1.0.13\tools\Microsoft.Bcl.Build.targets')" />
   <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
-    <Error Condition="!Exists('..\..\packages\Microsoft.Bcl.Build.1.0.10\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
-    <Error Condition="Exists('..\..\packages\Microsoft.Bcl.Build.1.0.10\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
+    <Error Condition="!Exists('..\..\packages\Microsoft.Bcl.Build.1.0.13\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
+    <Error Condition="Exists('..\..\packages\Microsoft.Bcl.Build.1.0.13\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

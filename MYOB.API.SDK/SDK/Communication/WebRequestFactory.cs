@@ -23,6 +23,17 @@ namespace MYOB.AccountRight.SDK.Communication
     /// </code>
     public class WebRequestFactory : IWebRequestFactory
     {
+        private IApiConfiguration _configuration;
+
+        /// <summary>
+        /// WebRequest factory constructor
+        /// </summary>
+        /// <param name="configuration">Configuration</param>
+        public WebRequestFactory(IApiConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
         /// <summary>
         /// Build a WebRequest object
         /// </summary>
@@ -33,6 +44,11 @@ namespace MYOB.AccountRight.SDK.Communication
         {
             var webrequest = (HttpWebRequest)WebRequest.Create(requestUri);
             webrequest.Accept = acceptEncoding;
+
+#if !PORTABLE
+            webrequest.CachePolicy = _configuration.RequestCachePolicy;
+#endif
+
             return webrequest;
         }
     }

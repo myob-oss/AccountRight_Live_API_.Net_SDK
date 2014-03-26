@@ -33,7 +33,7 @@ namespace MYOB.AccountRight.SDK.Services
         protected ServiceBase(IApiConfiguration configuration, IWebRequestFactory webRequestFactory, IOAuthKeyService keyService)
         {
             Configuration = configuration;
-            WebRequestFactory = webRequestFactory ?? new WebRequestFactory();
+            WebRequestFactory = webRequestFactory ?? new WebRequestFactory(configuration);
             _keyService = keyService;
         }
 

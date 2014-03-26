@@ -274,7 +274,7 @@ namespace SDK.Test.Communication
             var request = factory.Create(new Uri("http://localhost"));
 
             var stream = new MemoryStream();
-            request.EndGetRequestStream(Arg.Any<IAsyncResult>()).Returns(c => stream);
+            request.GetRequestStreamAsync().Returns(async c => (Stream)stream);
 
             var handler = new ApiRequestHandler(new ApiConfiguration("<<clientid>>", "<<clientsecret>>", "<<redirecturl>>"), null);
 
@@ -320,7 +320,7 @@ namespace SDK.Test.Communication
             var request = factory.Create(new Uri("http://localhost"));
 
             var stream = new MemoryStream();
-            request.EndGetRequestStream(Arg.Any<IAsyncResult>()).Returns(c => stream);
+            request.GetRequestStreamAsync().Returns(async c => (Stream)stream);
 
             var handler = new ApiRequestHandler(new ApiConfiguration("<<clientid>>", "<<clientsecret>>", "<<redirecturl>>"), null);
 

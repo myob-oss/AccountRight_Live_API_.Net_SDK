@@ -36,7 +36,21 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="credentials">The credentials to access the company file</param>
         public virtual void Delete(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials)
         {
-            MakeApiDeleteRequestSync(BuildUri(cf, uid), credentials);
+            this.Delete(cf, uid, credentials, ErrorLevel.IgnoreWarnings);
+        }
+
+        /// <summary>
+        /// Delete an entity
+        /// </summary>
+        /// <param name="cf">A company file that has been retrieved</param>
+        /// <param name="uid">The identifier of the entity to retrieve</param>
+        /// <param name="credentials">The credentials to access the company file</param>
+        /// <param name="errorLevel"></param>
+        public virtual void Delete(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, ErrorLevel errorLevel)
+        {
+            var queryString = this.QueryStringFromErrorLevel(errorLevel);
+
+            MakeApiDeleteRequestSync(BuildUri(cf, uid, queryString: queryString), credentials);
         }
 
 #if ASYNC
@@ -62,7 +76,36 @@ namespace MYOB.AccountRight.SDK.Services
         /// <returns></returns>
         public virtual Task DeleteAsync(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, CancellationToken cancellationToken)
         {
-            return this.MakeApiDeleteRequestAsync(this.BuildUri(cf, uid), credentials, cancellationToken);
+            return this.DeleteAsync(cf, uid, credentials, ErrorLevel.IgnoreWarnings, cancellationToken);
+        }
+
+        /// <summary>
+        /// Delete an entity
+        /// </summary>
+        /// <param name="cf">A company file that has been retrieved</param>
+        /// <param name="uid">The identifier of the entity to retrieve</param>
+        /// <param name="credentials">The credentials to access the company file</param>
+        /// <param name="errorLevel"></param>
+        /// <returns></returns>
+        public virtual Task DeleteAsync(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, ErrorLevel errorLevel)
+        {
+            return this.DeleteAsync(cf, uid, credentials, errorLevel, CancellationToken.None);
+        }
+
+        /// <summary>
+        /// Delete an entity
+        /// </summary>
+        /// <param name="cf">A company file that has been retrieved</param>
+        /// <param name="uid">The identifier of the entity to retrieve</param>
+        /// <param name="credentials">The credentials to access the company file</param>
+        /// <param name="errorLevel"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public virtual Task DeleteAsync(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, ErrorLevel errorLevel, CancellationToken cancellationToken)
+        {
+            var queryString = this.QueryStringFromErrorLevel(errorLevel);
+
+            return this.MakeApiDeleteRequestAsync(this.BuildUri(cf, uid, queryString: queryString), credentials, cancellationToken);
         }
 #endif
         /// <summary>
@@ -75,7 +118,23 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="onError">The action to call when the operation has an error</param>
         public virtual void Delete(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, Action<HttpStatusCode> onComplete, Action<Uri, Exception> onError)
         {
-            MakeApiDeleteRequestDelegate(BuildUri(cf, uid), credentials, onComplete, onError);
+            Delete(cf, uid, credentials, ErrorLevel.IgnoreWarnings, onComplete, onError);
+        }
+
+        /// <summary>
+        /// Delete an entity
+        /// </summary>
+        /// <param name="cf">A company file that has been retrieved</param>
+        /// <param name="uid">The identifier of the entity to retrieve</param>
+        /// <param name="credentials">The credentials to access the company file</param>
+        /// <param name="errorLevel"></param>
+        /// <param name="onComplete">The action to call when the operation is complete</param>
+        /// <param name="onError">The action to call when the operation has an error</param>
+        public virtual void Delete(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, ErrorLevel errorLevel, Action<HttpStatusCode> onComplete, Action<Uri, Exception> onError)
+        {
+            var queryString = this.QueryStringFromErrorLevel(errorLevel);
+
+            MakeApiDeleteRequestDelegate(BuildUri(cf, uid, queryString: queryString), credentials, onComplete, onError);
         }
 
         /// <summary>
@@ -87,7 +146,22 @@ namespace MYOB.AccountRight.SDK.Services
         /// <returns></returns>
         public virtual string Update(CompanyFile cf, T entity, ICompanyFileCredentials credentials)
         {
-            return MakeApiPutRequestSync(BuildUri(cf, entity.UID), entity, credentials);
+            return Update(cf, entity, credentials, ErrorLevel.IgnoreWarnings);
+        }
+
+        /// <summary>
+        /// Update an existing entity
+        /// </summary>
+        /// <param name="cf">A company file that has been retrieved</param>
+        /// <param name="entity">The entity to update</param>
+        /// <param name="credentials">The credentials to access the company file</param>
+        /// <param name="errorLevel"></param>
+        /// <returns></returns>
+        public virtual string Update(CompanyFile cf, T entity, ICompanyFileCredentials credentials, ErrorLevel errorLevel)
+        {
+            var queryString = this.QueryStringFromErrorLevel(errorLevel);
+
+            return MakeApiPutRequestSync(BuildUri(cf, entity.UID, queryString: queryString), entity, credentials);
         }
 
 #if ASYNC
@@ -113,7 +187,36 @@ namespace MYOB.AccountRight.SDK.Services
         /// <returns></returns>
         public virtual Task<string> UpdateAsync(CompanyFile cf, T entity, ICompanyFileCredentials credentials, CancellationToken cancellationToken)
         {
-            return this.MakeApiPutRequestAsync(this.BuildUri(cf, entity.UID), entity, credentials, cancellationToken);
+            return this.UpdateAsync(cf, entity, credentials, ErrorLevel.IgnoreWarnings, cancellationToken);
+        }
+
+        /// <summary>
+        /// Update an existing entity
+        /// </summary>
+        /// <param name="cf">A company file that has been retrieved</param>
+        /// <param name="entity">The entity to update</param>
+        /// <param name="credentials">The credentials to access the company file</param>
+        /// <param name="errorLevel"></param>
+        /// <returns></returns>
+        public virtual Task<string> UpdateAsync(CompanyFile cf, T entity, ICompanyFileCredentials credentials, ErrorLevel errorLevel)
+        {
+            return this.UpdateAsync(cf, entity, credentials, errorLevel, CancellationToken.None);
+        }
+
+        /// <summary>
+        /// Update an existing entity
+        /// </summary>
+        /// <param name="cf">A company file that has been retrieved</param>
+        /// <param name="entity">The entity to update</param>
+        /// <param name="credentials">The credentials to access the company file</param>
+        /// <param name="errorLevel"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public virtual Task<string> UpdateAsync(CompanyFile cf, T entity, ICompanyFileCredentials credentials, ErrorLevel errorLevel, CancellationToken cancellationToken)
+        {
+            var queryString = this.QueryStringFromErrorLevel(errorLevel);
+
+            return this.MakeApiPutRequestAsync(this.BuildUri(cf, entity.UID, queryString: queryString), entity, credentials, cancellationToken);
         }
 #endif
         /// <summary>
@@ -180,5 +283,11 @@ namespace MYOB.AccountRight.SDK.Services
             return this.MakeApiPostRequestAsync(this.BuildUri(cf), entity, credentials, cancellationToken);
         }
 #endif
+
+        /// <exclude/>
+        private string QueryStringFromErrorLevel(ErrorLevel errorLevel)
+        {
+            return errorLevel == ErrorLevel.WarningsAsErrors ? "warningsAsErrors=true" : string.Empty;
+        }
     }
 }

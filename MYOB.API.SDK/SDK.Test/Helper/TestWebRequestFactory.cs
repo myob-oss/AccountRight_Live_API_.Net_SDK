@@ -7,6 +7,8 @@ using System.Net;
 using System.Text;
 using MYOB.AccountRight.SDK;
 using NSubstitute;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace SDK.Test.Helper
 {
@@ -103,7 +105,11 @@ namespace SDK.Test.Helper
                            return asyncResult;
                        });
 
-            request.EndGetRequestStream(Arg.Any<IAsyncResult>()).Returns(c => new MemoryStream());
+            Stream ms = new MemoryStream();
+
+            request.GetRequestStreamAsync().Returns(async c => ms);
+
+            request.EndGetRequestStream(Arg.Any<IAsyncResult>()).Returns(c => ms);
 
             request.BeginGetRequestStream(Arg.Any<AsyncCallback>(), Arg.Any<object>())
                    .Returns(c =>
@@ -115,6 +121,8 @@ namespace SDK.Test.Helper
 
             request.EndGetResponse(Arg.Any<IAsyncResult>())
                    .Returns(c => toReturn());
+
+            request.GetResponseAsync().Returns(async c => toReturn());
 
             return request;
         }

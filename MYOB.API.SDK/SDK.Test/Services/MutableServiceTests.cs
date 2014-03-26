@@ -16,6 +16,8 @@ using SDK.Test.Helper;
 
 namespace SDK.Test.Services
 {
+    using System.Threading;
+
     [TestFixture]
     public class MutableServiceTests
     {
@@ -159,5 +161,104 @@ namespace SDK.Test.Services
             Assert.AreEqual(location, received, "Incorrect data received during {0} operation", action.Item1);
         }
 
+        [Test]
+        public void UpdateAsync_Overloads_Call_Through_Correctly()
+        {
+            var cf = new CompanyFile();
+            var baseEntity = Substitute.For<BaseEntity>();
+            var credentials = Substitute.For<ICompanyFileCredentials>();
+            var errorLevel = ErrorLevel.WarningsAsErrors;
+            var ret = Task.FromResult("");
+
+            var callCount = 0;
+
+            var testMutableService = new MutableServiceTestClass<BaseEntity>(Substitute.For<IApiConfiguration>(), Substitute.For<IWebRequestFactory>(), Substitute.For<IOAuthKeyService>())
+            {
+                UpdateAsyncCallback =
+
+                    (_cf, _entity, _credentials, _errorLevel, _cancellationToken) =>
+                        {
+                            callCount++;
+                            Assert.AreEqual(cf, _cf);
+                            Assert.AreEqual(baseEntity, _entity);
+                            Assert.AreEqual(errorLevel, _errorLevel);
+                            Assert.AreEqual(_cancellationToken, CancellationToken.None);
+
+                            return ret;
+                        }
+            };
+
+
+            var _ret = testMutableService.UpdateAsync(cf, baseEntity, credentials, errorLevel);
+
+            Assert.AreEqual(1, callCount);
+            Assert.AreEqual(_ret, ret);
+        }
+
+        [Test]
+        public void DeleteAsync_Overloads_Call_Through_Correctly()
+        {
+            var cf = new CompanyFile();
+            var id = Guid.NewGuid();
+            var credentials = Substitute.For<ICompanyFileCredentials>();
+            var errorLevel = ErrorLevel.WarningsAsErrors;
+            var ret = Task.FromResult("");
+
+            var callCount = 0;
+
+            var testMutableService = new MutableServiceTestClass<BaseEntity>(Substitute.For<IApiConfiguration>(), Substitute.For<IWebRequestFactory>(), Substitute.For<IOAuthKeyService>())
+            {
+                DeleteAsyncCallback =
+
+                    (_cf, _id, _credentials, _errorLevel, _cancellationToken) =>
+                    {
+                        callCount++;
+                        Assert.AreEqual(cf, _cf);
+                        Assert.AreEqual(id, _id);
+                        Assert.AreEqual(errorLevel, _errorLevel);
+                        Assert.AreEqual(_cancellationToken, CancellationToken.None);
+
+                        return ret;
+                    }
+            };
+
+
+            var _ret = testMutableService.DeleteAsync(cf, id, credentials, errorLevel);
+
+            Assert.AreEqual(1, callCount);
+            Assert.AreEqual(_ret, ret);
+        }
+
+        private class MutableServiceTestClass<T> : MutableService<T>
+            where T : BaseEntity
+        {
+            public Func<CompanyFile, T, ICompanyFileCredentials, ErrorLevel, CancellationToken, Task<string>> UpdateAsyncCallback { get;set; }
+
+            public Func<CompanyFile, Guid, ICompanyFileCredentials, ErrorLevel, CancellationToken, Task<string>> DeleteAsyncCallback { get; set; }
+
+
+            public MutableServiceTestClass(IApiConfiguration configuration, IWebRequestFactory webRequestFactory, IOAuthKeyService keyService)
+                : base(configuration, webRequestFactory, keyService)
+            {
+            }
+
+            public override Task<string> UpdateAsync(CompanyFile cf, T entity, ICompanyFileCredentials credentials, ErrorLevel errorLevel, CancellationToken cancellationToken)
+            {
+                return UpdateAsyncCallback(cf, entity, credentials, errorLevel, cancellationToken);
+            }
+
+            public override Task DeleteAsync(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, ErrorLevel errorLevel, CancellationToken cancellationToken)
+            {
+                return DeleteAsyncCallback(cf, uid, credentials, errorLevel, cancellationToken);
+            }
+
+            internal override string Route
+            {
+                get
+                {
+                    throw new NotImplementedException();
+                }
+            }
+        }
     }
 }
