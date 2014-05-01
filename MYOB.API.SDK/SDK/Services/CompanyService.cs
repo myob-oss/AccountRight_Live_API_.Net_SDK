@@ -1,5 +1,4 @@
 ﻿using MYOB.AccountRight.SDK.Communication;
-using MYOB.AccountRight.SDK.Contracts;
 
 namespace MYOB.AccountRight.SDK.Services
 {

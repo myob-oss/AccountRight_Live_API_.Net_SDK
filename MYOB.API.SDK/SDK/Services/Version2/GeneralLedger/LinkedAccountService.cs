@@ -37,7 +37,8 @@ namespace MYOB.AccountRight.SDK.Services.GeneralLedger
         /// <param name="cf"></param>
         /// <param name="uid"></param>
         /// <param name="credentials"></param>
-        public override void Delete(Contracts.CompanyFile cf, System.Guid uid, ICompanyFileCredentials credentials)
+        /// <param name="errorLevel"></param>
+        public override void Delete(Contracts.CompanyFile cf, System.Guid uid, ICompanyFileCredentials credentials, ErrorLevel errorLevel = ErrorLevel.IgnoreWarnings)
         {
             throw new NotSupportedException();
         }
@@ -50,7 +51,8 @@ namespace MYOB.AccountRight.SDK.Services.GeneralLedger
         /// <param name="credentials"></param>
         /// <param name="onComplete"></param>
         /// <param name="onError"></param>
-        public override void Delete(Contracts.CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, Action<System.Net.HttpStatusCode> onComplete, Action<Uri, Exception> onError)
+        /// <param name="errorLevel"></param>
+        public override void Delete(Contracts.CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, Action<System.Net.HttpStatusCode> onComplete, Action<Uri, Exception> onError, ErrorLevel errorLevel = ErrorLevel.IgnoreWarnings)
         {
             throw new NotSupportedException();
         }
@@ -63,21 +65,24 @@ namespace MYOB.AccountRight.SDK.Services.GeneralLedger
         /// <param name="uid"></param>
         /// <param name="credentials"></param>
         /// <param name="cancellationToken"></param>
+        /// <param name="errorLevel"></param>
         /// <returns></returns>
-        public override Task DeleteAsync(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, CancellationToken cancellationToken)
+        public override Task DeleteAsync(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, CancellationToken cancellationToken, ErrorLevel errorLevel = ErrorLevel.IgnoreWarnings)
         {
             throw new NotSupportedException();
         }
         
 #endif
+
         /// <summary>
         /// Not supported
         /// </summary>
         /// <param name="cf"></param>
         /// <param name="entity"></param>
         /// <param name="credentials"></param>
+        /// <param name="errorLevel"></param>
         /// <returns></returns>
-        public override string Insert(Contracts.CompanyFile cf, LinkedAccount entity, ICompanyFileCredentials credentials)
+        public override string Insert(Contracts.CompanyFile cf, LinkedAccount entity, ICompanyFileCredentials credentials, ErrorLevel errorLevel = ErrorLevel.IgnoreWarnings)
         {
             throw new NotSupportedException();
         }
@@ -90,7 +95,8 @@ namespace MYOB.AccountRight.SDK.Services.GeneralLedger
         /// <param name="credentials"></param>
         /// <param name="onComplete"></param>
         /// <param name="onError"></param>
-        public override void Insert(Contracts.CompanyFile cf, LinkedAccount entity, ICompanyFileCredentials credentials, Action<System.Net.HttpStatusCode, string> onComplete, Action<Uri, Exception> onError)
+        /// <param name="errorLevel"></param>
+        public override void Insert(Contracts.CompanyFile cf, LinkedAccount entity, ICompanyFileCredentials credentials, Action<System.Net.HttpStatusCode, string> onComplete, Action<Uri, Exception> onError, ErrorLevel errorLevel = ErrorLevel.IgnoreWarnings)
         {
             throw new NotSupportedException();
         }
@@ -103,8 +109,9 @@ namespace MYOB.AccountRight.SDK.Services.GeneralLedger
         /// <param name="entity"></param>
         /// <param name="credentials"></param>
         /// <param name="cancellationToken"></param>
+        /// <param name="errorLevel"></param>
         /// <returns></returns>
-        public override Task<string> InsertAsync(CompanyFile cf, LinkedAccount entity, ICompanyFileCredentials credentials, CancellationToken cancellationToken)
+        public override Task<string> InsertAsync(CompanyFile cf, LinkedAccount entity, ICompanyFileCredentials credentials, CancellationToken cancellationToken, ErrorLevel errorLevel = ErrorLevel.IgnoreWarnings)
         {
             throw new NotSupportedException();
         }

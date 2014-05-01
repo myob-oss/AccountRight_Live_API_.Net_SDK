@@ -31,8 +31,14 @@
         public CompanyPurchasesPreferences Purchases { get; set; }
 
         /// <summary>
+        /// Timesheet preferences
+        /// </summary>
+        public CompanyTimesheetPreferences Timesheets { get; set; }
+
+        /// <summary>
         /// A number that can be used for change control but does not preserve a date or a time. <br/>
         /// </summary>
         public string RowVersion { get; set; }
     }
+
 }

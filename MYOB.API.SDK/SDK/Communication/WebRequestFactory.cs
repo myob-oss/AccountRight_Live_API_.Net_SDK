@@ -47,6 +47,7 @@ namespace MYOB.AccountRight.SDK.Communication
 
 #if !PORTABLE
             webrequest.CachePolicy = _configuration.RequestCachePolicy;
+            webrequest.Timeout = 180000;
 #endif
 
             return webrequest;

@@ -80,6 +80,7 @@
     <Compile Include="Communication\OAuthRequestHandlerTests.cs" />
     <Compile Include="Contracts\ProductLevelTests.cs" />
     <Compile Include="Contracts\Version2\AccountTests.cs" />
+    <Compile Include="Contracts\Version2\ActivityTests.cs" />
     <Compile Include="Contracts\Version2\CategoryTests.cs" />
     <Compile Include="Contracts\Version2\ContactTests.cs" />
     <Compile Include="Contracts\Version2\SpendMoneyTxnTests.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="Extensions\WebRequestExtensionsTests.cs" />
     <Compile Include="Services\AccountRegisterServiceTests.cs" />
     <Compile Include="Services\AccountServiceTests.cs" />
+    <Compile Include="Services\ActivityServiceTests.cs" />
     <Compile Include="Services\BillServiceTests.cs" />
     <Compile Include="Services\CalculateDiscountsFeesServiceTests.cs" />
     <Compile Include="Services\CalculateDiscountsServiceTests.cs" />
@@ -103,6 +105,12 @@
     <Compile Include="Services\CategoryServiceTests.cs" />
     <Compile Include="Services\CompanyPreferencesServiceTests.cs" />
     <Compile Include="Services\CompanyServiceTests.cs" />
+    <Compile Include="Services\GetOnlyServiceTests.cs" />
+    <Compile Include="Services\StatementServiceTests.cs" />
+    <Compile Include="Services\TimesheetServiceTests.cs" />
+    <Compile Include="Services\EmployeePayrollDetailsServiceTests.cs" />
+    <Compile Include="Services\PayrollEmploymentClassificationTests.cs" />
+    <Compile Include="Services\PayrollSuperannuationFundTests.cs" />
     <Compile Include="Services\InventoryAdjustmentServiceTests.cs" />
     <Compile Include="Services\PayrollCategoryDeductionServiceTests.cs" />
     <Compile Include="Services\PayrollCategoryEntitlementServiceTests.cs" />
@@ -110,6 +118,7 @@
     <Compile Include="Services\PayrollCategoryServiceTests.cs" />
     <Compile Include="Services\PayrollCategorySuperannuationServiceTests.cs" />
     <Compile Include="Services\PayrollCategoryTaxServiceTests.cs" />
+    <Compile Include="Services\PayrollCategoryTaxTableServiceTests.cs" />
     <Compile Include="Services\PayrollCategoryWageServiceTests.cs" />
     <Compile Include="Services\ReceiveMoneyTxnServiceTests.cs" />
     <Compile Include="Services\SpendMoneyTxnServiceTests.cs" />
@@ -144,6 +153,7 @@
     <Compile Include="Services\TaxCodeServiceTests.cs" />
     <Compile Include="Services\TransferMoneyTxnServiceTests.cs" />
     <Compile Include="Services\UriHelperTests.cs" />
+    <Compile Include="Services\CurrentUserServiceTests.cs" />
     <Compile Include="UserContract.cs" />
     <Compile Include="Helper\TestWebRequestFactory.cs" />
     <Compile Include="Communication\WebRequestFactoryTests.cs" />

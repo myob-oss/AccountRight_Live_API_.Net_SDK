@@ -12,9 +12,28 @@ using System.Threading.Tasks;
 
 namespace SDK.Test.Helper
 {
+    public class DefaultResponseTestWebRequestFactory : TestWebRequestFactory, IWebRequestFactory
+    {
+        public readonly List<Uri> UnhandledUris = new List<Uri>(); 
+        
+        public new WebRequest Create(Uri requestUri, string acceptEncoding = null)
+        {
+            var request = base.Create(requestUri, acceptEncoding);
+
+            if (request == null)
+            {
+                UnhandledUris.Add(requestUri);
+                request = CreateWebRequest(requestUri, () => ReturnBody(null, HttpStatusCode.BadRequest, null));
+            }
+
+            return request;
+        }
+    }
+
     public class TestWebRequestFactory : IWebRequestFactory
     {
         private readonly Dictionary<string, Func<WebResponse>> lookup = new Dictionary<string, Func<WebResponse>>();
+
 
         public void RegisterResultForUri(string uri, string resultBody, HttpStatusCode returnCode = HttpStatusCode.OK, string location = null)
         {
@@ -42,7 +61,7 @@ namespace SDK.Test.Helper
             lookup.Add(uri.TrimEnd('/').ToLowerInvariant(), () => { throw new TEx(); });
         }
 
-        static WebResponse ReturnBody(string body, HttpStatusCode returnCode, string location)
+        protected static WebResponse ReturnBody(string body, HttpStatusCode returnCode, string location)
         {
             var byteArray = Encoding.ASCII.GetBytes(body ?? string.Empty);
             return ReturnBody(new MemoryStream(byteArray), returnCode, location);
@@ -89,7 +108,7 @@ namespace SDK.Test.Helper
             return null;
         }
 
-        private static HttpWebRequest CreateWebRequest(Uri uri, Func<WebResponse> toReturn)
+        protected static HttpWebRequest CreateWebRequest(Uri uri, Func<WebResponse> toReturn)
         {
             var request = Substitute.For<HttpWebRequest>();
             var asyncResult = Substitute.For<IAsyncResult>();
