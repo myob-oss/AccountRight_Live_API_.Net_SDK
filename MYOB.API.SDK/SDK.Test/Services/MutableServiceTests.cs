@@ -16,12 +16,14 @@ using SDK.Test.Helper;
 
 namespace SDK.Test.Services
 {
+    using System.Threading;
+
     [TestFixture]
     public class MutableServiceTests
     {
-        public class TestReadOnlyService : MutableService<UserContract>
+        public class TestMutableService : MutableService<UserContract>
         {
-            public TestReadOnlyService(IApiConfiguration configuration, IWebRequestFactory webRequestFactory, IOAuthKeyService keyService) : base(configuration, webRequestFactory, keyService)
+            public TestMutableService(IApiConfiguration configuration, IWebRequestFactory webRequestFactory, IOAuthKeyService keyService) : base(configuration, webRequestFactory, keyService)
             {
             }
 
@@ -32,46 +34,52 @@ namespace SDK.Test.Services
         }
 
         private IApiConfiguration _configuration;
-        private TestWebRequestFactory _webFactory;
-        private TestReadOnlyService _service;
+        private DefaultResponseTestWebRequestFactory _webFactory;
+        private TestMutableService _service;
         private static Guid _uid;
 
         [SetUp]
         public void SetUp()
         {
             _configuration = Substitute.For<IApiConfiguration>();
-            _webFactory = new TestWebRequestFactory();
-            _service = new TestReadOnlyService(_configuration, _webFactory, null);
+            _webFactory = new DefaultResponseTestWebRequestFactory();
+            _service = new TestMutableService(_configuration, _webFactory, null);
             _configuration.ApiBaseUrl.Returns(ApiRequestHandler.ApiRequestUri.AbsoluteUri);
             _uid = Guid.NewGuid();
         }
 
-        private readonly Tuple<string, Func<TestReadOnlyService, CompanyFile, bool>>[] _deleteActions = new[]
+        private readonly Tuple<string, Func<TestMutableService, CompanyFile, bool>>[] _deleteActions = new[]
             {
-                new Tuple<string, Func<TestReadOnlyService, CompanyFile, bool>>("Delegate", 
+                new Tuple<string, Func<TestMutableService, CompanyFile, bool>>("Delegate", 
                     (service, cf) =>
                     {
                         var ret = false;
                         service.Delete(cf, _uid, null, (code) => { ret = true; }, (uri, exception) => Assert.Fail(exception.Message));
                         return ret;
                     }),
-                new Tuple<string, Func<TestReadOnlyService, CompanyFile, bool>>("Sync", 
+                new Tuple<string, Func<TestMutableService, CompanyFile, bool>>("Sync", 
                     (service, cf) =>
                     {
                         service.Delete(cf, _uid, null);
                         return true;
                     }),
-                new Tuple<string, Func<TestReadOnlyService, CompanyFile, bool>>("Async", 
+                new Tuple<string, Func<TestMutableService, CompanyFile, bool>>("Async", 
                     (service, cf) =>
                     {
                         service.DeleteAsync(cf, _uid, null);
+                        return true;
+                    }),
+                 new Tuple<string, Func<TestMutableService, CompanyFile, bool>>("Async2", 
+                    (service, cf) =>
+                    {
+                        service.DeleteAsync(cf, _uid, null, CancellationToken.None);
                         return true;
                     }),
             };
 
 
         [Test]
-        public void WeDeleteContactUsingCompanyFileBaseUrl([ValueSource("_deleteActions")] Tuple<string, Func<TestReadOnlyService, CompanyFile, bool>> action)
+        public void WeDeleteContactUsingCompanyFileBaseUrl([ValueSource("_deleteActions")] Tuple<string, Func<TestMutableService, CompanyFile, bool>> action)
         {
             // arrange
             var cf = new CompanyFile() { Uri = new Uri("https://dc1.api.myob.com/accountright/7D5F5516-AF68-4C5B-844A-3F054E00DF10") };
@@ -84,30 +92,35 @@ namespace SDK.Test.Services
             Assert.IsTrue(ret, "Incorrect data received during {0} operation", action.Item1);
         }
 
-        private readonly Tuple<string, Func<TestReadOnlyService, CompanyFile, string>>[] _postActions = new[]
+        private readonly Tuple<string, Func<TestMutableService, CompanyFile, string>>[] _postActions = new[]
             {
-                new Tuple<string, Func<TestReadOnlyService, CompanyFile, string>>("Delegate", 
+                new Tuple<string, Func<TestMutableService, CompanyFile, string>>("Delegate", 
                     (service, cf) =>
                     {
                         string received = null;
                         service.Insert(cf, new UserContract() {UID = UID}, null, (code, location) => { received = location; }, (uri, exception) => Assert.Fail(exception.Message));
                         return received;
                     }),
-                new Tuple<string, Func<TestReadOnlyService, CompanyFile, string>>("Sync", 
+                new Tuple<string, Func<TestMutableService, CompanyFile, string>>("Sync", 
                     (service, cf) =>
                     {
                         return service.Insert(cf, new UserContract() {UID = UID}, null);
                     }),
-                new Tuple<string, Func<TestReadOnlyService, CompanyFile, string>>("Async", 
+                new Tuple<string, Func<TestMutableService, CompanyFile, string>>("Async", 
                     (service, cf) =>
                     {
                         return service.InsertAsync(cf, new UserContract() {UID = UID}, null).Result;
+                    }),
+                 new Tuple<string, Func<TestMutableService, CompanyFile, string>>("Async2", 
+                    (service, cf) =>
+                    {
+                        return service.InsertAsync(cf, new UserContract() {UID = UID}, null, CancellationToken.None).Result;
                     }),
             };
 
 
         [Test]
-        public void WePostContactUsingCompanyFileBaseUrl([ValueSource("_postActions")] Tuple<string, Func<TestReadOnlyService, CompanyFile, string>> action)
+        public void WePostContactUsingCompanyFileBaseUrl([ValueSource("_postActions")] Tuple<string, Func<TestMutableService, CompanyFile, string>> action)
         {
             // arrange
             var cf = new CompanyFile() { Uri = new Uri("https://dc1.api.myob.com/accountright/7D5F5516-AF68-4C5B-844A-3F054E00DF10") };
@@ -123,29 +136,34 @@ namespace SDK.Test.Services
 
         protected static Guid UID = Guid.NewGuid();
 
-        private readonly Tuple<string, Func<TestReadOnlyService, CompanyFile, string>>[] _putActions = new[]
+        private readonly Tuple<string, Func<TestMutableService, CompanyFile, string>>[] _putActions = new[]
             {
-                new Tuple<string, Func<TestReadOnlyService, CompanyFile, string>>("Delegate", 
+                new Tuple<string, Func<TestMutableService, CompanyFile, string>>("Delegate", 
                     (service, cf) =>
                     {
                         string received = null;
                         service.Update(cf, new UserContract() { UID = UID }, null, (code, location) => { received = location; }, (uri, exception) => Assert.Fail(exception.Message));
                         return received;
                     }),
-                new Tuple<string, Func<TestReadOnlyService, CompanyFile, string>>("Sync", 
+                new Tuple<string, Func<TestMutableService, CompanyFile, string>>("Sync", 
                     (service, cf) =>
                     {
                         return service.Update(cf, new UserContract() { UID = UID }, null);
                     }),
-                new Tuple<string, Func<TestReadOnlyService, CompanyFile, string>>("Async", 
+                new Tuple<string, Func<TestMutableService, CompanyFile, string>>("Async", 
                     (service, cf) =>
                     {
                         return service.UpdateAsync(cf, new UserContract() { UID = UID }, null).Result;
                     }),
+                new Tuple<string, Func<TestMutableService, CompanyFile, string>>("Async2", 
+                    (service, cf) =>
+                    {
+                        return service.UpdateAsync(cf, new UserContract() { UID = UID }, null, CancellationToken.None).Result;
+                    }),
             };
 
         [Test]
-        public void WePutContactUsingCompanyFileBaseUrl([ValueSource("_putActions")] Tuple<string, Func<TestReadOnlyService, CompanyFile, string>> action)
+        public void WePutContactUsingCompanyFileBaseUrl([ValueSource("_putActions")] Tuple<string, Func<TestMutableService, CompanyFile, string>> action)
         {
             // arrange
             var cf = new CompanyFile() { Uri = new Uri("https://dc1.api.myob.com/accountright/7D5F5516-AF68-4C5B-844A-3F054E00DF10") };
@@ -159,5 +177,190 @@ namespace SDK.Test.Services
             Assert.AreEqual(location, received, "Incorrect data received during {0} operation", action.Item1);
         }
 
+        private readonly Tuple<string, Func<TestMutableService, CompanyFile, string>>[] _errorLevelActions = new[]
+            {
+                new Tuple<string, Func<TestMutableService, CompanyFile, string>>("DelegateUpdate", 
+                    (service, cf) =>
+                    {
+                        string received = null;
+                        service.Update(cf, new UserContract() { UID = UID }, null, (code, location) => { received = location; }, (uri, exception) => Assert.Fail(exception.Message), ErrorLevel.WarningsAsErrors);
+                        return received;
+                    }),
+                new Tuple<string, Func<TestMutableService, CompanyFile, string>>("SyncUpdate", 
+                    (service, cf) =>
+                    {
+                        return service.Update(cf, new UserContract() { UID = UID }, null, ErrorLevel.WarningsAsErrors);
+                    }),
+                new Tuple<string, Func<TestMutableService, CompanyFile, string>>("AsyncUpdate", 
+                    (service, cf) =>
+                    {
+                        return service.UpdateAsync(cf, new UserContract() { UID = UID }, null, ErrorLevel.WarningsAsErrors).Result;
+                    }),
+                 new Tuple<string, Func<TestMutableService, CompanyFile, string>>("AsyncUpdate2", 
+                    (service, cf) =>
+                    {
+                        return service.UpdateAsync(cf, new UserContract() { UID = UID }, null, CancellationToken.None, ErrorLevel.WarningsAsErrors).Result;
+                    }),
+                new Tuple<string, Func<TestMutableService, CompanyFile, string>>("DelegateInsert", 
+                    (service, cf) =>
+                    {
+                        string received = null;
+                        service.Insert(cf, new UserContract() { UID = UID }, null, (code, location) => { received = location; }, (uri, exception) => Assert.Fail(exception.Message), ErrorLevel.WarningsAsErrors);
+                        return received;
+                    }),
+                new Tuple<string, Func<TestMutableService, CompanyFile, string>>("SyncInsert", 
+                    (service, cf) =>
+                    {
+                        return service.Insert(cf, new UserContract() { UID = UID }, null, ErrorLevel.WarningsAsErrors);
+                    }),
+                new Tuple<string, Func<TestMutableService, CompanyFile, string>>("AsyncInsert", 
+                    (service, cf) =>
+                    {
+                        return service.InsertAsync(cf, new UserContract() { UID = UID }, null, ErrorLevel.WarningsAsErrors).Result;
+                    }),
+                 new Tuple<string, Func<TestMutableService, CompanyFile, string>>("AsyncInsert2", 
+                    (service, cf) =>
+                    {
+                        return service.InsertAsync(cf, new UserContract() { UID = UID }, null, CancellationToken.None, ErrorLevel.WarningsAsErrors).Result;
+                    }),
+                new Tuple<string, Func<TestMutableService, CompanyFile, string>>("DelegateDelete", 
+                    (service, cf) =>
+                    {
+                        var ret = false;
+                        service.Delete(cf, _uid, null, (code) => { ret = true; }, (uri, exception) => Assert.Fail(exception.Message), ErrorLevel.WarningsAsErrors);
+                        return string.Empty;
+                    }),
+                new Tuple<string, Func<TestMutableService, CompanyFile, string>>("SyncDelete", 
+                    (service, cf) =>
+                    {
+                        service.Delete(cf, _uid, null, ErrorLevel.WarningsAsErrors);
+                        return string.Empty;
+                    }),
+                new Tuple<string, Func<TestMutableService, CompanyFile, string>>("AsyncDelete", 
+                    (service, cf) =>
+                    {
+                        service.DeleteAsync(cf, _uid, null, ErrorLevel.WarningsAsErrors);
+                        return string.Empty;
+                    }),
+                new Tuple<string, Func<TestMutableService, CompanyFile, string>>("AsyncDelete2", 
+                    (service, cf) =>
+                    {
+                        service.DeleteAsync(cf, _uid, null, CancellationToken.None, ErrorLevel.WarningsAsErrors);
+                        return string.Empty;
+                    }),
+            };
+
+        [Test]
+        public void QueryString_Has_WarningsAsErrors_When_ErrorLevel_Is_Supplied([ValueSource("_errorLevelActions")] Tuple<string, Func<TestMutableService, CompanyFile, string>> action)
+        {
+            // arrange
+            var cf = new CompanyFile() { Uri = new Uri("https://dc1.api.myob.com/accountright/7D5F5516-AF68-4C5B-844A-3F054E00DF10") };
+
+            // act
+            var received = action.Item2(_service, cf);
+
+            // assert
+            Assert.IsNotNull(_webFactory.UnhandledUris.First(u => u.Query.ToLower().Contains("warningsaserrors=true")));
+        }
+
+        [Test]
+        public void UpdateAsync_Overloads_Call_Through_Correctly()
+        {
+            var cf = new CompanyFile();
+            var baseEntity = Substitute.For<BaseEntity>();
+            var credentials = Substitute.For<ICompanyFileCredentials>();
+            var errorLevel = ErrorLevel.WarningsAsErrors;
+            var ret = Task.FromResult("");
+
+            var callCount = 0;
+
+            var testMutableService = new MutableServiceTestClass<BaseEntity>(Substitute.For<IApiConfiguration>(), Substitute.For<IWebRequestFactory>(), Substitute.For<IOAuthKeyService>())
+            {
+                UpdateAsyncCallback =
+
+                    (_cf, _entity, _credentials, _errorLevel, _cancellationToken) =>
+                        {
+                            callCount++;
+                            Assert.AreEqual(cf, _cf);
+                            Assert.AreEqual(baseEntity, _entity);
+                            Assert.AreEqual(errorLevel, _errorLevel);
+                            Assert.AreEqual(_cancellationToken, CancellationToken.None);
+
+                            return ret;
+                        }
+            };
+
+
+            var _ret = testMutableService.UpdateAsync(cf, baseEntity, credentials, errorLevel);
+
+            Assert.AreEqual(1, callCount);
+            Assert.AreEqual(_ret, ret);
+        }
+
+        [Test]
+        public void DeleteAsync_Overloads_Call_Through_Correctly()
+        {
+            var cf = new CompanyFile();
+            var id = Guid.NewGuid();
+            var credentials = Substitute.For<ICompanyFileCredentials>();
+            var errorLevel = ErrorLevel.WarningsAsErrors;
+            var ret = Task.FromResult("");
+
+            var callCount = 0;
+
+            var testMutableService = new MutableServiceTestClass<BaseEntity>(Substitute.For<IApiConfiguration>(), Substitute.For<IWebRequestFactory>(), Substitute.For<IOAuthKeyService>())
+            {
+                DeleteAsyncCallback =
+
+                    (_cf, _id, _credentials, _errorLevel, _cancellationToken) =>
+                    {
+                        callCount++;
+                        Assert.AreEqual(cf, _cf);
+                        Assert.AreEqual(id, _id);
+                        Assert.AreEqual(errorLevel, _errorLevel);
+                        Assert.AreEqual(_cancellationToken, CancellationToken.None);
+
+                        return ret;
+                    }
+            };
+
+
+            var _ret = testMutableService.DeleteAsync(cf, id, credentials, errorLevel);
+
+            Assert.AreEqual(1, callCount);
+            Assert.AreEqual(_ret, ret);
+        }
+
+        private class MutableServiceTestClass<T> : MutableService<T>
+            where T : BaseEntity
+        {
+            public Func<CompanyFile, T, ICompanyFileCredentials, ErrorLevel, CancellationToken, Task<string>> UpdateAsyncCallback { get;set; }
+
+            public Func<CompanyFile, Guid, ICompanyFileCredentials, ErrorLevel, CancellationToken, Task<string>> DeleteAsyncCallback { get; set; }
+
+
+            public MutableServiceTestClass(IApiConfiguration configuration, IWebRequestFactory webRequestFactory, IOAuthKeyService keyService)
+                : base(configuration, webRequestFactory, keyService)
+            {
+            }
+
+            public override Task<string> UpdateAsync(CompanyFile cf, T entity, ICompanyFileCredentials credentials, CancellationToken cancellationToken, ErrorLevel errorLevel = ErrorLevel.IgnoreWarnings)
+            {
+                return UpdateAsyncCallback(cf, entity, credentials, errorLevel, cancellationToken);
+            }
+
+            public override Task DeleteAsync(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, CancellationToken cancellationToken, ErrorLevel errorLevel = ErrorLevel.IgnoreWarnings)
+            {
+                return DeleteAsyncCallback(cf, uid, credentials, errorLevel, cancellationToken);
+            }
+
+            internal override string Route
+            {
+                get
+                {
+                    throw new NotImplementedException();
+                }
+            }
+        }
     }
 }

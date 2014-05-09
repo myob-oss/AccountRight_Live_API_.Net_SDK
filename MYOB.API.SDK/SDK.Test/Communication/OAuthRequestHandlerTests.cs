@@ -34,6 +34,7 @@ namespace SDK.Test.Communication
 
             _stream = new MemoryStream();
             _request.EndGetRequestStream(Arg.Any<IAsyncResult>()).Returns(c => _stream);
+            _request.GetRequestStreamAsync().Returns(async c => (Stream)_stream);
 
             _handler = new OAuthRequestHandler(new ApiConfiguration("<<clientid>>", "<<clientsecret>>", "http://desktop/"));
 

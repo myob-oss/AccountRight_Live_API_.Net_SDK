@@ -1,4 +1,5 @@
-﻿using MYOB.AccountRight.SDK.Contracts.Version2.Contact;
+﻿using System;
+using MYOB.AccountRight.SDK.Contracts.Version2.Contact;
 using MYOB.AccountRight.SDK.Contracts.Version2.GeneralLedger;
 
 namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
@@ -107,6 +108,14 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
         /// Referral Source selected on the sale invoice.
         /// </summary>
         public string ReferralSource { get; set; }
+
+        /// <summary>
+        /// The date of the last payment made on the invoice
+        /// </summary>
+        /// <remarks>
+        /// Availability: 2013.5 (Cloud), 2014.1 (Desktop)
+        /// </remarks>
+        public DateTime? LastPaymentDate { get; set; }
 
         /// <summary>
         /// Invoice delivery status assigned.

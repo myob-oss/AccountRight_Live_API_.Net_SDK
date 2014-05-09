@@ -109,6 +109,14 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Purchase
         public PurchaseStatus Status { get; set; }
 
         /// <summary>
+        /// The date of the last payment made on the invoice
+        /// </summary>
+        /// <remarks>
+        /// Availability: 2013.5 (Cloud), 2014.1 (Desktop)
+        /// </remarks>
+        public DateTime? LastPaymentDate { get; set; }
+
+        /// <summary>
         /// The type of Bill - this is only populated when querying the "/Purchase/Bill" endpoint
         /// </summary>
         public BillType BillType { get; set; }

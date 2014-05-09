@@ -34,9 +34,11 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="cf">A company file that has been retrieved</param>
         /// <param name="uid">The identifier of the entity to retrieve</param>
         /// <param name="credentials">The credentials to access the company file</param>
-        public virtual void Delete(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials)
+        /// <param name="errorLevel">Treat warnings as errors</param>
+        public virtual void Delete(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, ErrorLevel errorLevel = ErrorLevel.IgnoreWarnings)
         {
-            MakeApiDeleteRequestSync(BuildUri(cf, uid), credentials);
+            var queryString = QueryStringFromErrorLevel(errorLevel);
+            MakeApiDeleteRequestSync(BuildUri(cf, uid, queryString: queryString), credentials);
         }
 
 #if ASYNC
@@ -46,10 +48,11 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="cf">A company file that has been retrieved</param>
         /// <param name="uid">The identifier of the entity to retrieve</param>
         /// <param name="credentials">The credentials to access the company file</param>
+        /// <param name="errorLevel">Treat warnings as errors</param>
         /// <returns></returns>
-        public virtual Task DeleteAsync(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials)
+        public virtual Task DeleteAsync(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, ErrorLevel errorLevel = ErrorLevel.IgnoreWarnings)
         {
-            return this.DeleteAsync(cf, uid, credentials, CancellationToken.None);
+            return DeleteAsync(cf, uid, credentials, CancellationToken.None, errorLevel);
         }
 
         /// <summary>
@@ -58,24 +61,31 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="cf">A company file that has been retrieved</param>
         /// <param name="uid">The identifier of the entity to retrieve</param>
         /// <param name="credentials">The credentials to access the company file</param>
+        /// <param name="errorLevel">Treat warnings as errors</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public virtual Task DeleteAsync(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, CancellationToken cancellationToken)
+        public virtual Task DeleteAsync(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, CancellationToken cancellationToken, ErrorLevel errorLevel = ErrorLevel.IgnoreWarnings)
         {
-            return this.MakeApiDeleteRequestAsync(this.BuildUri(cf, uid), credentials, cancellationToken);
+            var queryString = QueryStringFromErrorLevel(errorLevel);
+
+            return MakeApiDeleteRequestAsync(BuildUri(cf, uid, queryString: queryString), credentials, cancellationToken);
         }
 #endif
+        
         /// <summary>
         /// Delete an entity
         /// </summary>
         /// <param name="cf">A company file that has been retrieved</param>
         /// <param name="uid">The identifier of the entity to retrieve</param>
         /// <param name="credentials">The credentials to access the company file</param>
+        /// <param name="errorLevel">Treat warnings as errors</param>
         /// <param name="onComplete">The action to call when the operation is complete</param>
         /// <param name="onError">The action to call when the operation has an error</param>
-        public virtual void Delete(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, Action<HttpStatusCode> onComplete, Action<Uri, Exception> onError)
+        public virtual void Delete(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, Action<HttpStatusCode> onComplete, Action<Uri, Exception> onError, ErrorLevel errorLevel = ErrorLevel.IgnoreWarnings)
         {
-            MakeApiDeleteRequestDelegate(BuildUri(cf, uid), credentials, onComplete, onError);
+            var queryString = QueryStringFromErrorLevel(errorLevel);
+
+            MakeApiDeleteRequestDelegate(BuildUri(cf, uid, queryString: queryString), credentials, onComplete, onError);
         }
 
         /// <summary>
@@ -84,10 +94,12 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="cf">A company file that has been retrieved</param>
         /// <param name="entity">The entity to update</param>
         /// <param name="credentials">The credentials to access the company file</param>
+        /// <param name="errorLevel">Treat warnings as errors</param>
         /// <returns></returns>
-        public virtual string Update(CompanyFile cf, T entity, ICompanyFileCredentials credentials)
+        public virtual string Update(CompanyFile cf, T entity, ICompanyFileCredentials credentials, ErrorLevel errorLevel = ErrorLevel.IgnoreWarnings)
         {
-            return MakeApiPutRequestSync(BuildUri(cf, entity.UID), entity, credentials);
+            var queryString = QueryStringFromErrorLevel(errorLevel);
+            return MakeApiPutRequestSync(BuildUri(cf, entity.UID, queryString: queryString), entity, credentials);
         }
 
 #if ASYNC
@@ -97,10 +109,11 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="cf">A company file that has been retrieved</param>
         /// <param name="entity">The entity to update</param>
         /// <param name="credentials">The credentials to access the company file</param>
+        /// <param name="errorLevel">Treat warnings as errors</param>
         /// <returns></returns>
-        public virtual Task<string> UpdateAsync(CompanyFile cf, T entity, ICompanyFileCredentials credentials)
+        public virtual Task<string> UpdateAsync(CompanyFile cf, T entity, ICompanyFileCredentials credentials, ErrorLevel errorLevel = ErrorLevel.IgnoreWarnings)
         {
-            return this.UpdateAsync(cf, entity, credentials, CancellationToken.None);
+            return UpdateAsync(cf, entity, credentials, CancellationToken.None, errorLevel);
         }
 
         /// <summary>
@@ -109,24 +122,29 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="cf">A company file that has been retrieved</param>
         /// <param name="entity">The entity to update</param>
         /// <param name="credentials">The credentials to access the company file</param>
+        /// <param name="errorLevel">Treat warnings as errors</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public virtual Task<string> UpdateAsync(CompanyFile cf, T entity, ICompanyFileCredentials credentials, CancellationToken cancellationToken)
+        public virtual Task<string> UpdateAsync(CompanyFile cf, T entity, ICompanyFileCredentials credentials, CancellationToken cancellationToken, ErrorLevel errorLevel = ErrorLevel.IgnoreWarnings)
         {
-            return this.MakeApiPutRequestAsync(this.BuildUri(cf, entity.UID), entity, credentials, cancellationToken);
+            var queryString = QueryStringFromErrorLevel(errorLevel);
+            return MakeApiPutRequestAsync(BuildUri(cf, entity.UID, queryString: queryString), entity, credentials, cancellationToken);
         }
 #endif
+
         /// <summary>
         /// Update an existing entity
         /// </summary>
         /// <param name="cf">A company file that has been retrieved</param>
         /// <param name="entity">The entity to update</param>
         /// <param name="credentials">The credentials to access the company file</param>
+        /// <param name="errorLevel">Treat warnings as errors</param>
         /// <param name="onComplete">The action to call when the operation is complete</param>
         /// <param name="onError">The action to call when the operation has an error</param>
-        public virtual void Update(CompanyFile cf, T entity, ICompanyFileCredentials credentials, Action<HttpStatusCode, string> onComplete, Action<Uri, Exception> onError)
+        public virtual void Update(CompanyFile cf, T entity, ICompanyFileCredentials credentials, Action<HttpStatusCode, string> onComplete, Action<Uri, Exception> onError, ErrorLevel errorLevel = ErrorLevel.IgnoreWarnings)
         {
-            MakeApiPutRequestDelegate(BuildUri(cf, entity.UID), entity, credentials, onComplete, onError);
+            var queryString = QueryStringFromErrorLevel(errorLevel);
+            MakeApiPutRequestDelegate(BuildUri(cf, entity.UID, queryString: queryString), entity, credentials, onComplete, onError);
         }
 
         /// <summary>
@@ -135,23 +153,12 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="cf">A company file that has been retrieved</param>
         /// <param name="entity">The entity to update</param>
         /// <param name="credentials">The credentials to access the company file</param>
+        /// <param name="errorLevel">Treat warnings as errors</param>
         /// <returns></returns>
-        public virtual string Insert(CompanyFile cf, T entity, ICompanyFileCredentials credentials)
+        public virtual string Insert(CompanyFile cf, T entity, ICompanyFileCredentials credentials, ErrorLevel errorLevel = ErrorLevel.IgnoreWarnings)
         {
-            return MakeApiPostRequestSync(BuildUri(cf), entity, credentials);
-        }
-
-        /// <summary>
-        /// Insert a new entity
-        /// </summary>
-        /// <param name="cf">A company file that has been retrieved</param>
-        /// <param name="entity">The entity to update</param>
-        /// <param name="credentials">The credentials to access the company file</param>
-        /// <param name="onComplete">The action to call when the operation is complete</param>
-        /// <param name="onError">The action to call when the operation has an error</param>
-        public virtual void Insert(CompanyFile cf, T entity, ICompanyFileCredentials credentials, Action<HttpStatusCode, string> onComplete, Action<Uri, Exception> onError)
-        {
-            MakeApiPostRequestDelegate(BuildUri(cf), entity, credentials, onComplete, onError);
+            var queryString = QueryStringFromErrorLevel(errorLevel);
+            return MakeApiPostRequestSync(BuildUri(cf, queryString: queryString), entity, credentials);
         }
 
 #if ASYNC
@@ -161,10 +168,11 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="cf">A company file that has been retrieved</param>
         /// <param name="entity">The entity to update</param>
         /// <param name="credentials">The credentials to access the company file</param>
+        /// <param name="errorLevel"></param>
         /// <returns></returns>
-        public virtual Task<string> InsertAsync(CompanyFile cf, T entity, ICompanyFileCredentials credentials)
+        public virtual Task<string> InsertAsync(CompanyFile cf, T entity, ICompanyFileCredentials credentials, ErrorLevel errorLevel = ErrorLevel.IgnoreWarnings)
         {
-            return this.InsertAsync(cf, entity, credentials, CancellationToken.None);
+            return InsertAsync(cf, entity, credentials, CancellationToken.None, errorLevel);
         }
 
         /// <summary>
@@ -174,11 +182,35 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="entity">The entity to update</param>
         /// <param name="credentials">The credentials to access the company file</param>
         /// <param name="cancellationToken"></param>
+        /// <param name="errorLevel">Treat warnings as errors</param>
         /// <returns></returns>
-        public virtual Task<string> InsertAsync(CompanyFile cf, T entity, ICompanyFileCredentials credentials, CancellationToken cancellationToken)
+        public virtual Task<string> InsertAsync(CompanyFile cf, T entity, ICompanyFileCredentials credentials, CancellationToken cancellationToken, ErrorLevel errorLevel = ErrorLevel.IgnoreWarnings)
         {
-            return this.MakeApiPostRequestAsync(this.BuildUri(cf), entity, credentials, cancellationToken);
+            var queryString = QueryStringFromErrorLevel(errorLevel);
+            return MakeApiPostRequestAsync(BuildUri(cf, queryString: queryString), entity, credentials, cancellationToken);
         }
 #endif
+
+        /// <summary>
+        /// Insert a new entity
+        /// </summary>
+        /// <param name="cf">A company file that has been retrieved</param>
+        /// <param name="entity">The entity to update</param>
+        /// <param name="credentials">The credentials to access the company file</param>
+        /// <param name="errorLevel">Treat warnings as errors</param>
+        /// <param name="onComplete">The action to call when the operation is complete</param>
+        /// <param name="onError">The action to call when the operation has an error</param>
+        public virtual void Insert(CompanyFile cf, T entity, ICompanyFileCredentials credentials, Action<HttpStatusCode, string> onComplete, Action<Uri, Exception> onError, ErrorLevel errorLevel = ErrorLevel.IgnoreWarnings)
+        {
+            var queryString = QueryStringFromErrorLevel(errorLevel);
+
+            MakeApiPostRequestDelegate(BuildUri(cf, queryString: queryString), entity, credentials, onComplete, onError);
+        }
+
+        /// <exclude/>
+        private static string QueryStringFromErrorLevel(ErrorLevel errorLevel)
+        {
+            return errorLevel == ErrorLevel.WarningsAsErrors ? "warningsAsErrors=true" : string.Empty;
+        }
     }
 }

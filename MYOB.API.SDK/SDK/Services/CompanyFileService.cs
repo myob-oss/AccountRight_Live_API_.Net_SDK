@@ -7,7 +7,6 @@ using System.Threading;
 using MYOB.AccountRight.SDK.Communication;
 using MYOB.AccountRight.SDK.Contracts;
 using MYOB.AccountRight.SDK.Extensions;
-using MYOB.AccountRight.SDK.Services.GeneralLedger;
 
 namespace MYOB.AccountRight.SDK.Services
 {

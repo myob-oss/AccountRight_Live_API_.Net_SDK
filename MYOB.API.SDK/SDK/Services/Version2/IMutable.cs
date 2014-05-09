@@ -22,9 +22,10 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="cf">A company file that has been retrieved</param>
         /// <param name="uid">The identifier of the entity to retrieve</param>
         /// <param name="credentials">The credentials to access the company file</param>
-        /// <param name="onComplete">The action to call when the operation is complete</param>
-        /// <param name="onError">The action to call when the operation has an error</param>
-        void Delete(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, Action<HttpStatusCode> onComplete, Action<Uri, Exception> onError);
+        /// <param name="errorLevel">Treat warnings as errors</param>
+        void Delete(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, ErrorLevel errorLevel = ErrorLevel.IgnoreWarnings);
+
+#if ASYNC
 
         /// <summary>
         /// Delete an entity
@@ -32,9 +33,10 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="cf">A company file that has been retrieved</param>
         /// <param name="uid">The identifier of the entity to retrieve</param>
         /// <param name="credentials">The credentials to access the company file</param>
-        void Delete(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials);
+        /// <param name="errorLevel">Treat warnings as errors</param>
+        /// <returns></returns>
+        Task DeleteAsync(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, ErrorLevel errorLevel = ErrorLevel.IgnoreWarnings);
 
-#if ASYNC
         /// <summary>
         /// Delete an entity
         /// </summary>
@@ -42,18 +44,21 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="uid">The identifier of the entity to retrieve</param>
         /// <param name="credentials">The credentials to access the company file</param>
         /// <param name="cancellationToken"></param>
+        /// <param name="errorLevel">Treat warnings as errors</param>
         /// <returns></returns>
-        Task DeleteAsync(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, CancellationToken cancellationToken);
+        Task DeleteAsync(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, CancellationToken cancellationToken, ErrorLevel errorLevel = ErrorLevel.IgnoreWarnings);
 #endif
+
         /// <summary>
-        /// Update an existing entity
+        /// Delete an entity
         /// </summary>
         /// <param name="cf">A company file that has been retrieved</param>
-        /// <param name="entity">The entity to update</param>
+        /// <param name="uid">The identifier of the entity to retrieve</param>
         /// <param name="credentials">The credentials to access the company file</param>
         /// <param name="onComplete">The action to call when the operation is complete</param>
         /// <param name="onError">The action to call when the operation has an error</param>
-        void Update(CompanyFile cf, T entity, ICompanyFileCredentials credentials, Action<HttpStatusCode, string> onComplete, Action<Uri, Exception> onError);
+        /// <param name="errorLevel"></param>
+        void Delete(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, Action<HttpStatusCode> onComplete, Action<Uri, Exception> onError, ErrorLevel errorLevel = ErrorLevel.IgnoreWarnings);
 
         /// <summary>
         /// Update an existing entity
@@ -61,8 +66,9 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="cf">A company file that has been retrieved</param>
         /// <param name="entity">The entity to update</param>
         /// <param name="credentials">The credentials to access the company file</param>
+        /// <param name="errorLevel">Treat warnings as errors</param>
         /// <returns></returns>
-        string Update(CompanyFile cf, T entity, ICompanyFileCredentials credentials);
+        string Update(CompanyFile cf, T entity, ICompanyFileCredentials credentials, ErrorLevel errorLevel = ErrorLevel.IgnoreWarnings);
 
 #if ASYNC
         /// <summary>
@@ -71,20 +77,32 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="cf">A company file that has been retrieved</param>
         /// <param name="entity">The entity to update</param>
         /// <param name="credentials">The credentials to access the company file</param>
-        /// <param name="cancellationToken"></param>
+        /// <param name="errorLevel">Treat warnings as errors</param>
         /// <returns></returns>
-        Task<string> UpdateAsync(CompanyFile cf, T entity, ICompanyFileCredentials credentials, CancellationToken cancellationToken);
+        Task<string> UpdateAsync(CompanyFile cf, T entity, ICompanyFileCredentials credentials, ErrorLevel errorLevel = ErrorLevel.IgnoreWarnings);
+
+        /// <summary>
+        /// Update an existing entity
+        /// </summary>
+        /// <param name="cf">A company file that has been retrieved</param>
+        /// <param name="entity">The entity to update</param>
+        /// <param name="credentials">The credentials to access the company file</param>
+        /// <param name="cancellationToken"></param>
+        /// <param name="errorLevel">Treat warnings as errors</param>
+        /// <returns></returns>
+        Task<string> UpdateAsync(CompanyFile cf, T entity, ICompanyFileCredentials credentials, CancellationToken cancellationToken, ErrorLevel errorLevel = ErrorLevel.IgnoreWarnings);
 #endif
 
         /// <summary>
-        /// Insert a new entity
+        /// Update an existing entity
         /// </summary>
         /// <param name="cf">A company file that has been retrieved</param>
         /// <param name="entity">The entity to update</param>
         /// <param name="credentials">The credentials to access the company file</param>
         /// <param name="onComplete">The action to call when the operation is complete</param>
         /// <param name="onError">The action to call when the operation has an error</param>
-        void Insert(CompanyFile cf, T entity, ICompanyFileCredentials credentials, Action<HttpStatusCode, string> onComplete, Action<Uri, Exception> onError);
+        /// <param name="errorLevel">Treat warnings as errors</param>
+        void Update(CompanyFile cf, T entity, ICompanyFileCredentials credentials, Action<HttpStatusCode, string> onComplete, Action<Uri, Exception> onError, ErrorLevel errorLevel = ErrorLevel.IgnoreWarnings);
 
         /// <summary>
         /// Insert a new entity
@@ -92,8 +110,9 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="cf">A company file that has been retrieved</param>
         /// <param name="entity">The entity to update</param>
         /// <param name="credentials">The credentials to access the company file</param>
+        /// <param name="errorLevel">Treat warnings as errors</param>
         /// <returns></returns>
-        string Insert(CompanyFile cf, T entity, ICompanyFileCredentials credentials);
+        string Insert(CompanyFile cf, T entity, ICompanyFileCredentials credentials, ErrorLevel errorLevel = ErrorLevel.IgnoreWarnings);
         
 #if ASYNC
         /// <summary>
@@ -102,9 +121,33 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="cf">A company file that has been retrieved</param>
         /// <param name="entity">The entity to update</param>
         /// <param name="credentials">The credentials to access the company file</param>
-        /// <param name="cancellationToken"></param>
+        /// <param name="errorLevel">Treat warnings as errors</param>
         /// <returns></returns>
-        Task<string> InsertAsync(CompanyFile cf, T entity, ICompanyFileCredentials credentials, CancellationToken cancellationToken);
+        Task<string> InsertAsync(CompanyFile cf, T entity, ICompanyFileCredentials credentials, ErrorLevel errorLevel = ErrorLevel.IgnoreWarnings);
+
+        /// <summary>
+        /// Insert a new entity
+        /// </summary>
+        /// <param name="cf">A company file that has been retrieved</param>
+        /// <param name="entity">The entity to update</param>
+        /// <param name="credentials">The credentials to access the company file</param>
+        /// <param name="cancellationToken"></param>
+        /// <param name="errorLevel">Treat warnings as errors</param>
+        /// <returns></returns>
+        Task<string> InsertAsync(CompanyFile cf, T entity, ICompanyFileCredentials credentials, CancellationToken cancellationToken, ErrorLevel errorLevel = ErrorLevel.IgnoreWarnings);
+
 #endif
+
+        /// <summary>
+        /// Insert a new entity
+        /// </summary>
+        /// <param name="cf">A company file that has been retrieved</param>
+        /// <param name="entity">The entity to update</param>
+        /// <param name="credentials">The credentials to access the company file</param>
+        /// <param name="onComplete">The action to call when the operation is complete</param>
+        /// <param name="onError">The action to call when the operation has an error</param>
+        /// <param name="errorLevel">Treat warnings as errors</param>
+        void Insert(CompanyFile cf, T entity, ICompanyFileCredentials credentials, Action<HttpStatusCode, string> onComplete, Action<Uri, Exception> onError, ErrorLevel errorLevel = ErrorLevel.IgnoreWarnings);
+
     }
 }

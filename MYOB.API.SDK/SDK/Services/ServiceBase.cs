@@ -33,7 +33,7 @@ namespace MYOB.AccountRight.SDK.Services
         protected ServiceBase(IApiConfiguration configuration, IWebRequestFactory webRequestFactory, IOAuthKeyService keyService)
         {
             Configuration = configuration;
-            WebRequestFactory = webRequestFactory ?? new WebRequestFactory();
+            WebRequestFactory = webRequestFactory ?? new WebRequestFactory(configuration);
             _keyService = keyService;
         }
 
@@ -143,7 +143,7 @@ namespace MYOB.AccountRight.SDK.Services
                         wait.Set();
                     });
 
-            if (wait.WaitOne(new TimeSpan(0, 0, 0, 60)))
+            if (wait.WaitOne(new TimeSpan(0, 0, 0, 180)))
             {
                 ex.ProcessException(requestUri);
             }
@@ -173,7 +173,7 @@ namespace MYOB.AccountRight.SDK.Services
                     wait.Set();
                 });
 
-            if (wait.WaitOne(new TimeSpan(0, 0, 0, 60)))
+            if (wait.WaitOne(new TimeSpan(0, 0, 0, 180)))
             {
                 ex.ProcessException(requestUri);
             }
@@ -228,7 +228,7 @@ namespace MYOB.AccountRight.SDK.Services
                         wait.Set();
                     });
 
-            if (wait.WaitOne(new TimeSpan(0, 0, 0, 60)))
+            if (wait.WaitOne(new TimeSpan(0, 0, 0, 180)))
             {
                 ex.ProcessException(requestUri);
             }
@@ -321,7 +321,7 @@ namespace MYOB.AccountRight.SDK.Services
                     wait.Set();
                 });
 
-            if (wait.WaitOne(new TimeSpan(0, 0, 0, 60)))
+            if (wait.WaitOne(new TimeSpan(0, 0, 0, 180)))
             {
                 ex.ProcessException(requestUri);
             }
@@ -379,7 +379,7 @@ namespace MYOB.AccountRight.SDK.Services
                         wait.Set();
                     });
 
-            if (wait.WaitOne(new TimeSpan(0, 0, 0, 60)))
+            if (wait.WaitOne(new TimeSpan(0, 0, 0, 180)))
             {
                 ex.ProcessException(requestUri);
             }

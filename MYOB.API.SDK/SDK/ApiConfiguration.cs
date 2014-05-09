@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+#if !PORTABLE
+using System.Net.Cache;
+#endif
 
 namespace MYOB.AccountRight.SDK
 {
+
     /// <summary>
     /// A simple container to hold basic API configuration
     /// </summary>
@@ -56,6 +60,13 @@ namespace MYOB.AccountRight.SDK
         /// The AccountRight API endpoint, defaults to 'https://api.myob.com/accountright'
         /// </summary>
         public string ApiBaseUrl { get; private set; }
+
+#if !PORTABLE
+        /// <summary>
+        /// Gets or sets the cache policy for all requests
+        /// </summary>
+        public RequestCachePolicy RequestCachePolicy { get; set; } 
+#endif
     }
 
     /// <summary>
