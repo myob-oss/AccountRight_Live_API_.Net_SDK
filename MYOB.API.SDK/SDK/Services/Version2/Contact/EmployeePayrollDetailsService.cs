@@ -1,7 +1,7 @@
 ﻿using MYOB.AccountRight.SDK.Communication;
 using MYOB.AccountRight.SDK.Contracts.Version2.Contact;
 
-namespace MYOB.AccountRight.SDK.Services.Version2.Contact
+namespace MYOB.AccountRight.SDK.Services.Contact
 {
     /// <summary>
     /// A service that provides access to the <see cref="EmployeePayrollDetails"/> resource

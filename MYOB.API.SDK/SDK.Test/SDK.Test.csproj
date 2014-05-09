@@ -103,6 +103,7 @@
     <Compile Include="Services\CalculateDiscountsServiceTests.cs" />
     <Compile Include="Services\CategoryRegisterServiceTests.cs" />
     <Compile Include="Services\CategoryServiceTests.cs" />
+    <Compile Include="Services\NamespaceTests.cs" />
     <Compile Include="Services\CompanyPreferencesServiceTests.cs" />
     <Compile Include="Services\CompanyServiceTests.cs" />
     <Compile Include="Services\GetOnlyServiceTests.cs" />

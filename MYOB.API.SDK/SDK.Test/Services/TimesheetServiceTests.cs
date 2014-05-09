@@ -9,7 +9,7 @@ using MYOB.AccountRight.SDK.Contracts.Version2.Contact;
 using MYOB.AccountRight.SDK.Contracts.Version2.Payroll;
 using MYOB.AccountRight.SDK.Extensions;
 using MYOB.AccountRight.SDK.Services;
-using MYOB.AccountRight.SDK.Services.Version2.Payroll;
+using MYOB.AccountRight.SDK.Services.Payroll;
 using NSubstitute;
 using NUnit.Framework;
 using SDK.Test.Helper;

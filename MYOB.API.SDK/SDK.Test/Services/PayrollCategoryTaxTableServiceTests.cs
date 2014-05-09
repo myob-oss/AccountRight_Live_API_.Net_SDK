@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MYOB.AccountRight.SDK.Services.Version2.PayrollCategory;
+﻿using MYOB.AccountRight.SDK.Services.PayrollCategory;
 using NUnit.Framework;
 
 namespace SDK.Test.Services

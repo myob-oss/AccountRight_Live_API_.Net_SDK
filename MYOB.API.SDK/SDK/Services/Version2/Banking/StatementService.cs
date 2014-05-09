@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using MYOB.AccountRight.SDK.Communication;
+﻿using MYOB.AccountRight.SDK.Communication;
 using MYOB.AccountRight.SDK.Contracts.Version2.Banking;
 
-namespace MYOB.AccountRight.SDK.Services.Version2.Banking
+namespace MYOB.AccountRight.SDK.Services.Banking
 {
     /// <summary>
     /// a service that provides access to <see cref="Statement"/> resource

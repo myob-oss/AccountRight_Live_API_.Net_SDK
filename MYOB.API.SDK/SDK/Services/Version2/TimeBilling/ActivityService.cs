@@ -1,7 +1,7 @@
 ﻿using MYOB.AccountRight.SDK.Communication;
 using MYOB.AccountRight.SDK.Contracts.Version2.TimeBilling;
 
-namespace MYOB.AccountRight.SDK.Services.Version2.TimeBilling
+namespace MYOB.AccountRight.SDK.Services.TimeBilling
 {
     /// <summary>
     /// A service that provides access to the <see cref="Activity"/> resource

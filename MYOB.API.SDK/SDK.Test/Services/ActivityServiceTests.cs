@@ -1,4 +1,4 @@
-﻿using MYOB.AccountRight.SDK.Services.Version2.TimeBilling;
+﻿using MYOB.AccountRight.SDK.Services.TimeBilling;
 using NUnit.Framework;
 
 namespace SDK.Test.Services

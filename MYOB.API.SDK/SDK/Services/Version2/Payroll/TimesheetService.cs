@@ -12,7 +12,7 @@ using MYOB.AccountRight.SDK.Extensions;
 
 #endif
 
-namespace MYOB.AccountRight.SDK.Services.Version2.Payroll
+namespace MYOB.AccountRight.SDK.Services.Payroll
 {
     /// <summary>
     /// Timesheet Service interface

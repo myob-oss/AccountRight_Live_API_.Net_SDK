@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MYOB.AccountRight.SDK.Services.Version2.Banking;
+﻿using MYOB.AccountRight.SDK.Services.Banking;
 using NUnit.Framework;
 
 namespace SDK.Test.Services

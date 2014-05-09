@@ -1,4 +1,4 @@
-﻿using MYOB.AccountRight.SDK.Services.Version2.Contact;
+﻿using MYOB.AccountRight.SDK.Services.Contact;
 using NUnit.Framework;
 
 namespace SDK.Test.Services

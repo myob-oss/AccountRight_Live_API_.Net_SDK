@@ -5,7 +5,7 @@ using System.Text;
 using MYOB.AccountRight.SDK.Communication;
 using MYOB.AccountRight.SDK.Contracts.Version2.PayrollCategory;
 
-namespace MYOB.AccountRight.SDK.Services.Version2.PayrollCategory
+namespace MYOB.AccountRight.SDK.Services.PayrollCategory
 {
     /// <summary>
     /// A service that provides access to the <see cref="PayrollCategoryTaxTable"/> resource
