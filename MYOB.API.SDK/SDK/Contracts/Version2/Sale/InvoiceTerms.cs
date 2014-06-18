@@ -3,7 +3,7 @@
 namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
 {
     /// <summary>
-    /// Describe the Sale invoice's terms
+    /// Describe the Sale Invoice's terms
     /// </summary>
     public class InvoiceTerms : Terms
     {

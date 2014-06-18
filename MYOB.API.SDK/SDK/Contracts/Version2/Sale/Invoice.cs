@@ -74,7 +74,7 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
         public decimal TotalAmount { get; set; }
 
         /// <summary>
-        /// The category assocated with the Invoice
+        /// The category associated with the Invoice
         /// </summary>
         public CategoryLink Category { get; set; }
 
@@ -124,5 +124,12 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
         /// Not supported by Miscellaneous invoices
         /// </remarks>
         public DocumentAction InvoiceDeliveryStatus { get; set; }
+
+        /// <summary>
+        /// The source Order when an Invoice is converted from an Order
+        /// or when you wish to convert an existing Open Order to a new Invoice
+        /// Available from 2014.3
+        /// </summary>
+        public SaleOrderLink Order { get; set; }
     }
 }
