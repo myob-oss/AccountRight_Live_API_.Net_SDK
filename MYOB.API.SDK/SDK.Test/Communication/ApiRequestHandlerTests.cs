@@ -243,6 +243,24 @@ namespace SDK.Test.Communication
         }
 
         [Test]
+        public void PutAsyncRequest_Return_Response()
+        {
+            // arrange
+            var expected = new ExpectedResult { UID = Guid.NewGuid() };
+            var factory = new TestWebRequestFactory();
+            factory.RegisterResultForUri("http://localhost", expected.ToJson());
+            var request = factory.Create(new Uri("http://localhost"));
+
+            var handler = new ApiRequestHandler(new ApiConfiguration("<<clientid>>", "<<clientsecret>>", "<<redirecturl>>"), new CompanyFileCredentials("user", "pass"));
+
+            // act
+            var receivedEntity = handler.PutAsync<Parameter, ExpectedResult>(request, new Parameter()).Result;
+
+            // assert
+            Assert.AreEqual(expected.UID, receivedEntity.UID);
+        }
+
+        [Test]
         public void TheEntityIsPlacedOnTheOutgoingStreamInJsonFormatDuringPut()
         {
             // arrange

@@ -183,12 +183,12 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Contact
         /// <summary>
         /// Gender
         /// </summary>
-        public Gender Gender { get; set; }
+        public Gender? Gender { get; set; }
 
         /// <summary>
         /// Start date of employment
         /// </summary>
-        public DateTime StartDate { get; set; }
+        public DateTime? StartDate { get; set; }
 
         /// <summary>
         /// Date of termination
@@ -210,8 +210,10 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Contact
         /// </summary>
         public EmploymentStatus EmploymentStatus { get; set; }
 
-        //[DataMember(Order = 9)]
-        //public EmployeeClassification EmployeeClassification { get; set; }
+        /// <summary>
+        /// Employment Classification
+        /// </summary>
+        public PayrollEmploymentClassificationLink EmploymentClassification { get; set; }
 
         /// <summary>
         /// Pay slip delivery options
@@ -224,19 +226,19 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Contact
         public string PaySlipEmail { get; set; }
 
         /// <summary>
-        /// 
-        /// </summary>
-        public EmployeeSuperannuationInfo Superannuation { get; set; }
-
-        /// <summary>
         /// All information about the Employee's wage is here: Annyal Salary, Pay Basis, Wages Catgories...etc.
         /// </summary>
         public EmployeeWageInfo Wage { get; set; }
 
         /// <summary>
-        /// All information about the Employee's tax is here: TaxFileNumber, TaxTable...etc.
+        /// Details relating to the the employee's Supperannuation
         /// </summary>
-        public EmployeeTaxInfo Tax { get; set; }
+        public EmployeeSuperannuationInfo Superannuation { get; set; }
+
+        /// <summary>
+        /// Entitlements
+        /// </summary>
+        public IEnumerable<EmployeeEntitlementInfo> Entitlements { get; set; }
 
         /// <summary>
         /// Deduction Categories
@@ -249,19 +251,13 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Contact
         public IEnumerable<PayrollCategoryLink> EmployerExpenses { get; set; }
 
         /// <summary>
+        /// All information about the Employee's tax is here: TaxFileNumber, TaxTable...etc.
+        /// </summary>
+        public EmployeeTaxInfo Tax { get; set; }
+
+        /// <summary>
         /// Time Billing Info
         /// </summary>
-        public EmployeeTimeBillingInfo TimeBilling { get; set; }
-
-        /// <summary>
-        /// Entitlements
-        /// </summary>
-        public IEnumerable<EmployeeEntitlementInfo> Entitlements { get; set; }
-
-        /// <summary>
-        /// Employment Classification
-        /// </summary>
-        public PayrollEmploymentClassificationLink EmploymentClassification { get; set; }
-    
+        public EmployeeTimeBillingInfo TimeBilling { get; set; }    
     }
 }
