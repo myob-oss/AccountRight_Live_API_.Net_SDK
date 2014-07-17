@@ -36,5 +36,10 @@ namespace MYOB.AccountRight.SDK
         /// </summary>
         RequestCachePolicy RequestCachePolicy { get; set; }
 #endif
+
+        /// <summary>
+        /// Should the returned entities have the link Uris populated
+        /// </summary>
+        bool GenerateUris { get; }
     }
 }

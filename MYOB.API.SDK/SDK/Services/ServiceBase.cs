@@ -242,7 +242,8 @@ namespace MYOB.AccountRight.SDK.Services
         }
 
         /// <exclude/>
-        protected void MakeApiPostRequestDelegate<TRequestEntity, TResponseEntity>(Uri uri, TRequestEntity entity, ICompanyFileCredentials credentials, Action<HttpStatusCode, string, TResponseEntity> onComplete, Action<Uri, Exception> onError)
+        protected void MakeApiPostRequestDelegate<TRequestEntity, TResponseEntity>(Uri uri, TRequestEntity entity, ICompanyFileCredentials credentials, 
+            Action<HttpStatusCode, string, TResponseEntity> onComplete, Action<Uri, Exception> onError)
             where TRequestEntity : class
             where TResponseEntity : class
         {
@@ -333,6 +334,14 @@ namespace MYOB.AccountRight.SDK.Services
         protected void MakeApiPutRequestDelegate<T>(Uri uri, T entity, ICompanyFileCredentials credentials, Action<HttpStatusCode, string> onComplete, Action<Uri, Exception> onError)
             where T : class
         {
+            MakeApiPutRequestDelegate<T, T>(uri, entity, credentials, (code, s, response) => onComplete(code, s), onError);
+        }
+
+        /// <exclude/>
+        protected void MakeApiPutRequestDelegate<TRequest, TResponse>(Uri uri, TRequest entity, ICompanyFileCredentials credentials, Action<HttpStatusCode, string, TResponse> onComplete, Action<Uri, Exception> onError)
+            where TRequest : class
+            where TResponse : class
+        {
             WrapApiRequestWithOAuthRenew(response =>
             {
                 var api = new ApiRequestHandler(Configuration, credentials, response);
@@ -354,22 +363,49 @@ namespace MYOB.AccountRight.SDK.Services
             var api = new ApiRequestHandler(Configuration, credentials, _keyService.Maybe(_ => _.OAuthResponse));
             var res = await api.PutAsync(WebRequestFactory.Create(uri), entity, cancellationToken);
             return res;
+        }
+
+        /// <exclude/>
+        protected Task<TResponse> MakeApiPutRequestAsync<TRequest, TResponse>(Uri uri, TRequest entity, ICompanyFileCredentials credentials) 
+            where TRequest : class where TResponse : class
+        {
+            return this.MakeApiPutRequestAsync<TRequest, TResponse>(uri, entity, credentials, CancellationToken.None);
+        }
+
+        /// <exclude/>
+        async protected Task<TResponse> MakeApiPutRequestAsync<TRequest, TResponse>(Uri uri, TRequest entity, ICompanyFileCredentials credentials, CancellationToken cancellationToken) 
+            where TRequest : class where TResponse : class
+        {
+            await RenewOAuthTokensAsync(cancellationToken);
+            var api = new ApiRequestHandler(Configuration, credentials, _keyService.Maybe(_ => _.OAuthResponse));
+            var res = await api.PutAsync<TRequest, TResponse>(WebRequestFactory.Create(uri), entity, cancellationToken);
+            return res;
         } 
 #endif
 
         /// <exclude/>
         protected string MakeApiPutRequestSync<T>(Uri uri, T entity, ICompanyFileCredentials credentials) where T : class
         {
+            return MakeApiPutRequestSync<T, T>(uri, entity, credentials).Key;
+        }
+
+        /// <exclude/>
+        protected KeyValuePair<string, TResponse> MakeApiPutRequestSync<TRequest, TResponse>(Uri uri, TRequest entity, ICompanyFileCredentials credentials) 
+            where TRequest : class
+            where TResponse : class
+        {
             var wait = new AutoResetEvent(false);
             Exception ex = null;
             var requestUri = default(Uri);
             string retlocation = null;
+            TResponse responseEntity = null;
 
-            MakeApiPutRequestDelegate(
+            MakeApiPutRequestDelegate<TRequest, TResponse>(
                 uri, entity, credentials,
-                (code, location) =>
+                (code, location, response) =>
                     {
                         retlocation = location;
+                        responseEntity = response;
                         wait.Set();
                     },
                 (exUri, exception) =>
@@ -384,7 +420,7 @@ namespace MYOB.AccountRight.SDK.Services
                 ex.ProcessException(requestUri);
             }
 
-            return retlocation;
+            return new KeyValuePair<string, TResponse>(retlocation, responseEntity);
         }
     }
 }

@@ -9,7 +9,10 @@
         /// The name of the contact resource
         /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// Contact Identifier    
+        /// </summary>
+        public string DisplayID { get; set; }
     }
-
-
 }

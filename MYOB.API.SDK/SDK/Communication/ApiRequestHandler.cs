@@ -93,15 +93,22 @@ namespace MYOB.AccountRight.SDK.Communication
         public void Put<T>(WebRequest request, T entity, Action<HttpStatusCode, string> onComplete,
                            Action<Uri, Exception> onError)
         {
+            Put<T, string>(request, entity, (code, s, response) => onComplete(code, s), onError);
+        }
+
+        public void Put<TRequest, TResponse>(WebRequest request, TRequest entity, Action<HttpStatusCode, string, TResponse> onComplete,
+                           Action<Uri, Exception> onError)
+            where TResponse : class
+        {
             ApiRequestHelper.SetStandardHeaders(request, _configuration, _credentials, _oauth);
             request.Method = "PUT";
             request.ContentType = "application/json";
-            request.BeginGetRequestStream(HandleRequestCallback<T>,
-                                          new RequestContext<T, string>
+            request.BeginGetRequestStream(HandleRequestCallback<TRequest, TResponse>,
+                                          new RequestContext<TRequest, TResponse>
                                               {
                                                   Body = entity.ToJson(),
                                                   Request = request,
-                                                  OnComplete = (code, s, response) => onComplete(code, s),
+                                                  OnComplete = onComplete,
                                                   OnError = onError,
                                               });
         }
@@ -120,6 +127,26 @@ namespace MYOB.AccountRight.SDK.Communication
             var res = await GetRequestStreamTask(request, entity);
 
             return (await GetResponseTask<T>(res, cancellationToken)).Item2;
+        }
+
+        public Task<TResponseEntity> PutAsync<TRequestEntity, TResponseEntity>(WebRequest request, TRequestEntity entity)
+            where TRequestEntity : class
+            where TResponseEntity : class
+        {
+            return this.PutAsync<TRequestEntity, TResponseEntity>(request, entity, CancellationToken.None);
+        }
+
+        public async Task<TResponseEntity> PutAsync<TRequestEntity, TResponseEntity>(WebRequest request, TRequestEntity entity, CancellationToken cancellationToken)
+            where TRequestEntity : class
+            where TResponseEntity : class
+        {
+            ApiRequestHelper.SetStandardHeaders(request, _configuration, _credentials, _oauth);
+            request.Method = "PUT";
+            request.ContentType = "application/json";
+
+            var res = await GetRequestStreamTask(request, entity);
+
+            return (await GetResponseTask<TResponseEntity>(res, cancellationToken)).Item3;
         }
 #endif
 
@@ -198,11 +225,6 @@ namespace MYOB.AccountRight.SDK.Communication
             return request;
         }
 #endif
-
-        private void HandleRequestCallback<T>(IAsyncResult asynchronousResult)
-        {
-            HandleRequestCallback<T, string>(asynchronousResult);
-        }
 
         private void HandleRequestCallback<TRequestEntity, TResponseEntity>(IAsyncResult asynchronousResult)
             where TResponseEntity : class

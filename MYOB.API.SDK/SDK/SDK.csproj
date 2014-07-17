@@ -67,6 +67,7 @@
     <Compile Include="Contracts\Version2\Company\CompanyBankingPreferences.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Contracts\Version2\Company\CompanyLink.cs" />
     <Compile Include="Contracts\Version2\Company\CompanyPreferences.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -89,6 +90,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Contracts\Version2\Company\CompanyTimesheetPreferences.cs" />
+    <Compile Include="Contracts\Version2\Company\FormTemplate.cs" />
     <Compile Include="Contracts\Version2\Company\PriceLevel.cs" />
     <Compile Include="Contracts\Version2\Contact\EmployeeEntitlementInfo.cs" />
     <Compile Include="Contracts\Version2\Contact\EmployeePayrollDetails.cs" />
@@ -104,6 +106,21 @@
     <Compile Include="Contracts\Version2\Inventory\ItemPriceMatrix.cs" />
     <Compile Include="Contracts\Version2\Inventory\Levels.cs" />
     <Compile Include="Contracts\Version2\Inventory\SellingPrice.cs" />
+    <Compile Include="Contracts\Version2\Report\Payroll\EmployeePayrollAdvice.cs" />
+    <Compile Include="Contracts\Version2\Sale\MiscellaneousOrder.cs" />
+    <Compile Include="Contracts\Version2\Sale\MiscellaneousOrderLine.cs" />
+    <Compile Include="Contracts\Version2\Sale\Order.cs" />
+    <Compile Include="Contracts\Version2\Sale\ItemOrder.cs" />
+    <Compile Include="Contracts\Version2\Sale\ItemOrderLine.cs" />
+    <Compile Include="Contracts\Version2\Sale\OrderLayoutType.cs" />
+    <Compile Include="Contracts\Version2\Sale\OrderLine.cs" />
+    <Compile Include="Contracts\Version2\Sale\OrderLineType.cs" />
+    <Compile Include="Contracts\Version2\Sale\ProfessionalOrder.cs" />
+    <Compile Include="Contracts\Version2\Sale\ProfessionalOrderLine.cs" />
+    <Compile Include="Contracts\Version2\Sale\SaleOrderLink.cs" />
+    <Compile Include="Contracts\Version2\Sale\ServiceOrder.cs" />
+    <Compile Include="Contracts\Version2\Sale\ServiceOrderLine.cs" />
+    <Compile Include="Contracts\Version2\Sale\OrderWithLines.cs" />
     <Compile Include="Contracts\Version2\TimeBilling\Activity.cs" />
     <Compile Include="Contracts\Version2\PayrollCategory\ActivityLink.cs" />
     <Compile Include="Contracts\Version2\PayrollCategory\PayrollCategory.cs" />
@@ -269,6 +286,7 @@
     <Compile Include="Services\Version2\Banking\StatementService.cs" />
     <Compile Include="Services\Version2\Banking\TransferMoneyTxnService.cs" />
     <Compile Include="Services\Version2\Company\CompanyPreferencesService.cs" />
+    <Compile Include="Services\Version2\Company\FormTemplateService.cs" />
     <Compile Include="Services\Version2\Contact\ContactService.cs" />
     <Compile Include="Services\Version2\Contact\EmployeePayrollDetailsService.cs" />
     <Compile Include="Services\Version2\ErrorLevel.cs" />
@@ -283,6 +301,13 @@
     <Compile Include="Services\Version2\IGetOnlyService.cs" />
     <Compile Include="Services\Version2\Inventory\InventoryAdjustmentService.cs" />
     <Compile Include="Services\Version2\Inventory\ItemPriceMatrixService.cs" />
+    <Compile Include="Services\Version2\ReadableRangeService.cs" />
+    <Compile Include="Services\Version2\Report\Payroll\EmployeePayrollAdviceService.cs" />
+    <Compile Include="Services\Version2\Sale\ItemOrderService.cs" />
+    <Compile Include="Services\Version2\Sale\MiscellaneousOrderService.cs" />
+    <Compile Include="Services\Version2\Sale\OrderService.cs" />
+    <Compile Include="Services\Version2\Sale\ProfessionalOrderService.cs" />
+    <Compile Include="Services\Version2\Sale\ServiceOrderService.cs" />
     <Compile Include="Services\Version2\TimeBilling\ActivityService.cs" />
     <Compile Include="Services\Version2\PayrollCategory\PayrollCategoryDeductionService.cs" />
     <Compile Include="Services\Version2\PayrollCategory\PayrollCategoryEntitlementService.cs" />

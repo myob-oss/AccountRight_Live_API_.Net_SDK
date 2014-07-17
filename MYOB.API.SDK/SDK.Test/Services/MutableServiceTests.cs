@@ -42,6 +42,8 @@ namespace SDK.Test.Services
         public void SetUp()
         {
             _configuration = Substitute.For<IApiConfiguration>();
+            _configuration.GenerateUris.Returns(true);
+
             _webFactory = new DefaultResponseTestWebRequestFactory();
             _service = new TestMutableService(_configuration, _webFactory, null);
             _configuration.ApiBaseUrl.Returns(ApiRequestHandler.ApiRequestUri.AbsoluteUri);
@@ -261,6 +263,105 @@ namespace SDK.Test.Services
 
             // assert
             Assert.IsNotNull(_webFactory.UnhandledUris.First(u => u.Query.ToLower().Contains("warningsaserrors=true")));
+            Assert.IsNull(_webFactory.UnhandledUris.FirstOrDefault(u => u.Query.ToLower().Contains("generateuris=false")));
+        }
+
+        [Test]
+        public void QueryString_Has_GenerateUris_When_ConfigurationSettingIsSet([ValueSource("_errorLevelActions")] Tuple<string, Func<TestMutableService, CompanyFile, string>> action)
+        {
+            // arrange
+            _configuration.GenerateUris.Returns(false);
+            var cf = new CompanyFile() { Uri = new Uri("https://dc1.api.myob.com/accountright/7D5F5516-AF68-4C5B-844A-3F054E00DF10") };
+
+            // act
+            var received = action.Item2(_service, cf);
+
+            // assert
+            Assert.IsNotNull(_webFactory.UnhandledUris.First(u => u.Query.ToLower().Contains("generateuris=false")));
+        }
+
+        private readonly Tuple<string, Func<TestMutableService, CompanyFile, UserContract>>[] _postActionsEx = new[]
+            {
+                new Tuple<string, Func<TestMutableService, CompanyFile, UserContract>>("Delegate", 
+                    (service, cf) =>
+                    {
+                        UserContract received = null;
+                        service.InsertEx(cf, new UserContract() { UID = UID }, null, (code, location, entity) => { received = entity; }, (uri, exception) => Assert.Fail(exception.Message));
+                        return received;
+                    }),
+                new Tuple<string, Func<TestMutableService, CompanyFile, UserContract>>("Sync", 
+                    (service, cf) =>
+                    {
+                        return service.InsertEx(cf, new UserContract() {UID = UID}, null);
+                    }),
+                new Tuple<string, Func<TestMutableService, CompanyFile, UserContract>>("Async", 
+                    (service, cf) =>
+                    {
+                        return service.InsertExAsync(cf, new UserContract() {UID = UID}, null).Result;
+                    }),
+                 new Tuple<string, Func<TestMutableService, CompanyFile, UserContract>>("Async2", 
+                    (service, cf) =>
+                    {
+                        return service.InsertExAsync(cf, new UserContract() {UID = UID}, null, CancellationToken.None).Result;
+                    }),
+            };
+
+        [Test]
+        public void BodyIsReturned_AfterInsertOperation([ValueSource("_postActionsEx")] Tuple<string, Func<TestMutableService, CompanyFile, UserContract>> action)
+        {
+            var cf = new CompanyFile() { Uri = new Uri("https://dc1.api.myob.com/accountright/7D5F5516-AF68-4C5B-844A-3F054E00DF10") };
+            var location = cf.Uri.AbsoluteUri + "/Test/User/Contract/" + UID;
+            var entity = new UserContract() { UID = UID };
+            _webFactory.RegisterResultForUri(cf.Uri.AbsoluteUri + "/Test/User/Contract/?returnbody=true", entity.ToJson(), HttpStatusCode.OK, location);
+
+            // act
+            var received = action.Item2(_service, cf);
+
+            // assert
+            Assert.IsNotNull(received, "Incorrect data received during {0} operation", action.Item1);
+            Assert.AreEqual(entity.UID, received.UID);
+        }
+
+        private readonly Tuple<string, Func<TestMutableService, CompanyFile, UserContract>>[] _putActionsEx = new[]
+            {
+                new Tuple<string, Func<TestMutableService, CompanyFile, UserContract>>("Delegate", 
+                    (service, cf) =>
+                    {
+                        UserContract received = null;
+                        service.UpdateEx(cf, new UserContract() { UID = UID }, null, (code, location, entity) => { received = entity; }, (uri, exception) => Assert.Fail(exception.Message));
+                        return received;
+                    }),
+                new Tuple<string, Func<TestMutableService, CompanyFile, UserContract>>("Sync", 
+                    (service, cf) =>
+                    {
+                        return service.UpdateEx(cf, new UserContract() { UID = UID }, null);
+                    }),
+                new Tuple<string, Func<TestMutableService, CompanyFile, UserContract>>("Async", 
+                    (service, cf) =>
+                    {
+                        return service.UpdateExAsync(cf, new UserContract() { UID = UID }, null).Result;
+                    }),
+                 new Tuple<string, Func<TestMutableService, CompanyFile, UserContract>>("Async2", 
+                    (service, cf) =>
+                    {
+                        return service.UpdateExAsync(cf, new UserContract() { UID = UID }, null, CancellationToken.None).Result;
+                    }),
+            };
+
+        [Test]
+        public void BodyIsReturned_AfterUpdateOperation([ValueSource("_putActionsEx")] Tuple<string, Func<TestMutableService, CompanyFile, UserContract>> action)
+        {
+            var cf = new CompanyFile() { Uri = new Uri("https://dc1.api.myob.com/accountright/7D5F5516-AF68-4C5B-844A-3F054E00DF10") };
+            var location = cf.Uri.AbsoluteUri + "/Test/User/Contract/" + UID;
+            var entity = new UserContract() { UID = UID };
+            _webFactory.RegisterResultForUri(cf.Uri.AbsoluteUri + "/Test/User/Contract/" + UID + "?returnbody=true", entity.ToJson(), HttpStatusCode.OK, location);
+
+            // act
+            var received = action.Item2(_service, cf);
+
+            // assert
+            Assert.IsNotNull(received, "Incorrect data received during {0} operation", action.Item1);
+            Assert.AreEqual(entity.UID, received.UID);
         }
 
         [Test]

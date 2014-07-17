@@ -13,6 +13,11 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Contact
         public string TaxFileNumber { get; set; }
 
         /// <summary>
+        /// Tax Table
+        /// </summary>
+        public TaxTableLink TaxTable { get; set; }
+
+        /// <summary>
         /// Withholding Variation Rate
         /// </summary>
         public decimal WithholdingVariationRate { get; set; }
@@ -26,11 +31,6 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Contact
         /// Extra Tax Per Pay
         /// </summary>
         public decimal ExtraTaxPerPay { get; set; }
-
-        /// <summary>
-        /// Tax Table
-        /// </summary>
-        public TaxTableLink TaxTable { get; set; }
 
         /// <summary>
         /// Tax Category

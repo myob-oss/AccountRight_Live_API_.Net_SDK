@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Net;
-using System.Text.RegularExpressions;
 #if ASYNC
 using System.Threading.Tasks; 
 #endif
 using MYOB.AccountRight.SDK.Communication;
 using MYOB.AccountRight.SDK.Contracts;
-using MYOB.AccountRight.SDK.Contracts.Version2;
-using MYOB.AccountRight.SDK.Extensions;
 
 namespace MYOB.AccountRight.SDK.Services
 {
@@ -17,10 +14,8 @@ namespace MYOB.AccountRight.SDK.Services
     /// A base class that provides the support required for a service that supports GET operations for its resource
     /// </summary>
     /// <typeparam name="T">The resource type</typeparam>
-    public abstract class ReadableService<T> : ServiceBase, IReadable<T> where T : class
+    public abstract class ReadableService<T> : ReadableRangeService<T>, IReadable<T> where T : class
     {
-        internal abstract string Route { get; }
-
         /// <summary>
         /// Initialise base instance
         /// </summary>
@@ -30,25 +25,6 @@ namespace MYOB.AccountRight.SDK.Services
         protected ReadableService(IApiConfiguration configuration, IWebRequestFactory webRequestFactory, IOAuthKeyService keyService)
             : base(configuration, webRequestFactory, keyService)
         {
-        }
-
-        /// <exclude/>
-        protected Uri BuildUri(CompanyFile companyFile, Guid? uid = null, string postResource = null, string queryString = null)
-        {
-            return UriHelper.BuildUri(companyFile, Route, uid, postResource, queryString);
-        }
-
-        /// <exclude/>
-        protected Uri ValidateUri(CompanyFile cf, Uri uri)
-        {
-            if (!uri.AbsoluteUri.ToLowerInvariant().StartsWith(cf.Uri.AbsoluteUri.ToLowerInvariant()))
-                throw new ArgumentException("The supplied Uri is not valid for the company file.", "uri");
-            var tmpUri = BuildUri(cf);
-            if (!uri.AbsoluteUri.ToLowerInvariant().StartsWith(tmpUri.AbsoluteUri.ToLowerInvariant()))
-                throw new ArgumentException("The supplied Uri is not valid for the current service.", "uri");
-            if (!Regex.Match(uri.AbsoluteUri, ".*/([a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})$", RegexOptions.IgnoreCase).Success)
-                throw new ArgumentException("The supplied Uri must end with a UID.", "uri");
-            return uri;
         }
 
         /// <summary>
@@ -155,56 +131,8 @@ namespace MYOB.AccountRight.SDK.Services
         } 
 #endif
 
-        /// <summary>
-        /// Retrieve a paged list of entities
-        /// </summary>
-        /// <param name="cf">A company file that has been retrieved</param>
-        /// <param name="queryString">An odata filter</param>
-        /// <param name="credentials">The credentials to access the company file</param>
-        /// <param name="onComplete">The action to call when the operation is complete</param>
-        /// <param name="onError">The action to call when the operation has an error</param>
-        public virtual void GetRange(CompanyFile cf, string queryString, ICompanyFileCredentials credentials, Action<HttpStatusCode, PagedCollection<T>> onComplete, Action<Uri, Exception> onError)
-        {
-            MakeApiGetRequestDelegate(BuildUri(cf, null, queryString.Maybe(_ => "?" + _.TrimStart(new[] { '?' }))), credentials, onComplete, onError);
-        }
-
-        /// <summary>
-        /// Retrieve a paged list of entities
-        /// </summary>
-        /// <param name="cf">A company file that has been retrieved</param>
-        /// <param name="queryString">An odata filter</param>
-        /// <param name="credentials">The credentials to access the company file</param>
-        /// <returns></returns>
-        public virtual PagedCollection<T> GetRange(CompanyFile cf, string queryString, ICompanyFileCredentials credentials)
-        {
-            return MakeApiGetRequestSync<PagedCollection<T>>(BuildUri(cf, null, queryString.Maybe(_ => "?" + _.TrimStart(new[] { '?' }))), credentials);
-        }
-
 #if ASYNC
-        /// <summary>
-        /// Retrieve a paged list of entities
-        /// </summary>
-        /// <param name="cf">A company file that has been retrieved</param>
-        /// <param name="queryString">An odata filter</param>
-        /// <param name="credentials">The credentials to access the company file</param>
-        /// <returns></returns>
-        public virtual Task<PagedCollection<T>> GetRangeAsync(CompanyFile cf, string queryString, ICompanyFileCredentials credentials)
-        {
-            return this.GetRangeAsync(cf, queryString, credentials, CancellationToken.None);
-        } 
 
-        /// <summary>
-        /// Retrieve a paged list of entities
-        /// </summary>
-        /// <param name="cf">A company file that has been retrieved</param>
-        /// <param name="queryString">An odata filter</param>
-        /// <param name="credentials">The credentials to access the company file</param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public virtual Task<PagedCollection<T>> GetRangeAsync(CompanyFile cf, string queryString, ICompanyFileCredentials credentials, CancellationToken cancellationToken)
-        {
-            return this.MakeApiGetRequestAsync<PagedCollection<T>>(this.BuildUri(cf, null, queryString.Maybe(_ => "?" + _.TrimStart(new[] { '?' }))), credentials, cancellationToken);
-        } 
 #endif
     }
 }
