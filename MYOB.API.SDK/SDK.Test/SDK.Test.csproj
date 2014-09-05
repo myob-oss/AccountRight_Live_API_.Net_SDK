@@ -83,11 +83,14 @@
     <Compile Include="Contracts\Version2\ActivityTests.cs" />
     <Compile Include="Contracts\Version2\CategoryTests.cs" />
     <Compile Include="Contracts\Version2\ContactTests.cs" />
+    <Compile Include="Contracts\Version2\ItemPurchaseOrderTests.cs" />
     <Compile Include="Contracts\Version2\ItemOrderTests.cs" />
     <Compile Include="Contracts\Version2\MiscellaneousOrderTests.cs" />
     <Compile Include="Contracts\Version2\OrderTests.cs" />
     <Compile Include="Contracts\Version2\ProfessionalOrderTests.cs" />
+    <Compile Include="Contracts\Version2\ProfessionalPurchaseOrderTests.cs" />
     <Compile Include="Contracts\Version2\ServiceOrderTests.cs" />
+    <Compile Include="Contracts\Version2\ServicePurchaseOrderTests.cs" />
     <Compile Include="Contracts\Version2\SpendMoneyTxnTests.cs" />
     <Compile Include="Contracts\Version2\ItemTests.cs" />
     <Compile Include="Contracts\Version2\SupplierPaymentTests.cs" />
@@ -108,6 +111,11 @@
     <Compile Include="Services\CalculateDiscountsServiceTests.cs" />
     <Compile Include="Services\CategoryRegisterServiceTests.cs" />
     <Compile Include="Services\CategoryServiceTests.cs" />
+    <Compile Include="Services\EmployeePaymentDetailsServiceTests.cs" />
+    <Compile Include="Services\ItemPurchaseOrderServiceTests.cs" />
+    <Compile Include="Services\MiscellaneousPurchaseOrderServiceTests.cs" />
+    <Compile Include="Services\ProfessionalPurchaseOrderServiceTests.cs" />
+    <Compile Include="Services\ServicePurchaseOrderServiceTests.cs" />
     <Compile Include="Services\FormTemplateServiceTests.cs" />
     <Compile Include="Services\MiscellaneousOrderServiceTests.cs" />
     <Compile Include="Services\NamespaceTests.cs" />
@@ -118,8 +126,10 @@
     <Compile Include="Services\ItemOrderServiceTests.cs" />
     <Compile Include="Services\OrderServiceTests.cs" />
     <Compile Include="Services\ProfessionalOrderServiceTests.cs" />
+    <Compile Include="Services\PurchaseOrderServiceTests.cs" />
     <Compile Include="Services\ServiceOrderServiceTests.cs" />
     <Compile Include="Services\StatementServiceTests.cs" />
+    <Compile Include="Services\TimeBillingInvoiceServiceTests.cs" />
     <Compile Include="Services\TimesheetServiceTests.cs" />
     <Compile Include="Services\EmployeePayrollDetailsServiceTests.cs" />
     <Compile Include="Services\PayrollEmploymentClassificationTests.cs" />
@@ -167,6 +177,7 @@
     <Compile Include="Services\TransferMoneyTxnServiceTests.cs" />
     <Compile Include="Services\UriHelperTests.cs" />
     <Compile Include="Services\CurrentUserServiceTests.cs" />
+    <Compile Include="External\ServerTests.cs" />
     <Compile Include="UserContract.cs" />
     <Compile Include="Helper\TestWebRequestFactory.cs" />
     <Compile Include="Communication\WebRequestFactoryTests.cs" />

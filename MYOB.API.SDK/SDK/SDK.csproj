@@ -92,6 +92,7 @@
     <Compile Include="Contracts\Version2\Company\CompanyTimesheetPreferences.cs" />
     <Compile Include="Contracts\Version2\Company\FormTemplate.cs" />
     <Compile Include="Contracts\Version2\Company\PriceLevel.cs" />
+    <Compile Include="Contracts\Version2\Contact\EmployeePaymentDetails.cs" />
     <Compile Include="Contracts\Version2\Contact\EmployeeEntitlementInfo.cs" />
     <Compile Include="Contracts\Version2\Contact\EmployeePayrollDetails.cs" />
     <Compile Include="Contracts\Version2\Contact\EmployeeSuperannuationInfo.cs" />
@@ -99,6 +100,7 @@
     <Compile Include="Contracts\Version2\Contact\EmployeeTimeBillingInfo.cs" />
     <Compile Include="Contracts\Version2\Contact\EmployeeWageInfo.cs" />
     <Compile Include="Contracts\Version2\Contact\PayrollEmploymentClassificationLink.cs" />
+    <Compile Include="Contracts\Version2\Contact\PurchaseTerms.cs" />
     <Compile Include="Contracts\Version2\Contact\SuperannuationFundLink.cs" />
     <Compile Include="Contracts\Version2\CurrentUser.cs" />
     <Compile Include="Contracts\Version2\GeneralLedger\SourceTransaction.cs" />
@@ -106,6 +108,16 @@
     <Compile Include="Contracts\Version2\Inventory\ItemPriceMatrix.cs" />
     <Compile Include="Contracts\Version2\Inventory\Levels.cs" />
     <Compile Include="Contracts\Version2\Inventory\SellingPrice.cs" />
+    <Compile Include="Contracts\Version2\Purchase\ItemPurchaseOrderLine.cs" />
+    <Compile Include="Contracts\Version2\Purchase\MiscellaneousPurchaseOrder.cs" />
+    <Compile Include="Contracts\Version2\Purchase\MiscellaneousPurchaseOrderLine.cs" />
+    <Compile Include="Contracts\Version2\Purchase\ProfessionalPurchaseOrder.cs" />
+    <Compile Include="Contracts\Version2\Purchase\ProfessionalPurchaseOrderLine.cs" />
+    <Compile Include="Contracts\Version2\Purchase\PurchaseOrder.cs" />
+    <Compile Include="Contracts\Version2\Purchase\ItemPurchaseOrder.cs" />
+    <Compile Include="Contracts\Version2\Purchase\ServicePurchaseOrder.cs" />
+    <Compile Include="Contracts\Version2\Purchase\ServicePurchaseOrderLine.cs" />
+    <Compile Include="Contracts\Version2\Purchase\PurchaseOrderWithLines.cs" />
     <Compile Include="Contracts\Version2\Report\Payroll\EmployeePayrollAdvice.cs" />
     <Compile Include="Contracts\Version2\Sale\MiscellaneousOrder.cs" />
     <Compile Include="Contracts\Version2\Sale\MiscellaneousOrderLine.cs" />
@@ -121,6 +133,8 @@
     <Compile Include="Contracts\Version2\Sale\ServiceOrder.cs" />
     <Compile Include="Contracts\Version2\Sale\ServiceOrderLine.cs" />
     <Compile Include="Contracts\Version2\Sale\OrderWithLines.cs" />
+    <Compile Include="Contracts\Version2\Sale\TimeBillingInvoice.cs" />
+    <Compile Include="Contracts\Version2\Sale\TimeBillingInvoiceLine.cs" />
     <Compile Include="Contracts\Version2\TimeBilling\Activity.cs" />
     <Compile Include="Contracts\Version2\PayrollCategory\ActivityLink.cs" />
     <Compile Include="Contracts\Version2\PayrollCategory\PayrollCategory.cs" />
@@ -288,6 +302,7 @@
     <Compile Include="Services\Version2\Company\CompanyPreferencesService.cs" />
     <Compile Include="Services\Version2\Company\FormTemplateService.cs" />
     <Compile Include="Services\Version2\Contact\ContactService.cs" />
+    <Compile Include="Services\Version2\Contact\EmployeePaymentDetailsService.cs" />
     <Compile Include="Services\Version2\Contact\EmployeePayrollDetailsService.cs" />
     <Compile Include="Services\Version2\ErrorLevel.cs" />
     <Compile Include="Services\Version2\GeneralLedger\AccountingPropertiesService.cs" />
@@ -301,6 +316,11 @@
     <Compile Include="Services\Version2\IGetOnlyService.cs" />
     <Compile Include="Services\Version2\Inventory\InventoryAdjustmentService.cs" />
     <Compile Include="Services\Version2\Inventory\ItemPriceMatrixService.cs" />
+    <Compile Include="Services\Version2\Purchase\ItemPurchaseOrderService.cs" />
+    <Compile Include="Services\Version2\Purchase\MiscellaneousPurchaseOrderService.cs" />
+    <Compile Include="Services\Version2\Purchase\ProfessionalPurchaseOrderService.cs" />
+    <Compile Include="Services\Version2\Purchase\ServicePurchaseOrderService.cs" />
+    <Compile Include="Services\Version2\Purchase\PurchaseOrderService.cs" />
     <Compile Include="Services\Version2\ReadableRangeService.cs" />
     <Compile Include="Services\Version2\Report\Payroll\EmployeePayrollAdviceService.cs" />
     <Compile Include="Services\Version2\Sale\ItemOrderService.cs" />
@@ -308,6 +328,7 @@
     <Compile Include="Services\Version2\Sale\OrderService.cs" />
     <Compile Include="Services\Version2\Sale\ProfessionalOrderService.cs" />
     <Compile Include="Services\Version2\Sale\ServiceOrderService.cs" />
+    <Compile Include="Services\Version2\Sale\TimeBillingInvoiceService.cs" />
     <Compile Include="Services\Version2\TimeBilling\ActivityService.cs" />
     <Compile Include="Services\Version2\PayrollCategory\PayrollCategoryDeductionService.cs" />
     <Compile Include="Services\Version2\PayrollCategory\PayrollCategoryEntitlementService.cs" />

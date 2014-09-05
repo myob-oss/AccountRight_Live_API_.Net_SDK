@@ -24,10 +24,13 @@ namespace MYOB.AccountRight.SDK.Extensions
             if (webEx != null)
             {
                 var statusCode = (webEx.Response as HttpWebResponse).Maybe(_ => _.StatusCode);
-                IList<Error> errList = null;
                 var info = string.Empty;
                 if (webEx.Response != null)
                 {
+                    var requestId =
+                        webEx.Response.Headers.Maybe(
+                            h => h["x-myobapi-requestid"].Maybe(_ => _.ToLowerInvariant(), string.Empty));
+
                     using (var stream = webEx.Response.GetResponseStream())
                     {
                         using (var reader = new StreamReader(stream))
@@ -38,9 +41,16 @@ namespace MYOB.AccountRight.SDK.Extensions
                                 if (statusCode == HttpStatusCode.BadRequest)
                                 {
                                     var list = output.FromJson<ErrorList>();
-                                    errList = list.Errors;
+                                    var errList = list.Errors;
                                     info = list.Information;
+                                    throw new ApiValidationException(
+                                        string.Format("Encountered a validation error ({0})", requestUri),
+                                        statusCode, requestUri, webEx, errList, info, requestId);
                                 }
+                            }
+                            catch (ApiValidationException)
+                            {
+                                throw;
                             }
                             catch (Exception) 
                             {
@@ -48,9 +58,13 @@ namespace MYOB.AccountRight.SDK.Extensions
                             }
                         }
                     }
+                    throw new ApiCommunicationException(
+                    string.Format("Encountered a communication error ({0})", requestUri),
+                    statusCode, requestUri, webEx, null, info, requestId);
                 }
-                throw new ApiCommunicationException(string.Format("Encountered a communication error ({0})", requestUri),
-                                                    statusCode, requestUri, webEx, errList, info);
+                throw new ApiCommunicationException(
+                    string.Format("Encountered a communication error ({0})", requestUri),
+                    statusCode, requestUri, webEx, null, info, null);
             }
             throw new ApiOperationException(string.Format("Encountered an operation error ({0})", requestUri), ex);
         }
