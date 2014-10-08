@@ -6,7 +6,7 @@ namespace MYOB.AccountRight.SDK.Services.Sale
     /// <summary>
     /// A service that provides access to the <see cref="ItemOrder"/> resource
     /// </summary>
-    public sealed class ItemOrderService : MutableService<ItemOrder>
+    public sealed class ItemOrderService : PdfServiceBase<ItemOrder>
     {
         /// <summary>
         /// Initialise a service that can use <see cref="ItemOrder"/> resources
@@ -19,7 +19,10 @@ namespace MYOB.AccountRight.SDK.Services.Sale
         {
         }
 
-        internal override string Route
+        /// <summary>
+        /// The route to the service (after the company file identifier)
+        /// </summary>
+        public override string Route
         {
             get { return "Sale/Order/Item"; }
         }

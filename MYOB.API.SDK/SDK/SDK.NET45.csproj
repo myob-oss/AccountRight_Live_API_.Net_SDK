@@ -44,8 +44,9 @@
     <AssemblyOriginatorKeyFile>MYOB.API.SDK.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\packages\Newtonsoft.Json.5.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -110,6 +111,7 @@
     <Compile Include="Contracts\Version2\Contact\EmployeeLink.cs" />
     <Compile Include="Contracts\Version2\Contact\EmployeePaymentDetails.cs" />
     <Compile Include="Contracts\Version2\Contact\EmployeePayrollDetails.cs" />
+    <Compile Include="Contracts\Version2\Contact\EmployeeStandardPay.cs" />
     <Compile Include="Contracts\Version2\Contact\EmployeeSuperannuationInfo.cs" />
     <Compile Include="Contracts\Version2\Contact\EmployeeTaxInfo.cs" />
     <Compile Include="Contracts\Version2\Contact\EmployeeTimeBillingInfo.cs" />
@@ -272,6 +274,8 @@
     <Compile Include="Contracts\Version2\Sale\ServiceOrderLine.cs" />
     <Compile Include="Contracts\Version2\Sale\TimeBillingInvoice.cs" />
     <Compile Include="Contracts\Version2\Sale\TimeBillingInvoiceLine.cs" />
+    <Compile Include="Contracts\Version2\Sale\TimeBillingOrder.cs" />
+    <Compile Include="Contracts\Version2\Sale\TimeBillingOrderLine.cs" />
     <Compile Include="Contracts\Version2\Terms.cs" />
     <Compile Include="Contracts\Version2\TermsPaymentType.cs" />
     <Compile Include="Contracts\Version2\TimeBilling\Activity.cs" />
@@ -306,6 +310,7 @@
     <Compile Include="Services\Version2\Contact\EmployeePaymentDetailsService.cs" />
     <Compile Include="Services\Version2\Contact\EmployeePayrollDetailsService.cs" />
     <Compile Include="Services\Version2\Contact\EmployeeService.cs" />
+    <Compile Include="Services\Version2\Contact\EmployeeStandardPayService.cs" />
     <Compile Include="Services\Version2\Contact\PersonalService.cs" />
     <Compile Include="Services\Version2\Contact\SupplierService.cs" />
     <Compile Include="Services\Version2\CurrentUserService.cs" />
@@ -380,6 +385,7 @@
     <Compile Include="Services\Version2\Sale\ServiceInvoiceService.cs" />
     <Compile Include="Services\Version2\Sale\ServiceOrderService.cs" />
     <Compile Include="Services\Version2\Sale\TimeBillingInvoiceService.cs" />
+    <Compile Include="Services\Version2\Sale\TimeBillingOrderService.cs" />
     <Compile Include="Services\Version2\TimeBilling\ActivityService.cs" />
     <Compile Include="Services\Version2\UriHelper.cs" />
     <Compile Include="Services\VersionInfoService.cs" />

@@ -1,12 +1,13 @@
 ﻿using MYOB.AccountRight.SDK.Communication;
 using MYOB.AccountRight.SDK.Contracts.Version2.Purchase;
+using MYOB.AccountRight.SDK.Services.Sale;
 
 namespace MYOB.AccountRight.SDK.Services.Purchase
 {
     /// <summary>
     /// A service that provides access to the <see cref="ServicePurchaseOrder"/> resource
     /// </summary>
-    public sealed class ServicePurchaseOrderService : MutableService<Contracts.Version2.Purchase.ServicePurchaseOrder>
+    public sealed class ServicePurchaseOrderService : PdfServiceBase<Contracts.Version2.Purchase.ServicePurchaseOrder>
     {
         /// <summary>
         /// Initialise a service that can use <see cref="ServicePurchaseOrder"/> resources
@@ -19,7 +20,10 @@ namespace MYOB.AccountRight.SDK.Services.Purchase
         {
         }
 
-        internal override string Route
+        /// <summary>
+        /// The route to the service (after the company file identifier)
+        /// </summary>
+        public override string Route
         {
             get { return "Purchase/Order/Service"; }
         }

@@ -20,7 +20,10 @@ namespace MYOB.AccountRight.SDK.Services.Banking
         {
         }
 
-        internal override string Route
+        /// <summary>
+        /// The route to the service (after the company file identifier)
+        /// </summary>
+        public override string Route
         {
             get { return "Banking/SpendMoneyTxn"; }
         }

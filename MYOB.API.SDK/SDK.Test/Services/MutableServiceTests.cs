@@ -27,7 +27,7 @@ namespace SDK.Test.Services
             {
             }
 
-            internal override string Route
+            public override string Route
             {
                 get { return "Test/User/Contract"; }
             }
@@ -455,7 +455,7 @@ namespace SDK.Test.Services
                 return DeleteAsyncCallback(cf, uid, credentials, errorLevel, cancellationToken);
             }
 
-            internal override string Route
+            public override string Route
             {
                 get
                 {

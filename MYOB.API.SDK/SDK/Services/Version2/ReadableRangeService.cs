@@ -29,7 +29,10 @@ namespace MYOB.AccountRight.SDK.Services
         {
         }
 
-        internal abstract string Route { get; }
+        /// <summary>
+        /// The route to the service (after the company file identifier)
+        /// </summary>
+        public abstract string Route { get; }
 
         /// <exclude/>
         protected Uri BuildUri(CompanyFile companyFile, Guid? uid = null, string postResource = null, string queryString = null)

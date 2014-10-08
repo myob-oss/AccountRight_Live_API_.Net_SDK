@@ -7,8 +7,10 @@ using Newtonsoft.Json.Linq;
 
 namespace MYOB.AccountRight.SDK.Extensions
 {
-    
-    internal static class ExceptionExtensions
+    /// <summary>
+    /// Common exceltion handling utilities
+    /// </summary>
+    public static class ExceptionExtensions
     {
         internal class ErrorList
         {
@@ -16,6 +18,11 @@ namespace MYOB.AccountRight.SDK.Extensions
             public string Information { get; set; }
         }
 
+        /// <summary>
+        /// Process an exception
+        /// </summary>
+        /// <param name="ex"></param>
+        /// <param name="requestUri"></param>
         public static void ProcessException(this Exception ex, Uri requestUri)
         {
             if (ex == null) return;

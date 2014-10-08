@@ -92,6 +92,7 @@
     <Compile Include="Contracts\Version2\Company\CompanyTimesheetPreferences.cs" />
     <Compile Include="Contracts\Version2\Company\FormTemplate.cs" />
     <Compile Include="Contracts\Version2\Company\PriceLevel.cs" />
+    <Compile Include="Contracts\Version2\Contact\EmployeeStandardPay.cs" />
     <Compile Include="Contracts\Version2\Contact\EmployeePaymentDetails.cs" />
     <Compile Include="Contracts\Version2\Contact\EmployeeEntitlementInfo.cs" />
     <Compile Include="Contracts\Version2\Contact\EmployeePayrollDetails.cs" />
@@ -119,6 +120,8 @@
     <Compile Include="Contracts\Version2\Purchase\ServicePurchaseOrderLine.cs" />
     <Compile Include="Contracts\Version2\Purchase\PurchaseOrderWithLines.cs" />
     <Compile Include="Contracts\Version2\Report\Payroll\EmployeePayrollAdvice.cs" />
+    <Compile Include="Contracts\Version2\Sale\TimeBillingOrder.cs" />
+    <Compile Include="Contracts\Version2\Sale\TimeBillingOrderLine.cs" />
     <Compile Include="Contracts\Version2\Sale\MiscellaneousOrder.cs" />
     <Compile Include="Contracts\Version2\Sale\MiscellaneousOrderLine.cs" />
     <Compile Include="Contracts\Version2\Sale\Order.cs" />
@@ -302,6 +305,7 @@
     <Compile Include="Services\Version2\Company\CompanyPreferencesService.cs" />
     <Compile Include="Services\Version2\Company\FormTemplateService.cs" />
     <Compile Include="Services\Version2\Contact\ContactService.cs" />
+    <Compile Include="Services\Version2\Contact\EmployeeStandardPayService.cs" />
     <Compile Include="Services\Version2\Contact\EmployeePaymentDetailsService.cs" />
     <Compile Include="Services\Version2\Contact\EmployeePayrollDetailsService.cs" />
     <Compile Include="Services\Version2\ErrorLevel.cs" />
@@ -323,6 +327,7 @@
     <Compile Include="Services\Version2\Purchase\PurchaseOrderService.cs" />
     <Compile Include="Services\Version2\ReadableRangeService.cs" />
     <Compile Include="Services\Version2\Report\Payroll\EmployeePayrollAdviceService.cs" />
+    <Compile Include="Services\Version2\Sale\TimeBillingOrderService.cs" />
     <Compile Include="Services\Version2\Sale\ItemOrderService.cs" />
     <Compile Include="Services\Version2\Sale\MiscellaneousOrderService.cs" />
     <Compile Include="Services\Version2\Sale\OrderService.cs" />

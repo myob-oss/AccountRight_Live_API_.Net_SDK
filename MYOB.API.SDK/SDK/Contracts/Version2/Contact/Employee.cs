@@ -21,12 +21,27 @@
         /// </remarks>
         public EmployeePaymentDetailsLink EmployeePaymentDetails { get; set; }
 
+        /// <summary>
+        /// The location of the <see cref="EmployeeStandardPay" /> resource for this <see cref="Employee"/> 
+        /// </summary>
+        /// <remarks>
+        /// Only applicable for 2014.4 cloud and 2014.5 desktop where supported
+        /// </remarks>
+        public EmployeeStandardPayLink EmployeeStandardPay { get; set; }
+
     }
 
     /// <summary>
-    /// Describes a link to the employee payment details if supported
+    /// Describes a link to the <see cref="EmployeePaymentDetails" /> resource if supported
     /// </summary>
     public class EmployeePaymentDetailsLink : BaseLink
+    {
+    }
+
+    /// <summary>
+    /// Describes a link to the <see cref="EmployeeStandardPay" /> resource if supported
+    /// </summary>
+    public class EmployeeStandardPayLink : BaseLink
     {
     }
 }

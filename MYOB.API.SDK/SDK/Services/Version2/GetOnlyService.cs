@@ -82,6 +82,9 @@ namespace MYOB.AccountRight.SDK.Services
             return UriHelper.BuildUri(companyFile, Route);
         }
 
-        internal abstract string Route { get; }
+        /// <summary>
+        /// The route to the service (after the company file identifier)
+        /// </summary>
+        public abstract string Route { get; }
     }
 }

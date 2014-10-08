@@ -19,7 +19,10 @@ namespace MYOB.AccountRight.SDK.Services.TimeBilling
         {
         }
 
-        internal override string Route
+        /// <summary>
+        /// The route to the service (after the company file identifier)
+        /// </summary>
+        public override string Route
         {
             get { return "TimeBilling/Activity"; }
         }

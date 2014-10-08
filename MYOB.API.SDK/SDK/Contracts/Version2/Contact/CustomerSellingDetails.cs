@@ -24,7 +24,7 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Contact
         public string PrintedForm { get; set; }
 
         /// <summary>
-        /// The Item price level
+        /// The Item price level (read-only)
         /// </summary>
         public string ItemPriceLevel { get; set; }
 

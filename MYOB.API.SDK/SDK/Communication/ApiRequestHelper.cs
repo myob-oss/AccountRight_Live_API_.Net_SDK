@@ -22,17 +22,49 @@ using SharpCompress.Compressor.Deflate;
 
 namespace MYOB.AccountRight.SDK.Communication
 {
-    internal interface IApiRequestHelper
+    /// <summary>
+    /// 
+    /// </summary>
+    public interface IApiRequestHelper
     {
+        /// <summary>
+        /// Set common headers on the request
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="configuration"></param>
+        /// <param name="credentials"></param>
+        /// <param name="oauth"></param>
         void SetStandardHeaders(WebRequest request, IApiConfiguration configuration, ICompanyFileCredentials credentials, OAuthTokens oauth = null);
+
+        /// <summary>
+        /// Is the response compressed
+        /// </summary>
+        /// <param name="response"></param>
+        /// <returns></returns>
         bool IsGZipped(WebResponse response);
+
+        /// <summary>
+        /// Extract the compressed entity
+        /// </summary>
+        /// <param name="response"></param>
+        /// <returns></returns>
         Stream ExtractCompressedEntity(WebResponse response);
     }
 
-    internal class ApiRequestHelper : IApiRequestHelper
+    /// <summary>
+    /// An ApiRequestHelper provide common utility methods
+    /// </summary>
+    public class ApiRequestHelper : IApiRequestHelper
     {
-        public static Version Version;
-        public static string UserAgent;
+        /// <summary>
+        /// Get the assembly version
+        /// </summary>
+        public static Version Version { get; private set; }
+
+        /// <summary>
+        /// Get the user agent string being applied
+        /// </summary>
+        public static string UserAgent { get; private set; }
 
         static ApiRequestHelper()
         {
@@ -42,6 +74,13 @@ namespace MYOB.AccountRight.SDK.Communication
             UserAgent = string.Format("MYOB-ARL-SDK/{0} (+http://developer.myob.com/api/accountright/v2/)", Version.ToString(3));
         }
 
+        /// <summary>
+        /// Set common headers on the request
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="configuration"></param>
+        /// <param name="credentials"></param>
+        /// <param name="oauth"></param>
         public void SetStandardHeaders(WebRequest request, IApiConfiguration configuration, ICompanyFileCredentials credentials, OAuthTokens oauth = null)
         {
             request.Headers[HttpRequestHeader.Authorization] = string.Format("Bearer {0}", oauth.Maybe(_ => _.AccessToken, string.Empty));
@@ -71,17 +110,31 @@ namespace MYOB.AccountRight.SDK.Communication
                 credentials.Maybe(_ => _.Username).Maybe(_ => _, string.Empty), credentials.Maybe(_ => _.Password).Maybe(_ => _, string.Empty))));
         }
 
+        /// <summary>
+        /// Is the response compressed
+        /// </summary>
+        /// <param name="response"></param>
+        /// <returns></returns>
         public bool IsGZipped(WebResponse response)
         {
             return response.Headers["Content-Encoding"] != null && response.Headers["Content-Encoding"].Contains("gzip");
         }
 
+        /// <summary>
+        /// Extract the compressed entity
+        /// </summary>
+        /// <param name="response"></param>
+        /// <returns></returns>
         public Stream ExtractCompressedEntity(WebResponse response)
         {
             var responseStream = response.GetResponseStream();
             return new GZipStream(responseStream, CompressionMode.Decompress);         
         }
 
+        /// <summary>
+        /// swallow errors
+        /// </summary>
+        /// <param name="a"></param>
         public static void IgnoreError(Action a)
         {
             try

@@ -25,9 +25,9 @@
         /// </summary>
         Miscellaneous,
 
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        //TimeBilling,
+        /// <summary>
+        /// The order is an <see cref="TimeBillingOrder"/>
+        /// </summary>
+        TimeBilling,
     }
 }

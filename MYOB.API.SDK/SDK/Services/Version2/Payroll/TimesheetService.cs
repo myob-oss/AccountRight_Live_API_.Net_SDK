@@ -403,7 +403,10 @@ namespace MYOB.AccountRight.SDK.Services.Payroll
             return UriHelper.BuildUri(companyFile, Route, uid, postResource, qs == null ? null : qs.TrimEnd('&'));
         }
 
-        internal string Route
+        /// <summary>
+        /// The route to the service (after the company file identifier)
+        /// </summary>
+        public string Route
         {
             get
             {
