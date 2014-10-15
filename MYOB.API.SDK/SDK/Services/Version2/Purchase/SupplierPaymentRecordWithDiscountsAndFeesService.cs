@@ -85,7 +85,10 @@ namespace MYOB.AccountRight.SDK.Services.Purchase
             return UriHelper.BuildUri(companyFile, Route, uid, postResource);
         }
 
-        internal string Route
+        /// <summary>
+        /// The route to the service (after the company file identifier)
+        /// </summary>
+        public string Route
         {
             get
             {

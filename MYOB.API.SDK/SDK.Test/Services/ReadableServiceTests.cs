@@ -24,7 +24,7 @@ namespace SDK.Test.Services
             {
             }
 
-            internal override string Route
+            public override string Route
             {
                 get { return "Test/User/Contract"; }
             }

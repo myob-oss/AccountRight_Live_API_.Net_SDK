@@ -19,6 +19,9 @@ namespace MYOB.AccountRight.SDK.Services.Company
         {
         }
 
-        internal override string Route { get { return "Company/FormTemplate"; } }
+        /// <summary>
+        /// The route to the service (after the company file identifier)
+        /// </summary>
+        public override string Route { get { return "Company/FormTemplate"; } }
     }
 }

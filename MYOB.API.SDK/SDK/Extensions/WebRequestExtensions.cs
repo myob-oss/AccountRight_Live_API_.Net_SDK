@@ -6,8 +6,17 @@ using System.Threading.Tasks;
 
 namespace MYOB.AccountRight.SDK.Extensions
 {
-    internal static class WebRequestExtensions
+    /// <summary>
+    /// Extensions that improve webrequest handling
+    /// </summary>
+    public static class WebRequestExtensions
     {
+        /// <summary>
+        /// Support cancelling a webrequest using a cancellation token 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public static async Task<HttpWebResponse> GetResponseAsync(this WebRequest request, CancellationToken cancellationToken)
         {
             using (cancellationToken.Register(request.Abort, false))

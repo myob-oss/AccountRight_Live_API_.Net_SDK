@@ -35,7 +35,11 @@ namespace SDK.Test.Communication
 
             Assert.AreEqual("<<clientid>>", request.Headers["x-myobapi-key"]);
             Assert.AreEqual("v2", request.Headers["x-myobapi-version"]);
-            Assert.AreEqual(Convert.ToBase64String(Encoding.UTF8.GetBytes("user:pass")), request.Headers["x-myobapi-cftoken"]); 
+            Assert.AreEqual(Convert.ToBase64String(Encoding.UTF8.GetBytes("user:pass")), request.Headers["x-myobapi-cftoken"]);
+
+            var version = typeof (ApiRequestHandler).Assembly.GetName().Version.ToString(3);
+            var userAgent = request.Headers[HttpRequestHeader.UserAgent];
+            Assert.IsTrue(userAgent.Contains(string.Format("MYOB-ARL-SDK/{0}", version)));
         }
 
         [Test]
@@ -434,6 +438,12 @@ namespace SDK.Test.Communication
 
             // assert
             Assert.AreEqual("http://localhost/ABC", res);
+        }
+
+        [Test]
+        public void IgnoreException_SwallowsExceptions()
+        {
+             Assert.DoesNotThrow(() => ApiRequestHelper.IgnoreError(() => { throw new Exception(); }));
         }
     }
 }

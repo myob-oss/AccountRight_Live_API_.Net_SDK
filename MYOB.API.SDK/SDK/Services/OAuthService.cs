@@ -32,7 +32,10 @@ namespace MYOB.AccountRight.SDK.Services
             this._factory = factory ?? new WebRequestFactory(configuration);
         }
 
-        internal IWebRequestFactory Factory
+        /// <summary>
+        /// provide access to the factory being used to create web requests
+        /// </summary>
+        public IWebRequestFactory Factory
         {
             get
             {

@@ -17,7 +17,7 @@ using SDK.Test.Helper;
 namespace SDK.Test.Services
 {
     [TestFixture]
-    public class TimesheetServiceTests
+    public class TimesheetServiceTests 
     {
         [SetUp]
         public void SetUp()

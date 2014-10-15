@@ -83,12 +83,36 @@ namespace SDK.Test.Extensions
                 (wex.Response as HttpWebResponse).StatusCode.Returns(HttpStatusCode.BadRequest);
                 
                 var uri = new Uri("http://dc1.api.myob.com/");
-                var apiCommunicationEx = Assert.Throws<ApiCommunicationException>(() => wex.ProcessException(uri));
+                var apiCommunicationEx = Assert.Throws<ApiValidationException>(() => wex.ProcessException(uri));
                 Assert.IsNotNull(apiCommunicationEx.Errors[0]);
                 Assert.AreEqual(16000, apiCommunicationEx.Errors[0].ErrorCode);
                 Assert.AreEqual("ValidationError", apiCommunicationEx.Errors[0].Name);
                 Assert.AreEqual("Duplicate RequestID", apiCommunicationEx.Errors[0].Message);
                 Assert.AreEqual("RequestID", apiCommunicationEx.Errors[0].AdditionalDetails);
+            }
+        }
+
+        [Test]
+        public void PackagesRequestIdIntoExceptionIfAvailable()
+        {
+            var mesg = @"{
+            ""Errors"": [{                     
+            ""Name"": ""ValidationError"",       
+            ""Message"": ""Duplicate RequestID"",
+            ""AdditionalDetails"": ""RequestID"",
+            ""ErrorCode"": 16000               
+            }]}";
+
+            using (Stream responsestream = GetStream(mesg))
+            {
+                var wex = GetWebException(responsestream);
+                (wex.Response as HttpWebResponse).StatusCode.Returns(HttpStatusCode.BadRequest);
+                (wex.Response as HttpWebResponse).Headers.Returns(new WebHeaderCollection(){"x-myobapi-requestid:an-id-of-usefuleness"});
+
+                var uri = new Uri("http://dc1.api.myob.com/");
+                var apiCommunicationEx = Assert.Throws<ApiValidationException>(() => wex.ProcessException(uri));
+                Assert.IsNotNull(apiCommunicationEx.Errors[0]);
+                Assert.AreEqual("an-id-of-usefuleness", apiCommunicationEx.RequestId);
             }
         }
     }

@@ -7,7 +7,7 @@ namespace MYOB.AccountRight.SDK.Services.Sale
     /// <summary>
     /// A service that provides access to the <see cref="ServiceInvoice"/> resource
     /// </summary>
-    public sealed class ServiceInvoiceService : PdfInvoiceServiceBase<ServiceInvoice>
+    public sealed class ServiceInvoiceService : PdfServiceBase<ServiceInvoice>
     {
         /// <summary>
         /// Initialise a service that can use <see cref="ServiceInvoice"/> resources
@@ -20,7 +20,10 @@ namespace MYOB.AccountRight.SDK.Services.Sale
         {
         }
 
-        internal override string Route
+        /// <summary>
+        /// The route to the service (after the company file identifier)
+        /// </summary>
+        public override string Route
         {
             get { return "Sale/Invoice/Service"; }
         }

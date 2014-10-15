@@ -15,48 +15,48 @@ namespace MYOB.AccountRight.SDK.Services
     public interface IPdfService
     {
         /// <summary>
-        /// Gets an Invoice as Pdf
+        /// Get resource as Pdf
         /// </summary>
         /// <param name="cf"></param>
-        /// <param name="invoiceUid"></param>
+        /// <param name="resourceUid"></param>
         /// <param name="credentials"></param>
         /// <param name="template">The Template Name</param>
         /// <returns></returns>
-        Stream GetInvoiceFormAsPdf(CompanyFile cf, Guid invoiceUid, ICompanyFileCredentials credentials, string template);
+        Stream GetPdf(CompanyFile cf, Guid resourceUid, ICompanyFileCredentials credentials, string template);
 
         /// <summary>
-        /// Gets an Invoice as Pdf
+        /// Get resource as Pdf
         /// </summary>
         /// <param name="cf"></param>
-        /// <param name="invoiceUid"></param>
+        /// <param name="resourceUid"></param>
         /// <param name="credentials"></param>
         /// <param name="template">The Template Name</param>
         /// <param name="onComplete">The action to call when the operation is complete</param>
         /// <param name="onError">The action to call when the operation has an error</param>
-        void GetInvoiceFormAsPdf(CompanyFile cf, Guid invoiceUid, ICompanyFileCredentials credentials, string template,
+        void GetPdf(CompanyFile cf, Guid resourceUid, ICompanyFileCredentials credentials, string template,
                                  Action<HttpStatusCode, Stream> onComplete, Action<Uri, Exception> onError);
 
 #if ASYNC
         /// <summary>
-        /// Gets an Invoice as Pdf Async
+        /// Get resource as Pdf 
         /// </summary>
         /// <param name="cf"></param>
-        /// <param name="invoiceUid"></param>
+        /// <param name="resourceUid"></param>
         /// <param name="credentials"></param>
         /// <param name="template"></param>
         /// <returns></returns>
-        Task<Stream> GetInvoiceFormAsPdfAsync(CompanyFile cf, Guid invoiceUid, ICompanyFileCredentials credentials, string template);
+        Task<Stream> GetPdfAsync(CompanyFile cf, Guid resourceUid, ICompanyFileCredentials credentials, string template);
 
         /// <summary>
-        /// Gets an Invoice as Pdf Async
+        /// Get resource as Pdf
         /// </summary>
         /// <param name="cf"></param>
-        /// <param name="invoiceUid"></param>
+        /// <param name="resourceUid"></param>
         /// <param name="credentials"></param>
         /// <param name="template"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<Stream> GetInvoiceFormAsPdfAsync(CompanyFile cf, Guid invoiceUid, ICompanyFileCredentials credentials, string template, CancellationToken cancellationToken);
+        Task<Stream> GetPdfAsync(CompanyFile cf, Guid resourceUid, ICompanyFileCredentials credentials, string template, CancellationToken cancellationToken);
 #endif
 
     }

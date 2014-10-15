@@ -19,7 +19,10 @@ namespace MYOB.AccountRight.SDK.Services.PayrollCategory
         {
         }
 
-        internal override string Route
+        /// <summary>
+        /// The route to the service (after the company file identifier)
+        /// </summary>
+        public override string Route
         {
             get { return "Payroll/PayrollCategory/Expense"; }
         }

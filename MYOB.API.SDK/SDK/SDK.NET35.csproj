@@ -42,8 +42,9 @@
     <AssemblyOriginatorKeyFile>MYOB.API.SDK.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\packages\Newtonsoft.Json.5.0.6\lib\net35\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Newtonsoft.Json.6.0.5\lib\net35\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -104,7 +105,9 @@
     <Compile Include="Contracts\Version2\Contact\Employee.cs" />
     <Compile Include="Contracts\Version2\Contact\EmployeeEntitlementInfo.cs" />
     <Compile Include="Contracts\Version2\Contact\EmployeeLink.cs" />
+    <Compile Include="Contracts\Version2\Contact\EmployeePaymentDetails.cs" />
     <Compile Include="Contracts\Version2\Contact\EmployeePayrollDetails.cs" />
+    <Compile Include="Contracts\Version2\Contact\EmployeeStandardPay.cs" />
     <Compile Include="Contracts\Version2\Contact\EmployeeSuperannuationInfo.cs" />
     <Compile Include="Contracts\Version2\Contact\EmployeeTaxInfo.cs" />
     <Compile Include="Contracts\Version2\Contact\EmployeeTimeBillingInfo.cs" />
@@ -112,6 +115,7 @@
     <Compile Include="Contracts\Version2\Contact\PayrollEmploymentClassificationLink.cs" />
     <Compile Include="Contracts\Version2\Contact\Personal.cs" />
     <Compile Include="Contracts\Version2\Contact\PurchaseLayoutType.cs" />
+    <Compile Include="Contracts\Version2\Contact\PurchaseTerms.cs" />
     <Compile Include="Contracts\Version2\Contact\SuperannuationFundLink.cs" />
     <Compile Include="Contracts\Version2\Contact\Supplier.cs" />
     <Compile Include="Contracts\Version2\Contact\SupplierBuyingDetails.cs" />
@@ -187,10 +191,20 @@
     <Compile Include="Contracts\Version2\Purchase\ItemBillLine.cs" />
     <Compile Include="Contracts\Version2\Purchase\MiscellaneousBill.cs" />
     <Compile Include="Contracts\Version2\Purchase\MiscellaneousBillLine.cs" />
+    <Compile Include="Contracts\Version2\Purchase\MiscellaneousPurchaseOrder.cs" />
+    <Compile Include="Contracts\Version2\Purchase\MiscellaneousPurchaseOrderLine.cs" />
     <Compile Include="Contracts\Version2\Purchase\PayFrom.cs" />
     <Compile Include="Contracts\Version2\Purchase\ProfessionalBill.cs" />
     <Compile Include="Contracts\Version2\Purchase\ProfessionalBillLine.cs" />
+    <Compile Include="Contracts\Version2\Purchase\ProfessionalPurchaseOrder.cs" />
+    <Compile Include="Contracts\Version2\Purchase\ProfessionalPurchaseOrderLine.cs" />
     <Compile Include="Contracts\Version2\Purchase\PurchaseLink.cs" />
+    <Compile Include="Contracts\Version2\Purchase\ItemPurchaseOrderLine.cs" />
+    <Compile Include="Contracts\Version2\Purchase\PurchaseOrder.cs" />
+    <Compile Include="Contracts\Version2\Purchase\ItemPurchaseOrder.cs" />
+    <Compile Include="Contracts\Version2\Purchase\ServicePurchaseOrder.cs" />
+    <Compile Include="Contracts\Version2\Purchase\ServicePurchaseOrderLine.cs" />
+    <Compile Include="Contracts\Version2\Purchase\PurchaseOrderWithLines.cs" />
     <Compile Include="Contracts\Version2\Purchase\PurchaseStatus.cs" />
     <Compile Include="Contracts\Version2\Purchase\ServiceBill.cs" />
     <Compile Include="Contracts\Version2\Purchase\ServiceBillLine.cs" />
@@ -254,6 +268,10 @@
     <Compile Include="Contracts\Version2\Sale\ServiceInvoiceLine.cs" />
     <Compile Include="Contracts\Version2\Sale\ServiceOrder.cs" />
     <Compile Include="Contracts\Version2\Sale\ServiceOrderLine.cs" />
+    <Compile Include="Contracts\Version2\Sale\TimeBillingInvoice.cs" />
+    <Compile Include="Contracts\Version2\Sale\TimeBillingInvoiceLine.cs" />
+    <Compile Include="Contracts\Version2\Sale\TimeBillingOrder.cs" />
+    <Compile Include="Contracts\Version2\Sale\TimeBillingOrderLine.cs" />
     <Compile Include="Contracts\Version2\Terms.cs" />
     <Compile Include="Contracts\Version2\TermsPaymentType.cs" />
     <Compile Include="Contracts\Version2\TimeBilling\Activity.cs" />
@@ -285,8 +303,10 @@
     <Compile Include="Services\Version2\Company\FormTemplateService.cs" />
     <Compile Include="Services\Version2\Contact\ContactService.cs" />
     <Compile Include="Services\Version2\Contact\CustomerService.cs" />
+    <Compile Include="Services\Version2\Contact\EmployeePaymentDetailsService.cs" />
     <Compile Include="Services\Version2\Contact\EmployeePayrollDetailsService.cs" />
     <Compile Include="Services\Version2\Contact\EmployeeService.cs" />
+    <Compile Include="Services\Version2\Contact\EmployeeStandardPayService.cs" />
     <Compile Include="Services\Version2\Contact\PersonalService.cs" />
     <Compile Include="Services\Version2\Contact\SupplierService.cs" />
     <Compile Include="Services\Version2\CurrentUserService.cs" />
@@ -332,7 +352,12 @@
     <Compile Include="Services\Version2\Purchase\DebitSettlementService.cs" />
     <Compile Include="Services\Version2\Purchase\ItemBillService.cs" />
     <Compile Include="Services\Version2\Purchase\MiscellaneousBillService.cs" />
+    <Compile Include="Services\Version2\Purchase\MiscellaneousPurchaseOrderService.cs" />
     <Compile Include="Services\Version2\Purchase\ProfessionalBillService.cs" />
+    <Compile Include="Services\Version2\Purchase\ItemPurchaseOrderService.cs" />
+    <Compile Include="Services\Version2\Purchase\ProfessionalPurchaseOrderService.cs" />
+    <Compile Include="Services\Version2\Purchase\PurchaseOrderService.cs" />
+    <Compile Include="Services\Version2\Purchase\ServicePurchaseOrderService.cs" />
     <Compile Include="Services\Version2\Purchase\ServiceBillService.cs" />
     <Compile Include="Services\Version2\Purchase\SupplierPaymentRecordWithDiscountsAndFeesService.cs" />
     <Compile Include="Services\Version2\Purchase\SupplierPaymentService.cs" />
@@ -355,6 +380,8 @@
     <Compile Include="Services\Version2\Sale\ProfessionalOrderService.cs" />
     <Compile Include="Services\Version2\Sale\ServiceInvoiceService.cs" />
     <Compile Include="Services\Version2\Sale\ServiceOrderService.cs" />
+    <Compile Include="Services\Version2\Sale\TimeBillingInvoiceService.cs" />
+    <Compile Include="Services\Version2\Sale\TimeBillingOrderService.cs" />
     <Compile Include="Services\Version2\TimeBilling\ActivityService.cs" />
     <Compile Include="Services\Version2\UriHelper.cs" />
     <Compile Include="Services\VersionInfoService.cs" />
