@@ -88,16 +88,30 @@ namespace MYOB.AccountRight.SDK.Communication
         /// <returns></returns>
         protected async Task<Tuple<HttpStatusCode, string, T>> GetResponseTask<T>(WebRequest request, CancellationToken cancellationToken) where T : class
         {
-            var response = await request.GetResponseAsync(cancellationToken);
-            var location = response.Headers["Location"];
-            var statusCode = (response as HttpWebResponse).Maybe(_ => _.StatusCode);
-            if (ApiRequestHelper.IsGZipped((HttpWebResponse)response))
+            try
             {
-                var entityCompressed = ExtractJSonCompressedEntity<T>(response);
-                return new Tuple<HttpStatusCode, string, T>(statusCode, location, entityCompressed);
+                var response = await request.GetResponseAsync(cancellationToken);
+
+                var location = response.Headers["Location"];
+                var statusCode = (response as HttpWebResponse).Maybe(_ => _.StatusCode);
+                T entity;
+
+                if (ApiRequestHelper.IsGZipped((HttpWebResponse)response))
+                {
+                    entity = ExtractJSonCompressedEntity<T>(response);
+                }
+                else
+                {
+                    entity = ExtractJSonEntity<T>(response);
+                }
+
+                return new Tuple<HttpStatusCode, string, T>(statusCode, location, entity);
             }
-            var entityNormal = ExtractJSonEntity<T>(response);
-            return new Tuple<HttpStatusCode, string, T>(statusCode, location, entityNormal);
+            catch (Exception wex)
+            {
+                wex.ProcessException(request.RequestUri);
+                throw;
+            }
         }
 #endif
 
