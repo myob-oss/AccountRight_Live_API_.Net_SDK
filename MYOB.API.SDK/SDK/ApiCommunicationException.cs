@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Runtime.Serialization;
 using System.Text;
 
 
@@ -10,8 +11,19 @@ namespace MYOB.AccountRight.SDK
     /// <summary>
     /// An exception that is thrown when there is a communication error i.e. web between the SDK and the account right servers
     /// </summary>
+    [Serializable]
     public class ApiCommunicationException : Exception
     {
+        protected ApiCommunicationException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+            StatusCode = (HttpStatusCode)info.GetInt32("StatusCode");
+            URI = (Uri)info.GetValue("URI", typeof(Uri));
+            Errors = (IList<Error>)info.GetValue("Errors", typeof(IList<Error>));
+            ErrorInformation = info.GetString("ErrorInformation");
+            RequestId = info.GetString("RequestId");
+        }
+
         /// <summary>
         /// A standard HTTP status
         /// </summary>
@@ -56,11 +68,22 @@ namespace MYOB.AccountRight.SDK
             ErrorInformation = information;
             RequestId = requestId;
         }
+
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            base.GetObjectData(info, context);
+            info.AddValue("StatusCode", (int)StatusCode);
+            info.AddValue("URI", URI);
+            info.AddValue("Errors", Errors);
+            info.AddValue("ErrorInformation", ErrorInformation);
+            info.AddValue("RequestId", RequestId);
+        }
     }
 
     /// <summary>
     /// An exception that is thrown when an error has occured within the API and is not communication related
     /// </summary>
+    [Serializable]
     public class ApiOperationException : Exception
     {
         /// <summary>
@@ -74,6 +97,7 @@ namespace MYOB.AccountRight.SDK
     /// <summary>
     /// An exception that is thrown when the API throws a validation exception
     /// </summary>
+    [Serializable]
     public class ApiValidationException : ApiCommunicationException
     {
         /// <summary>
