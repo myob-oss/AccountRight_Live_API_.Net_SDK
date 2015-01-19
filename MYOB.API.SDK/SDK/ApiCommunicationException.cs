@@ -11,9 +11,12 @@ namespace MYOB.AccountRight.SDK
     /// <summary>
     /// An exception that is thrown when there is a communication error i.e. web between the SDK and the account right servers
     /// </summary>
+#if !PORTABLE
     [Serializable]
+#endif
     public class ApiCommunicationException : Exception
     {
+#if !PORTABLE
         protected ApiCommunicationException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
@@ -23,7 +26,7 @@ namespace MYOB.AccountRight.SDK
             ErrorInformation = info.GetString("ErrorInformation");
             RequestId = info.GetString("RequestId");
         }
-
+#endif
         /// <summary>
         /// A standard HTTP status
         /// </summary>
@@ -69,6 +72,7 @@ namespace MYOB.AccountRight.SDK
             RequestId = requestId;
         }
 
+#if !PORTABLE
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);
@@ -78,12 +82,14 @@ namespace MYOB.AccountRight.SDK
             info.AddValue("ErrorInformation", ErrorInformation);
             info.AddValue("RequestId", RequestId);
         }
+#endif
     }
-
     /// <summary>
     /// An exception that is thrown when an error has occured within the API and is not communication related
     /// </summary>
+#if !PORTABLE
     [Serializable]
+#endif
     public class ApiOperationException : Exception
     {
         /// <summary>
@@ -97,7 +103,9 @@ namespace MYOB.AccountRight.SDK
     /// <summary>
     /// An exception that is thrown when the API throws a validation exception
     /// </summary>
+#if !PORTABLE
     [Serializable]
+#endif
     public class ApiValidationException : ApiCommunicationException
     {
         /// <summary>

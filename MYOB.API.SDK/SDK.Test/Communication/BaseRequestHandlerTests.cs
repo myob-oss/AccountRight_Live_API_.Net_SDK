@@ -141,5 +141,21 @@ namespace SDK.Test.Communication
             Assert.IsNotNull(res.Item2);
             Assert.AreEqual("Paul", res.Item2.Name);
         }
+
+        [Test]
+        public void TranslatesWebExceptionsWhenThrown()
+        {
+            // arrange
+            var uri = "http://localhost/";
+            var factory = new TestWebRequestFactory();
+            factory.RegisterExceptionForUri<WebException>(uri);
+            var handler = new TestBaseRequestHandler(factory);
+
+            // act
+            Assert.Throws<ApiCommunicationException>(async () => await handler.MakeRequestAsync(uri));
+
+            // assert
+        }
+
     }
 }

@@ -90,6 +90,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiCommunicationExceptionTests.cs" />
     <Compile Include="ApiConfigurationTests.cs" />
     <Compile Include="MyobArlApiPact.cs" />
     <Compile Include="Communication\ApiRequestHandlerTests.cs" />

@@ -88,30 +88,19 @@ namespace MYOB.AccountRight.SDK.Communication
         /// <returns></returns>
         protected async Task<Tuple<HttpStatusCode, string, T>> GetResponseTask<T>(WebRequest request, CancellationToken cancellationToken) where T : class
         {
+            T entity = null;
+            string location = null;
+            var statusCode = HttpStatusCode.Unused;
             try
             {
                 var response = await request.GetResponseAsync(cancellationToken);
-
-                var location = response.Headers["Location"];
-                var statusCode = (response as HttpWebResponse).Maybe(_ => _.StatusCode);
-                T entity;
-
-                if (ApiRequestHelper.IsGZipped((HttpWebResponse)response))
-                {
-                    entity = ExtractJSonCompressedEntity<T>(response);
-                }
-                else
-                {
-                    entity = ExtractJSonEntity<T>(response);
-                }
-
-                return new Tuple<HttpStatusCode, string, T>(statusCode, location, entity);
+                entity = ExtractDetails<T>(response, out location, out statusCode);
             }
             catch (Exception wex)
             {
                 wex.ProcessException(request.RequestUri);
-                throw;
             }
+            return new Tuple<HttpStatusCode, string, T>(statusCode, location, entity);
         }
 #endif
 
@@ -133,18 +122,12 @@ namespace MYOB.AccountRight.SDK.Communication
             try
             {
                 var response = (HttpWebResponse)request.EndGetResponse(asynchronousResult);
-                var location = response.Headers["Location"];
 
-                if (ApiRequestHelper.IsGZipped(response))
-                {
-                    var entity = ExtractJSonCompressedEntity<TResp>(response);
-                    requestData.OnComplete(response.StatusCode, location, entity);
-                }
-                else
-                {
-                    var entity = ExtractJSonEntity<TResp>(response);
-                    requestData.OnComplete(response.StatusCode, location, entity);
-                }
+                string location;
+                HttpStatusCode statusCode;
+                var entity = ExtractDetails<TResp>(response, out location, out statusCode);
+
+                requestData.OnComplete(response.StatusCode, location, entity);
             }
             catch (Exception ex)
             {
@@ -164,6 +147,24 @@ namespace MYOB.AccountRight.SDK.Communication
             {
                 return reader.ReadToEnd();
             }
+        }
+
+        private T ExtractDetails<T>(HttpWebResponse response, out string location, out HttpStatusCode statusCode)
+            where T : class
+        {
+            location = response.Headers["Location"];
+            statusCode = response.Maybe(_ => _.StatusCode);
+            T entity;
+
+            if (ApiRequestHelper.IsGZipped(response))
+            {
+                entity = ExtractJSonCompressedEntity<T>(response);
+            }
+            else
+            {
+                entity = ExtractJSonEntity<T>(response);
+            }
+            return entity;
         }
 
         private static TResp ExtractJSonEntity<TResp>(WebResponse response)
