@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using MYOB.AccountRight.SDK;
 using MYOB.AccountRight.SDK.Communication;
@@ -444,6 +445,24 @@ namespace SDK.Test.Communication
         public void IgnoreException_SwallowsExceptions()
         {
              Assert.DoesNotThrow(() => ApiRequestHelper.IgnoreError(() => { throw new Exception(); }));
+        }
+
+        [Test]
+        public void AuthorizationHeaderNotAppliedWhenClientCertificateAttached()
+        {
+            // arrange
+            var factory = new TestWebRequestFactory();
+            factory.RegisterResultForUri("http://localhost", new UserContract() { Name = "David" }.ToJson());
+            var request = factory.Create(new Uri("http://localhost"));
+            (request as HttpWebRequest).ClientCertificates.Add(new X509Certificate());
+
+            var handler = new ApiRequestHandler(new ApiConfiguration("<<clientid>>", "<<clientsecret>>", "<<redirecturl>>"), new CompanyFileCredentials("user", "pass"));
+
+            // act
+            handler.Get<UserContract>(request, (code, response) => { }, (uri, exception) => Assert.Fail(exception.Message));
+
+            // assert
+            Assert.IsNull(request.Headers[HttpRequestHeader.Authorization]);
         }
     }
 }

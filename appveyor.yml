@@ -3,6 +3,7 @@ shallow_clone: true
 environment:
   COVERALLS_REPO_TOKEN:
     secure: Cn76L45YPBc4LT+lbfEuztWDmudgETBZaHRoT7O48sBE8OpUhtegDDh1AlRFXMzG
+cache: .\MYOB.API.SDK\SDK\MYOB.API.SDK.snk
 build_script:
 - build.bat
 on_success:

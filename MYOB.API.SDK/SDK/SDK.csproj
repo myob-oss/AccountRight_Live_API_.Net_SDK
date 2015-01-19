@@ -11,33 +11,54 @@
     <RootNamespace>MYOB.AccountRight.SDK</RootNamespace>
     <AssemblyName>MYOB.AccountRight.SDK</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Profile88</TargetFrameworkProfile>
+    <TargetFrameworkProfile>Profile136</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
     <BaseIntermediateOutputPath>obj\Portable\</BaseIntermediateOutputPath>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <NuGetPackageImportStamp>45c51275</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\Artefacts\SDK\Ship\</OutputPath>
+    <OutputPath>$(SolutionDir)\Artefacts\SDK\Ship\</OutputPath>
     <DefineConstants>TRACE;DEBUG;PORTABLE,ASYNC</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\..\Artefacts\SDK\Ship\MYOB.AccountRight.SDK.XML</DocumentationFile>
+    <DocumentationFile>$(SolutionDir)\Artefacts\SDK\Ship\MYOB.AccountRight.SDK.XML</DocumentationFile>
     <RunCodeAnalysis>false</RunCodeAnalysis>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\Artefacts\SDK\Ship\</OutputPath>
+    <OutputPath>$(SolutionDir)\Artefacts\SDK\Ship\</OutputPath>
     <DefineConstants>TRACE;PORTABLE,ASYNC</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\..\Artefacts\SDK\Ship\MYOB.AccountRight.SDK.XML</DocumentationFile>
+    <DocumentationFile>$(SolutionDir)\Artefacts\SDK\Ship\MYOB.AccountRight.SDK.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
@@ -57,6 +78,7 @@
     <Compile Include="Communication\WebRequestFactory.cs" />
     <Compile Include="Contracts\Company.cs" />
     <Compile Include="Contracts\ProductLevel.cs" />
+    <Compile Include="Contracts\Version2\Banking\BankAccount.cs" />
     <Compile Include="Contracts\Version2\Banking\ReceiveMoneyTxnLine.cs" />
     <Compile Include="Contracts\Version2\Banking\ReceiveMoneyTxn.cs" />
     <Compile Include="Contracts\Version2\Banking\SpendMoneyTxn.cs" />
@@ -104,6 +126,9 @@
     <Compile Include="Contracts\Version2\Contact\PurchaseTerms.cs" />
     <Compile Include="Contracts\Version2\Contact\SuperannuationFundLink.cs" />
     <Compile Include="Contracts\Version2\CurrentUser.cs" />
+    <Compile Include="Contracts\Version2\GeneralLedger\AccountBudget.cs" />
+    <Compile Include="Contracts\Version2\GeneralLedger\JobBudget.cs" />
+    <Compile Include="Contracts\Version2\GeneralLedger\ProfitLossDistribution.cs" />
     <Compile Include="Contracts\Version2\GeneralLedger\SourceTransaction.cs" />
     <Compile Include="Contracts\Version2\Inventory\InventoryAdjustment.cs" />
     <Compile Include="Contracts\Version2\Inventory\ItemPriceMatrix.cs" />
@@ -298,6 +323,7 @@
     <Compile Include="Contracts\Version2\GeneralLedger\TaxCodeLink.cs" />
     <Compile Include="Services\CompanyService.cs" />
     <Compile Include="Services\IOAuthService.cs" />
+    <Compile Include="Services\Version2\Banking\BankAccountService.cs" />
     <Compile Include="Services\Version2\Banking\ReceiveMoneyTxnService.cs" />
     <Compile Include="Services\Version2\Banking\SpendMoneyTxnService.cs" />
     <Compile Include="Services\Version2\Banking\StatementService.cs" />
@@ -309,6 +335,7 @@
     <Compile Include="Services\Version2\Contact\EmployeePaymentDetailsService.cs" />
     <Compile Include="Services\Version2\Contact\EmployeePayrollDetailsService.cs" />
     <Compile Include="Services\Version2\ErrorLevel.cs" />
+    <Compile Include="Services\Version2\GeneralLedger\AccountBudgetService.cs" />
     <Compile Include="Services\Version2\GeneralLedger\AccountingPropertiesService.cs" />
     <Compile Include="Services\Version2\GeneralLedger\AccountRegisterService.cs" />
     <Compile Include="Services\Version2\GeneralLedger\AccountService.cs" />
@@ -316,6 +343,8 @@
     <Compile Include="Services\Version2\GeneralLedger\CategoryService.cs" />
     <Compile Include="Services\CompanyFileService.cs" />
     <Compile Include="IOAuthKeyService.cs" />
+    <Compile Include="Services\Version2\GeneralLedger\JobBudgetService.cs" />
+    <Compile Include="Services\Version2\GeneralLedger\ProfitLossDistributionService.cs" />
     <Compile Include="Services\Version2\GetOnlyService.cs" />
     <Compile Include="Services\Version2\IGetOnlyService.cs" />
     <Compile Include="Services\Version2\Inventory\InventoryAdjustmentService.cs" />
@@ -397,40 +426,54 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Threading.Tasks">
-      <HintPath>..\..\packages\Microsoft.Bcl.Async.1.0.165\lib\portable-net40+sl4+win8+wp71\Microsoft.Threading.Tasks.dll</HintPath>
+      <HintPath>$(SolutionDir)\packages\Microsoft.Bcl.Async.1.0.168\lib\portable-net40+sl4+win8+wp71+wpa81\Microsoft.Threading.Tasks.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Threading.Tasks.Extensions">
-      <HintPath>..\..\packages\Microsoft.Bcl.Async.1.0.165\lib\portable-net40+sl4+win8+wp71\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
+      <HintPath>$(SolutionDir)\packages\Microsoft.Bcl.Async.1.0.168\lib\portable-net40+sl4+win8+wp71+wpa81\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\packages\Newtonsoft.Json.5.0.6\lib\portable-net40+sl4+wp7+win8\Newtonsoft.Json.dll</HintPath>
+      <HintPath>$(SolutionDir)\packages\Newtonsoft.Json.6.0.5\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="SharpCompress">
-      <HintPath>..\..\packages\sharpcompress.0.10.1.3\lib\portable-net4+sl4+wp7+win8\SharpCompress.dll</HintPath>
+      <HintPath>$(SolutionDir)\packages\sharpcompress.0.10.3\lib\portable-net4+sl5+wp8+win8\SharpCompress.dll</HintPath>
     </Reference>
     <Reference Include="System.IO">
-      <HintPath>..\..\packages\Microsoft.Bcl.1.1.6\lib\portable-net40+sl4+win8+wp71\System.IO.dll</HintPath>
+      <HintPath>$(SolutionDir)\packages\Microsoft.Bcl.1.1.8\lib\portable-net40+sl5+win8+wp8+wpa81\System.IO.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime">
-      <HintPath>..\..\packages\Microsoft.Bcl.1.1.6\lib\portable-net40+sl4+win8+wp71\System.Runtime.dll</HintPath>
+      <HintPath>$(SolutionDir)\packages\Microsoft.Bcl.1.1.8\lib\portable-net40+sl5+win8+wp8+wpa81\System.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="System.Threading.Tasks">
-      <HintPath>..\..\packages\Microsoft.Bcl.1.1.6\lib\portable-net40+sl4+win8+wp71\System.Threading.Tasks.dll</HintPath>
+      <HintPath>$(SolutionDir)\packages\Microsoft.Bcl.1.1.8\lib\portable-net40+sl5+win8+wp8+wpa81\System.Threading.Tasks.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="MYOB.API.SDK.snk" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
-  <Import Project="..\..\packages\Microsoft.Bcl.Build.1.0.13\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\..\packages\Microsoft.Bcl.Build.1.0.13\tools\Microsoft.Bcl.Build.targets')" />
-  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
-    <Error Condition="!Exists('..\..\packages\Microsoft.Bcl.Build.1.0.13\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
-    <Error Condition="Exists('..\..\packages\Microsoft.Bcl.Build.1.0.13\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
+  <Import Project="$(SolutionDir)\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('$(SolutionDir)\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

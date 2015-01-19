@@ -84,6 +84,13 @@ namespace MYOB.AccountRight.SDK.Communication
         public void SetStandardHeaders(WebRequest request, IApiConfiguration configuration, ICompanyFileCredentials credentials, OAuthTokens oauth = null)
         {
             request.Headers[HttpRequestHeader.Authorization] = string.Format("Bearer {0}", oauth.Maybe(_ => _.AccessToken, string.Empty));
+
+#if !PORTABLE
+            if ((request as HttpWebRequest).Maybe(_ => _.ClientCertificates.Maybe(c => c.Count != 0)))
+            {
+                request.Headers.Remove(HttpRequestHeader.Authorization);
+            }
+#endif
             request.Headers[HttpRequestHeader.AcceptEncoding] = "gzip";
             
             IgnoreError(() =>

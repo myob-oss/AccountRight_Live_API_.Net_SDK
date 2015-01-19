@@ -29,5 +29,10 @@ namespace MYOB.AccountRight.SDK
         /// An error code
         /// </summary>
         public int ErrorCode { get; set; }
+
+        /// <summary>
+        /// The severity
+        /// </summary>
+        public string Severity { get; set; }
     }
 }

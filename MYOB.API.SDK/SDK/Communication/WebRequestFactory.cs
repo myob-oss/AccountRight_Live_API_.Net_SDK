@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Net;
-using MYOB.AccountRight.SDK.Extensions;
 
 namespace MYOB.AccountRight.SDK.Communication
 {
@@ -53,4 +52,5 @@ namespace MYOB.AccountRight.SDK.Communication
             return webrequest;
         }
     }
+
 }
