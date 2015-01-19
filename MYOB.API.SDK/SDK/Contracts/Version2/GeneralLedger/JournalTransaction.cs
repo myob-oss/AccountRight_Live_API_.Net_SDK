@@ -38,5 +38,9 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.GeneralLedger
         /// </summary>
         public IEnumerable<JournalTransactionLine> Lines { get; set; }
 
+        /// <summary>
+        /// Source transaction information
+        /// </summary>
+        public SourceTransaction SourceTransaction { get; set; }
     }
 }

@@ -39,7 +39,7 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Purchase
         /// <summary>
         /// The payment terms
         /// </summary>
-        public Terms Terms { get; set; }
+        public InvoiceTerms Terms { get; set; }
 
         /// <summary>
         /// <para>True indicates the transaction is set to tax inclusive.</para>
@@ -109,6 +109,14 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Purchase
         public PurchaseStatus Status { get; set; }
 
         /// <summary>
+        /// The date of the last payment made on the invoice
+        /// </summary>
+        /// <remarks>
+        /// Availability: 2013.5 (Cloud), 2014.1 (Desktop)
+        /// </remarks>
+        public DateTime? LastPaymentDate { get; set; }
+
+        /// <summary>
         /// The type of Bill - this is only populated when querying the "/Purchase/Bill" endpoint
         /// </summary>
         public BillType BillType { get; set; }
@@ -134,5 +142,22 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Purchase
         /// </remarks>
         public TaxCodeLink FreightTaxCode { get; set; }
 
+        /// <summary>
+        /// The source Purchase Order when an Bill is converted from an Purchase Order
+        /// or when you wish to convert an existing Open Purchase Order to a new Bill
+        /// Available from 2014.4
+        /// </summary>
+        public PurchaseOrderLink Order { get; set; }
+    }
+
+    /// <summary>
+    /// Describe the link to the Purchase/Order resource
+    /// </summary>
+    public class PurchaseOrderLink: BaseLink
+    {
+        /// <summary>
+        /// The number of the purchase order
+        /// </summary>
+        public string Number { get; set; }
     }
 }

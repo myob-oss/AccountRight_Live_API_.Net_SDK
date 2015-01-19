@@ -9,6 +9,11 @@
         /// Company Name
         /// </summary>
         public string CompanyName { get; set; }
+
+         /// <summary>
+        /// Serial Number
+        /// </summary>
+        public string SerialNumber { get; set; }
         
         /// <summary>
         /// Company Address

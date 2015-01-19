@@ -13,7 +13,10 @@ using MYOB.AccountRight.SDK.Extensions;
 
 namespace MYOB.AccountRight.SDK.Communication
 {
-    internal class OAuthRequestHandler : BaseRequestHandler
+    /// <summary>
+    /// The OAuth request handler, manages the OAuth token fetching and renewal
+    /// </summary>
+    public class OAuthRequestHandler : BaseRequestHandler
     {
         /// <summary>
         /// https://secure.myob.com/oauth2/v1/authorize
@@ -22,6 +25,10 @@ namespace MYOB.AccountRight.SDK.Communication
 
         private readonly IApiConfiguration _configuration;
 
+        /// <summary>
+        /// Constructs an OAuth request handler
+        /// </summary>
+        /// <param name="configuration"></param>
         public OAuthRequestHandler(IApiConfiguration configuration) : base(new ApiRequestHelper())
         {
             _configuration = configuration;

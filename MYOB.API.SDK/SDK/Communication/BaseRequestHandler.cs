@@ -20,29 +20,72 @@ using SharpCompress.Compressor.Deflate;
 
 namespace MYOB.AccountRight.SDK.Communication
 {
-    internal abstract class BaseRequestHandler
+    /// <summary>
+    /// 
+    /// </summary>
+    public abstract class BaseRequestHandler
     {
+        /// <summary>
+        /// 
+        /// </summary>
         protected readonly IApiRequestHelper ApiRequestHelper;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="apiRequestHelper"></param>
         protected BaseRequestHandler(IApiRequestHelper apiRequestHelper)
         {
             ApiRequestHelper = apiRequestHelper;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="TR"></typeparam>
         protected class RequestContext<T, TR>
         {
+            /// <summary>
+            /// The request
+            /// </summary>
             public WebRequest Request { get; set; }
+
+            /// <summary>
+            /// The bod
+            /// </summary>
             public string Body { get; set; }
+
+            /// <summary>
+            /// The action to perform when complete
+            /// </summary>
             public Action<HttpStatusCode, string, TR> OnComplete { get; set; }
+
+            /// <summary>
+            /// The action to return on an error
+            /// </summary>
             public Action<Uri, Exception> OnError { get; set; }
         }
 
 #if ASYNC
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="request"></param>
+        /// <returns></returns>
         protected Task<Tuple<HttpStatusCode, string, T>> GetResponseTask<T>(WebRequest request) where T : class
         {
             return this.GetResponseTask<T>(request, CancellationToken.None);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         protected async Task<Tuple<HttpStatusCode, string, T>> GetResponseTask<T>(WebRequest request, CancellationToken cancellationToken) where T : class
         {
             var response = await request.GetResponseAsync(cancellationToken);
@@ -58,6 +101,13 @@ namespace MYOB.AccountRight.SDK.Communication
         }
 #endif
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="TReq"></typeparam>
+        /// <typeparam name="TResp"></typeparam>
+        /// <param name="asynchronousResult"></param>
         protected void HandleResponseCallback<T, TReq, TResp>(IAsyncResult asynchronousResult)
             where T : RequestContext<TReq, TResp>
             where TResp : class
@@ -88,6 +138,11 @@ namespace MYOB.AccountRight.SDK.Communication
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="response"></param>
+        /// <returns></returns>
         private static string ExtractBody(WebResponse response)
         {
             var responseStream = response.GetResponseStream();

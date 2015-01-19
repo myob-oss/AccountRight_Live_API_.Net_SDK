@@ -20,7 +20,10 @@ namespace MYOB.AccountRight.SDK.Services.Purchase
         {
         }
 
-        internal override string Route
+        /// <summary>
+        /// The route to the service (after the company file identifier)
+        /// </summary>
+        public override string Route
         {
             get { return "Purchase/DebitRefund"; }
         }
@@ -31,8 +34,9 @@ namespace MYOB.AccountRight.SDK.Services.Purchase
         /// <param name="cf">A company file that has been retrieved</param>
         /// <param name="entity">The entity to update</param>
         /// <param name="credentials">The credentials to access the company file</param>
+        /// <param name="errorLevel"></param>
         /// <returns></returns>
-        public override string Update(Contracts.CompanyFile cf, DebitRefund entity, ICompanyFileCredentials credentials)
+        public override string Update(Contracts.CompanyFile cf, DebitRefund entity, ICompanyFileCredentials credentials, ErrorLevel errorLevel = ErrorLevel.IgnoreWarnings)
         {
             throw new NotSupportedException();
         }
@@ -45,7 +49,8 @@ namespace MYOB.AccountRight.SDK.Services.Purchase
         /// <param name="credentials">The credentials to access the company file</param>
         /// <param name="onComplete">The action to call when the operation is complete</param>
         /// <param name="onError">The action to call when the operation has an error</param>
-        public override void Update(Contracts.CompanyFile cf, DebitRefund entity, ICompanyFileCredentials credentials, Action<System.Net.HttpStatusCode, string> onComplete, Action<Uri, Exception> onError)
+        /// <param name="errorLevel"></param>
+        public override void Update(Contracts.CompanyFile cf, DebitRefund entity, ICompanyFileCredentials credentials, Action<System.Net.HttpStatusCode, string> onComplete, Action<Uri, Exception> onError, ErrorLevel errorLevel = ErrorLevel.IgnoreWarnings)
         {
             throw new NotSupportedException();
         }
@@ -57,8 +62,9 @@ namespace MYOB.AccountRight.SDK.Services.Purchase
         /// <param name="cf">A company file that has been retrieved</param>
         /// <param name="entity">The entity to update</param>
         /// <param name="credentials">The credentials to access the company file</param>
+        /// <param name="errorLevel"></param>
         /// <returns></returns>
-        public override System.Threading.Tasks.Task<string> UpdateAsync(Contracts.CompanyFile cf, DebitRefund entity, ICompanyFileCredentials credentials)
+        public override System.Threading.Tasks.Task<string> UpdateAsync(Contracts.CompanyFile cf, DebitRefund entity, ICompanyFileCredentials credentials, ErrorLevel errorLevel = ErrorLevel.IgnoreWarnings)
         {
             throw new NotSupportedException();
         }

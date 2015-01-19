@@ -30,5 +30,15 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2
         /// NOT required when creating a new account. 
         /// </remarks>
         public string RowVersion { get; set; }
+
+        /// <summary>
+        /// If supported then the time the entity was created, or a default value if the database was upgraded and the time of creating was unknown and cannot be determined. (Read only)
+        /// </summary>
+        public DateTime? Created { get; set; }
+
+        /// <summary>
+        /// If supported then the time the entity was last modified, or a default value if the database was upgraded and the time of last modification was unknown and cannot be determined. (Read only)
+        /// </summary>
+        public DateTime? LastModified { get; set; }
     }
 }

@@ -2,9 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MYOB.AccountRight.SDK.Contracts.Version2;
+
+#if !PORTABLE
+using System.Net.Cache;
+#endif
 
 namespace MYOB.AccountRight.SDK
 {
+
     /// <summary>
     /// A simple container to hold basic API configuration
     /// </summary>
@@ -22,12 +28,14 @@ namespace MYOB.AccountRight.SDK
         /// <param name="clientSecret">The client id (OAuth related)</param>
         /// <param name="redirectUrl">The redirect uri for the application (OAuth related)</param>
         /// <param name="apiBaseUrl">The AccountRight API endpoint, defaults to 'https://api.myob.com/accountright'</param>
-        public ApiConfiguration(string clientId, string clientSecret, string redirectUrl, string apiBaseUrl = "https://api.myob.com/accountright")
+        /// <param name="generateUris">Should the returned entities have the <see cref="BaseEntity.URI"/> and <see cref="BaseLink.URI"/> fields populated</param>
+        public ApiConfiguration(string clientId, string clientSecret, string redirectUrl, string apiBaseUrl = "https://api.myob.com/accountright", bool generateUris = true)
         {
             ApiBaseUrl = apiBaseUrl;
             ClientId = clientId;
             ClientSecret = clientSecret;
             RedirectUrl = redirectUrl;
+            GenerateUris = generateUris;
         }
 
         /// <summary>
@@ -56,6 +64,18 @@ namespace MYOB.AccountRight.SDK
         /// The AccountRight API endpoint, defaults to 'https://api.myob.com/accountright'
         /// </summary>
         public string ApiBaseUrl { get; private set; }
+
+        /// <summary>
+        /// Should the returned entities have the <see cref="BaseEntity.URI"/> and <see cref="BaseLink.URI"/> fields populated
+        /// </summary>
+        public bool GenerateUris { get; private set; }
+
+#if !PORTABLE
+        /// <summary>
+        /// Gets or sets the cache policy for all requests
+        /// </summary>
+        public RequestCachePolicy RequestCachePolicy { get; set; } 
+#endif
     }
 
     /// <summary>

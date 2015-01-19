@@ -30,7 +30,10 @@ namespace MYOB.AccountRight.SDK.Services.Sale
         {
         }
 
-        internal override string Route
+        /// <summary>
+        /// The route to the service (after the company file identifier)
+        /// </summary>
+        public override string Route
         {
             get { return "Sale/CustomerPayment"; }
         }
@@ -41,8 +44,9 @@ namespace MYOB.AccountRight.SDK.Services.Sale
         /// <param name="cf"></param>
         /// <param name="entity"></param>
         /// <param name="credentials"></param>
+        /// <param name="errorLevel"></param>
         /// <returns></returns>
-        public override string Update(Contracts.CompanyFile cf, CustomerPayment entity, ICompanyFileCredentials credentials)
+        public override string Update(Contracts.CompanyFile cf, CustomerPayment entity, ICompanyFileCredentials credentials, ErrorLevel errorLevel = ErrorLevel.IgnoreWarnings)
         {
             throw new NotSupportedException();
         }
@@ -55,7 +59,8 @@ namespace MYOB.AccountRight.SDK.Services.Sale
         /// <param name="credentials"></param>
         /// <param name="onComplete"></param>
         /// <param name="onError"></param>
-        public override void Update(Contracts.CompanyFile cf, CustomerPayment entity, ICompanyFileCredentials credentials, Action<HttpStatusCode, string> onComplete, Action<Uri, Exception> onError)
+        /// <param name="errorLevel"></param>
+        public override void Update(Contracts.CompanyFile cf, CustomerPayment entity, ICompanyFileCredentials credentials, Action<HttpStatusCode, string> onComplete, Action<Uri, Exception> onError, ErrorLevel errorLevel = ErrorLevel.IgnoreWarnings)
         {
             throw new NotSupportedException();
         }
@@ -68,8 +73,9 @@ namespace MYOB.AccountRight.SDK.Services.Sale
         /// <param name="entity"></param>
         /// <param name="credentials"></param>
         /// <param name="cancellationToken"></param>
+        /// <param name="errorLevel"></param>
         /// <returns></returns>
-        public override Task<string> UpdateAsync(CompanyFile cf, CustomerPayment entity, ICompanyFileCredentials credentials, CancellationToken cancellationToken)
+        public override Task<string> UpdateAsync(CompanyFile cf, CustomerPayment entity, ICompanyFileCredentials credentials, CancellationToken cancellationToken, ErrorLevel errorLevel = ErrorLevel.IgnoreWarnings)
         {
             return Task.Factory.StartNew<string>(() => { throw new NotSupportedException(); });       
         }

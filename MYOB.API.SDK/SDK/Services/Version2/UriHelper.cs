@@ -3,8 +3,20 @@ using MYOB.AccountRight.SDK.Contracts;
 
 namespace MYOB.AccountRight.SDK.Services
 {
-    internal class UriHelper
+    /// <summary>
+    /// Uri helper utilities
+    /// </summary>
+    public class UriHelper
     {
+        /// <summary>
+        /// Build a uri
+        /// </summary>
+        /// <param name="companyFile"></param>
+        /// <param name="route"></param>
+        /// <param name="uid"></param>
+        /// <param name="postResource"></param>
+        /// <param name="queryString"></param>
+        /// <returns></returns>
         public static Uri BuildUri(CompanyFile companyFile, string route, Guid? uid = null, string postResource = null, string queryString = null)
         {
             var qs = string.IsNullOrEmpty(queryString) ? string.Empty : queryString.StartsWith("?") ? queryString : "?" + queryString;

@@ -1,5 +1,4 @@
 ﻿using MYOB.AccountRight.SDK.Communication;
-using MYOB.AccountRight.SDK.Contracts;
 using MYOB.AccountRight.SDK.Contracts.Version2.Company;
 
 namespace MYOB.AccountRight.SDK.Services.Company
@@ -19,7 +18,10 @@ namespace MYOB.AccountRight.SDK.Services.Company
             : base(configuration, webRequestFactory, keyService)
         {
         }
-        
-        internal override string Route { get { return "Company/Preferences"; } }
+
+        /// <summary>
+        /// The route to the service (after the company file identifier)
+        /// </summary>
+        public override string Route { get { return "Company/Preferences"; } }
     }
 }

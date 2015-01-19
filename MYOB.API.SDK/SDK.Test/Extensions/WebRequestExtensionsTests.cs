@@ -15,60 +15,36 @@ namespace SDK.Test.Extensions
     public class WebRequestExtensionsTests
     {
         [Test]
-        public async Task GetResponseAsync_Calls_Underlying_BeginGetResponse_AndEndGetResponse_Method()
+        public async Task GetResponseAsync_Calls_Underlying_GetResponseAsyncMethod()
         {
             var request = Substitute.For<WebRequest>();
-            var beginGetResponseCalledEvent = new ManualResetEvent(false);
-            AsyncCallback webrequestCompleteCallback = null;
-            var result = Substitute.For<IAsyncResult>();
 
-            request.BeginGetResponse(Arg.Any<AsyncCallback>(), Arg.Any<object>()).Returns(callInfo =>
-                {
-                    webrequestCompleteCallback = (AsyncCallback)callInfo.Args()[0];
+            request.GetResponseAsync(CancellationToken.None);
 
-                    beginGetResponseCalledEvent.Set();
-                    return result;
-                });
-
-            var getResponseTask = request.GetResponseAsync(CancellationToken.None);
-
-            beginGetResponseCalledEvent.WaitOne(500);
-
-            Assert.IsNotNull(webrequestCompleteCallback, "BeginGetResponse was not called");
-
-            webrequestCompleteCallback(result);
-
-            await getResponseTask;
-
-            request.Received().EndGetResponse(Arg.Any<IAsyncResult>());
+            request.Received().GetResponseAsync();
         }
 
         [Test]
         public void Setting_CancellationToken_Calls_Underlying_Abort_Method()
         {
             var request = Substitute.For<WebRequest>();
-            var beginGetResponseCalledEvent = new ManualResetEvent(false);
-            AsyncCallback webrequestCompleteCallback = null;
-            var result = Substitute.For<IAsyncResult>();
+            var webRequestCompleteEvent = new ManualResetEvent(false);
+
+            request.GetResponseAsync().Returns(c => Task.Run(() =>
+                {
+                    webRequestCompleteEvent.WaitOne(5000);
 
 
-            request.BeginGetResponse(Arg.Any<AsyncCallback>(), Arg.Any<object>()).Returns(callInfo =>
-            {
-                webrequestCompleteCallback = (AsyncCallback)callInfo.Args()[0];
-
-                beginGetResponseCalledEvent.Set();
-                return result;
-            });
+                    return (WebResponse)null;
+                }));
 
             var cancellationSource = new CancellationTokenSource();
 
             var getResponseTask = request.GetResponseAsync(cancellationSource.Token);
 
-            beginGetResponseCalledEvent.WaitOne(500);
-
             cancellationSource.Cancel();
 
-            webrequestCompleteCallback(result);
+            webRequestCompleteEvent.Set();
 
             Assert.Throws<OperationCanceledException>(async () => await getResponseTask);
 
@@ -79,28 +55,24 @@ namespace SDK.Test.Extensions
         public void Exceptions_Are_Converted_To_OperationCanceledExceptions_If_Cancelled()
         {
             var request = Substitute.For<WebRequest>();
-            var beginGetResponseCalledEvent = new ManualResetEvent(false);
-            AsyncCallback webrequestCompleteCallback = null;
-            var result = Substitute.For<IAsyncResult>();
+            var webRequestCompleteEvent = new ManualResetEvent(false);
 
-            request.BeginGetResponse(Arg.Any<AsyncCallback>(), Arg.Any<object>()).Returns(callInfo =>
+            request.GetResponseAsync().Returns(c => Task.Run(() =>
             {
-                webrequestCompleteCallback = (AsyncCallback)callInfo.Args()[0];
+                webRequestCompleteEvent.WaitOne(5000);
 
-                beginGetResponseCalledEvent.Set();
-                return result;
-            });
+                throw new WebException();
+
+                return (WebResponse)null;
+            }));
 
             var cancellationSource = new CancellationTokenSource();
 
             var getResponseTask = request.GetResponseAsync(cancellationSource.Token);
 
-            beginGetResponseCalledEvent.WaitOne(500);
-            request.EndGetResponse(Arg.Any<IAsyncResult>()).Returns(_ => { throw new WebException(); });
-
             cancellationSource.Cancel();
 
-            webrequestCompleteCallback(result);
+            webRequestCompleteEvent.Set();
 
             Assert.Throws(Is.InstanceOf<OperationCanceledException>(), async () => await getResponseTask);
         }
@@ -110,23 +82,23 @@ namespace SDK.Test.Extensions
         {
             var request = Substitute.For<WebRequest>();
             var beginGetResponseCalledEvent = new ManualResetEvent(false);
-            AsyncCallback webrequestCompleteCallback = null;
-            var result = Substitute.For<IAsyncResult>();
+            var webRequestCompleteEvent = new ManualResetEvent(false);
 
-            request.BeginGetResponse(Arg.Any<AsyncCallback>(), Arg.Any<object>()).Returns(callInfo =>
+            request.GetResponseAsync().Returns(c => Task.Run(() =>
             {
-                webrequestCompleteCallback = (AsyncCallback)callInfo.Args()[0];
-
                 beginGetResponseCalledEvent.Set();
-                return result;
-            });
+                webRequestCompleteEvent.WaitOne(500);
+
+                throw new WebException();
+
+                return (WebResponse)null;
+            }));
 
             var getResponseTask = request.GetResponseAsync(CancellationToken.None);
 
             beginGetResponseCalledEvent.WaitOne(500);
 
-            request.EndGetResponse(Arg.Any<IAsyncResult>()).Returns(_ => { throw new WebException(); });
-            webrequestCompleteCallback(result);
+            webRequestCompleteEvent.Set();
 
             Assert.Throws<WebException>(async () => await getResponseTask);
         }

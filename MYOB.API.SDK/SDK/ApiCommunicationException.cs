@@ -33,6 +33,11 @@ namespace MYOB.AccountRight.SDK
         public string ErrorInformation { get; private set; }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public string RequestId { get; private set; }
+
+        /// <summary>
         /// Initializes an instance of the ApiCommunicationException class
         /// </summary>
         /// <param name="message"></param>
@@ -40,19 +45,21 @@ namespace MYOB.AccountRight.SDK
         /// <param name="uri"></param>
         /// <param name="innerException"></param>
         /// <param name="listOfErrors"></param>
-        /// <param name="Information"></param>
-        public ApiCommunicationException(string message, HttpStatusCode statusCode, Uri uri, WebException innerException, IList<Error> listOfErrors, string Information)
+        /// <param name="information"></param>
+        /// <param name="requestId"></param>
+        public ApiCommunicationException(string message, HttpStatusCode statusCode, Uri uri, WebException innerException, IList<Error> listOfErrors, string information, string requestId)
             : base(message, innerException)
         {
             StatusCode = statusCode;
             URI = uri;
             Errors = listOfErrors;
-            ErrorInformation = Information; 
+            ErrorInformation = information;
+            RequestId = requestId;
         }
     }
 
     /// <summary>
-    /// An excpetion that is thrown when an error has occured within the API and is not communication related
+    /// An exception that is thrown when an error has occured within the API and is not communication related
     /// </summary>
     public class ApiOperationException : Exception
     {
@@ -62,5 +69,26 @@ namespace MYOB.AccountRight.SDK
         /// <param name="message"></param>
         /// <param name="innerException"></param>
         public ApiOperationException(string message, Exception innerException) : base(message,innerException){}
+    }
+
+    /// <summary>
+    /// An exception that is thrown when the API throws a validation exception
+    /// </summary>
+    public class ApiValidationException : ApiCommunicationException
+    {
+        /// <summary>
+        /// Initializes an instance of the ApiCommunicationException class
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="statusCode"></param>
+        /// <param name="uri"></param>
+        /// <param name="innerException"></param>
+        /// <param name="listOfErrors"></param>
+        /// <param name="information"></param>
+        /// <param name="requestId"></param>
+        public ApiValidationException(string message, HttpStatusCode statusCode, Uri uri, WebException innerException, IList<Error> listOfErrors, string information, string requestId)
+            : base(message, statusCode, uri, innerException, listOfErrors, information, requestId)
+        {
+        }
     }
 }

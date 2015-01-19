@@ -75,6 +75,11 @@ namespace SDK.Test.Services
             {
                 return await MakeApiPostRequestAsync<UserContract, TestContract>(uri, contract, null);
             }
+
+            async public Task<TestContract> PutAsync(Uri uri, UserContract contract)
+            {
+                return await MakeApiPutRequestAsync<UserContract, TestContract>(uri, contract, null);
+            }
         }
 
         [Test]
@@ -122,6 +127,7 @@ namespace SDK.Test.Services
                 new Tuple<Action<TestServiceBase, Uri>, string, bool>((@base, uri) => @base.GetAsync(uri).Wait(), new UserContract() { Name = "User" }.ToJson(), false),
                 new Tuple<Action<TestServiceBase, Uri>, string, bool>((@base, uri) => @base.DeleteAsync(uri).Wait(), null, false),
                 new Tuple<Action<TestServiceBase, Uri>, string, bool>((@base, uri) => @base.PutAsync(uri).Wait(), null, false),
+                new Tuple<Action<TestServiceBase, Uri>, string, bool>((@base, uri) => @base.PutAsync(uri, new UserContract()).Wait(), null, false),
                 new Tuple<Action<TestServiceBase, Uri>, string, bool>((@base, uri) => @base.PostAsync(uri).Wait(), null, false),
                 new Tuple<Action<TestServiceBase, Uri>, string, bool>((@base, uri) => @base.PostAsync(uri, new UserContract()).Wait(), null, false),
             };

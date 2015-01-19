@@ -10,7 +10,8 @@ using MYOB.AccountRight.SDK.Services.Sale;
 using NSubstitute;
 using NUnit.Framework;
 using SDK.Test.Helper;
-
+using System.IO.Compression;
+    
 namespace SDK.Test.Services
 {
     [TestFixture]
@@ -95,7 +96,7 @@ namespace SDK.Test.Services
             var received = action.Item2(_service, cf);
 
             // Assert
-            Assert.IsInstanceOf<SharpCompress.Compressor.Deflate.GZipStream>(received);
+            Assert.IsInstanceOf<GZipStream>(received);
             using (var actualPdf = new MemoryStream())
             {
                 received.CopyTo(actualPdf);

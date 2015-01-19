@@ -35,7 +35,11 @@ namespace SDK.Test.Communication
 
             Assert.AreEqual("<<clientid>>", request.Headers["x-myobapi-key"]);
             Assert.AreEqual("v2", request.Headers["x-myobapi-version"]);
-            Assert.AreEqual(Convert.ToBase64String(Encoding.UTF8.GetBytes("user:pass")), request.Headers["x-myobapi-cftoken"]); 
+            Assert.AreEqual(Convert.ToBase64String(Encoding.UTF8.GetBytes("user:pass")), request.Headers["x-myobapi-cftoken"]);
+
+            var version = typeof (ApiRequestHandler).Assembly.GetName().Version.ToString(3);
+            var userAgent = request.Headers[HttpRequestHeader.UserAgent];
+            Assert.IsTrue(userAgent.Contains(string.Format("MYOB-ARL-SDK/{0}", version)));
         }
 
         [Test]
@@ -243,6 +247,24 @@ namespace SDK.Test.Communication
         }
 
         [Test]
+        public void PutAsyncRequest_Return_Response()
+        {
+            // arrange
+            var expected = new ExpectedResult { UID = Guid.NewGuid() };
+            var factory = new TestWebRequestFactory();
+            factory.RegisterResultForUri("http://localhost", expected.ToJson());
+            var request = factory.Create(new Uri("http://localhost"));
+
+            var handler = new ApiRequestHandler(new ApiConfiguration("<<clientid>>", "<<clientsecret>>", "<<redirecturl>>"), new CompanyFileCredentials("user", "pass"));
+
+            // act
+            var receivedEntity = handler.PutAsync<Parameter, ExpectedResult>(request, new Parameter()).Result;
+
+            // assert
+            Assert.AreEqual(expected.UID, receivedEntity.UID);
+        }
+
+        [Test]
         public void TheEntityIsPlacedOnTheOutgoingStreamInJsonFormatDuringPut()
         {
             // arrange
@@ -274,7 +296,7 @@ namespace SDK.Test.Communication
             var request = factory.Create(new Uri("http://localhost"));
 
             var stream = new MemoryStream();
-            request.EndGetRequestStream(Arg.Any<IAsyncResult>()).Returns(c => stream);
+            request.GetRequestStreamAsync().Returns(async c => (Stream)stream);
 
             var handler = new ApiRequestHandler(new ApiConfiguration("<<clientid>>", "<<clientsecret>>", "<<redirecturl>>"), null);
 
@@ -320,7 +342,7 @@ namespace SDK.Test.Communication
             var request = factory.Create(new Uri("http://localhost"));
 
             var stream = new MemoryStream();
-            request.EndGetRequestStream(Arg.Any<IAsyncResult>()).Returns(c => stream);
+            request.GetRequestStreamAsync().Returns(async c => (Stream)stream);
 
             var handler = new ApiRequestHandler(new ApiConfiguration("<<clientid>>", "<<clientsecret>>", "<<redirecturl>>"), null);
 
@@ -416,6 +438,12 @@ namespace SDK.Test.Communication
 
             // assert
             Assert.AreEqual("http://localhost/ABC", res);
+        }
+
+        [Test]
+        public void IgnoreException_SwallowsExceptions()
+        {
+             Assert.DoesNotThrow(() => ApiRequestHelper.IgnoreError(() => { throw new Exception(); }));
         }
     }
 }
