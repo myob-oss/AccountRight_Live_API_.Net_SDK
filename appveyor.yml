@@ -1,8 +1,15 @@
 version: 1.0.{build}
 shallow_clone: true
+assembly_info:
+  patch: true
+  file: '**\AssemblyInfo.*'
+  assembly_version: '{version}'
+  assembly_file_version: '{version}'
+  assembly_informational_version: '{version}'
 environment:
   COVERALLS_REPO_TOKEN:
     secure: Cn76L45YPBc4LT+lbfEuztWDmudgETBZaHRoT7O48sBE8OpUhtegDDh1AlRFXMzG
+cache: .\MYOB.API.SDK\SDK\MYOB.API.SDK.snk
 build_script:
 - build.bat
 on_success:
