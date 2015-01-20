@@ -12,5 +12,25 @@ environment:
 cache: .\MYOB.API.SDK\SDK\MYOB.API.SDK.snk
 build_script:
 - build.bat
+artifacts:
+- path: .\Artefacts\Nuget\Release\*.nupkg
+  name: Release
+- path: .\Artefacts\Nuget\Candidate\*.nupkg
+  name: Candidate
+deploy:
+- provider: NuGet
+  api_key:
+    secure: yew/4xjmqdUs1U//LNGQjjMgB3JVantsz09C2LxmKaLXuG1gEsWJl+Nd+VRmB3TM
+  skip_symbols: true
+  artifact: Release
+  on:
+    branch: release
+- provider: NuGet
+  api_key:
+    secure: yew/4xjmqdUs1U//LNGQjjMgB3JVantsz09C2LxmKaLXuG1gEsWJl+Nd+VRmB3TM
+  skip_symbols: true
+  artifact: Candidate
+  on:
+    branch: candidate
 on_success:
 - .\packages\coveralls.io.1.1.86\tools\coveralls.net.exe --opencover .\Artefacts\Coverage\output.xml
