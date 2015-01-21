@@ -35,9 +35,9 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="credentials">The credentials to access the company file</param>
         /// <param name="onComplete">The action to call when the operation is complete</param>
         /// <param name="onError">The action to call when the operation has an error</param>
-        public virtual void Get(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, Action<HttpStatusCode, T> onComplete, Action<Uri, Exception> onError)
+        public virtual void Get(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, Action<HttpStatusCode, T> onComplete, Action<Uri, Exception> onError, string etag = null)
         {
-            MakeApiGetRequestDelegate(BuildUri(cf, uid), credentials, onComplete, onError);
+            MakeApiGetRequestDelegate(BuildUri(cf, uid), credentials, onComplete, onError, etag);
         }
 
         /// <summary>
@@ -47,9 +47,9 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="uid">The identifier of the entity to retrieve</param>
         /// <param name="credentials">The credentials to access the company file</param>
         /// <returns></returns>
-        public virtual T Get(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials)
+        public virtual T Get(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, string etag = null)
         {
-            return MakeApiGetRequestSync<T>(BuildUri(cf, uid), credentials);
+            return MakeApiGetRequestSync<T>(BuildUri(cf, uid), credentials, null, etag);
         }
 
 #if ASYNC
@@ -60,9 +60,9 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="uid">The identifier of the entity to retrieve</param>
         /// <param name="credentials">The credentials to access the company file</param>
         /// <returns></returns>
-        public virtual Task<T> GetAsync(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials)
+        public virtual Task<T> GetAsync(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, string etag = null)
         {
-            return this.GetAsync(cf, uid, credentials, CancellationToken.None);
+            return this.GetAsync(cf, uid, credentials, CancellationToken.None, etag);
         } 
 
         /// <summary>
@@ -73,9 +73,9 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="credentials">The credentials to access the company file</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public virtual Task<T> GetAsync(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, CancellationToken cancellationToken)
+        public virtual Task<T> GetAsync(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, CancellationToken cancellationToken, string etag = null)
         {
-            return this.MakeApiGetRequestAsync<T>(this.BuildUri(cf, uid), credentials, cancellationToken);
+            return this.MakeApiGetRequestAsync<T>(this.BuildUri(cf, uid), credentials, cancellationToken, etag);
         } 
 #endif
 
@@ -87,9 +87,9 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="credentials">The credentials to access the company file</param>
         /// <param name="onComplete">The action to call when the operation is complete</param>
         /// <param name="onError">The action to call when the operation has an error</param>
-        public virtual void Get(CompanyFile cf, Uri uri, ICompanyFileCredentials credentials, Action<HttpStatusCode, T> onComplete, Action<Uri, Exception> onError)
+        public virtual void Get(CompanyFile cf, Uri uri, ICompanyFileCredentials credentials, Action<HttpStatusCode, T> onComplete, Action<Uri, Exception> onError, string etag = null)
         {
-            MakeApiGetRequestDelegate(ValidateUri(cf, uri), credentials, onComplete, onError);
+            MakeApiGetRequestDelegate(ValidateUri(cf, uri), credentials, onComplete, onError, etag);
         }
 
         /// <summary>
@@ -99,9 +99,9 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="uri">The uri of the entity to retrieve</param>
         /// <param name="credentials">The credentials to access the company file</param>
         /// <returns></returns>
-        public virtual T Get(CompanyFile cf, Uri uri, ICompanyFileCredentials credentials)
+        public virtual T Get(CompanyFile cf, Uri uri, ICompanyFileCredentials credentials, string etag = null)
         {
-            return MakeApiGetRequestSync<T>(ValidateUri(cf, uri), credentials);
+            return MakeApiGetRequestSync<T>(ValidateUri(cf, uri), credentials, null, etag);
         }
 
 #if ASYNC
@@ -112,9 +112,9 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="uri">The uri of the entity to retrieve</param>
         /// <param name="credentials">The credentials to access the company file</param>
         /// <returns></returns>
-        public virtual Task<T> GetAsync(CompanyFile cf, Uri uri, ICompanyFileCredentials credentials)
+        public virtual Task<T> GetAsync(CompanyFile cf, Uri uri, ICompanyFileCredentials credentials, string etag = null)
         {
-            return this.GetAsync(cf, uri, credentials, CancellationToken.None);
+            return this.GetAsync(cf, uri, credentials, CancellationToken.None, etag);
         }
 
         /// <summary>
@@ -125,9 +125,9 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="credentials">The credentials to access the company file</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public virtual Task<T> GetAsync(CompanyFile cf, Uri uri, ICompanyFileCredentials credentials, CancellationToken cancellationToken)
+        public virtual Task<T> GetAsync(CompanyFile cf, Uri uri, ICompanyFileCredentials credentials, CancellationToken cancellationToken, string etag = null)
         {
-            return this.MakeApiGetRequestAsync<T>(this.ValidateUri(cf, uri), credentials, cancellationToken);
+            return this.MakeApiGetRequestAsync<T>(this.ValidateUri(cf, uri), credentials, cancellationToken, etag);
         } 
 #endif
 

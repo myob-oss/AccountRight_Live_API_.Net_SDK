@@ -70,12 +70,12 @@ namespace MYOB.AccountRight.SDK.Services
 #endif
 
         /// <exclude/>
-        protected void MakeApiGetRequestDelegate<T>(Uri uri, ICompanyFileCredentials credentials, Action<HttpStatusCode, T> onComplete, Action<Uri, Exception> onError) where T : class
+        protected void MakeApiGetRequestDelegate<T>(Uri uri, ICompanyFileCredentials credentials, Action<HttpStatusCode, T> onComplete, Action<Uri, Exception> onError, string etag = null) where T : class
         {
             WrapApiRequestWithOAuthRenew(response =>
             {
                 var api = new ApiRequestHandler(Configuration, credentials, response);
-                api.Get(WebRequestFactory.Create(uri), onComplete, onError);
+                api.Get(WebRequestFactory.Create(uri), onComplete, onError, etag);
             }, onError);
         }
 
@@ -96,11 +96,11 @@ namespace MYOB.AccountRight.SDK.Services
         } 
 
         /// <exclude/>
-        async protected Task<T> MakeApiGetRequestAsync<T>(Uri uri, ICompanyFileCredentials credentials, CancellationToken cancellationToken) where T : class
+        async protected Task<T> MakeApiGetRequestAsync<T>(Uri uri, ICompanyFileCredentials credentials, CancellationToken cancellationToken, string etag = null) where T : class
         {
             await RenewOAuthTokensAsync(cancellationToken);
             var api = new ApiRequestHandler(Configuration, credentials, GetOAuthResponse());
-            var data = await api.GetAsync<T>(this.WebRequestFactory.Create(uri), cancellationToken);
+            var data = await api.GetAsync<T>(this.WebRequestFactory.Create(uri), cancellationToken, etag);
 			return data.Item2;
         } 
 #endif
@@ -122,7 +122,7 @@ namespace MYOB.AccountRight.SDK.Services
 #endif
 
         /// <exclude/>
-        protected T MakeApiGetRequestSync<T>(Uri uri, ICompanyFileCredentials credentials, Action<HttpWebRequest> transform = null) where T : class
+        protected T MakeApiGetRequestSync<T>(Uri uri, ICompanyFileCredentials credentials, Action<HttpWebRequest> transform = null, string etag = null) where T : class
         {
             var wait = new AutoResetEvent(false);
             Exception ex = null;
@@ -141,7 +141,7 @@ namespace MYOB.AccountRight.SDK.Services
                         requestUri = exUri;
                         ex = exception;
                         wait.Set();
-                    });
+                    }, etag);
 
             if (wait.WaitOne(new TimeSpan(0, 0, 0, 180)))
             {

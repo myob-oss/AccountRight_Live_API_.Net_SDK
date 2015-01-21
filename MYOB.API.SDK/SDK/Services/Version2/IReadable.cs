@@ -24,7 +24,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="credentials">The credentials to access the company file</param>
         /// <param name="onComplete">The action to call when the operation is complete</param>
         /// <param name="onError">The action to call when the operation has an error</param>
-        void GetRange(CompanyFile cf, string queryString, ICompanyFileCredentials credentials, Action<HttpStatusCode, PagedCollection<T>> onComplete, Action<Uri, Exception> onError);
+        void GetRange(CompanyFile cf, string queryString, ICompanyFileCredentials credentials, Action<HttpStatusCode, PagedCollection<T>> onComplete, Action<Uri, Exception> onError, string etag = null);
 
         /// <summary>
         /// Retrieve a paged list of entities
@@ -33,7 +33,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="queryString">An odata filter</param>
         /// <param name="credentials">The credentials to access the company file</param>
         /// <returns></returns>
-        PagedCollection<T> GetRange(CompanyFile cf, string queryString, ICompanyFileCredentials credentials);
+        PagedCollection<T> GetRange(CompanyFile cf, string queryString, ICompanyFileCredentials credentials, string etag = null);
 
 #if ASYNC
         /// <summary>
@@ -44,7 +44,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="credentials">The credentials to access the company file</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<PagedCollection<T>> GetRangeAsync(CompanyFile cf, string queryString, ICompanyFileCredentials credentials, CancellationToken cancellationToken);
+        Task<PagedCollection<T>> GetRangeAsync(CompanyFile cf, string queryString, ICompanyFileCredentials credentials, CancellationToken cancellationToken, string etag = null);
 #endif
     }
 
@@ -62,7 +62,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="credentials">The credentials to access the company file</param>
         /// <param name="onComplete">The action to call when the operation is complete</param>
         /// <param name="onError">The action to call when the operation has an error</param>
-        void Get(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, Action<HttpStatusCode, T> onComplete, Action<Uri, Exception> onError);
+        void Get(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, Action<HttpStatusCode, T> onComplete, Action<Uri, Exception> onError, string etag = null);
 
         /// <summary>
         /// Retrieve an entity
@@ -71,7 +71,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="uid">The identifier of the entity to retrieve</param>
         /// <param name="credentials">The credentials to access the company file</param>
         /// <returns></returns>
-        T Get(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials);
+        T Get(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, string etag = null);
 
 #if ASYNC
 
@@ -83,7 +83,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="credentials">The credentials to access the company file</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<T> GetAsync(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, CancellationToken cancellationToken); 
+        Task<T> GetAsync(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, CancellationToken cancellationToken, string etag = null); 
 #endif
 
         /// <summary>
@@ -94,7 +94,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="credentials">The credentials to access the company file</param>
         /// <param name="onComplete">The action to call when the operation is complete</param>
         /// <param name="onError">The action to call when the operation has an error</param>
-        void Get(CompanyFile cf, Uri uri, ICompanyFileCredentials credentials, Action<HttpStatusCode, T> onComplete, Action<Uri, Exception> onError);
+        void Get(CompanyFile cf, Uri uri, ICompanyFileCredentials credentials, Action<HttpStatusCode, T> onComplete, Action<Uri, Exception> onError, string etag = null);
 
         /// <summary>
         /// Retrieve an entity
@@ -103,7 +103,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="uri">The uri of the entity to retrieve</param>
         /// <param name="credentials">The credentials to access the company file</param>
         /// <returns></returns>
-        T Get(CompanyFile cf, Uri uri, ICompanyFileCredentials credentials);
+        T Get(CompanyFile cf, Uri uri, ICompanyFileCredentials credentials, string etag = null);
 
 #if ASYNC
         /// <summary>
@@ -114,7 +114,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="credentials">The credentials to access the company file</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<T> GetAsync(CompanyFile cf, Uri uri, ICompanyFileCredentials credentials, CancellationToken cancellationToken); 
+        Task<T> GetAsync(CompanyFile cf, Uri uri, ICompanyFileCredentials credentials, CancellationToken cancellationToken, string etag = null); 
 #endif
 
 #if ASYNC
