@@ -8,6 +8,9 @@ namespace MYOB.AccountRight.SDK
     /// <summary>
     /// Describes an Error
     /// </summary>
+#if !PORTABLE
+    [Serializable]
+#endif
     public class Error
     {
         /// <summary>
