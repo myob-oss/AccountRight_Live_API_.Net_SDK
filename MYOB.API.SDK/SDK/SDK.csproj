@@ -56,6 +56,7 @@
     </Compile>
     <Compile Include="Communication\WebRequestFactory.cs" />
     <Compile Include="Contracts\Company.cs" />
+    <Compile Include="Contracts\IETagSupport.cs" />
     <Compile Include="Contracts\ProductLevel.cs" />
     <Compile Include="Contracts\Version2\Banking\ReceiveMoneyTxnLine.cs" />
     <Compile Include="Contracts\Version2\Banking\ReceiveMoneyTxn.cs" />

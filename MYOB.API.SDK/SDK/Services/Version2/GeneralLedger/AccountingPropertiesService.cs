@@ -42,10 +42,11 @@ namespace MYOB.AccountRight.SDK.Services.GeneralLedger
         /// <param name="cf">A company file reference that has been retrieved</param>
         /// <param name="uid">The identifier of the entity to retrieve</param>
         /// <param name="credentials">The credentials to access the company file</param>
+        /// <param name="eTag">The <see cref="BaseEntity.ETag" /> from a previously fetched entity</param>
         /// <returns></returns>
-        public override AccountingProperties Get(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, string etag = null)
+        public override AccountingProperties Get(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, string eTag = null)
         {
-            return base.GetRange(cf, null, credentials, etag).Items.Maybe(_ => _[0]);
+            return base.GetRange(cf, null, credentials, eTag).Items.Maybe(_ => _[0]);
         }
 
         /// <summary>
@@ -56,9 +57,10 @@ namespace MYOB.AccountRight.SDK.Services.GeneralLedger
         /// <param name="credentials">The credentials to access the company file</param>
         /// <param name="onComplete">The action to call when the operation is complete</param>
         /// <param name="onError">The action to call when the operation has an error</param>
-        public override void Get(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, Action<HttpStatusCode, AccountingProperties> onComplete, Action<Uri, Exception> onError, string etag = null)
+        /// <param name="eTag">The <see cref="BaseEntity.ETag" /> from a previously fetched entity</param>
+        public override void Get(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, Action<HttpStatusCode, AccountingProperties> onComplete, Action<Uri, Exception> onError, string eTag = null)
         {
-            base.GetRange(cf, null, credentials, (code, collection) => onComplete(code, collection.Items.Maybe(_ => _[0])), onError, etag);
+            base.GetRange(cf, null, credentials, (code, collection) => onComplete(code, collection.Items.Maybe(_ => _[0])), onError, eTag);
         }
 
 #if ASYNC
@@ -69,10 +71,11 @@ namespace MYOB.AccountRight.SDK.Services.GeneralLedger
         /// <param name="uid">The identifier of the entity to retrieve</param>
         /// <param name="credentials">The credentials to access the company file</param>
         /// <param name="cancellationToken"></param>
+        /// <param name="eTag">The <see cref="BaseEntity.ETag" /> from a previously fetched entity</param>
         /// <returns></returns>
-        public async override Task<AccountingProperties> GetAsync(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, CancellationToken cancellationToken, string etag = null)
+        public async override Task<AccountingProperties> GetAsync(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, CancellationToken cancellationToken, string eTag = null)
         {
-            var res = await base.GetRangeAsync(cf, null, credentials, cancellationToken, etag);
+            var res = await base.GetRangeAsync(cf, null, credentials, cancellationToken, eTag);
             return res.Items[0];
         }  
 #endif   

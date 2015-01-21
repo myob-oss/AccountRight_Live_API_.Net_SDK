@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Net;
+using MYOB.AccountRight.SDK.Contracts;
 using MYOB.AccountRight.SDK.Extensions;
 
 #if ASYNC
@@ -95,10 +96,9 @@ namespace MYOB.AccountRight.SDK.Communication
             try
             {
                 var response = await request.GetResponseAsync(cancellationToken);
-                if (entity is IETag)
-                    (entity as IETag).ETag = (response.Headers["ETag"] ?? string.Empty).Replace("\"", string.Empty);
-
-
+                entity = ExtractDetails<T>(response, out location, out statusCode);
+                if (entity is IETagSupport)
+                    (entity as IETagSupport).ETag = (response.Headers["ETag"] ?? string.Empty).Replace("\"", string.Empty);
             }
             catch (Exception wex)
             {

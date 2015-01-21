@@ -27,7 +27,7 @@ namespace SDK.Test.Communication
             var handler = new ApiRequestHandler(new ApiConfiguration("<<clientid>>", "<<clientsecret>>", "<<redirecturl>>"), new CompanyFileCredentials("user", "pass"));
 
             // act
-            handler.Get<UserContract>(request, (code, response) => { }, (uri, exception) => Assert.Fail(exception.Message));
+            handler.Get<UserContract>(request, (code, response) => { }, (uri, exception) => Assert.Fail(exception.Message), null);
 
             // assert
             Assert.IsTrue(request.Headers[HttpRequestHeader.Authorization].StartsWith("Bearer"));
@@ -40,6 +40,25 @@ namespace SDK.Test.Communication
             var version = typeof (ApiRequestHandler).Assembly.GetName().Version.ToString(3);
             var userAgent = request.Headers[HttpRequestHeader.UserAgent];
             Assert.IsTrue(userAgent.Contains(string.Format("MYOB-ARL-SDK/{0}", version)));
+            Assert.IsNull(request.Headers[HttpRequestHeader.IfNoneMatch]);
+        }
+
+        [Test]
+        public void DuringGetRequest_IfNoneMatchHeaderAttached_IfSupplyETag()
+        {
+            // arrange
+            var eTag = "123456789";
+            var factory = new TestWebRequestFactory();
+            factory.RegisterResultForUri("http://localhost", new UserContract() { Name = "David" }.ToJson());
+            var request = factory.Create(new Uri("http://localhost"));
+
+            var handler = new ApiRequestHandler(new ApiConfiguration("<<clientid>>", "<<clientsecret>>", "<<redirecturl>>"), new CompanyFileCredentials("user", "pass"));
+
+            // act
+            handler.Get<UserContract>(request, (code, response) => { }, (uri, exception) => Assert.Fail(exception.Message), eTag);
+
+            // assert
+            Assert.AreEqual(eTag, request.Headers[HttpRequestHeader.IfNoneMatch]);
         }
 
         [Test]
@@ -53,7 +72,7 @@ namespace SDK.Test.Communication
             var handler = new ApiRequestHandler(new ApiConfiguration("<<clientid>>", "<<clientsecret>>", "<<redirecturl>>"), new CompanyFileCredentials("user", "pass"));
 
             // act
-            var res = await handler.GetAsync<UserContract>(request);
+            var res = await handler.GetAsync<UserContract>(request, null);
 
             // assert
             Assert.IsTrue(request.Headers[HttpRequestHeader.Authorization].StartsWith("Bearer"));
@@ -62,6 +81,25 @@ namespace SDK.Test.Communication
             Assert.AreEqual("<<clientid>>", request.Headers["x-myobapi-key"]);
             Assert.AreEqual("v2", request.Headers["x-myobapi-version"]);
             Assert.AreEqual(Convert.ToBase64String(Encoding.UTF8.GetBytes("user:pass")), request.Headers["x-myobapi-cftoken"]);
+            Assert.IsNull(request.Headers[HttpRequestHeader.IfNoneMatch]);
+        }
+
+        [Test]
+        async public void DuringGetRequest_Async_IfNoneMatchHeaderAttached_IfSupplyETag()
+        {
+            // arrange
+            var eTag = "123456789";
+            var factory = new TestWebRequestFactory();
+            factory.RegisterResultForUri("http://localhost", new UserContract() { Name = "David" }.ToJson());
+            var request = factory.Create(new Uri("http://localhost"));
+
+            var handler = new ApiRequestHandler(new ApiConfiguration("<<clientid>>", "<<clientsecret>>", "<<redirecturl>>"), new CompanyFileCredentials("user", "pass"));
+
+            // act
+            var res = await handler.GetAsync<UserContract>(request, eTag);
+
+            // assert
+            Assert.AreEqual(eTag, request.Headers[HttpRequestHeader.IfNoneMatch]);
         }
 
         [Test]

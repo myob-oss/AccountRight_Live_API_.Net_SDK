@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace MYOB.AccountRight.SDK.Contracts.Version2
 {
@@ -10,7 +11,7 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2
     /// <remarks>
     /// If the NextPageLink is populated there is more data available to be retrieved.
     /// </remarks>
-    public class PagedCollection<T> : IETag
+    public class PagedCollection<T> : IETagSupport
     {
         /// <summary>
         /// The retrieved items
@@ -30,6 +31,7 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2
         /// <summary>
         /// Returns the ETag from the HTTP response header
         /// </summary>
+        [JsonIgnore]
         public string ETag { get; set; }
     }
 }

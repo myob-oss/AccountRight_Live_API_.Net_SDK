@@ -70,12 +70,12 @@ namespace MYOB.AccountRight.SDK.Services
 #endif
 
         /// <exclude/>
-        protected void MakeApiGetRequestDelegate<T>(Uri uri, ICompanyFileCredentials credentials, Action<HttpStatusCode, T> onComplete, Action<Uri, Exception> onError, string etag = null) where T : class
+        protected void MakeApiGetRequestDelegate<T>(Uri uri, ICompanyFileCredentials credentials, Action<HttpStatusCode, T> onComplete, Action<Uri, Exception> onError, string eTag) where T : class
         {
             WrapApiRequestWithOAuthRenew(response =>
             {
                 var api = new ApiRequestHandler(Configuration, credentials, response);
-                api.Get(WebRequestFactory.Create(uri), onComplete, onError, etag);
+                api.Get(WebRequestFactory.Create(uri), onComplete, onError, eTag);
             }, onError);
         }
 
@@ -90,24 +90,24 @@ namespace MYOB.AccountRight.SDK.Services
         }
 #if ASYNC
         /// <exclude/>
-        protected Task<T> MakeApiGetRequestAsync<T>(Uri uri, ICompanyFileCredentials credentials) where T : class
+        protected Task<T> MakeApiGetRequestAsync<T>(Uri uri, ICompanyFileCredentials credentials, string eTag) where T : class
         {
-            return this.MakeApiGetRequestAsync<T>(uri, credentials, CancellationToken.None);
+            return this.MakeApiGetRequestAsync<T>(uri, credentials, CancellationToken.None, eTag);
         } 
 
         /// <exclude/>
-        async protected Task<T> MakeApiGetRequestAsync<T>(Uri uri, ICompanyFileCredentials credentials, CancellationToken cancellationToken, string etag = null) where T : class
+        async protected Task<T> MakeApiGetRequestAsync<T>(Uri uri, ICompanyFileCredentials credentials, CancellationToken cancellationToken, string eTag) where T : class
         {
             await RenewOAuthTokensAsync(cancellationToken);
             var api = new ApiRequestHandler(Configuration, credentials, GetOAuthResponse());
-            var data = await api.GetAsync<T>(this.WebRequestFactory.Create(uri), cancellationToken, etag);
+            var data = await api.GetAsync<T>(this.WebRequestFactory.Create(uri), cancellationToken, eTag);
 			return data.Item2;
         } 
 #endif
 
 #if ASYNC
         /// <exclude/>
-        async protected Task<Stream> MakeApiGetRequestAsyncStream(Uri uri, string acceptEncoding, ICompanyFileCredentials credentials, CancellationToken cancellationToken)
+        async protected Task<Stream> MakeApiGetRequestAsyncStream(Uri uri, string acceptEncoding, ICompanyFileCredentials credentials, CancellationToken cancellationToken, string eTag)
         {
             await RenewOAuthTokensAsync(cancellationToken);
             var api = new ApiStreamRequestHandler(Configuration, credentials, GetOAuthResponse());
@@ -122,7 +122,7 @@ namespace MYOB.AccountRight.SDK.Services
 #endif
 
         /// <exclude/>
-        protected T MakeApiGetRequestSync<T>(Uri uri, ICompanyFileCredentials credentials, Action<HttpWebRequest> transform = null, string etag = null) where T : class
+        protected T MakeApiGetRequestSync<T>(Uri uri, ICompanyFileCredentials credentials, Action<HttpWebRequest> transform, string eTag) where T : class
         {
             var wait = new AutoResetEvent(false);
             Exception ex = null;
@@ -141,7 +141,7 @@ namespace MYOB.AccountRight.SDK.Services
                         requestUri = exUri;
                         ex = exception;
                         wait.Set();
-                    }, etag);
+                    }, eTag);
 
             if (wait.WaitOne(new TimeSpan(0, 0, 0, 180)))
             {

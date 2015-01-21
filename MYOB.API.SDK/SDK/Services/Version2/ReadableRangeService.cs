@@ -61,9 +61,10 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="credentials">The credentials to access the company file</param>
         /// <param name="onComplete">The action to call when the operation is complete</param>
         /// <param name="onError">The action to call when the operation has an error</param>
-        public virtual void GetRange(CompanyFile cf, string queryString, ICompanyFileCredentials credentials, Action<HttpStatusCode, PagedCollection<T>> onComplete, Action<Uri, Exception> onError, string etag = null)
+        /// <param name="eTag">The <see cref="PagedCollection&lt;T&gt;.ETag" /> from a previously fetched entity</param>
+        public virtual void GetRange(CompanyFile cf, string queryString, ICompanyFileCredentials credentials, Action<HttpStatusCode, PagedCollection<T>> onComplete, Action<Uri, Exception> onError, string eTag = null)
         {
-            MakeApiGetRequestDelegate(BuildUri(cf, null, queryString.Maybe(_ => "?" + _.TrimStart(new[] { '?' }))), credentials, onComplete, onError, etag);
+            MakeApiGetRequestDelegate(BuildUri(cf, null, queryString.Maybe(_ => "?" + _.TrimStart(new[] { '?' }))), credentials, onComplete, onError, eTag);
         }
 
         /// <summary>
@@ -72,10 +73,11 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="cf">A company file that has been retrieved</param>
         /// <param name="queryString">An odata filter</param>
         /// <param name="credentials">The credentials to access the company file</param>
+        /// <param name="eTag">The <see cref="PagedCollection&lt;T&gt;.ETag" /> from a previously fetched entity</param>
         /// <returns></returns>
-        public virtual PagedCollection<T> GetRange(CompanyFile cf, string queryString, ICompanyFileCredentials credentials, string etag = null)
+        public virtual PagedCollection<T> GetRange(CompanyFile cf, string queryString, ICompanyFileCredentials credentials, string eTag = null)
         {
-            return MakeApiGetRequestSync<PagedCollection<T>>(BuildUri(cf, null, queryString.Maybe(_ => "?" + _.TrimStart(new[] { '?' }))), credentials, null, etag);
+            return MakeApiGetRequestSync<PagedCollection<T>>(BuildUri(cf, null, queryString.Maybe(_ => "?" + _.TrimStart(new[] { '?' }))), credentials, null, eTag);
         }
 
 #if ASYNC
@@ -85,10 +87,11 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="cf">A company file that has been retrieved</param>
         /// <param name="queryString">An odata filter</param>
         /// <param name="credentials">The credentials to access the company file</param>
+        /// <param name="eTag">The <see cref="PagedCollection&lt;T&gt;.ETag" /> from a previously fetched entity</param>
         /// <returns></returns>
-        public virtual Task<PagedCollection<T>> GetRangeAsync(CompanyFile cf, string queryString, ICompanyFileCredentials credentials, string etag = null)
+        public virtual Task<PagedCollection<T>> GetRangeAsync(CompanyFile cf, string queryString, ICompanyFileCredentials credentials, string eTag = null)
         {
-            return this.GetRangeAsync(cf, queryString, credentials, CancellationToken.None, etag);
+            return this.GetRangeAsync(cf, queryString, credentials, CancellationToken.None, eTag);
         }
 
         /// <summary>
@@ -98,10 +101,11 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="queryString">An odata filter</param>
         /// <param name="credentials">The credentials to access the company file</param>
         /// <param name="cancellationToken"></param>
+        /// <param name="eTag">The <see cref="PagedCollection&lt;T&gt;.ETag" /> from a previously fetched entity</param>
         /// <returns></returns>
-        public virtual Task<PagedCollection<T>> GetRangeAsync(CompanyFile cf, string queryString, ICompanyFileCredentials credentials, CancellationToken cancellationToken, string etag = null)
+        public virtual Task<PagedCollection<T>> GetRangeAsync(CompanyFile cf, string queryString, ICompanyFileCredentials credentials, CancellationToken cancellationToken, string eTag = null)
         {
-            return this.MakeApiGetRequestAsync<PagedCollection<T>>(this.BuildUri(cf, null, queryString.Maybe(_ => "?" + _.TrimStart(new[] { '?' }))), credentials, cancellationToken, etag);
+            return this.MakeApiGetRequestAsync<PagedCollection<T>>(this.BuildUri(cf, null, queryString.Maybe(_ => "?" + _.TrimStart(new[] { '?' }))), credentials, cancellationToken, eTag);
         }
 #endif
     }

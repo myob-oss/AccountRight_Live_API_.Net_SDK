@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace MYOB.AccountRight.SDK.Contracts.Version2
 {
     /// <summary>
     /// Commonly shared properties for main entities
     /// </summary>
-    public abstract class BaseEntity : IETag
+    public abstract class BaseEntity : IETagSupport
     {
         /// <summary>
         /// Unique account identifier in the form of a guid.
@@ -44,6 +44,7 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2
         /// <summary>
         /// Returns the ETag from the HTTP Response Header
         /// </summary>
+        [JsonIgnore]
         public string ETag { get; set; }
     }
 }

@@ -37,7 +37,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <returns></returns>
         public T Get(CompanyFile companyFile, ICompanyFileCredentials credentials)
         {
-            return MakeApiGetRequestSync<T>(BuildUri(companyFile), credentials);
+            return MakeApiGetRequestSync<T>(BuildUri(companyFile), credentials, null, null);
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="onError">The action to call when the operation has an error</param>
         public void Get(CompanyFile companyFile, ICompanyFileCredentials credentials, Action<HttpStatusCode, T> onComplete, Action<Uri, Exception> onError)
         {
-            MakeApiGetRequestDelegate(BuildUri(companyFile), credentials, onComplete, onError);
+            MakeApiGetRequestDelegate(BuildUri(companyFile), credentials, onComplete, onError, null);
         }
 
 #if ASYNC
@@ -73,7 +73,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <returns></returns>
         public Task<T> GetAsync(CompanyFile companyFile, ICompanyFileCredentials credentials, CancellationToken cancellationToken)
         {
-            return this.MakeApiGetRequestAsync<T>(this.BuildUri(companyFile), credentials, cancellationToken);
+            return this.MakeApiGetRequestAsync<T>(this.BuildUri(companyFile), credentials, cancellationToken, null);
         }
 #endif
         /// <exclude/>
