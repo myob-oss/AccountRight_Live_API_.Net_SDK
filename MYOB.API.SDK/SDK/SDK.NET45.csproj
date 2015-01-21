@@ -74,6 +74,7 @@
     <Compile Include="Contracts\Company.cs" />
     <Compile Include="Contracts\CompanyFile.cs" />
     <Compile Include="Contracts\CompanyFileWithResources.cs" />
+    <Compile Include="Contracts\IETag.cs" />
     <Compile Include="Contracts\OAuthTokens.cs" />
     <Compile Include="Contracts\ProductLevel.cs" />
     <Compile Include="Contracts\Version2\Banking\ReceiveMoneyTxn.cs" />

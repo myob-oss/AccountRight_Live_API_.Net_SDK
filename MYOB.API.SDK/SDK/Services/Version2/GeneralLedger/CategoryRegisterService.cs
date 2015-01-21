@@ -43,7 +43,7 @@ namespace MYOB.AccountRight.SDK.Services.GeneralLedger
         /// <param name="uid">The identifier of the entity to retrieve</param>
         /// <param name="credentials">The credentials to access the company file</param>
         /// <returns></returns>
-        public override CategoryRegister Get(Contracts.CompanyFile cf, System.Guid uid, ICompanyFileCredentials credentials)
+        public override CategoryRegister Get(Contracts.CompanyFile cf, System.Guid uid, ICompanyFileCredentials credentials, string etag = null)
         {
             throw new NotSupportedException();
         }
@@ -56,7 +56,7 @@ namespace MYOB.AccountRight.SDK.Services.GeneralLedger
         /// <param name="credentials">The credentials to access the company file</param>
         /// <param name="onComplete">The action to call when the operation is complete</param>
         /// <param name="onError">The action to call when the operation has an error</param>
-        public override void Get(Contracts.CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, Action<System.Net.HttpStatusCode, CategoryRegister> onComplete, Action<Uri, Exception> onError)
+        public override void Get(Contracts.CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, Action<System.Net.HttpStatusCode, CategoryRegister> onComplete, Action<Uri, Exception> onError, string etag = null)
         {
             throw new NotSupportedException();
         }
@@ -68,7 +68,7 @@ namespace MYOB.AccountRight.SDK.Services.GeneralLedger
         /// <param name="uri">The uri of the entity to retrieve</param>
         /// <param name="credentials">The credentials to access the company file</param>
         /// <returns></returns>
-        public override CategoryRegister Get(Contracts.CompanyFile cf, Uri uri, ICompanyFileCredentials credentials)
+        public override CategoryRegister Get(Contracts.CompanyFile cf, Uri uri, ICompanyFileCredentials credentials, string etag = null)
         {
             throw new NotSupportedException();
         }
@@ -81,7 +81,7 @@ namespace MYOB.AccountRight.SDK.Services.GeneralLedger
         /// <param name="credentials">The credentials to access the company file</param>
         /// <param name="onComplete">The action to call when the operation is complete</param>
         /// <param name="onError">The action to call when the operation has an error</param>
-        public override void Get(Contracts.CompanyFile cf, Uri uri, ICompanyFileCredentials credentials, Action<System.Net.HttpStatusCode, CategoryRegister> onComplete, Action<Uri, Exception> onError)
+        public override void Get(Contracts.CompanyFile cf, Uri uri, ICompanyFileCredentials credentials, Action<System.Net.HttpStatusCode, CategoryRegister> onComplete, Action<Uri, Exception> onError, string etag = null)
         {
             throw new NotSupportedException();
         }
@@ -95,7 +95,7 @@ namespace MYOB.AccountRight.SDK.Services.GeneralLedger
         /// <param name="credentials">The credentials to access the company file</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public override Task<CategoryRegister> GetAsync(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, CancellationToken cancellationToken)
+        public override Task<CategoryRegister> GetAsync(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, CancellationToken cancellationToken, string etag = null)
         {
             return Task.Factory.StartNew<CategoryRegister>(() => { throw new NotSupportedException(); });      
         }
@@ -108,7 +108,7 @@ namespace MYOB.AccountRight.SDK.Services.GeneralLedger
         /// <param name="credentials">The credentials to access the company file</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public override Task<CategoryRegister> GetAsync(CompanyFile cf, Uri uri, ICompanyFileCredentials credentials, CancellationToken cancellationToken)
+        public override Task<CategoryRegister> GetAsync(CompanyFile cf, Uri uri, ICompanyFileCredentials credentials, CancellationToken cancellationToken, string etag = null)
         {
             return Task.Factory.StartNew<CategoryRegister>(() => { throw new NotSupportedException(); }); 
         }

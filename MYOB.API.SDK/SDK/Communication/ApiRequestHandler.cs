@@ -55,10 +55,12 @@ namespace MYOB.AccountRight.SDK.Communication
         /// <param name="request"></param>
         /// <param name="onComplete"></param>
         /// <param name="onError"></param>
-        public void Get<T>(WebRequest request, Action<HttpStatusCode, T> onComplete, Action<Uri, Exception> onError)
+        public void Get<T>(WebRequest request, Action<HttpStatusCode, T> onComplete, Action<Uri, Exception> onError, string etag = null)
             where T : class
         {
             ApiRequestHelper.SetStandardHeaders(request, _configuration, _credentials, _oauth);
+            ApiRequestHelper.SetIsNoneMatch(request, etag);
+
             request.BeginGetResponse(HandleResponseCallback<RequestContext<string, T>, string, T>,
                                      new RequestContext<string, T>
                                          {
@@ -87,9 +89,11 @@ namespace MYOB.AccountRight.SDK.Communication
         /// <param name="request"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public async Task<Tuple<HttpStatusCode, T>> GetAsync<T>(WebRequest request, CancellationToken cancellationToken) where T : class
+        public async Task<Tuple<HttpStatusCode, T>> GetAsync<T>(WebRequest request, CancellationToken cancellationToken, string etag = null) where T : class
         {
             ApiRequestHelper.SetStandardHeaders(request, _configuration, _credentials, _oauth);
+            ApiRequestHelper.SetIsNoneMatch(request, etag);
+
             var get = await GetResponseTask<T>(request, cancellationToken);
             return new Tuple<HttpStatusCode, T>(get.Item1, get.Item3);
         }

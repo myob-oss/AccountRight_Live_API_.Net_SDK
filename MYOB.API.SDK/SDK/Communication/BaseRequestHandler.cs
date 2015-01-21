@@ -13,6 +13,7 @@ using System.Threading;
 
 #if COMPRESSION
 using System.IO.Compression;
+using MYOB.AccountRight.SDK.Contracts;
 #else
 using SharpCompress.Compressor;
 using SharpCompress.Compressor.Deflate;
@@ -94,7 +95,10 @@ namespace MYOB.AccountRight.SDK.Communication
             try
             {
                 var response = await request.GetResponseAsync(cancellationToken);
-                entity = ExtractDetails<T>(response, out location, out statusCode);
+                if (entity is IETag)
+                    (entity as IETag).ETag = (response.Headers["ETag"] ?? string.Empty).Replace("\"", string.Empty);
+
+
             }
             catch (Exception wex)
             {
