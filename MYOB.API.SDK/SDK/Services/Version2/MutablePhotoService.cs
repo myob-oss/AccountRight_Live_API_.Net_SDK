@@ -40,7 +40,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="onError">The action to call when the operation has an error</param>
         public virtual void GetPhoto(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, Action<HttpStatusCode, byte[]> onComplete, Action<Uri, Exception> onError)
         {
-            MakeApiGetRequestDelegate<Photo>(BuildUri(cf, uid, "/Photo"), credentials, (code, photo) => onComplete(code, photo.Maybe(_ => _.Data)), onError);
+            MakeApiGetRequestDelegate<Photo>(BuildUri(cf, uid, "/Photo"), credentials, (code, photo) => onComplete(code, photo.Maybe(_ => _.Data)), onError, null);
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <returns></returns>
         public virtual byte[] GetPhoto(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials)
         {
-            return MakeApiGetRequestSync<Photo>(BuildUri(cf, uid, "/Photo"), credentials).Maybe(_ => _.Data);
+            return MakeApiGetRequestSync<Photo>(BuildUri(cf, uid, "/Photo"), credentials, null, null).Maybe(_ => _.Data);
         }
 
 #if ASYNC
@@ -78,7 +78,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <returns></returns>
         public async virtual Task<byte[]> GetPhotoAsync(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, CancellationToken cancellationToken)
         {
-            var res = await this.MakeApiGetRequestAsync<Photo>(this.BuildUri(cf, uid, "/Photo"), credentials, cancellationToken);
+            var res = await this.MakeApiGetRequestAsync<Photo>(this.BuildUri(cf, uid, "/Photo"), credentials, cancellationToken, null);
             return res.Maybe(_ => _.Data);
         } 
 #endif

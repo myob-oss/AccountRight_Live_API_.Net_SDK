@@ -30,10 +30,13 @@ namespace SDK.Test.Helper
         }
     }
 
+    public delegate void CreatedWebRequestHandler(WebRequest request); 
+
     public class TestWebRequestFactory : IWebRequestFactory
     {
         private readonly Dictionary<string, Func<WebResponse>> lookup = new Dictionary<string, Func<WebResponse>>();
 
+        public event CreatedWebRequestHandler CreatedWebRequest;
 
         public void RegisterResultForUri(string uri, string resultBody, HttpStatusCode returnCode = HttpStatusCode.OK, string location = null)
         {
@@ -108,7 +111,7 @@ namespace SDK.Test.Helper
             return null;
         }
 
-        protected static HttpWebRequest CreateWebRequest(Uri uri, Func<WebResponse> toReturn)
+        protected HttpWebRequest CreateWebRequest(Uri uri, Func<WebResponse> toReturn)
         {
             var request = Substitute.For<HttpWebRequest>();
             var asyncResult = Substitute.For<IAsyncResult>();
@@ -142,6 +145,8 @@ namespace SDK.Test.Helper
                    .Returns(c => toReturn());
 
             request.GetResponseAsync().Returns(async c => toReturn());
+
+            if (CreatedWebRequest != null) CreatedWebRequest(request);
 
             return request;
         }

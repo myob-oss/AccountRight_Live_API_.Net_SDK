@@ -14,147 +14,6 @@ using MYOB.AccountRight.SDK.Extensions;
 namespace MYOB.AccountRight.SDK.Services.GeneralLedger
 {
     /// <summary>
-    /// Timesheet Service interface
-    /// </summary>
-    public interface IAccountBudgetService
-    {
-        /// <summary>
-        /// Retrieve an entity
-        /// </summary>
-        /// <param name="cf">A company file that has been retrieved</param>
-        /// <param name="financialYear">The requested financial year</param>
-        /// <param name="credentials">The credentials to access the company file</param>
-        /// <param name="onComplete">The action to call when the operation is complete</param>
-        /// <param name="onError">The action to call when the operation has an error</param>
-        void Get(CompanyFile cf, int financialYear, ICompanyFileCredentials credentials,
-                 Action<HttpStatusCode, AccountBudget> onComplete, Action<Uri, Exception> onError);
-
-        /// <summary>
-        /// Retrieve an entity
-        /// </summary>
-        /// <param name="cf">A company file that has been retrieved</param>
-        /// <param name="financialYear">The requested financial year</param>
-        /// <param name="credentials">The credentials to access the company file</param>
-        /// <returns></returns>
-        AccountBudget Get(CompanyFile cf, int financialYear, ICompanyFileCredentials credentials);
-
-
-#if ASYNC
-        /// <summary>
-        /// Retrieve an entity
-        /// </summary>
-        /// <param name="cf">A company file that has been retrieved</param>
-        /// <param name="financialYear">The requested financial year</param>
-        /// <param name="credentials">The credentials to access the company file</param>
-        /// <returns></returns>
-        Task<AccountBudget> GetAsync(CompanyFile cf, int financialYear,
-                                 ICompanyFileCredentials credentials);
-
-        /// <summary>
-        /// Retrieve an entity
-        /// </summary>
-        /// <param name="cf">A company file that has been retrieved</param>
-        /// <param name="financialYear">The requested financial year</param>
-        /// <param name="credentials">The credentials to access the company file</param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        Task<AccountBudget> GetAsync(CompanyFile cf, int financialYear,
-                                 ICompanyFileCredentials credentials, CancellationToken cancellationToken);
-#endif
-
-        /// <summary>
-        /// Retrieve an entity
-        /// </summary>
-        /// <param name="cf">A company file that has been retrieved</param>
-        /// <param name="uri">The uri of the entity to retrieve</param>
-        /// <param name="credentials">The credentials to access the company file</param>
-        /// <param name="onComplete">The action to call when the operation is complete</param>
-        /// <param name="onError">The action to call when the operation has an error</param>
-        void Get(CompanyFile cf, Uri uri, ICompanyFileCredentials credentials,
-                 Action<HttpStatusCode, AccountBudget> onComplete, Action<Uri, Exception> onError);
-
-        /// <summary>
-        /// Retrieve an entity
-        /// </summary>
-        /// <param name="cf">A company file that has been retrieved</param>
-        /// <param name="uri">The uri of the entity to retrieve</param>
-        /// <param name="credentials">The credentials to access the company file</param>
-        /// <returns></returns>
-        AccountBudget Get(CompanyFile cf, Uri uri, ICompanyFileCredentials credentials);
-
-#if ASYNC
-        /// <summary>
-        /// Retrieve an entity
-        /// </summary>
-        /// <param name="cf">A company file that has been retrieved</param>
-        /// <param name="uri">The uri of the entity to retrieve</param>
-        /// <param name="credentials">The credentials to access the company file</param>
-        /// <returns></returns>
-        Task<AccountBudget> GetAsync(CompanyFile cf, Uri uri, ICompanyFileCredentials credentials);
-
-        /// <summary>
-        /// Retrieve an entity
-        /// </summary>
-        /// <param name="cf">A company file that has been retrieved</param>
-        /// <param name="uri">The uri of the entity to retrieve</param>
-        /// <param name="credentials">The credentials to access the company file</param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        Task<AccountBudget> GetAsync(CompanyFile cf, Uri uri, ICompanyFileCredentials credentials,
-                                 CancellationToken cancellationToken);
-#endif
-
-        /// <summary>
-        /// Update an existing entity
-        /// </summary>
-        /// <param name="cf">A company file that has been retrieved</param>
-        /// <param name="entity">The entity to update</param>
-        /// <param name="credentials">The credentials to access the company file</param>
-        /// <param name="errorLevel"></param>
-        /// <returns></returns>
-        string Update(CompanyFile cf, AccountBudget entity, ICompanyFileCredentials credentials,
-                      ErrorLevel errorLevel = ErrorLevel.IgnoreWarnings);
-
-#if ASYNC
-        /// <summary>
-        /// Update an existing entity
-        /// </summary>
-        /// <param name="cf">A company file that has been retrieved</param>
-        /// <param name="entity">The entity to update</param>
-        /// <param name="credentials">The credentials to access the company file</param>
-        /// <param name="errorLevel"></param>
-        /// <returns></returns>
-        Task<string> UpdateAsync(CompanyFile cf, AccountBudget entity, ICompanyFileCredentials credentials,
-                                 ErrorLevel errorLevel = ErrorLevel.IgnoreWarnings);
-
-        /// <summary>
-        /// Update an existing entity
-        /// </summary>
-        /// <param name="cf">A company file that has been retrieved</param>
-        /// <param name="entity">The entity to update</param>
-        /// <param name="credentials">The credentials to access the company file</param>
-        /// <param name="errorLevel"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        Task<string> UpdateAsync(CompanyFile cf, AccountBudget entity, ICompanyFileCredentials credentials,
-                                 CancellationToken cancellationToken, ErrorLevel errorLevel = ErrorLevel.IgnoreWarnings);
-#endif
-
-        /// <summary>
-        /// Update an existing entity
-        /// </summary>
-        /// <param name="cf">A company file that has been retrieved</param>
-        /// <param name="entity">The entity to update</param>
-        /// <param name="credentials">The credentials to access the company file</param>
-        /// <param name="onComplete">The action to call when the operation is complete</param>
-        /// <param name="onError">The action to call when the operation has an error</param>
-        /// <param name="errorLevel"></param>
-        void Update(CompanyFile cf, AccountBudget entity, ICompanyFileCredentials credentials,
-                    Action<HttpStatusCode, string> onComplete, Action<Uri, Exception> onError,
-                    ErrorLevel errorLevel = ErrorLevel.IgnoreWarnings);
-    }
-
-    /// <summary>
     /// A service that provides access to the <see cref="AccountBudget"/> resource
     /// </summary>
     public sealed class AccountBudgetService : ServiceBase, IAccountBudgetService
@@ -179,12 +38,13 @@ namespace MYOB.AccountRight.SDK.Services.GeneralLedger
         /// <param name="credentials">The credentials to access the company file</param>
         /// <param name="onComplete">The action to call when the operation is complete</param>
         /// <param name="onError">The action to call when the operation has an error</param>
+        /// <param name="eTag">The <see cref="BaseEntity.ETag" /> from a previously fetched entity</param>
         public void Get(CompanyFile cf, int financialYear,
                         ICompanyFileCredentials credentials, Action<HttpStatusCode, AccountBudget> onComplete,
-                        Action<Uri, Exception> onError)
+                        Action<Uri, Exception> onError, string eTag = null)
         {
             MakeApiGetRequestDelegate(BuildUri(cf, financialYear), credentials, onComplete,
-                                      onError);
+                                      onError, eTag);
         }
 
         /// <summary>
@@ -193,12 +53,13 @@ namespace MYOB.AccountRight.SDK.Services.GeneralLedger
         /// <param name="cf">A company file that has been retrieved</param>
         /// <param name="financialYear">The requested financial year</param>
         /// <param name="credentials">The credentials to access the company file</param>
+        /// <param name="eTag">The <see cref="BaseEntity.ETag" /> from a previously fetched entity</param>
         /// <returns></returns>
         public AccountBudget Get(CompanyFile cf, int financialYear,
-                             ICompanyFileCredentials credentials)
+                             ICompanyFileCredentials credentials, string eTag = null)
         {
             return MakeApiGetRequestSync<AccountBudget>(BuildUri(cf, financialYear),
-                                                    credentials);
+                                                    credentials, null, eTag);
         }
 
 #if ASYNC
@@ -208,8 +69,9 @@ namespace MYOB.AccountRight.SDK.Services.GeneralLedger
         /// <param name="cf">A company file that has been retrieved</param>
         /// <param name="financialYear">The requested financial year</param>
         /// <param name="credentials">The credentials to access the company file</param>
+        /// <param name="eTag">The <see cref="BaseEntity.ETag" /> from a previously fetched entity</param>
         /// <returns></returns>
-        public Task<AccountBudget> GetAsync(CompanyFile cf, int financialYear, ICompanyFileCredentials credentials)
+        public Task<AccountBudget> GetAsync(CompanyFile cf, int financialYear, ICompanyFileCredentials credentials, string eTag = null)
         {
             return this.GetAsync(cf, financialYear, credentials, CancellationToken.None);
         }
@@ -220,13 +82,14 @@ namespace MYOB.AccountRight.SDK.Services.GeneralLedger
         /// <param name="cf">A company file that has been retrieved</param>
         /// <param name="financialYear">The requested financial year</param>
         /// <param name="credentials">The credentials to access the company file</param>
+        /// <param name="eTag">The <see cref="BaseEntity.ETag" /> from a previously fetched entity</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         public Task<AccountBudget> GetAsync(CompanyFile cf, int financialYear,
-                                        ICompanyFileCredentials credentials, CancellationToken cancellationToken)
+                                        ICompanyFileCredentials credentials, CancellationToken cancellationToken, string eTag = null)
         {
             return this.MakeApiGetRequestAsync<AccountBudget>(
-                this.BuildUri(cf, financialYear), credentials, cancellationToken);
+                this.BuildUri(cf, financialYear), credentials, cancellationToken, eTag);
         }
 #endif
 
@@ -238,10 +101,11 @@ namespace MYOB.AccountRight.SDK.Services.GeneralLedger
         /// <param name="credentials">The credentials to access the company file</param>
         /// <param name="onComplete">The action to call when the operation is complete</param>
         /// <param name="onError">The action to call when the operation has an error</param>
+        /// <param name="eTag">The <see cref="BaseEntity.ETag" /> from a previously fetched entity</param>
         public void Get(CompanyFile cf, Uri uri, ICompanyFileCredentials credentials,
-                        Action<HttpStatusCode, AccountBudget> onComplete, Action<Uri, Exception> onError)
+                        Action<HttpStatusCode, AccountBudget> onComplete, Action<Uri, Exception> onError, string eTag = null)
         {
-            MakeApiGetRequestDelegate(ValidateUri(cf, uri), credentials, onComplete, onError);
+            MakeApiGetRequestDelegate(ValidateUri(cf, uri), credentials, onComplete, onError, eTag);
         }
 
         /// <summary>
@@ -250,10 +114,11 @@ namespace MYOB.AccountRight.SDK.Services.GeneralLedger
         /// <param name="cf">A company file that has been retrieved</param>
         /// <param name="uri">The uri of the entity to retrieve</param>
         /// <param name="credentials">The credentials to access the company file</param>
+        /// <param name="eTag">The <see cref="BaseEntity.ETag" /> from a previously fetched entity</param>
         /// <returns></returns>
-        public AccountBudget Get(CompanyFile cf, Uri uri, ICompanyFileCredentials credentials)
+        public AccountBudget Get(CompanyFile cf, Uri uri, ICompanyFileCredentials credentials, string eTag = null)
         {
-            return MakeApiGetRequestSync<AccountBudget>(ValidateUri(cf, uri), credentials);
+            return MakeApiGetRequestSync<AccountBudget>(ValidateUri(cf, uri), credentials, null, eTag);
         }
 
 #if ASYNC
@@ -263,10 +128,11 @@ namespace MYOB.AccountRight.SDK.Services.GeneralLedger
         /// <param name="cf">A company file that has been retrieved</param>
         /// <param name="uri">The uri of the entity to retrieve</param>
         /// <param name="credentials">The credentials to access the company file</param>
+        /// <param name="eTag">The <see cref="BaseEntity.ETag" /> from a previously fetched entity</param>
         /// <returns></returns>
-        public Task<AccountBudget> GetAsync(CompanyFile cf, Uri uri, ICompanyFileCredentials credentials)
+        public Task<AccountBudget> GetAsync(CompanyFile cf, Uri uri, ICompanyFileCredentials credentials, string eTag = null)
         {
-            return this.GetAsync(cf, uri, credentials, CancellationToken.None);
+            return this.GetAsync(cf, uri, credentials, CancellationToken.None, eTag);
         }
 
         /// <summary>
@@ -276,11 +142,12 @@ namespace MYOB.AccountRight.SDK.Services.GeneralLedger
         /// <param name="uri">The uri of the entity to retrieve</param>
         /// <param name="credentials">The credentials to access the company file</param>
         /// <param name="cancellationToken"></param>
+        /// <param name="eTag">The <see cref="BaseEntity.ETag" /> from a previously fetched entity</param>
         /// <returns></returns>
         public Task<AccountBudget> GetAsync(CompanyFile cf, Uri uri, ICompanyFileCredentials credentials,
-                                        CancellationToken cancellationToken)
+                                        CancellationToken cancellationToken, string eTag = null)
         {
-            return this.MakeApiGetRequestAsync<AccountBudget>(ValidateUri(cf, uri), credentials, cancellationToken);
+            return this.MakeApiGetRequestAsync<AccountBudget>(ValidateUri(cf, uri), credentials, cancellationToken, eTag);
         }
 #endif
 
@@ -292,13 +159,14 @@ namespace MYOB.AccountRight.SDK.Services.GeneralLedger
         /// <param name="credentials">The credentials to access the company file</param>
         /// <param name="onComplete">The action to call when the operation is complete</param>
         /// <param name="onError">The action to call when the operation has an error</param>
+        /// <param name="eTag">The <see cref="BaseEntity.ETag" /> from a previously fetched entity</param>
         public void GetRange(CompanyFile cf, string queryString, ICompanyFileCredentials credentials,
                              Action<HttpStatusCode, PagedCollection<AccountBudget>> onComplete,
-                             Action<Uri, Exception> onError)
+                             Action<Uri, Exception> onError, string eTag = null)
         {
             MakeApiGetRequestDelegate(
                 BuildUri(cf, null, queryString == null ? null : "?" + queryString.TrimStart(new[] {'?'})), credentials,
-                onComplete, onError);
+                onComplete, onError, eTag);
         }
 
         /// <summary>
@@ -307,14 +175,15 @@ namespace MYOB.AccountRight.SDK.Services.GeneralLedger
         /// <param name="cf">A company file that has been retrieved</param>
         /// <param name="queryString">An odata filter</param>
         /// <param name="credentials">The credentials to access the company file</param>
+        /// <param name="eTag">The <see cref="BaseEntity.ETag" /> from a previously fetched entity</param>
         /// <returns></returns>
         public PagedCollection<AccountBudget> GetRange(CompanyFile cf, string queryString,
-                                                   ICompanyFileCredentials credentials)
+                                                   ICompanyFileCredentials credentials, string eTag = null)
         {
             return
                 MakeApiGetRequestSync<PagedCollection<AccountBudget>>(
                     BuildUri(cf, null, queryString == null ? null : "?" + queryString.TrimStart(new[] {'?'})),
-                    credentials);
+                    credentials, null, eTag);
         }
 
 #if ASYNC
@@ -324,9 +193,10 @@ namespace MYOB.AccountRight.SDK.Services.GeneralLedger
         /// <param name="cf">A company file that has been retrieved</param>
         /// <param name="queryString">An odata filter</param>
         /// <param name="credentials">The credentials to access the company file</param>
+        /// <param name="eTag">The <see cref="BaseEntity.ETag" /> from a previously fetched entity</param>
         /// <returns></returns>
         public Task<PagedCollection<AccountBudget>> GetRangeAsync(CompanyFile cf, string queryString,
-                                                              ICompanyFileCredentials credentials)
+                                                              ICompanyFileCredentials credentials, string eTag = null)
         {
             return this.GetRangeAsync(cf, queryString, credentials, CancellationToken.None);
         }
@@ -338,15 +208,16 @@ namespace MYOB.AccountRight.SDK.Services.GeneralLedger
         /// <param name="queryString">An odata filter</param>
         /// <param name="credentials">The credentials to access the company file</param>
         /// <param name="cancellationToken"></param>
+        /// <param name="eTag">The <see cref="BaseEntity.ETag" /> from a previously fetched entity</param>
         /// <returns></returns>
         public Task<PagedCollection<AccountBudget>> GetRangeAsync(CompanyFile cf, string queryString,
                                                               ICompanyFileCredentials credentials,
-                                                              CancellationToken cancellationToken)
+                                                              CancellationToken cancellationToken, string eTag = null)
         {
             return
                 this.MakeApiGetRequestAsync<PagedCollection<AccountBudget>>(
                     this.BuildUri(cf, null, queryString.Maybe(_ => "?" + _.TrimStart(new[] {'?'}))), credentials,
-                    cancellationToken);
+                    cancellationToken, eTag);
         }
 #endif
 

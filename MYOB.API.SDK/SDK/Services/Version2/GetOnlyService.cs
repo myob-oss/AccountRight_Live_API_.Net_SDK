@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using MYOB.AccountRight.SDK.Contracts.Version2;
 #if ASYNC
 using System.Threading.Tasks;
 #endif
@@ -34,10 +35,11 @@ namespace MYOB.AccountRight.SDK.Services
         /// </summary>
         /// <param name="companyFile">The company file</param>
         /// <param name="credentials">The company file credentials</param>
+        /// <param name="eTag">The <see cref="BaseEntity.ETag" /> from a previously fetched entity</param>
         /// <returns></returns>
-        public T Get(CompanyFile companyFile, ICompanyFileCredentials credentials)
+        public T Get(CompanyFile companyFile, ICompanyFileCredentials credentials, string eTag = null)
         {
-            return MakeApiGetRequestSync<T>(BuildUri(companyFile), credentials);
+            return MakeApiGetRequestSync<T>(BuildUri(companyFile), credentials, null, eTag);
         }
 
         /// <summary>
@@ -47,9 +49,10 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="credentials">The company file credentials</param>
         /// <param name="onComplete">The action to call when the operation is complete</param>
         /// <param name="onError">The action to call when the operation has an error</param>
-        public void Get(CompanyFile companyFile, ICompanyFileCredentials credentials, Action<HttpStatusCode, T> onComplete, Action<Uri, Exception> onError)
+        /// <param name="eTag">The <see cref="BaseEntity.ETag" /> from a previously fetched entity</param>
+        public void Get(CompanyFile companyFile, ICompanyFileCredentials credentials, Action<HttpStatusCode, T> onComplete, Action<Uri, Exception> onError, string eTag = null)
         {
-            MakeApiGetRequestDelegate(BuildUri(companyFile), credentials, onComplete, onError);
+            MakeApiGetRequestDelegate(BuildUri(companyFile), credentials, onComplete, onError, eTag);
         }
 
 #if ASYNC
@@ -58,10 +61,11 @@ namespace MYOB.AccountRight.SDK.Services
         /// </summary>
         /// <param name="companyFile">The company file</param>
         /// <param name="credentials">The company file credentials</param>
+        /// <param name="eTag">The <see cref="BaseEntity.ETag" /> from a previously fetched entity</param>
         /// <returns></returns>
-        public Task<T> GetAsync(CompanyFile companyFile, ICompanyFileCredentials credentials)
+        public Task<T> GetAsync(CompanyFile companyFile, ICompanyFileCredentials credentials, string eTag = null)
         {
-            return this.GetAsync(companyFile, credentials, CancellationToken.None);
+            return this.GetAsync(companyFile, credentials, CancellationToken.None, eTag);
         }
 
         /// <summary>
@@ -70,10 +74,11 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="companyFile">The company file</param>
         /// <param name="credentials">The company file credentials</param>
         /// <param name="cancellationToken"></param>
+        /// <param name="eTag">The <see cref="BaseEntity.ETag" /> from a previously fetched entity</param>
         /// <returns></returns>
-        public Task<T> GetAsync(CompanyFile companyFile, ICompanyFileCredentials credentials, CancellationToken cancellationToken)
+        public Task<T> GetAsync(CompanyFile companyFile, ICompanyFileCredentials credentials, CancellationToken cancellationToken, string eTag = null)
         {
-            return this.MakeApiGetRequestAsync<T>(this.BuildUri(companyFile), credentials, cancellationToken);
+            return this.MakeApiGetRequestAsync<T>(this.BuildUri(companyFile), credentials, cancellationToken, eTag);
         }
 #endif
         /// <exclude/>

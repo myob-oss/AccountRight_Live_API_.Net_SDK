@@ -180,7 +180,7 @@ namespace MYOB.AccountRight.SDK.Services.Payroll
         /// <param name="onError">The action to call when the operation has an error</param>
         public void Get(CompanyFile cf, Guid uid, DateTime? startDate, DateTime? endDate, ICompanyFileCredentials credentials, Action<HttpStatusCode, Timesheet> onComplete, Action<Uri, Exception> onError)
         {
-            MakeApiGetRequestDelegate(BuildUri(cf, uid, startDate: startDate, endDate: endDate), credentials, onComplete, onError);
+            MakeApiGetRequestDelegate(BuildUri(cf, uid, startDate: startDate, endDate: endDate), credentials, onComplete, onError, null);
         }
 
         /// <summary>
@@ -194,7 +194,7 @@ namespace MYOB.AccountRight.SDK.Services.Payroll
         /// <returns></returns>
         public Timesheet Get(CompanyFile cf, Guid uid, DateTime? startDate, DateTime? endDate, ICompanyFileCredentials credentials)
         {
-            return MakeApiGetRequestSync<Timesheet>(BuildUri(cf, uid, startDate: startDate, endDate: endDate), credentials);
+            return MakeApiGetRequestSync<Timesheet>(BuildUri(cf, uid, startDate: startDate, endDate: endDate), credentials, null, null);
         }
 
 #if ASYNC
@@ -224,7 +224,7 @@ namespace MYOB.AccountRight.SDK.Services.Payroll
         /// <returns></returns>
         public Task<Timesheet> GetAsync(CompanyFile cf, Guid uid, DateTime? startDate, DateTime? endDate, ICompanyFileCredentials credentials, CancellationToken cancellationToken)
         {
-            return this.MakeApiGetRequestAsync<Timesheet>(this.BuildUri(cf, uid, startDate: startDate, endDate: endDate), credentials, cancellationToken);
+            return this.MakeApiGetRequestAsync<Timesheet>(this.BuildUri(cf, uid, startDate: startDate, endDate: endDate), credentials, cancellationToken, null);
         }
 #endif
 
@@ -238,7 +238,7 @@ namespace MYOB.AccountRight.SDK.Services.Payroll
         /// <param name="onError">The action to call when the operation has an error</param>
         public void Get(CompanyFile cf, Uri uri, ICompanyFileCredentials credentials, Action<HttpStatusCode, Timesheet> onComplete, Action<Uri, Exception> onError)
         {
-            MakeApiGetRequestDelegate(ValidateUri(cf, uri), credentials, onComplete, onError);
+            MakeApiGetRequestDelegate(ValidateUri(cf, uri), credentials, onComplete, onError, null);
         }
 
         /// <summary>
@@ -250,7 +250,7 @@ namespace MYOB.AccountRight.SDK.Services.Payroll
         /// <returns></returns>
         public Timesheet Get(CompanyFile cf, Uri uri, ICompanyFileCredentials credentials)
         {
-            return MakeApiGetRequestSync<Timesheet>(ValidateUri(cf, uri), credentials);
+            return MakeApiGetRequestSync<Timesheet>(ValidateUri(cf, uri), credentials, null, null);
         }
 
 #if ASYNC
@@ -276,7 +276,7 @@ namespace MYOB.AccountRight.SDK.Services.Payroll
         /// <returns></returns>
         public Task<Timesheet> GetAsync(CompanyFile cf, Uri uri, ICompanyFileCredentials credentials, CancellationToken cancellationToken)
         {
-            return this.MakeApiGetRequestAsync<Timesheet>(ValidateUri(cf, uri), credentials, cancellationToken);
+            return this.MakeApiGetRequestAsync<Timesheet>(ValidateUri(cf, uri), credentials, cancellationToken, null);
         }
 #endif
 
@@ -290,7 +290,7 @@ namespace MYOB.AccountRight.SDK.Services.Payroll
         /// <param name="onError">The action to call when the operation has an error</param>
         public void GetRange(CompanyFile cf, string queryString, ICompanyFileCredentials credentials, Action<HttpStatusCode, PagedCollection<Timesheet>> onComplete, Action<Uri, Exception> onError)
         {
-            MakeApiGetRequestDelegate(BuildUri(cf, null, queryString == null ? null : "?" + queryString.TrimStart(new[] { '?' })), credentials, onComplete, onError);
+            MakeApiGetRequestDelegate(BuildUri(cf, null, queryString == null ? null : "?" + queryString.TrimStart(new[] { '?' })), credentials, onComplete, onError, null);
         }
 
         /// <summary>
@@ -302,7 +302,7 @@ namespace MYOB.AccountRight.SDK.Services.Payroll
         /// <returns></returns>
         public PagedCollection<Timesheet> GetRange(CompanyFile cf, string queryString, ICompanyFileCredentials credentials)
         {
-            return MakeApiGetRequestSync<PagedCollection<Timesheet>>(BuildUri(cf, null, queryString == null ? null : "?" + queryString.TrimStart(new[] { '?' })), credentials);
+            return MakeApiGetRequestSync<PagedCollection<Timesheet>>(BuildUri(cf, null, queryString == null ? null : "?" + queryString.TrimStart(new[] { '?' })), credentials, null, null);
         }
 
 #if ASYNC
@@ -328,7 +328,7 @@ namespace MYOB.AccountRight.SDK.Services.Payroll
         /// <returns></returns>
         public Task<PagedCollection<Timesheet>> GetRangeAsync(CompanyFile cf, string queryString, ICompanyFileCredentials credentials, CancellationToken cancellationToken)
         {
-            return this.MakeApiGetRequestAsync<PagedCollection<Timesheet>>(this.BuildUri(cf, null, queryString.Maybe(_ => "?" + _.TrimStart(new[] { '?' }))), credentials, cancellationToken);
+            return this.MakeApiGetRequestAsync<PagedCollection<Timesheet>>(this.BuildUri(cf, null, queryString.Maybe(_ => "?" + _.TrimStart(new[] { '?' }))), credentials, cancellationToken, null);
         }
 #endif
 

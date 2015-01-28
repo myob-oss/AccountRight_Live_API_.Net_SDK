@@ -70,6 +70,7 @@
     <Compile Include="Contracts\Company.cs" />
     <Compile Include="Contracts\CompanyFile.cs" />
     <Compile Include="Contracts\CompanyFileWithResources.cs" />
+    <Compile Include="Contracts\IETagSupport.cs" />
     <Compile Include="Contracts\OAuthTokens.cs" />
     <Compile Include="Contracts\ProductLevel.cs" />
     <Compile Include="Contracts\Version2\Banking\BankAccount.cs" />
@@ -324,6 +325,7 @@
     <Compile Include="Services\Version2\GeneralLedger\CategoryRegisterService.cs" />
     <Compile Include="Services\Version2\GeneralLedger\CategoryService.cs" />
     <Compile Include="Services\Version2\GeneralLedger\GeneralJournalService.cs" />
+    <Compile Include="Services\Version2\GeneralLedger\IAccountBudgetService.cs" />
     <Compile Include="Services\Version2\GeneralLedger\JobBudgetService.cs" />
     <Compile Include="Services\Version2\GeneralLedger\JobRegisterService.cs" />
     <Compile Include="Services\Version2\GeneralLedger\JobService.cs" />

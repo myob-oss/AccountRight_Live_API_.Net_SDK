@@ -83,7 +83,7 @@ namespace MYOB.AccountRight.SDK.Services.Sale
         /// <returns></returns>
         public Task<Stream> GetPdfAsync(CompanyFile cf, Guid resourceUid, ICompanyFileCredentials credentials, string template, CancellationToken cancellationToken)
         {
-            return this.MakeApiGetRequestAsyncStream(this.BuildUri(cf, resourceUid, template), PdfMimetype, credentials, cancellationToken);
+            return this.MakeApiGetRequestAsyncStream(this.BuildUri(cf, resourceUid, template), PdfMimetype, credentials, cancellationToken, null);
         }
 #endif
 

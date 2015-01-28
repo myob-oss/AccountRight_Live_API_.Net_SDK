@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using MYOB.AccountRight.SDK;
 using MYOB.AccountRight.SDK.Communication;
@@ -99,6 +101,11 @@ namespace SDK.Test.Services
                     (service, cf) =>
                     {
                         return service.GetRangeAsync(cf, null, null).Result;
+                    }),
+                new Tuple<string, Func<TestReadOnlyService, CompanyFile, PagedCollection<UserContract>>>("AsyncWithCancel", 
+                    (service, cf) =>
+                    {
+                        return service.GetRangeAsync(cf, null, null, CancellationToken.None).Result;
                     }),
             };
 
@@ -253,6 +260,86 @@ namespace SDK.Test.Services
             // act
             var ex = Assert.Throws<ArgumentException>(() => action.Item2(_service, cf), "The test {0} should have thrown an exception", action.Item1);
 
+        }
+
+        private readonly Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>[] _getByUriActionsEtag = new[]
+            {
+                new Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>("Async", 
+                    (service, cf) =>
+                    {
+                        UserContract received = null;
+                        service.Get(cf, new Uri(cf.Uri.AbsoluteUri + "/Test/User/Contract/" + _uid.ToString().ToUpper()), null, (code, files) => { received = files; }, (uri, exception) => Assert.Fail(exception.Message), "987654321");
+                        return received;
+                    }),
+                new Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>("Sync", 
+                    (service, cf) =>
+                    {
+                        return service.Get(cf, new Uri(cf.Uri.AbsoluteUri + "/Test/User/Contract/" + _uid), null, "987654321");
+                    }),
+                new Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>("Async", 
+                    (service, cf) =>
+                    {
+                        return service.GetAsync(cf, new Uri(cf.Uri.AbsoluteUri + "/Test/User/Contract/" + _uid), null, "987654321").Result;
+                    }),
+            };
+
+        [Test]
+        public void Get_IfRequestIsMadeWithETag_IfNoneMatchHeaderIsAttachedToRequest([ValueSource("_getByUriActionsEtag")] Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>> action)
+        {
+            // arrange
+            var cf = new CompanyFile() { Uri = new Uri("https://dc1.api.myob.com/accountright/7D5F5516-AF68-4C5B-844A-3F054E00DF10") };
+            _webFactory.RegisterResultForUri(cf.Uri.AbsoluteUri + "/Test/User/Contract/" + _uid, new UserContract() { UID = _uid }.ToJson());
+            HttpWebRequest request = null;
+            _webFactory.CreatedWebRequest += _ => request = (HttpWebRequest)_; 
+
+            // act
+            var received = action.Item2(_service, cf);
+
+            // assert
+            Assert.AreEqual("987654321", request.Headers[HttpRequestHeader.IfNoneMatch]);
+        }
+
+        private readonly Tuple<string, Func<TestReadOnlyService, CompanyFile, PagedCollection<UserContract>>>[] _getRangeActionsEtag = new[]
+            {
+                new Tuple<string, Func<TestReadOnlyService, CompanyFile, PagedCollection<UserContract>>>("Delegate", 
+                    (service, cf) =>
+                    {
+                        PagedCollection<UserContract> received = null;
+                        service.GetRange(cf, null, null, (code, files) => { received = files; }, (uri, exception) => Assert.Fail(exception.Message), "987654321");
+                        return received;
+                    }),
+                new Tuple<string, Func<TestReadOnlyService, CompanyFile, PagedCollection<UserContract>>>("Sync", 
+                    (service, cf) =>
+                    {
+                        return service.GetRange(cf, null, null, "987654321");
+                    }),
+                new Tuple<string, Func<TestReadOnlyService, CompanyFile, PagedCollection<UserContract>>>("Async", 
+                    (service, cf) =>
+                    {
+                        return service.GetRangeAsync(cf, null, null, "987654321").Result;
+                    }),
+                new Tuple<string, Func<TestReadOnlyService, CompanyFile, PagedCollection<UserContract>>>("AsyncWithCancel", 
+                    (service, cf) =>
+                    {
+                        return service.GetRangeAsync(cf, null, null, CancellationToken.None, "987654321").Result;
+                    }),
+            };
+
+
+        [Test]
+        public void GetRange_IfRequestIsMadeWithETag_IfNoneMatchHeaderIsAttachedToRequest([ValueSource("_getRangeActionsEtag")] Tuple<string, Func<TestReadOnlyService, CompanyFile, PagedCollection<UserContract>>> action)
+        {
+            // arrange
+            var cf = new CompanyFile() { Uri = new Uri("https://dc1.api.myob.com/accountright/7D5F5516-AF68-4C5B-844A-3F054E00DF10") };
+            _webFactory.RegisterResultForUri(cf.Uri.AbsoluteUri + "/Test/User/Contract", new PagedCollection<UserContract> { Count = 1, Items = new[] { new UserContract() { UID = _uid } } }.ToJson());
+            HttpWebRequest request = null;
+            _webFactory.CreatedWebRequest += _ => request = (HttpWebRequest)_; 
+
+            // act
+            var received = action.Item2(_service, cf);
+
+            // assert
+            Assert.AreEqual("987654321", request.Headers[HttpRequestHeader.IfNoneMatch]);
         }
     }
 }

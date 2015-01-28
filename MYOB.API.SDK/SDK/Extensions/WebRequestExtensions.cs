@@ -25,6 +25,7 @@ namespace MYOB.AccountRight.SDK.Extensions
                 {
                     var response = await request.GetResponseAsync();
                     cancellationToken.ThrowIfCancellationRequested();
+
                     return (HttpWebResponse)response;
                 }
                 catch (WebException ex)

@@ -32,5 +32,10 @@ deploy:
   artifact: Candidate
   on:
     branch: candidate
+- provider: NuGet
+  server: https://www.myget.org/F/myob-arlapi-sdk/
+  api_key:
+    secure: UOHB7ZJL44zMDE+fM0+IWJwpQSlHg27zbFG79/HshiVdoAXnpW53KMayETaO9E5K
+  artifact: Release
 on_success:
 - .\packages\coveralls.io.1.1.86\tools\coveralls.net.exe --opencover .\Artefacts\Coverage\output.xml

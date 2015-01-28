@@ -33,7 +33,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="onError">The action to call when the operation has an error</param>
         public void GetRange(Action<HttpStatusCode, CompanyFile[]> onComplete, Action<Uri, Exception> onError)
         {
-            MakeApiGetRequestDelegate(new Uri(Configuration.ApiBaseUrl), null, onComplete, onError);
+            MakeApiGetRequestDelegate(new Uri(Configuration.ApiBaseUrl), null, onComplete, onError, null);
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <returns></returns>
         public CompanyFile[] GetRange()
         {
-            return MakeApiGetRequestSync<CompanyFile[]>(new Uri(Configuration.ApiBaseUrl), null);
+            return MakeApiGetRequestSync<CompanyFile[]>(new Uri(Configuration.ApiBaseUrl), null, null, null);
         }
 
 #if ASYNC
@@ -62,7 +62,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <returns></returns>
         public Task<CompanyFile[]> GetRangeAsync(CancellationToken cancellationToken)
         {
-            return this.MakeApiGetRequestAsync<CompanyFile[]>(new Uri(this.Configuration.ApiBaseUrl), null, cancellationToken);
+            return this.MakeApiGetRequestAsync<CompanyFile[]>(new Uri(this.Configuration.ApiBaseUrl), null, cancellationToken, null);
         } 
 #endif
         /// <summary>
@@ -73,7 +73,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="onError">The action to call when the operation has an error</param>
         public void GetRange(string queryString, Action<HttpStatusCode, CompanyFile[]> onComplete, Action<Uri, Exception> onError)
         {
-            MakeApiGetRequestDelegate(BuildUri(queryString.Maybe(_ => "?" + _.TrimStart(new[] { '?' }))), null, onComplete, onError);
+            MakeApiGetRequestDelegate(BuildUri(queryString.Maybe(_ => "?" + _.TrimStart(new[] { '?' }))), null, onComplete, onError, null);
         }
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <returns></returns>
         public CompanyFile[] GetRange(string queryString)
         {
-            return MakeApiGetRequestSync<CompanyFile[]>(BuildUri(queryString.Maybe(_ => "?" + _.TrimStart(new[] { '?' }))), null);
+            return MakeApiGetRequestSync<CompanyFile[]>(BuildUri(queryString.Maybe(_ => "?" + _.TrimStart(new[] { '?' }))), null, null, null);
         }
 
 #if ASYNC
@@ -105,7 +105,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <returns></returns>
         public Task<CompanyFile[]> GetRangeAsync(string queryString, CancellationToken cancellationToken)
         {
-            return this.MakeApiGetRequestAsync<CompanyFile[]>(this.BuildUri(queryString.Maybe(_ => "?" + _.TrimStart(new[] { '?' }))), null, cancellationToken);
+            return this.MakeApiGetRequestAsync<CompanyFile[]>(this.BuildUri(queryString.Maybe(_ => "?" + _.TrimStart(new[] { '?' }))), null, cancellationToken, null);
         } 
 #endif
         /// <summary>
@@ -117,7 +117,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="onError">The action to call when the operation has an error</param>
         public void Get(CompanyFile cf, ICompanyFileCredentials credentials, Action<HttpStatusCode, CompanyFileWithResources> onComplete, Action<Uri, Exception> onError)
         {
-            MakeApiGetRequestDelegate(cf.Uri, credentials, onComplete, onError);
+            MakeApiGetRequestDelegate(cf.Uri, credentials, onComplete, onError, null);
         }
 
         /// <summary>
@@ -128,7 +128,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <returns></returns>
         public CompanyFileWithResources Get(CompanyFile cf, ICompanyFileCredentials credentials)
         {
-            return MakeApiGetRequestSync<CompanyFileWithResources>(cf.Uri, credentials);
+            return MakeApiGetRequestSync<CompanyFileWithResources>(cf.Uri, credentials, null, null);
         }
 
 #if ASYNC
@@ -152,7 +152,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <returns></returns>
         public Task<CompanyFileWithResources> GetAsync(CompanyFile cf, ICompanyFileCredentials credentials, CancellationToken cancellationToken)
         {
-            return this.MakeApiGetRequestAsync<CompanyFileWithResources>(cf.Uri, credentials, cancellationToken);
+            return this.MakeApiGetRequestAsync<CompanyFileWithResources>(cf.Uri, credentials, cancellationToken, null);
         } 
 #endif
 
