@@ -31,7 +31,7 @@ namespace SDK.Test.Services
             _mockProviderService.ClearInteractions(); //NOTE: Clears any previously registered interactions before the test is run
 
             _configuration = Substitute.For<IApiConfiguration>();
-            _service = new TimesheetService(_configuration, keyService: new SimpleOAuthKeyService());
+            _service = new TimesheetService(_configuration, keyService: new SimpleOAuthKeyService{OAuthResponse = new OAuthTokens{ExpiresIn = 120}});
 
             _cfUid = Guid.NewGuid();
             _uid = Guid.NewGuid(); 
@@ -89,7 +89,7 @@ namespace SDK.Test.Services
 
             
             // act
-            var result = _service.GetAsync(_cf, _uid, startDate.Value, endDate.Value, null, new CancellationToken()).Result;
+            var result = _service.GetAsync(_cf, _uid, startDate.Value, endDate.Value, new CompanyFileCredentials("", ""), new CancellationToken()).Result;
 
             // assert
             Assert.NotNull(result);
