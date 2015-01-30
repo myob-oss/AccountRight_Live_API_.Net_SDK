@@ -6,6 +6,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using MYOB.AccountRight.SDK;
 using MYOB.AccountRight.SDK.Communication;
+using MYOB.AccountRight.SDK.Contracts;
 using MYOB.AccountRight.SDK.Contracts.Version2.Purchase;
 using MYOB.AccountRight.SDK.Extensions;
 using NSubstitute;
@@ -18,25 +19,23 @@ namespace SDK.Test.Communication
     public class ApiRequestHandlerTests
     {
         [Test]
-        public void DuringGetRequestExpectedHeadersAreAttached()
+        [TestCase(true, true)]
+        [TestCase(false, false)]
+        public void DuringGetRequestExpectedHeadersAreAttached(bool supplyCredentials, bool supplyOAuth)
         {
             // arrange
             var factory = new TestWebRequestFactory();
             factory.RegisterResultForUri("http://localhost", new UserContract(){Name = "David"}.ToJson());
             var request = factory.Create(new Uri("http://localhost"));
 
-            var handler = new ApiRequestHandler(new ApiConfiguration("<<clientid>>", "<<clientsecret>>", "<<redirecturl>>"), new CompanyFileCredentials("user", "pass"));
+            var handler = new ApiRequestHandler(new ApiConfiguration("<<clientid>>", "<<clientsecret>>", "<<redirecturl>>"),
+                supplyCredentials ? new CompanyFileCredentials("user", "pass") : null, supplyOAuth ? new OAuthTokens() : null);
 
             // act
             handler.Get<UserContract>(request, (code, response) => { }, (uri, exception) => Assert.Fail(exception.Message), null);
 
             // assert
-            Assert.IsTrue(request.Headers[HttpRequestHeader.Authorization].StartsWith("Bearer"));
-            Assert.IsTrue(request.Headers[HttpRequestHeader.AcceptEncoding].Split(new []{','}).Contains("gzip"));
-
-            Assert.AreEqual("<<clientid>>", request.Headers["x-myobapi-key"]);
-            Assert.AreEqual("v2", request.Headers["x-myobapi-version"]);
-            Assert.AreEqual(Convert.ToBase64String(Encoding.UTF8.GetBytes("user:pass")), request.Headers["x-myobapi-cftoken"]);
+            AssertStandardHeaders(supplyCredentials, supplyOAuth, request);
 
             var version = typeof (ApiRequestHandler).Assembly.GetName().Version.ToString(3);
             var userAgent = request.Headers[HttpRequestHeader.UserAgent];
@@ -63,25 +62,23 @@ namespace SDK.Test.Communication
         }
 
         [Test]
-        async public void DuringGetRequest_Async_ExpectedHeadersAreAttached()
+        [TestCase(true, true)]
+        [TestCase(false, false)]
+        async public void DuringGetRequest_Async_ExpectedHeadersAreAttached(bool supplyCredentials, bool supplyOAuth)
         {
             // arrange
             var factory = new TestWebRequestFactory();
             factory.RegisterResultForUri("http://localhost", new UserContract() { Name = "David" }.ToJson());
             var request = factory.Create(new Uri("http://localhost"));
 
-            var handler = new ApiRequestHandler(new ApiConfiguration("<<clientid>>", "<<clientsecret>>", "<<redirecturl>>"), new CompanyFileCredentials("user", "pass"));
+            var handler = new ApiRequestHandler(new ApiConfiguration("<<clientid>>", "<<clientsecret>>", "<<redirecturl>>"),
+                supplyCredentials ? new CompanyFileCredentials("user", "pass") : null, supplyOAuth ? new OAuthTokens() : null);
 
             // act
             var res = await handler.GetAsync<UserContract>(request, null);
 
             // assert
-            Assert.IsTrue(request.Headers[HttpRequestHeader.Authorization].StartsWith("Bearer"));
-            Assert.IsTrue(request.Headers[HttpRequestHeader.AcceptEncoding].Split(new[] { ',' }).Contains("gzip"));
-
-            Assert.AreEqual("<<clientid>>", request.Headers["x-myobapi-key"]);
-            Assert.AreEqual("v2", request.Headers["x-myobapi-version"]);
-            Assert.AreEqual(Convert.ToBase64String(Encoding.UTF8.GetBytes("user:pass")), request.Headers["x-myobapi-cftoken"]);
+            AssertStandardHeaders(supplyCredentials, supplyOAuth, request);
             Assert.IsNull(request.Headers[HttpRequestHeader.IfNoneMatch]);
         }
 
@@ -104,118 +101,126 @@ namespace SDK.Test.Communication
         }
 
         [Test]
-        public void DuringDeleteRequestExpectedHeadersAreAttached()
+        [TestCase(true, true)]
+        [TestCase(false, false)]
+        public void DuringDeleteRequestExpectedHeadersAreAttached(bool supplyCredentials, bool supplyOAuth)
         {
             // arrange
             var factory = new TestWebRequestFactory();
             factory.RegisterResultForUri("http://localhost", "");
             var request = factory.Create(new Uri("http://localhost"));
 
-            var handler = new ApiRequestHandler(new ApiConfiguration("<<clientid>>", "<<clientsecret>>", "<<redirecturl>>"), new CompanyFileCredentials("user", "pass"));
+            var handler = new ApiRequestHandler(new ApiConfiguration("<<clientid>>", "<<clientsecret>>", "<<redirecturl>>"), 
+                supplyCredentials ? new CompanyFileCredentials("user", "pass"): null, supplyOAuth ? new OAuthTokens() : null);
 
             // act
             handler.Delete(request, (code) => { }, (uri, exception) => Assert.Fail(exception.Message));
 
             // assert
             Assert.AreEqual("DELETE", request.Method);
-            Assert.IsTrue(request.Headers[HttpRequestHeader.Authorization].StartsWith("Bearer"));
-            Assert.IsTrue(request.Headers[HttpRequestHeader.AcceptEncoding].Split(new[] { ',' }).Contains("gzip"));
+            AssertStandardHeaders(supplyCredentials, supplyOAuth, request);
+        }
+
+        private static void AssertStandardHeaders(bool supplyCredentials, bool supplyOAuth, WebRequest request)
+        {
+            if (supplyOAuth)
+                Assert.IsTrue(request.Headers[HttpRequestHeader.Authorization].StartsWith("Bearer"));
+            else
+                Assert.IsNull(request.Headers[HttpRequestHeader.Authorization]);
+        
+            Assert.IsTrue(request.Headers[HttpRequestHeader.AcceptEncoding].Split(new[] {','}).Contains("gzip"));
 
             Assert.AreEqual("<<clientid>>", request.Headers["x-myobapi-key"]);
             Assert.AreEqual("v2", request.Headers["x-myobapi-version"]);
-            Assert.AreEqual(Convert.ToBase64String(Encoding.UTF8.GetBytes("user:pass")), request.Headers["x-myobapi-cftoken"]);
-        }
+
+            if (supplyCredentials)
+                Assert.AreEqual(Convert.ToBase64String(Encoding.UTF8.GetBytes("user:pass")), request.Headers["x-myobapi-cftoken"]);
+            else
+                Assert.IsNull(request.Headers["x-myobapi-cftoken"]);
+            }
 
         [Test]
-        async public void DuringDeleteRequest_Async_ExpectedHeadersAreAttached()
+        [TestCase(true, true)]
+        [TestCase(false, false)]
+        async public void DuringDeleteRequest_Async_ExpectedHeadersAreAttached(bool supplyCredentials, bool supplyOAuth)
         {
             // arrange
             var factory = new TestWebRequestFactory();
             factory.RegisterResultForUri("http://localhost", "");
             var request = factory.Create(new Uri("http://localhost"));
 
-            var handler = new ApiRequestHandler(new ApiConfiguration("<<clientid>>", "<<clientsecret>>", "<<redirecturl>>"), new CompanyFileCredentials("user", "pass"));
+            var handler = new ApiRequestHandler(new ApiConfiguration("<<clientid>>", "<<clientsecret>>", "<<redirecturl>>"),
+                supplyCredentials ? new CompanyFileCredentials("user", "pass") : null, supplyOAuth ? new OAuthTokens() : null);
 
             // act
             await handler.DeleteAsync(request);
 
             // assert
             Assert.AreEqual("DELETE", request.Method);
-            Assert.IsTrue(request.Headers[HttpRequestHeader.Authorization].StartsWith("Bearer"));
-            Assert.IsTrue(request.Headers[HttpRequestHeader.AcceptEncoding].Split(new[] { ',' }).Contains("gzip"));
-
-            Assert.AreEqual("<<clientid>>", request.Headers["x-myobapi-key"]);
-            Assert.AreEqual("v2", request.Headers["x-myobapi-version"]);
-            Assert.AreEqual(Convert.ToBase64String(Encoding.UTF8.GetBytes("user:pass")), request.Headers["x-myobapi-cftoken"]);
+            AssertStandardHeaders(supplyCredentials, supplyOAuth, request);
         }
 
         [Test]
-        public void DuringPutRequestExpectedHeadersAreAttached()
+        [TestCase(true, true)]
+        [TestCase(false, false)]
+        public void DuringPutRequestExpectedHeadersAreAttached(bool supplyCredentials, bool supplyOAuth)
         {
             // arrange
             var factory = new TestWebRequestFactory();
             factory.RegisterResultForUri("http://localhost", "");
             var request = factory.Create(new Uri("http://localhost"));
 
-            var handler = new ApiRequestHandler(new ApiConfiguration("<<clientid>>", "<<clientsecret>>", "<<redirecturl>>"), new CompanyFileCredentials("user", "pass"));
+            var handler = new ApiRequestHandler(new ApiConfiguration("<<clientid>>", "<<clientsecret>>", "<<redirecturl>>"),
+                supplyCredentials ? new CompanyFileCredentials("user", "pass") : null, supplyOAuth ? new OAuthTokens() : null);
 
             // act
             handler.Put(request, new UserContract() { Name = "Paul" }, (code, location) => { }, (uri, exception) => Assert.Fail(exception.Message));
 
             // assert
             Assert.AreEqual("PUT", request.Method);
-            Assert.IsTrue(request.Headers[HttpRequestHeader.Authorization].StartsWith("Bearer"));
-            Assert.IsTrue(request.Headers[HttpRequestHeader.AcceptEncoding].Split(new[] { ',' }).Contains("gzip"));
-
-            Assert.AreEqual("<<clientid>>", request.Headers["x-myobapi-key"]);
-            Assert.AreEqual("v2", request.Headers["x-myobapi-version"]);
-            Assert.AreEqual(Convert.ToBase64String(Encoding.UTF8.GetBytes("user:pass")), request.Headers["x-myobapi-cftoken"]);
+            AssertStandardHeaders(supplyCredentials, supplyOAuth, request);
         }
 
         [Test]
-        async public void DuringPutRequest_Async_ExpectedHeadersAreAttached()
+        [TestCase(true, true)]
+        [TestCase(false, false)]
+        async public void DuringPutRequest_Async_ExpectedHeadersAreAttached(bool supplyCredentials, bool supplyOAuth)
         {
             // arrange
             var factory = new TestWebRequestFactory();
             factory.RegisterResultForUri("http://localhost", "");
             var request = factory.Create(new Uri("http://localhost"));
 
-            var handler = new ApiRequestHandler(new ApiConfiguration("<<clientid>>", "<<clientsecret>>", "<<redirecturl>>"), new CompanyFileCredentials("user", "pass"));
+            var handler = new ApiRequestHandler(new ApiConfiguration("<<clientid>>", "<<clientsecret>>", "<<redirecturl>>"),
+                supplyCredentials ? new CompanyFileCredentials("user", "pass") : null, supplyOAuth ? new OAuthTokens() : null);
 
             // act
             await handler.PutAsync(request, new UserContract() { Name = "Paul" });
 
             // assert
             Assert.AreEqual("PUT", request.Method);
-            Assert.IsTrue(request.Headers[HttpRequestHeader.Authorization].StartsWith("Bearer"));
-            Assert.IsTrue(request.Headers[HttpRequestHeader.AcceptEncoding].Split(new[] { ',' }).Contains("gzip"));
-
-            Assert.AreEqual("<<clientid>>", request.Headers["x-myobapi-key"]);
-            Assert.AreEqual("v2", request.Headers["x-myobapi-version"]);
-            Assert.AreEqual(Convert.ToBase64String(Encoding.UTF8.GetBytes("user:pass")), request.Headers["x-myobapi-cftoken"]);
+            AssertStandardHeaders(supplyCredentials, supplyOAuth, request);
         }
 
         [Test]
-        public void DuringPostRequestExpectedHeadersAreAttached()
+        [TestCase(true, true)]
+        [TestCase(false, false)]
+        public void DuringPostRequestExpectedHeadersAreAttached(bool supplyCredentials, bool supplyOAuth)
         {
             // arrange
             var factory = new TestWebRequestFactory();
             factory.RegisterResultForUri("http://localhost", "");
             var request = factory.Create(new Uri("http://localhost"));
 
-            var handler = new ApiRequestHandler(new ApiConfiguration("<<clientid>>", "<<clientsecret>>", "<<redirecturl>>"), new CompanyFileCredentials("user", "pass"));
+            var handler = new ApiRequestHandler(new ApiConfiguration("<<clientid>>", "<<clientsecret>>", "<<redirecturl>>"),
+                supplyCredentials ? new CompanyFileCredentials("user", "pass") : null, supplyOAuth ? new OAuthTokens() : null);
 
             // act
             handler.Post(request, new UserContract() { Name = "Paul" }, (code, location) => { }, (uri, exception) => Assert.Fail(exception.Message));
 
             // assert
             Assert.AreEqual("POST", request.Method);
-            Assert.IsTrue(request.Headers[HttpRequestHeader.Authorization].StartsWith("Bearer"));
-            Assert.IsTrue(request.Headers[HttpRequestHeader.AcceptEncoding].Split(new[] { ',' }).Contains("gzip"));
-
-            Assert.AreEqual("<<clientid>>", request.Headers["x-myobapi-key"]);
-            Assert.AreEqual("v2", request.Headers["x-myobapi-version"]);
-            Assert.AreEqual(Convert.ToBase64String(Encoding.UTF8.GetBytes("user:pass")), request.Headers["x-myobapi-cftoken"]);
+            AssertStandardHeaders(supplyCredentials, supplyOAuth, request);
         }
 
         private class ExpectedResult
@@ -245,26 +250,24 @@ namespace SDK.Test.Communication
         }
 
         [Test]
-        async public void DuringPostRequest_Async_ExpectedHeadersAreAttached()
+        [TestCase(true, true)]
+        [TestCase(false, false)]
+        async public void DuringPostRequest_Async_ExpectedHeadersAreAttached(bool supplyCredentials, bool supplyOAuth)
         {
             // arrange
             var factory = new TestWebRequestFactory();
             factory.RegisterResultForUri("http://localhost", "");
             var request = factory.Create(new Uri("http://localhost"));
 
-            var handler = new ApiRequestHandler(new ApiConfiguration("<<clientid>>", "<<clientsecret>>", "<<redirecturl>>"), new CompanyFileCredentials("user", "pass"));
+            var handler = new ApiRequestHandler(new ApiConfiguration("<<clientid>>", "<<clientsecret>>", "<<redirecturl>>"),
+                supplyCredentials ? new CompanyFileCredentials("user", "pass") : null, supplyOAuth ? new OAuthTokens() : null);
 
             // act
             await handler.PostAsync(request, new UserContract() { Name = "Paul" });
 
             // assert
             Assert.AreEqual("POST", request.Method);
-            Assert.IsTrue(request.Headers[HttpRequestHeader.Authorization].StartsWith("Bearer"));
-            Assert.IsTrue(request.Headers[HttpRequestHeader.AcceptEncoding].Split(new[] { ',' }).Contains("gzip"));
-
-            Assert.AreEqual("<<clientid>>", request.Headers["x-myobapi-key"]);
-            Assert.AreEqual("v2", request.Headers["x-myobapi-version"]);
-            Assert.AreEqual(Convert.ToBase64String(Encoding.UTF8.GetBytes("user:pass")), request.Headers["x-myobapi-cftoken"]);
+            AssertStandardHeaders(supplyCredentials, supplyOAuth, request);
         }
 
         [Test]
