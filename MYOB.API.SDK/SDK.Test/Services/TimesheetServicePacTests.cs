@@ -31,7 +31,7 @@ namespace SDK.Test.Services
             _mockProviderService.ClearInteractions(); //NOTE: Clears any previously registered interactions before the test is run
 
             _configuration = Substitute.For<IApiConfiguration>();
-            _service = new TimesheetService(_configuration);
+            _service = new TimesheetService(_configuration, keyService: new SimpleOAuthKeyService());
 
             _cfUid = Guid.NewGuid();
             _uid = Guid.NewGuid(); 
