@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace MYOB.AccountRight.SDK.Contracts.Version2
 {
     /// <summary>
     /// Commonly shared properties for main entities
     /// </summary>
-    public abstract class BaseEntity
+    public abstract class BaseEntity : IETagSupport
     {
         /// <summary>
         /// Unique account identifier in the form of a guid.
@@ -40,5 +40,11 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2
         /// If supported then the time the entity was last modified, or a default value if the database was upgraded and the time of last modification was unknown and cannot be determined. (Read only)
         /// </summary>
         public DateTime? LastModified { get; set; }
+
+        /// <summary>
+        /// Returns the ETag from the HTTP Response Header
+        /// </summary>
+        [JsonIgnore]
+        public string ETag { get; set; }
     }
 }

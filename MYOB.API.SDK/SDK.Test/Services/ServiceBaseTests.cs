@@ -26,9 +26,9 @@ namespace SDK.Test.Services
             {
             }
 
-            public UserContract Get(Uri uri)
+            public UserContract Get(Uri uri, string eTag=null)
             {
-                return MakeApiGetRequestSync<UserContract>(uri, null);
+                return MakeApiGetRequestSync<UserContract>(uri, null, null, eTag);
             }
 
             public void Delete(Uri uri)
@@ -51,9 +51,9 @@ namespace SDK.Test.Services
                 return MakeApiPostRequestSync<UserContract, TestContract>(uri, contract, null).Value;
             }
 
-            async public Task<UserContract> GetAsync(Uri uri)
+            async public Task<UserContract> GetAsync(Uri uri, string eTag = null)
             {
-                return await MakeApiGetRequestAsync<UserContract>(uri, null);
+                return await MakeApiGetRequestAsync<UserContract>(uri, null, eTag);
             }
 
             async public Task DeleteAsync(Uri uri)

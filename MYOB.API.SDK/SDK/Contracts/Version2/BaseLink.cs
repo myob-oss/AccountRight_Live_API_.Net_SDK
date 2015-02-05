@@ -2,7 +2,6 @@
 
 namespace MYOB.AccountRight.SDK.Contracts.Version2
 {
-
     /// <summary>
     /// Commonly shared properties for links to other entities
     /// </summary>
@@ -11,9 +10,6 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2
         /// <summary>
         /// Unique identifier for the referenced entity.
         /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
         public Guid UID { get; set; }
 
         /// <summary>

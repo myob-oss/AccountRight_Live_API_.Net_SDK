@@ -1,21 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text;
 #if ASYNC
 using System.Threading.Tasks;
 using System.Threading;
 #endif
 using MYOB.AccountRight.SDK.Contracts;
 using MYOB.AccountRight.SDK.Extensions;
-#if COMPRESSION
-using System.IO.Compression;
-#else
-using SharpCompress.Compressor;
-using SharpCompress.Compressor.Deflate;
-#endif
 
 namespace MYOB.AccountRight.SDK.Communication
 {
@@ -55,10 +46,13 @@ namespace MYOB.AccountRight.SDK.Communication
         /// <param name="request"></param>
         /// <param name="onComplete"></param>
         /// <param name="onError"></param>
-        public void Get<T>(WebRequest request, Action<HttpStatusCode, T> onComplete, Action<Uri, Exception> onError)
+        /// <param name="eTag"></param>
+        public void Get<T>(WebRequest request, Action<HttpStatusCode, T> onComplete, Action<Uri, Exception> onError, string eTag)
             where T : class
         {
             ApiRequestHelper.SetStandardHeaders(request, _configuration, _credentials, _oauth);
+            ApiRequestHelper.SetIsNoneMatch(request, eTag);
+
             request.BeginGetResponse(HandleResponseCallback<RequestContext<string, T>, string, T>,
                                      new RequestContext<string, T>
                                          {
@@ -74,10 +68,11 @@ namespace MYOB.AccountRight.SDK.Communication
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="request"></param>
+        /// <param name="eTag"></param>
         /// <returns></returns>
-        public Task<Tuple<HttpStatusCode, T>> GetAsync<T>(WebRequest request) where T : class
+        public Task<Tuple<HttpStatusCode, T>> GetAsync<T>(WebRequest request, string eTag) where T : class
         {
-            return this.GetAsync<T>(request, CancellationToken.None);
+            return this.GetAsync<T>(request, CancellationToken.None, eTag);
         }
 
         /// <summary>
@@ -86,10 +81,13 @@ namespace MYOB.AccountRight.SDK.Communication
         /// <typeparam name="T"></typeparam>
         /// <param name="request"></param>
         /// <param name="cancellationToken"></param>
+        /// <param name="eTag"></param>
         /// <returns></returns>
-        public async Task<Tuple<HttpStatusCode, T>> GetAsync<T>(WebRequest request, CancellationToken cancellationToken) where T : class
+        public async Task<Tuple<HttpStatusCode, T>> GetAsync<T>(WebRequest request, CancellationToken cancellationToken, string eTag) where T : class
         {
             ApiRequestHelper.SetStandardHeaders(request, _configuration, _credentials, _oauth);
+            ApiRequestHelper.SetIsNoneMatch(request, eTag);
+
             var get = await GetResponseTask<T>(request, cancellationToken);
             return new Tuple<HttpStatusCode, T>(get.Item1, get.Item3);
         }

@@ -9,3 +9,4 @@ MYOB.API.SDK/**/obj/**/*
 /TestResult.xml
 /MYOB.API.SDK/SDK/MYOB.API.SDK.snk
 /*.nupkg
+/MYOB-Setup.txt

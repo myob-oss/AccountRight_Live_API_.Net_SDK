@@ -25,7 +25,7 @@
         /// The location of the <see cref="EmployeeStandardPay" /> resource for this <see cref="Employee"/> 
         /// </summary>
         /// <remarks>
-        /// Only applicable for 2014.4 cloud and 2014.5 desktop where supported
+        /// Only applicable for 2014.4 cloud and 2015.1 desktop where supported
         /// </remarks>
         public EmployeeStandardPayLink EmployeeStandardPay { get; set; }
 

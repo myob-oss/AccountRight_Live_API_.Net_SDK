@@ -37,6 +37,13 @@ namespace MYOB.AccountRight.SDK.Communication
         void SetStandardHeaders(WebRequest request, IApiConfiguration configuration, ICompanyFileCredentials credentials, OAuthTokens oauth = null);
 
         /// <summary>
+        /// Set Is-None-Match to request
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="tag"></param>
+        void SetIsNoneMatch(WebRequest request, string tag);
+
+        /// <summary>
         /// Is the response compressed
         /// </summary>
         /// <param name="response"></param>
@@ -81,9 +88,20 @@ namespace MYOB.AccountRight.SDK.Communication
         /// <param name="configuration"></param>
         /// <param name="credentials"></param>
         /// <param name="oauth"></param>
-        public void SetStandardHeaders(WebRequest request, IApiConfiguration configuration, ICompanyFileCredentials credentials, OAuthTokens oauth = null)
+        public void SetStandardHeaders(WebRequest request, IApiConfiguration configuration, 
+            ICompanyFileCredentials credentials, OAuthTokens oauth = null)
         {
-            request.Headers[HttpRequestHeader.Authorization] = string.Format("Bearer {0}", oauth.Maybe(_ => _.AccessToken, string.Empty));
+            if (oauth != null)
+            {
+                request.Headers[HttpRequestHeader.Authorization] = string.Format("Bearer {0}",
+                    oauth.AccessToken.Maybe(_ => _, string.Empty));
+            }
+#if !PORTABLE
+            if ((request as HttpWebRequest).Maybe(_ => _.ClientCertificates.Maybe(c => c.Count != 0)))
+            {
+                request.Headers.Remove(HttpRequestHeader.Authorization);
+            }
+#endif
             request.Headers[HttpRequestHeader.AcceptEncoding] = "gzip";
             
             IgnoreError(() =>
@@ -103,11 +121,26 @@ namespace MYOB.AccountRight.SDK.Communication
                     }
 #endif
                 });
-      
+
             request.Headers["x-myobapi-key"] = configuration.ClientId;
             request.Headers["x-myobapi-version"] = "v2";
-            request.Headers["x-myobapi-cftoken"] = Convert.ToBase64String(Encoding.UTF8.GetBytes(string.Format("{0}:{1}", 
-                credentials.Maybe(_ => _.Username).Maybe(_ => _, string.Empty), credentials.Maybe(_ => _.Password).Maybe(_ => _, string.Empty))));
+
+            if (credentials != null)
+            {
+                request.Headers["x-myobapi-cftoken"] = Convert.ToBase64String(Encoding.UTF8.GetBytes(string.Format("{0}:{1}",
+                    credentials.Username.Maybe(_ => _, string.Empty), credentials.Password.Maybe(_ => _, string.Empty))));
+            }
+        }
+
+        /// <summary>
+        /// Set Is-None-Match to request
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="tag"></param>
+        public void SetIsNoneMatch(WebRequest request, string tag)
+        {
+            if (tag != null)
+                request.Headers[HttpRequestHeader.IfNoneMatch] = tag;
         }
 
         /// <summary>

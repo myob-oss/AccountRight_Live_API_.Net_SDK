@@ -1,19 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using MYOB.AccountRight.SDK.Communication;
 using NUnit.Framework;
-
+using System.Net.Cache;
+using MYOB.AccountRight.SDK;
 
 namespace SDK.Test.Communication
 {
-    using System.Net.Cache;
-
-    using MYOB.AccountRight.SDK;
-
     [TestFixture]
     public class WebRequestFactoryTests
     {
