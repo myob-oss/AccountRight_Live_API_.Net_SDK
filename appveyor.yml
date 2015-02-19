@@ -17,6 +17,8 @@ artifacts:
   name: Release
 - path: .\Artefacts\Nuget\Candidate\*.nupkg
   name: Candidate
+- path: .\Artefacts\Coverage\output.xml
+  name: Coverage
 deploy:
 - provider: NuGet
   api_key:
