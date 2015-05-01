@@ -26,8 +26,8 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("2015.1.0.*")]
-[assembly: AssemblyFileVersion("2015.1.0.*")]
+[assembly: AssemblyVersion("2015.2.0.*")]
+[assembly: AssemblyFileVersion("2015.2.0.*")]
 
 [assembly: InternalsVisibleTo("SDK.BDD.Tests, PublicKey=" +
 "002400000480000094000000060200000024000052534131000400000100010035bd4d843bf80e" +

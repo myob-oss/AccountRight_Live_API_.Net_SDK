@@ -38,6 +38,13 @@ C# Example:
     var cfService = new CompanyFileService(configuration);
     var companyFiles = cfService.GetRange();
 
+##Publishing##
+
+Publishing to [Nuget](http://nuget.org/packages/MYOB.AccountRight.API.SDK) is done via the [AppVeyor](https://ci.appveyor.com/project/sawilde/accountright-live-api-net-sdk) build system.
+
+To publish release-candidate create and merge from `master` to `candidate` branches.
+
+To publish release create and merge from `master` to `release` branches.
 
 ##Contributions##
 

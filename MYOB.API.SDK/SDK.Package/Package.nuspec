@@ -2,7 +2,8 @@
 <package >
   <metadata>
     <id>MYOB.AccountRight.API.SDK</id>
-    <version>2.0.18</version>
+    <!-- the version number is managed by appveyor -->
+    <version>2015.2.0</version>
     <title>MYOB AccountRight API SDK</title>
     <authors>MYOB_Developers</authors>
     <owners>MYOB Technology Pty. Ltd.</owners>
