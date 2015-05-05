@@ -1,10 +1,15 @@
 [![Build status](https://img.shields.io/appveyor/ci/sawilde/accountright-live-api-net-sdk.svg)](https://ci.appveyor.com/project/sawilde/accountright-live-api-net-sdk)
 [![Coverage](https://img.shields.io/coveralls/MYOB-Technology/AccountRight_Live_API_.Net_SDK/master.svg)](https://coveralls.io/r/MYOB-Technology/AccountRight_Live_API_.Net_SDK)
-[![Nuget](https://img.shields.io/nuget/dt/MYOB.AccountRight.API.SDK.svg)](http://nuget.org/packages/MYOB.AccountRight.API.SDK)
-[![Nuget](https://img.shields.io/nuget/v/MYOB.AccountRight.API.SDK.svg)](http://nuget.org/packages/MYOB.AccountRight.API.SDK)
-[![Nuget](https://img.shields.io/nuget/vpre/MYOB.AccountRight.API.SDK.svg)](http://nuget.org/packages/MYOB.AccountRight.API.SDK)
+
+Nuget Downloads: [![Nuget](https://img.shields.io/nuget/dt/MYOB.AccountRight.API.SDK.svg)](http://nuget.org/packages/MYOB.AccountRight.API.SDK)
+
+Nuget Release:   [![Nuget](https://img.shields.io/nuget/v/MYOB.AccountRight.API.SDK.svg)](http://nuget.org/packages/MYOB.AccountRight.API.SDK)
+
+Nuget Latest:    [![Nuget](https://img.shields.io/nuget/vpre/MYOB.AccountRight.API.SDK.svg)](http://nuget.org/packages/MYOB.AccountRight.API.SDK)
 
 #AccountRight Live API .Net SDK#
+
+[![Join the chat at https://gitter.im/MYOB-Technology/AccountRight_Live_API_.Net_SDK](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/MYOB-Technology/AccountRight_Live_API_.Net_SDK?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 This is the source repository for the MYOB AccountRight Live .Net SDK.
 
@@ -33,6 +38,13 @@ C# Example:
     var cfService = new CompanyFileService(configuration);
     var companyFiles = cfService.GetRange();
 
+##Publishing##
+
+Publishing to [Nuget](http://nuget.org/packages/MYOB.AccountRight.API.SDK) is done via the [AppVeyor](https://ci.appveyor.com/project/sawilde/accountright-live-api-net-sdk) build system.
+
+To publish release-candidate create and merge from `master` to `candidate` branches.
+
+To publish release create and merge from `master` to `release` branches.
 
 ##Contributions##
 
