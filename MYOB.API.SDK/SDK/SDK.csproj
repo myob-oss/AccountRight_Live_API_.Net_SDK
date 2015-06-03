@@ -164,6 +164,9 @@
     <Compile Include="Contracts\Version2\Sale\OrderWithLines.cs" />
     <Compile Include="Contracts\Version2\Sale\TimeBillingInvoice.cs" />
     <Compile Include="Contracts\Version2\Sale\TimeBillingInvoiceLine.cs" />
+    <Compile Include="Contracts\Version2\Security\Role.cs" />
+    <Compile Include="Contracts\Version2\Security\RoleLink.cs" />
+    <Compile Include="Contracts\Version2\Security\User.cs" />
     <Compile Include="Contracts\Version2\TimeBilling\Activity.cs" />
     <Compile Include="Contracts\Version2\PayrollCategory\ActivityLink.cs" />
     <Compile Include="Contracts\Version2\PayrollCategory\PayrollCategory.cs" />
@@ -365,6 +368,8 @@
     <Compile Include="Services\Version2\Sale\ProfessionalOrderService.cs" />
     <Compile Include="Services\Version2\Sale\ServiceOrderService.cs" />
     <Compile Include="Services\Version2\Sale\TimeBillingInvoiceService.cs" />
+    <Compile Include="Services\Version2\Security\RoleService.cs" />
+    <Compile Include="Services\Version2\Security\UserService.cs" />
     <Compile Include="Services\Version2\TimeBilling\ActivityService.cs" />
     <Compile Include="Services\Version2\PayrollCategory\PayrollCategoryDeductionService.cs" />
     <Compile Include="Services\Version2\PayrollCategory\PayrollCategoryEntitlementService.cs" />
