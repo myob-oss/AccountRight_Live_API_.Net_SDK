@@ -295,6 +295,9 @@
     <Compile Include="Contracts\Version2\Sale\TimeBillingInvoiceLine.cs" />
     <Compile Include="Contracts\Version2\Sale\TimeBillingOrder.cs" />
     <Compile Include="Contracts\Version2\Sale\TimeBillingOrderLine.cs" />
+    <Compile Include="Contracts\Version2\Security\Role.cs" />
+    <Compile Include="Contracts\Version2\Security\RoleLink.cs" />
+    <Compile Include="Contracts\Version2\Security\User.cs" />
     <Compile Include="Contracts\Version2\Terms.cs" />
     <Compile Include="Contracts\Version2\TermsPaymentType.cs" />
     <Compile Include="Contracts\Version2\TimeBilling\Activity.cs" />
@@ -410,6 +413,8 @@
     <Compile Include="Services\Version2\Sale\ServiceOrderService.cs" />
     <Compile Include="Services\Version2\Sale\TimeBillingInvoiceService.cs" />
     <Compile Include="Services\Version2\Sale\TimeBillingOrderService.cs" />
+    <Compile Include="Services\Version2\Security\RoleService.cs" />
+    <Compile Include="Services\Version2\Security\UserService.cs" />
     <Compile Include="Services\Version2\TimeBilling\ActivityService.cs" />
     <Compile Include="Services\Version2\UriHelper.cs" />
     <Compile Include="Services\VersionInfoService.cs" />

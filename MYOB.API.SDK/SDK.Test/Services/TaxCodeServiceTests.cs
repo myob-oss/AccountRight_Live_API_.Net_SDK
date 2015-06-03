@@ -1,5 +1,4 @@
-﻿using MYOB.AccountRight.SDK.Services;
-using MYOB.AccountRight.SDK.Services.GeneralLedger;
+﻿using MYOB.AccountRight.SDK.Services.GeneralLedger;
 using NUnit.Framework;
 
 namespace SDK.Test.Services
