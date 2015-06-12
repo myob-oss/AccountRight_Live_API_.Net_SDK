@@ -99,6 +99,7 @@
   <ItemGroup>
     <Compile Include="ApiCommunicationExceptionTests.cs" />
     <Compile Include="ApiConfigurationTests.cs" />
+    <Compile Include="Contracts\Version2\UserTests.cs" />
     <Compile Include="MyobArlApiPact.cs" />
     <Compile Include="Communication\ApiRequestHandlerTests.cs" />
     <Compile Include="Communication\BaseRequestHandlerTests.cs" />
@@ -142,6 +143,7 @@
     <Compile Include="Services\EmployeeStandardPayServiceTests.cs" />
     <Compile Include="Services\JobBudgetServiceTests.cs" />
     <Compile Include="Services\ProfitLossDistributionServiceTests.cs" />
+    <Compile Include="Services\RoleServiceTests.cs" />
     <Compile Include="Services\TimeBillingOrderServiceTests.cs" />
     <Compile Include="Services\EmployeePaymentDetailsServiceTests.cs" />
     <Compile Include="Services\ItemPurchaseOrderServiceTests.cs" />
@@ -210,6 +212,7 @@
     <Compile Include="Services\TransferMoneyTxnServiceTests.cs" />
     <Compile Include="Services\UriHelperTests.cs" />
     <Compile Include="Services\CurrentUserServiceTests.cs" />
+    <Compile Include="Services\UserServiceTests.cs" />
     <Compile Include="UserContract.cs" />
     <Compile Include="Helper\TestWebRequestFactory.cs" />
     <Compile Include="Communication\WebRequestFactoryTests.cs" />
