@@ -6,12 +6,19 @@
     public class User : BaseEntity
     {
         /// <summary>
-        ///  the name of the role
+        /// Simple constructor
+        /// </summary>
+        public User()
+        {
+            IsActive = true;
+        }
+        /// <summary>
+        ///  the name of the role (read-only)
         /// </summary>
         public string Name { get; set; }
 
         /// <summary>
-        /// The associated mydotIdentity
+        /// The associated mydotIdentity (Cloud-only)
         /// </summary>
 // ReSharper disable once InconsistentNaming
         public string MYDOTIdentity { get; set; }
@@ -27,13 +34,19 @@
         public bool IsAdvisor { get; set; }
 
         /// <summary>
-        /// Is user active
+        /// Is user active (defaults to true)
         /// </summary>
         public bool IsActive { get; set; }
 
         /// <summary>
-        /// Should user be made an online administrator when creating user (POST)
+        /// Should user be made an online administrator when creating user (POST) (read-only) (Cloud-only)
         /// </summary>
         public bool? IsOnlineAdministrator { get; set; }
+
+        /// <summary>
+        /// User should be invited using the supplied <see cref="MYDOTIdentity"/> (read-only) (Cloud-only)
+        /// </summary>
+        public bool? InviteUser { get; set; }
+
     }
 }
