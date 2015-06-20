@@ -1,4 +1,6 @@
-﻿namespace MYOB.AccountRight.SDK.Contracts.Version2.GeneralLedger
+﻿using System;
+
+namespace MYOB.AccountRight.SDK.Contracts.Version2.GeneralLedger
 {
     /// <summary>
     /// The Account Type
@@ -6,86 +8,87 @@
     /// <remarks>
     /// Is related to Classification
     /// </remarks>
+    [Flags]
     public enum AccountType
     {
         /// <summary>
         /// Has Asset classification
         /// </summary>
-        Bank,
+        Bank = 1,
 
         /// <summary>
         /// Has Asset classification
         /// </summary>
-        AccountReceivable,
+        AccountReceivable = 2,
 
         /// <summary>
         /// Has Asset classification
         /// </summary>
-        OtherCurrentAsset,
+        OtherCurrentAsset = 4,
 
         /// <summary>
         /// Has Asset classification
         /// </summary>
-        FixedAsset,
+        FixedAsset = 8,
 
         /// <summary>
         /// Has Asset classification
         /// </summary>
-        OtherAsset,
+        OtherAsset = 16,
 
         /// <summary>
         /// Has Liability classification
         /// </summary>
-        CreditCard,
+        CreditCard = 32,
 
         /// <summary>
         /// Has Liability classification
         /// </summary>
-        AccountsPayable,
+        AccountsPayable = 64,
 
         /// <summary>
         /// Has Liability classification
         /// </summary>
-        OtherCurrentLiability,
+        OtherCurrentLiability = 128,
 
         /// <summary>
         /// Has Liability classification
         /// </summary>
-        LongTermLiability,
+        LongTermLiability = 256,
 
         /// <summary>
         /// Has Liability classification
         /// </summary>
-        OtherLiability,
+        OtherLiability = 512,
 
         /// <summary>
         /// Has Equity classification
         /// </summary>
-        Equity,
+        Equity = 1024,
 
         /// <summary>
         /// Has Income classification
         /// </summary>
-        Income,
+        Income = 2048,
 
         /// <summary>
         /// Has CostOfSales classification
         /// </summary>
-        CostOfSales,
+        CostOfSales = 4096,
 
         /// <summary>
         /// Has Expense classification
         /// </summary>
-        Expense,
+        Expense = 8192,
 
         /// <summary>
         /// Has OtherIncome classification
         /// </summary>
-        OtherIncome,
+        OtherIncome = 16384,
 
         /// <summary>
         /// Has OtherExpense classification
         /// </summary>
-        OtherExpense,
+        OtherExpense = 32768,
     }
 }
