@@ -10,8 +10,8 @@ function Check-Same-Compile-Includes {
   
   @(Select-Xml '//e:Compile' $srcxml -Namespace $ns) | 
 		select -ExpandProperty Node | 
-		? { $_.Include} |
-		select -ExpandProperty Include | 
+		? { $_.Include} | 
+		select -ExpandProperty Include | where { $_ -ne 'Properties\AssemblyInfoEx.cs' } |
     % {
       $compile = $_
       @(Select-Xml "//e:Compile[@Include = '$_']" $targetxml -Namespace $ns) | Measure-Object |

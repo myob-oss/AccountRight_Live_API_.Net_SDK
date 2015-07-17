@@ -439,10 +439,10 @@
       <HintPath>$(SolutionDir)\packages\Microsoft.Bcl.Async.1.0.168\lib\portable-net40+sl4+win8+wp71+wpa81\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>$(SolutionDir)\packages\Newtonsoft.Json.6.0.5\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+      <HintPath>$(SolutionDir)\packages\Newtonsoft.Json.6.0.8\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="SharpCompress">
-      <HintPath>$(SolutionDir)\packages\sharpcompress.0.10.3\lib\portable-net4+sl5+wp8+win8\SharpCompress.dll</HintPath>
+      <HintPath>..\..\packages\p3-sharpcompress.0.10.5.2\lib\portable-net4+sl5+wp8+wp8.1+win8\SharpCompress.dll</HintPath>
     </Reference>
     <Reference Include="System.IO">
       <HintPath>$(SolutionDir)\packages\Microsoft.Bcl.1.1.8\lib\portable-net40+sl5+win8+wp8+wpa81\System.IO.dll</HintPath>
