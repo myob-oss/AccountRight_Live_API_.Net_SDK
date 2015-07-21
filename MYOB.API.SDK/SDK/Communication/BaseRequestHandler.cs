@@ -14,7 +14,6 @@ using System.Threading;
 
 #if COMPRESSION
 using System.IO.Compression;
-using MYOB.AccountRight.SDK.Contracts;
 #else
 using SharpCompress.Compressor;
 using SharpCompress.Compressor.Deflate;
