@@ -1,0 +1,1121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E7C4C255-4DB8-4F10-A4A6-A6A160877F29}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MYOB.AccountRight.SDK</RootNamespace>
+    <AssemblyName>MYOB.AccountRight.SDK</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <BaseIntermediateOutputPath>obj\NET40\</BaseIntermediateOutputPath>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <NuGetPackageImportStamp>cad110ad</NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>$(SolutionDir)\Artefacts\SDK\Ship\NET40\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;ASYNC</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>$(SolutionDir)\Artefacts\SDK\Ship\NET40\MYOB.AccountRight.SDK.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>$(SolutionDir)\Artefacts\SDK\Ship\NET40\</OutputPath>
+    <DefineConstants>TRACE;ASYNC, COMPRESSION</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>$(SolutionDir)\Artefacts\SDK\Ship\NET40\MYOB.AccountRight.SDK.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>..\SDK\MYOB.API.SDK.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Threading.Tasks, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(SolutionDir)\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(SolutionDir)\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions.Desktop, Version=1.0.168.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(SolutionDir)\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.Desktop.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(SolutionDir)\packages\Newtonsoft.Json.7.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.IO">
+      <HintPath>$(SolutionDir)\packages\Microsoft.Bcl.1.1.8\lib\net40\System.IO.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net" />
+    <Reference Include="System.Runtime">
+      <HintPath>$(SolutionDir)\packages\Microsoft.Bcl.1.1.8\lib\net40\System.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks">
+      <HintPath>$(SolutionDir)\packages\Microsoft.Bcl.1.1.8\lib\net40\System.Threading.Tasks.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SDK\ApiCommunicationException.cs" />
+    <Compile Include="..\SDK\ApiConfiguration.cs" />
+    <Compile Include="..\SDK\Properties\AssemblyInfoEx.cs">
+      <Link>Properties\AssemblyInfoEx.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Communication\ApiRequestHandler.cs">
+      <Link>Communication\ApiRequestHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Communication\ApiRequestHelper.cs">
+      <SubType>Code</SubType>
+      <Link>Communication\ApiRequestHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Communication\ApiStreamRequestHandler.cs">
+      <SubType>Code</SubType>
+      <Link>Communication\ApiStreamRequestHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Communication\BaseRequestHandler.cs">
+      <Link>Communication\BaseRequestHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Communication\OAuthRequestHandler.cs">
+      <Link>Communication\OAuthRequestHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Communication\WebRequestFactory.cs">
+      <Link>Communication\WebRequestFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Company.cs">
+      <Link>Contracts\Company.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\CompanyFile.cs">
+      <Link>Contracts\CompanyFile.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\CompanyFileWithResources.cs">
+      <Link>Contracts\CompanyFileWithResources.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\IETagSupport.cs">
+      <Link>Contracts\IETagSupport.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\OAuthTokens.cs">
+      <Link>Contracts\OAuthTokens.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\ProductLevel.cs">
+      <Link>Contracts\ProductLevel.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Banking\BankAccount.cs">
+      <Link>Contracts\Version2\Banking\BankAccount.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Banking\ReceiveMoneyTxn.cs">
+      <Link>Contracts\Version2\Banking\ReceiveMoneyTxn.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Banking\ReceiveMoneyTxnLine.cs">
+      <Link>Contracts\Version2\Banking\ReceiveMoneyTxnLine.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Banking\SpendMoneyTxn.cs">
+      <Link>Contracts\Version2\Banking\SpendMoneyTxn.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Banking\SpendMoneyTxnLine.cs">
+      <Link>Contracts\Version2\Banking\SpendMoneyTxnLine.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Banking\Statement.cs">
+      <Link>Contracts\Version2\Banking\Statement.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Banking\TransferMoneyTxn.cs">
+      <Link>Contracts\Version2\Banking\TransferMoneyTxn.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\BaseEntity.cs">
+      <Link>Contracts\Version2\BaseEntity.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\BaseLink.cs">
+      <Link>Contracts\Version2\BaseLink.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Company\CategoryTracking.cs">
+      <Link>Contracts\Version2\Company\CategoryTracking.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Company\CompanyBankingPreferences.cs">
+      <Link>Contracts\Version2\Company\CompanyBankingPreferences.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Company\CompanyLink.cs">
+      <Link>Contracts\Version2\Company\CompanyLink.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Company\CompanyPreferences.cs">
+      <Link>Contracts\Version2\Company\CompanyPreferences.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Company\CompanyPurchasesPreferences.cs">
+      <Link>Contracts\Version2\Company\CompanyPurchasesPreferences.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Company\CompanyPurchasesPreferencesTerms.cs">
+      <Link>Contracts\Version2\Company\CompanyPurchasesPreferencesTerms.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Company\CompanyReportsAndFormsPreferences.cs">
+      <Link>Contracts\Version2\Company\CompanyReportsAndFormsPreferences.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Company\CompanySalesPreferences.cs">
+      <Link>Contracts\Version2\Company\CompanySalesPreferences.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Company\CompanySalesPreferencesTerms.cs">
+      <Link>Contracts\Version2\Company\CompanySalesPreferencesTerms.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Company\CompanySystemPreferences.cs">
+      <Link>Contracts\Version2\Company\CompanySystemPreferences.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Company\CompanyTimesheetPreferences.cs">
+      <Link>Contracts\Version2\Company\CompanyTimesheetPreferences.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Company\FormTemplate.cs">
+      <Link>Contracts\Version2\Company\FormTemplate.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Company\PriceLevel.cs">
+      <Link>Contracts\Version2\Company\PriceLevel.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Contact\Address.cs">
+      <Link>Contracts\Version2\Contact\Address.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Contact\CardLink.cs">
+      <Link>Contracts\Version2\Contact\CardLink.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Contact\Contact.cs">
+      <Link>Contracts\Version2\Contact\Contact.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Contact\ContactType.cs">
+      <Link>Contracts\Version2\Contact\ContactType.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Contact\Customer.cs">
+      <Link>Contracts\Version2\Contact\Customer.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Contact\CustomerCredit.cs">
+      <Link>Contracts\Version2\Contact\CustomerCredit.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Contact\CustomerLink.cs">
+      <Link>Contracts\Version2\Contact\CustomerLink.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Contact\CustomerPaymentDetails.cs">
+      <Link>Contracts\Version2\Contact\CustomerPaymentDetails.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Contact\CustomerSellingDetails.cs">
+      <Link>Contracts\Version2\Contact\CustomerSellingDetails.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Contact\CustomerTerms.cs">
+      <Link>Contracts\Version2\Contact\CustomerTerms.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Contact\Employee.cs">
+      <Link>Contracts\Version2\Contact\Employee.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Contact\EmployeeEntitlementInfo.cs">
+      <Link>Contracts\Version2\Contact\EmployeeEntitlementInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Contact\EmployeeLink.cs">
+      <Link>Contracts\Version2\Contact\EmployeeLink.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Contact\EmployeePaymentDetails.cs">
+      <Link>Contracts\Version2\Contact\EmployeePaymentDetails.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Contact\EmployeePayrollDetails.cs">
+      <Link>Contracts\Version2\Contact\EmployeePayrollDetails.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Contact\EmployeeStandardPay.cs">
+      <Link>Contracts\Version2\Contact\EmployeeStandardPay.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Contact\EmployeeSuperannuationInfo.cs">
+      <Link>Contracts\Version2\Contact\EmployeeSuperannuationInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Contact\EmployeeTaxInfo.cs">
+      <Link>Contracts\Version2\Contact\EmployeeTaxInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Contact\EmployeeTimeBillingInfo.cs">
+      <Link>Contracts\Version2\Contact\EmployeeTimeBillingInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Contact\EmployeeWageInfo.cs">
+      <Link>Contracts\Version2\Contact\EmployeeWageInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Contact\PayrollEmploymentClassificationLink.cs">
+      <Link>Contracts\Version2\Contact\PayrollEmploymentClassificationLink.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Contact\Personal.cs">
+      <Link>Contracts\Version2\Contact\Personal.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Contact\PurchaseLayoutType.cs">
+      <Link>Contracts\Version2\Contact\PurchaseLayoutType.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Contact\PurchaseTerms.cs">
+      <Link>Contracts\Version2\Contact\PurchaseTerms.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Contact\SuperannuationFundLink.cs">
+      <Link>Contracts\Version2\Contact\SuperannuationFundLink.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Contact\Supplier.cs">
+      <Link>Contracts\Version2\Contact\Supplier.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Contact\SupplierBuyingDetails.cs">
+      <Link>Contracts\Version2\Contact\SupplierBuyingDetails.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Contact\SupplierCredit.cs">
+      <Link>Contracts\Version2\Contact\SupplierCredit.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Contact\SupplierLink.cs">
+      <Link>Contracts\Version2\Contact\SupplierLink.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Contact\SupplierPaymentDetails.cs">
+      <Link>Contracts\Version2\Contact\SupplierPaymentDetails.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Contact\SupplierRefundDetails.cs">
+      <Link>Contracts\Version2\Contact\SupplierRefundDetails.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Contact\SupplierTerms.cs">
+      <Link>Contracts\Version2\Contact\SupplierTerms.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\CurrentUser.cs">
+      <Link>Contracts\Version2\CurrentUser.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\GeneralLedger\Account.cs">
+      <Link>Contracts\Version2\GeneralLedger\Account.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\GeneralLedger\AccountBudget.cs">
+      <Link>Contracts\Version2\GeneralLedger\AccountBudget.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\GeneralLedger\AccountingProperties.cs">
+      <Link>Contracts\Version2\GeneralLedger\AccountingProperties.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\GeneralLedger\AccountLink.cs">
+      <Link>Contracts\Version2\GeneralLedger\AccountLink.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\GeneralLedger\AccountRegister.cs">
+      <Link>Contracts\Version2\GeneralLedger\AccountRegister.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\GeneralLedger\AccountType.cs">
+      <Link>Contracts\Version2\GeneralLedger\AccountType.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\GeneralLedger\BankingDetails.cs">
+      <Link>Contracts\Version2\GeneralLedger\BankingDetails.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\GeneralLedger\Category.cs">
+      <Link>Contracts\Version2\GeneralLedger\Category.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\GeneralLedger\CategoryLink.cs">
+      <Link>Contracts\Version2\GeneralLedger\CategoryLink.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\GeneralLedger\CategoryRegister.cs">
+      <Link>Contracts\Version2\GeneralLedger\CategoryRegister.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\GeneralLedger\Classification.cs">
+      <Link>Contracts\Version2\GeneralLedger\Classification.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\GeneralLedger\GeneralJournal.cs">
+      <Link>Contracts\Version2\GeneralLedger\GeneralJournal.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\GeneralLedger\GeneralJournalLine.cs">
+      <Link>Contracts\Version2\GeneralLedger\GeneralJournalLine.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\GeneralLedger\GSTReportingMethod.cs">
+      <Link>Contracts\Version2\GeneralLedger\GSTReportingMethod.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\GeneralLedger\Job.cs">
+      <Link>Contracts\Version2\GeneralLedger\Job.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\GeneralLedger\JobBudget.cs">
+      <Link>Contracts\Version2\GeneralLedger\JobBudget.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\GeneralLedger\JobLink.cs">
+      <Link>Contracts\Version2\GeneralLedger\JobLink.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\GeneralLedger\JobRegister.cs">
+      <Link>Contracts\Version2\GeneralLedger\JobRegister.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\GeneralLedger\JournalTransaction.cs">
+      <Link>Contracts\Version2\GeneralLedger\JournalTransaction.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\GeneralLedger\JournalTransactionLine.cs">
+      <Link>Contracts\Version2\GeneralLedger\JournalTransactionLine.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\GeneralLedger\JournalType.cs">
+      <Link>Contracts\Version2\GeneralLedger\JournalType.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\GeneralLedger\LinkedAccount.cs">
+      <Link>Contracts\Version2\GeneralLedger\LinkedAccount.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\GeneralLedger\ProfitLossDistribution.cs">
+      <Link>Contracts\Version2\GeneralLedger\ProfitLossDistribution.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\GeneralLedger\SourceTransaction.cs">
+      <Link>Contracts\Version2\GeneralLedger\SourceTransaction.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\GeneralLedger\TaxCode.cs">
+      <Link>Contracts\Version2\GeneralLedger\TaxCode.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\GeneralLedger\TaxCodeLink.cs">
+      <Link>Contracts\Version2\GeneralLedger\TaxCodeLink.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Identifier.cs">
+      <Link>Contracts\Version2\Identifier.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Inventory\InventoryAdjustment.cs">
+      <Link>Contracts\Version2\Inventory\InventoryAdjustment.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Inventory\Item.cs">
+      <Link>Contracts\Version2\Inventory\Item.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Inventory\ItemLink.cs">
+      <Link>Contracts\Version2\Inventory\ItemLink.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Inventory\ItemPriceMatrix.cs">
+      <Link>Contracts\Version2\Inventory\ItemPriceMatrix.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Inventory\Levels.cs">
+      <Link>Contracts\Version2\Inventory\Levels.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Inventory\SellingPrice.cs">
+      <Link>Contracts\Version2\Inventory\SellingPrice.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\PagedCollection.cs">
+      <Link>Contracts\Version2\PagedCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\PayrollCategory\ActivityLink.cs">
+      <Link>Contracts\Version2\PayrollCategory\ActivityLink.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\PayrollCategory\PayrollCategory.cs">
+      <Link>Contracts\Version2\PayrollCategory\PayrollCategory.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\PayrollCategory\PayrollCategoryDeduction.cs">
+      <Link>Contracts\Version2\PayrollCategory\PayrollCategoryDeduction.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\PayrollCategory\PayrollCategoryEntitlement.cs">
+      <Link>Contracts\Version2\PayrollCategory\PayrollCategoryEntitlement.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\PayrollCategory\PayrollCategoryExpense.cs">
+      <Link>Contracts\Version2\PayrollCategory\PayrollCategoryExpense.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\PayrollCategory\PayrollCategoryLink.cs">
+      <Link>Contracts\Version2\PayrollCategory\PayrollCategoryLink.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\PayrollCategory\PayrollCategorySuperannuation.cs">
+      <Link>Contracts\Version2\PayrollCategory\PayrollCategorySuperannuation.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\PayrollCategory\PayrollCategoryTax.cs">
+      <Link>Contracts\Version2\PayrollCategory\PayrollCategoryTax.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\PayrollCategory\PayrollCategoryTaxTable.cs">
+      <Link>Contracts\Version2\PayrollCategory\PayrollCategoryTaxTable.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\PayrollCategory\PayrollCategoryWage.cs">
+      <Link>Contracts\Version2\PayrollCategory\PayrollCategoryWage.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\PayrollCategory\TaxTableLink.cs">
+      <Link>Contracts\Version2\PayrollCategory\TaxTableLink.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Payroll\PayrollEmploymentClassification.cs">
+      <Link>Contracts\Version2\Payroll\PayrollEmploymentClassification.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Payroll\PayrollSuperannuationFund.cs">
+      <Link>Contracts\Version2\Payroll\PayrollSuperannuationFund.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Payroll\Timesheet.cs">
+      <Link>Contracts\Version2\Payroll\Timesheet.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Photo.cs">
+      <Link>Contracts\Version2\Photo.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Purchase\Bill.cs">
+      <Link>Contracts\Version2\Purchase\Bill.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Purchase\BillLine.cs">
+      <Link>Contracts\Version2\Purchase\BillLine.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Purchase\BillLink.cs">
+      <Link>Contracts\Version2\Purchase\BillLink.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Purchase\BillType.cs">
+      <Link>Contracts\Version2\Purchase\BillType.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Purchase\BillWithLines.cs">
+      <Link>Contracts\Version2\Purchase\BillWithLines.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Purchase\CalculateDiscounts.cs">
+      <Link>Contracts\Version2\Purchase\CalculateDiscounts.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Purchase\CalculateDiscountsItem.cs">
+      <Link>Contracts\Version2\Purchase\CalculateDiscountsItem.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Purchase\CalculateDiscountsPurchase.cs">
+      <Link>Contracts\Version2\Purchase\CalculateDiscountsPurchase.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Purchase\CalculateDiscountsPurchaseType.cs">
+      <Link>Contracts\Version2\Purchase\CalculateDiscountsPurchaseType.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Purchase\CalculateDiscountsResponse.cs">
+      <Link>Contracts\Version2\Purchase\CalculateDiscountsResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Purchase\CalculateDiscountsResponseItem.cs">
+      <Link>Contracts\Version2\Purchase\CalculateDiscountsResponseItem.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Purchase\DebitRefund.cs">
+      <Link>Contracts\Version2\Purchase\DebitRefund.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Purchase\DebitSettlement.cs">
+      <Link>Contracts\Version2\Purchase\DebitSettlement.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Purchase\DebitSettlementLine.cs">
+      <Link>Contracts\Version2\Purchase\DebitSettlementLine.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Purchase\DebitSettlementLineType.cs">
+      <Link>Contracts\Version2\Purchase\DebitSettlementLineType.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Purchase\DebitSettlementLink.cs">
+      <Link>Contracts\Version2\Purchase\DebitSettlementLink.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Purchase\ItemBill.cs">
+      <Link>Contracts\Version2\Purchase\ItemBill.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Purchase\ItemBillLine.cs">
+      <Link>Contracts\Version2\Purchase\ItemBillLine.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Purchase\MiscellaneousBill.cs">
+      <Link>Contracts\Version2\Purchase\MiscellaneousBill.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Purchase\MiscellaneousBillLine.cs">
+      <Link>Contracts\Version2\Purchase\MiscellaneousBillLine.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Purchase\MiscellaneousPurchaseOrder.cs">
+      <Link>Contracts\Version2\Purchase\MiscellaneousPurchaseOrder.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Purchase\MiscellaneousPurchaseOrderLine.cs">
+      <Link>Contracts\Version2\Purchase\MiscellaneousPurchaseOrderLine.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Purchase\PayFrom.cs">
+      <Link>Contracts\Version2\Purchase\PayFrom.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Purchase\ProfessionalBill.cs">
+      <Link>Contracts\Version2\Purchase\ProfessionalBill.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Purchase\ProfessionalBillLine.cs">
+      <Link>Contracts\Version2\Purchase\ProfessionalBillLine.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Purchase\ProfessionalPurchaseOrder.cs">
+      <Link>Contracts\Version2\Purchase\ProfessionalPurchaseOrder.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Purchase\ProfessionalPurchaseOrderLine.cs">
+      <Link>Contracts\Version2\Purchase\ProfessionalPurchaseOrderLine.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Purchase\PurchaseLink.cs">
+      <Link>Contracts\Version2\Purchase\PurchaseLink.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Purchase\ItemPurchaseOrderLine.cs">
+      <Link>Contracts\Version2\Purchase\ItemPurchaseOrderLine.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Purchase\PurchaseOrder.cs">
+      <Link>Contracts\Version2\Purchase\PurchaseOrder.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Purchase\ItemPurchaseOrder.cs">
+      <Link>Contracts\Version2\Purchase\ItemPurchaseOrder.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Purchase\ServicePurchaseOrder.cs">
+      <Link>Contracts\Version2\Purchase\ServicePurchaseOrder.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Purchase\ServicePurchaseOrderLine.cs">
+      <Link>Contracts\Version2\Purchase\ServicePurchaseOrderLine.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Purchase\PurchaseOrderWithLines.cs">
+      <Link>Contracts\Version2\Purchase\PurchaseOrderWithLines.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Purchase\PurchaseStatus.cs">
+      <Link>Contracts\Version2\Purchase\PurchaseStatus.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Purchase\ServiceBill.cs">
+      <Link>Contracts\Version2\Purchase\ServiceBill.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Purchase\ServiceBillLine.cs">
+      <Link>Contracts\Version2\Purchase\ServiceBillLine.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Purchase\SupplierPayment.cs">
+      <Link>Contracts\Version2\Purchase\SupplierPayment.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Purchase\SupplierPaymentLine.cs">
+      <Link>Contracts\Version2\Purchase\SupplierPaymentLine.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Purchase\SupplierPaymentLineType.cs">
+      <Link>Contracts\Version2\Purchase\SupplierPaymentLineType.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Purchase\SupplierPaymentLink.cs">
+      <Link>Contracts\Version2\Purchase\SupplierPaymentLink.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Purchase\SupplierPaymentRecordWithDiscountsAndFees.cs">
+      <Link>Contracts\Version2\Purchase\SupplierPaymentRecordWithDiscountsAndFees.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Purchase\SupplierPaymentRecordWithDiscountsAndFeesLine.cs">
+      <Link>Contracts\Version2\Purchase\SupplierPaymentRecordWithDiscountsAndFeesLine.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Purchase\SupplierPaymentRecordWithDiscountsAndFeesResponse.cs">
+      <Link>Contracts\Version2\Purchase\SupplierPaymentRecordWithDiscountsAndFeesResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Report\Payroll\EmployeePayrollAdvice.cs">
+      <Link>Contracts\Version2\Report\Payroll\EmployeePayrollAdvice.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\CalculateDiscountsFees.cs">
+      <Link>Contracts\Version2\Sale\CalculateDiscountsFees.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\CalculateDiscountsFeesItem.cs">
+      <Link>Contracts\Version2\Sale\CalculateDiscountsFeesItem.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\CalculateDiscountsFeesResponse.cs">
+      <Link>Contracts\Version2\Sale\CalculateDiscountsFeesResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\CalculateDiscountsFeesResponseItem.cs">
+      <Link>Contracts\Version2\Sale\CalculateDiscountsFeesResponseItem.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\CalculateDiscountsFeesSale.cs">
+      <Link>Contracts\Version2\Sale\CalculateDiscountsFeesSale.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\CalculateDiscountsFeesSaleType.cs">
+      <Link>Contracts\Version2\Sale\CalculateDiscountsFeesSaleType.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\SaleOrderLink.cs">
+      <Link>Contracts\Version2\Sale\SaleOrderLink.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\CreditRefund.cs">
+      <Link>Contracts\Version2\Sale\CreditRefund.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\CreditSettlement.cs">
+      <Link>Contracts\Version2\Sale\CreditSettlement.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\CreditSettlementLine.cs">
+      <Link>Contracts\Version2\Sale\CreditSettlementLine.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\CreditSettlementLineType.cs">
+      <Link>Contracts\Version2\Sale\CreditSettlementLineType.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\CreditSettlementLink.cs">
+      <Link>Contracts\Version2\Sale\CreditSettlementLink.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\CustomerPayment.cs">
+      <Link>Contracts\Version2\Contact\CustomerPayment.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\CustomerPaymentLine.cs">
+      <Link>Contracts\Version2\Sale\CustomerPaymentLine.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\CustomerPaymentLineType.cs">
+      <Link>Contracts\Version2\Sale\CustomerPaymentLineType.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\CustomerPaymentLink.cs">
+      <Link>Contracts\Version2\Sale\CustomerPaymentLink.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\CustomerPaymentRecordWithDiscountsAndFees.cs">
+      <Link>Contracts\Version2\Sale\CustomerPaymentRecordWithDiscountsAndFees.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\CustomerPaymentRecordWithDiscountsAndFeesLine.cs">
+      <Link>Contracts\Version2\Sale\CustomerPaymentRecordWithDiscountsAndFeesLine.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\CustomerPaymentRecordWithDiscountsAndFeesResponse.cs">
+      <Link>Contracts\Version2\Sale\CustomerPaymentRecordWithDiscountsAndFeesResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\DepositTo.cs">
+      <Link>Contracts\Version2\Sale\DepositTo.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\DocumentAction.cs">
+      <Link>Contracts\Version2\Sale\DocumentAction.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\Invoice.cs">
+      <Link>Contracts\Version2\Sale\Invoice.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\InvoiceLayoutType.cs">
+      <Link>Contracts\Version2\Sale\InvoiceLayoutType.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\InvoiceLine.cs">
+      <Link>Contracts\Version2\Sale\InvoiceLine.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\InvoiceLineType.cs">
+      <Link>Contracts\Version2\Sale\InvoiceLineType.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\InvoiceLink.cs">
+      <Link>Contracts\Version2\Sale\InvoiceLink.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\InvoiceTerms.cs">
+      <Link>Contracts\Version2\Sale\InvoiceTerms.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\InvoiceWithLines.cs">
+      <Link>Contracts\Version2\Sale\InvoiceWithLines.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\ItemInvoice.cs">
+      <Link>Contracts\Version2\Sale\ItemInvoice.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\ItemInvoiceLine.cs">
+      <Link>Contracts\Version2\Sale\ItemInvoiceLine.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\ItemOrder.cs">
+      <Link>Contracts\Version2\Sale\ItemOrder.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\ItemOrderLine.cs">
+      <Link>Contracts\Version2\Sale\ItemOrderLine.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\MiscellaneousInvoice.cs">
+      <Link>Contracts\Version2\Sale\MiscellaneousInvoice.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\MiscellaneousInvoiceLine.cs">
+      <Link>Contracts\Version2\Sale\MiscellaneousInvoiceLine.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\MiscellaneousOrder.cs">
+      <Link>Contracts\Version2\Sale\MiscellaneousOrder.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\MiscellaneousOrderLine.cs">
+      <Link>Contracts\Version2\Sale\MiscellaneousOrderLine.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\Order.cs">
+      <Link>Contracts\Version2\Sale\Order.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\OrderLayoutType.cs">
+      <Link>Contracts\Version2\Sale\OrderLayoutType.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\OrderLine.cs">
+      <Link>Contracts\Version2\Sale\OrderLine.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\OrderLineType.cs">
+      <Link>Contracts\Version2\Sale\OrderLineType.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\OrderWithLines.cs">
+      <Link>Contracts\Version2\Sale\OrderWithLines.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\ProfessionalInvoice.cs">
+      <Link>Contracts\Version2\Sale\ProfessionalInvoice.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\ProfessionalInvoiceLine.cs">
+      <Link>Contracts\Version2\Sale\ProfessionalInvoiceLine.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\ProfessionalOrder.cs">
+      <Link>Contracts\Version2\Sale\ProfessionalOrder.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\ProfessionalOrderLine.cs">
+      <Link>Contracts\Version2\Sale\ProfessionalOrderLine.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\Sale.cs">
+      <Link>Contracts\Version2\Sale\Sale.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\SaleLink.cs">
+      <Link>Contracts\Version2\Sale\SaleLink.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\SaleStatus.cs">
+      <Link>Contracts\Version2\Sale\SaleStatus.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\ServiceInvoice.cs">
+      <Link>Contracts\Version2\Sale\ServiceInvoice.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\ServiceInvoiceLine.cs">
+      <Link>Contracts\Version2\Sale\ServiceInvoiceLine.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\ServiceOrder.cs">
+      <Link>Contracts\Version2\Sale\ServiceOrder.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\ServiceOrderLine.cs">
+      <Link>Contracts\Version2\Sale\ServiceOrderLine.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\TimeBillingInvoice.cs">
+      <Link>Contracts\Version2\Sale\TimeBillingInvoice.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\TimeBillingInvoiceLine.cs">
+      <Link>Contracts\Version2\Sale\TimeBillingInvoiceLine.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\TimeBillingOrder.cs">
+      <Link>Contracts\Version2\Sale\TimeBillingOrder.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\TimeBillingOrderLine.cs">
+      <Link>Contracts\Version2\Sale\TimeBillingOrderLine.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Security\Role.cs">
+      <Link>Contracts\Version2\Security\Role.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Security\RoleLink.cs">
+      <Link>Contracts\Version2\Security\RoleLink.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Security\User.cs">
+      <Link>Contracts\Version2\Security\User.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Terms.cs">
+      <Link>Contracts\Version2\Terms.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\TermsPaymentType.cs">
+      <Link>Contracts\Version2\TermsPaymentType.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\TimeBilling\Activity.cs">
+      <Link>Contracts\Version2\TimeBilling\Activity.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\UserAccess.cs">
+      <Link>Contracts\Version2\UserAccess.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\VersionInfo.cs">
+      <Link>Contracts\VersionInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\VersionMap.cs">
+      <Link>Contracts\VersionMap.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Error.cs" />
+    <Compile Include="..\SDK\Extensions\ContractExtensions.cs">
+      <Link>Extensions\ContractExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Extensions\ExceptionExtensions.cs">
+      <Link>Extensions\ExceptionExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Extensions\FunctionalExtensions.cs">
+      <Link>Extensions\FunctionalExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Extensions\JsonExtensions.cs">
+      <Link>Extensions\JsonExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Extensions\WebRequestExtensions.cs">
+      <Link>Extensions\WebRequestExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\IApiConfiguration.cs" />
+    <Compile Include="..\SDK\ICompanyFileCredentials.cs" />
+    <Compile Include="..\SDK\IOAuthKeyService.cs" />
+    <Compile Include="..\SDK\IWebRequestFactory.cs" />
+    <Compile Include="..\SDK\Properties\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\CompanyFileService.cs">
+      <Link>Services\CompanyFileService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\CompanyService.cs">
+      <Link>Services\CompanyService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\ICompanyFileService.cs">
+      <Link>Services\ICompanyFileService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\IOAuthService.cs">
+      <Link>Services\IOAuthService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\OAuthService.cs">
+      <Link>Services\OAuthService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\ServiceBase.cs">
+      <Link>Services\ServiceBase.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Banking\BankAccountService.cs">
+      <Link>Services\Version2\Banking\BankAccountService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Banking\ReceiveMoneyTxnService.cs">
+      <Link>Services\Version2\Banking\ReceiveMoneyTxnService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Banking\SpendMoneyTxnService.cs">
+      <Link>Services\Version2\Banking\SpendMoneyTxnService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Banking\StatementService.cs">
+      <Link>Services\Version2\Banking\StatementService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Banking\TransferMoneyTxnService.cs">
+      <Link>Services\Version2\Banking\TransferMoneyTxnService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Company\CompanyPreferencesService.cs">
+      <Link>Services\Version2\Company\CompanyPreferencesService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Company\FormTemplateService.cs">
+      <Link>Services\Version2\Company\FormTemplateService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Contact\ContactService.cs">
+      <Link>Services\Version2\Contact\ContactService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Contact\CustomerService.cs">
+      <Link>Services\Version2\Contact\CustomerService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Contact\EmployeePaymentDetailsService.cs">
+      <Link>Services\Version2\Contact\EmployeePaymentDetailsService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Contact\EmployeePayrollDetailsService.cs">
+      <Link>Services\Version2\Contact\EmployeePayrollDetailsService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Contact\EmployeeService.cs">
+      <Link>Services\Version2\Contact\EmployeeService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Contact\EmployeeStandardPayService.cs">
+      <Link>Services\Version2\Contact\EmployeeStandardPayService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Contact\PersonalService.cs">
+      <Link>Services\Version2\Contact\PersonalService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Contact\SupplierService.cs">
+      <Link>Services\Version2\Contact\SupplierService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\CurrentUserService.cs">
+      <Link>Services\Version2\CurrentUserService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\ErrorLevel.cs">
+      <Link>Services\Version2\ErrorLevel.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\GeneralLedger\AccountBudgetService.cs">
+      <Link>Services\Version2\GeneralLedger\AccountBudgetService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\GeneralLedger\AccountingPropertiesService.cs">
+      <Link>Services\Version2\GeneralLedger\AccountingPropertiesService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\GeneralLedger\AccountRegisterService.cs">
+      <Link>Services\Version2\GeneralLedger\AccountRegisterService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\GeneralLedger\AccountService.cs">
+      <Link>Services\Version2\GeneralLedger\AccountService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\GeneralLedger\CategoryRegisterService.cs">
+      <Link>Services\Version2\GeneralLedger\CategoryRegisterService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\GeneralLedger\CategoryService.cs">
+      <Link>Services\Version2\GeneralLedger\CategoryService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\GeneralLedger\GeneralJournalService.cs">
+      <Link>Services\Version2\GeneralLedger\GeneralJournalService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\GeneralLedger\IAccountBudgetService.cs">
+      <Link>Services\Version2\GeneralLedger\IAccountBudgetService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\GeneralLedger\JobBudgetService.cs">
+      <Link>Services\Version2\GeneralLedger\JobBudgetService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\GeneralLedger\JobRegisterService.cs">
+      <Link>Services\Version2\GeneralLedger\JobRegisterService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\GeneralLedger\JobService.cs">
+      <Link>Services\Version2\GeneralLedger\JobService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\GeneralLedger\JournalTransactionService.cs">
+      <Link>Services\Version2\GeneralLedger\JournalTransactionService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\GeneralLedger\LinkedAccountService.cs">
+      <Link>Services\Version2\GeneralLedger\LinkedAccountService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\GeneralLedger\ProfitLossDistributionService.cs">
+      <Link>Services\Version2\GeneralLedger\ProfitLossDistributionService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\GeneralLedger\TaxCodeService.cs">
+      <Link>Services\Version2\GeneralLedger\TaxCodeService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\GetOnlyService.cs">
+      <Link>Services\Version2\GetOnlyService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\IGetOnlyService.cs">
+      <Link>Services\Version2\IGetOnlyService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\IMutable.cs">
+      <Link>Services\Version2\IMutable.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\IMutablePhoto.cs">
+      <Link>Services\Version2\IMutablePhoto.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Inventory\InventoryAdjustmentService.cs">
+      <Link>Services\Version2\Inventory\InventoryAdjustmentService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Inventory\ItemPriceMatrixService.cs">
+      <Link>Services\Version2\Inventory\ItemPriceMatrixService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Inventory\ItemService.cs">
+      <Link>Services\Version2\Inventory\ItemService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\IOperation.cs">
+      <Link>Services\Version2\IOperation.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\IPdfService.cs">
+      <Link>Services\Version2\IPdfService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\IReadable.cs">
+      <Link>Services\Version2\IReadable.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\IReadablePhoto.cs">
+      <Link>Services\Version2\IReadablePhoto.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\MutablePhotoService.cs">
+      <Link>Services\Version2\MutablePhotoService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\MutableService.cs">
+      <Link>Services\Version2\MutableService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\PayrollCategory\PayrollCategoryDeductionService.cs">
+      <Link>Services\Version2\PayrollCategory\PayrollCategoryDeductionService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\PayrollCategory\PayrollCategoryEntitlementService.cs">
+      <Link>Services\Version2\PayrollCategory\PayrollCategoryEntitlementService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\PayrollCategory\PayrollCategoryExpenseService.cs">
+      <Link>Services\Version2\PayrollCategory\PayrollCategoryExpenseService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\PayrollCategory\PayrollCategoryService.cs">
+      <Link>Services\Version2\PayrollCategory\PayrollCategoryService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\PayrollCategory\PayrollCategorySuperannuationService.cs">
+      <Link>Services\Version2\PayrollCategory\PayrollCategorySuperannuationService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\PayrollCategory\PayrollCategoryTaxService.cs">
+      <Link>Services\Version2\PayrollCategory\PayrollCategoryTaxService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\PayrollCategory\PayrollCategoryTaxTableService.cs">
+      <Link>Services\Version2\PayrollCategory\PayrollCategoryTaxTableService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\PayrollCategory\PayrollCategoryWageService.cs">
+      <Link>Services\Version2\PayrollCategory\PayrollCategoryWageService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Payroll\PayrollEmploymentClassificationService.cs">
+      <Link>Services\Version2\Payroll\PayrollEmploymentClassificationService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Payroll\PayrollSuperannuationFundService.cs">
+      <Link>Services\Version2\Payroll\PayrollSuperannuationFundService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Payroll\TimesheetService.cs">
+      <Link>Services\Version2\Payroll\TimesheetService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Purchase\BillService.cs">
+      <Link>Services\Version2\Purchase\BillService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Purchase\CalculateDiscountsService.cs">
+      <Link>Contracts\Version2\Purchase\CalculateDiscountsService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Purchase\DebitRefundService.cs">
+      <Link>Services\Version2\Purchase\DebitRefundService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Purchase\DebitSettlementService.cs">
+      <Link>Services\Version2\Purchase\DebitSettlementService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Purchase\ItemBillService.cs">
+      <Link>Services\Version2\Purchase\ItemBillService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Purchase\MiscellaneousBillService.cs">
+      <Link>Services\Version2\Purchase\MiscellaneousBillService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Purchase\MiscellaneousPurchaseOrderService.cs">
+      <Link>Services\Version2\Purchase\MiscellaneousPurchaseOrderService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Purchase\ProfessionalBillService.cs">
+      <Link>Services\Version2\Purchase\ProfessionalBillService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Purchase\ItemPurchaseOrderService.cs">
+      <Link>Services\Version2\Purchase\ItemPurchaseOrderService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Purchase\ProfessionalPurchaseOrderService.cs">
+      <Link>Services\Version2\Purchase\ProfessionalPurchaseOrderService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Purchase\PurchaseOrderService.cs">
+      <Link>Services\Version2\Purchase\PurchaseOrderService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Purchase\ServicePurchaseOrderService.cs">
+      <Link>Services\Version2\Purchase\ServicePurchaseOrderService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Purchase\ServiceBillService.cs">
+      <Link>Services\Version2\Purchase\ServiceBillService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Purchase\SupplierPaymentRecordWithDiscountsAndFeesService.cs">
+      <Link>Services\Version2\Purchase\SupplierPaymentRecordWithDiscountsAndFeesService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Purchase\SupplierPaymentService.cs">
+      <Link>Services\Version2\Purchase\SupplierPaymentService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\ReadableRangeService.cs">
+      <Link>Services\Version2\ReadableRangeService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\ReadableService.cs">
+      <Link>Services\Version2\ReadableService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Report\Payroll\EmployeePayrollAdviceService.cs">
+      <Link>Services\Version2\Report\Payroll\EmployeePayrollAdviceService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Sale\CalculateDiscountsFeesService.cs">
+      <Link>Services\Version2\Sale\CalculateDiscountsFeesService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Sale\CreditRefundService.cs">
+      <Link>Services\Version2\Sale\CreditRefundService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Sale\CreditSettlementService.cs">
+      <Link>Services\Version2\Sale\CreditSettlementService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Sale\CustomerPaymentRecordWithDiscountsAndFeesService.cs">
+      <Link>Services\Version2\Sale\CustomerPaymentRecordWithDiscountsAndFeesService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Sale\CustomerPaymentService.cs">
+      <Link>Services\Version2\Sale\CustomerPaymentService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Sale\InvoiceService.cs">
+      <Link>Services\Version2\Sale\InvoiceService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Sale\ItemInvoiceService.cs">
+      <Link>Services\Version2\Sale\ItemInvoiceService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Sale\ItemOrderService.cs">
+      <Link>Services\Version2\Sale\ItemOrderService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Sale\MiscellaneousInvoiceService.cs">
+      <Link>Services\Version2\Sale\MiscellaneousInvoiceService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Sale\MiscellaneousOrderService.cs">
+      <Link>Services\Version2\Sale\MiscellaneousOrderService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Sale\OrderService.cs">
+      <Link>Services\Version2\Sale\OrderService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Sale\PdfInvoiceServiceBase.cs">
+      <Link>Services\Version2\Sale\PdfInvoiceServiceBase.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Sale\ProfessionalInvoiceService.cs">
+      <Link>Services\Version2\Sale\ProfessionalInvoiceService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Sale\ProfessionalOrderService.cs">
+      <Link>Services\Version2\Sale\ProfessionalOrderService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Sale\ServiceInvoiceService.cs">
+      <Link>Services\Version2\Sale\ServiceInvoiceService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Sale\ServiceOrderService.cs">
+      <Link>Services\Version2\Sale\ServiceOrderService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Sale\TimeBillingInvoiceService.cs">
+      <Link>Services\Version2\Sale\TimeBillingInvoiceService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Sale\TimeBillingOrderService.cs">
+      <Link>Services\Version2\Sale\TimeBillingOrderService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Security\RoleService.cs">
+      <Link>Services\Version2\Security\RoleService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Security\UserService.cs">
+      <Link>Services\Version2\Security\UserService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\TimeBilling\ActivityService.cs">
+      <Link>Services\Version2\TimeBilling\ActivityService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\UriHelper.cs">
+      <Link>Services\Version2\UriHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\VersionInfoService.cs">
+      <Link>Services\VersionInfoService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\SimpleOAuthKeyService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="..\SDK\MYOB.API.SDK.snk" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Import Project="$(SolutionDir)\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('$(SolutionDir)\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

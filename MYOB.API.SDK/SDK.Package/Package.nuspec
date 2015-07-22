@@ -23,19 +23,19 @@
     <copyright>Copyright MYOB Technology Pty. Ltd. 2013-2015</copyright>
     <dependencies>
       <group targetFramework="net35">
-        <dependency id="Newtonsoft.Json" version="[6.0.8]" />
+        <dependency id="Newtonsoft.Json" version="7.0.1" />
       </group>
       <group targetFramework="net40">
-        <dependency id="Newtonsoft.Json" version="6.0.8" />
+        <dependency id="Newtonsoft.Json" version="7.0.1" />
         <dependency id="Microsoft.Bcl.Async" version="1.0.168" />
       </group>
       <group targetFramework="net45">
-        <dependency id="Newtonsoft.Json" version="6.0.8" />
+        <dependency id="Newtonsoft.Json" version="7.0.1" />
       </group>
-      <group targetFramework="portable-net40+sl4+wp71+win8">
-        <dependency id="Newtonsoft.Json" version="6.0.8" />
-        <dependency id="p3-sharpcompress" version="0.10.5.2" />
+      <group targetFramework="portable-net45+win+wpa81+wp80">
+        <dependency id="Newtonsoft.Json" version="7.0.1" />
         <dependency id="Microsoft.Bcl.Async" version="1.0.168" />
+        <dependency id="Microsoft.Bcl.Compression" version="3.9.85" />
       </group>
     </dependencies>
     <references></references>
