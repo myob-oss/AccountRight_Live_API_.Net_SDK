@@ -34,7 +34,9 @@ namespace SDK.Test.Communication
 
             _stream = new MemoryStream();
             _request.EndGetRequestStream(Arg.Any<IAsyncResult>()).Returns(c => _stream);
+#pragma warning disable 1998
             _request.GetRequestStreamAsync().Returns(async c => (Stream)_stream);
+#pragma warning restore 1998
 
             _handler = new OAuthRequestHandler(new ApiConfiguration("<<clientid>>", "<<clientsecret>>", "http://desktop/"));
 

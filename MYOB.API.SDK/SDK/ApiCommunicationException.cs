@@ -17,6 +17,11 @@ namespace MYOB.AccountRight.SDK
     public class ApiCommunicationException : Exception
     {
 #if !PORTABLE
+        /// <summary>
+        /// Allow the ApiCommunicationException to be de-serialized
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="context"></param>    
         protected ApiCommunicationException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
@@ -73,6 +78,11 @@ namespace MYOB.AccountRight.SDK
         }
 
 #if !PORTABLE
+        /// <summary>
+        /// Allow the ApiCommunicationException to be serialized
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="context"></param>
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using MYOB.AccountRight.SDK.Contracts.Version2.GeneralLedger;
+using System;
 
 namespace MYOB.AccountRight.SDK.Contracts.Version2.Inventory
 {
@@ -14,9 +15,9 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Inventory
         public string InventoryJournalNumber { get; set; }
 
         /// <summary>
-        /// The date fo the adjustment
+        /// The date for the adjustment
         /// </summary>
-        public string Date { get; set; }
+        public DateTime Date { get; set; }
 
         /// <summary>
         /// Is this a year end adjustment (period 13)

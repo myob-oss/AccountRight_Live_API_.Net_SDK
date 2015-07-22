@@ -129,7 +129,9 @@ namespace SDK.Test.Helper
 
             Stream ms = new MemoryStream();
 
+#pragma warning disable 1998
             request.GetRequestStreamAsync().Returns(async c => ms);
+#pragma warning restore 1998
 
             request.EndGetRequestStream(Arg.Any<IAsyncResult>()).Returns(c => ms);
 
@@ -144,7 +146,9 @@ namespace SDK.Test.Helper
             request.EndGetResponse(Arg.Any<IAsyncResult>())
                    .Returns(c => toReturn());
 
+#pragma warning disable 1998
             request.GetResponseAsync().Returns(async c => toReturn());
+#pragma warning restore 1998
 
             if (CreatedWebRequest != null) CreatedWebRequest(request);
 
