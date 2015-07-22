@@ -27,14 +27,18 @@
       </group>
       <group targetFramework="net40">
         <dependency id="Newtonsoft.Json" version="7.0.1" />
+        <dependency id="Microsoft.Bcl" version="1.1.10" />
         <dependency id="Microsoft.Bcl.Async" version="1.0.168" />
+        <dependency id="Microsoft.Bcl.Build" version="1.0.21" />
       </group>
       <group targetFramework="net45">
         <dependency id="Newtonsoft.Json" version="7.0.1" />
       </group>
       <group targetFramework="portable-net45+win+wpa81+wp80">
         <dependency id="Newtonsoft.Json" version="7.0.1" />
+        <dependency id="Microsoft.Bcl" version="1.1.10" />
         <dependency id="Microsoft.Bcl.Async" version="1.0.168" />
+        <dependency id="Microsoft.Bcl.Build" version="1.0.21" />
         <dependency id="Microsoft.Bcl.Compression" version="3.9.85" />
       </group>
     </dependencies>
