@@ -8,7 +8,7 @@ assembly_info:
   assembly_informational_version: '{version}'
 environment:
   COVERALLS_REPO_TOKEN:
-    secure: Cn76L45YPBc4LT+lbfEuztWDmudgETBZaHRoT7O48sBE8OpUhtegDDh1AlRFXMzG
+    secure: XBCyPFZbO55cEI6tMsd1Ts3O7sXF3IFCxGPYQGJbVae48G9j9miONIHmDwzG4iLG
 cache: .\MYOB.API.SDK\SDK\MYOB.API.SDK.snk
 build_script:
 - build.bat
