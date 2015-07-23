@@ -12,13 +12,7 @@ using System.Threading;
 #if PORTABLE
 #endif
 
-#if COMPRESSION
 using System.IO.Compression;
-using MYOB.AccountRight.SDK.Contracts;
-#else
-using SharpCompress.Compressor;
-using SharpCompress.Compressor.Deflate;
-#endif
 
 namespace MYOB.AccountRight.SDK.Communication
 {

@@ -13,12 +13,7 @@ using System.Threading.Tasks;
 #if PORTABLE
 #endif
 
-#if COMPRESSION
 using System.IO.Compression;
-#else
-using SharpCompress.Compressor;
-using SharpCompress.Compressor.Deflate;
-#endif
 
 namespace MYOB.AccountRight.SDK.Communication
 {
@@ -75,7 +70,11 @@ namespace MYOB.AccountRight.SDK.Communication
 
         static ApiRequestHelper()
         {
+#if PORTABLE
+            var name = typeof(ApiRequestHelper).GetTypeInfo().Assembly.FullName;
+#else
             var name = typeof(ApiRequestHelper).Assembly.FullName;
+#endif
             var asmName = new AssemblyName(name);
             Version = asmName.Version;
             UserAgent = string.Format("MYOB-ARL-SDK/{0} (+http://developer.myob.com/api/accountright/v2/)", Version.ToString(3));

@@ -228,7 +228,9 @@ namespace SDK.Test.Services
                 new Tuple<string, Func<TestMutableService, CompanyFile, string>>("DelegateDelete", 
                     (service, cf) =>
                     {
+#pragma warning disable 219
                         var ret = false;
+#pragma warning restore 219
                         service.Delete(cf, _uid, null, (code) => { ret = true; }, (uri, exception) => Assert.Fail(exception.Message), ErrorLevel.WarningsAsErrors);
                         return string.Empty;
                     }),

@@ -1,4 +1,4 @@
-[![Build status](https://img.shields.io/appveyor/ci/sawilde/accountright-live-api-net-sdk.svg)](https://ci.appveyor.com/project/sawilde/accountright-live-api-net-sdk)
+[![Build status](https://img.shields.io/appveyor/ci/myob-developers/accountright-live-api-net-sdk.svg)](https://ci.appveyor.com/project/myob-developers/accountright-live-api-net-sdk)
 [![Coverage](https://img.shields.io/coveralls/MYOB-Technology/AccountRight_Live_API_.Net_SDK/master.svg)](https://coveralls.io/r/MYOB-Technology/AccountRight_Live_API_.Net_SDK)
 
 Nuget Downloads: [![Nuget](https://img.shields.io/nuget/dt/MYOB.AccountRight.API.SDK.svg)](http://nuget.org/packages/MYOB.AccountRight.API.SDK)
