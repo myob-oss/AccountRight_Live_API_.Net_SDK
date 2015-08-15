@@ -43,7 +43,7 @@
       </group>
     </dependencies>
     <references></references>
-    <tags>MYOB AccountRight SDK Portable</tags>
+    <tags>MYOB AccountRight SDK Portable linqpad-samples</tags>
   </metadata>
   <files>
     <!--
@@ -64,5 +64,6 @@
     <file src="..\..\Artefacts\SDK\Ship\NET45\MYOB.AccountRight.SDK.pdb" target="lib\net45" />
     <file src="..\..\Artefacts\SDK\Ship\NET45\MYOB.AccountRight.SDK.xml" target="lib\net45" />
     <file src="readme.txt" target="" />
+    <file src="linqpad-samples\" target="linqpad-samples" />
   </files>
 </package>
