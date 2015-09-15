@@ -19,9 +19,11 @@ namespace SDK.Test.Extensions
         {
             var request = Substitute.For<WebRequest>();
 
-            request.GetResponseAsync(CancellationToken.None);
+            await request.GetResponseAsync(CancellationToken.None);
 
+#pragma warning disable 4014
             request.Received().GetResponseAsync();
+#pragma warning restore 4014
         }
 
         [Test]
@@ -63,7 +65,9 @@ namespace SDK.Test.Extensions
 
                 throw new WebException();
 
+#pragma warning disable 162
                 return (WebResponse)null;
+#pragma warning restore 162
             }));
 
             var cancellationSource = new CancellationTokenSource();
@@ -91,7 +95,9 @@ namespace SDK.Test.Extensions
 
                 throw new WebException();
 
+#pragma warning disable 162
                 return (WebResponse)null;
+#pragma warning restore 162
             }));
 
             var getResponseTask = request.GetResponseAsync(CancellationToken.None);
