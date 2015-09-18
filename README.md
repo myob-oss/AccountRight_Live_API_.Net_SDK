@@ -52,10 +52,10 @@ The code has been supplied to help developers who may not be able to use the NUG
 
 Community Contributions requested.
 
-##3rd Party Dependancies##
+##3rd Party Dependencies##
 
 The MYOB SDK uses the following 3rd party (via NUGET) packages
 
-1. [SharpCompress](https://github.com/adamhathcock/sharpcompress)
-2. [JSON.NET](http://james.newtonking.com/projects/json-net.aspx)
-3. [Bcl.Async](https://www.nuget.org/packages/Microsoft.Bcl.Async)
+1. [JSON.NET](http://james.newtonking.com/projects/json-net.aspx)
+2. [Bcl.Async](https://www.nuget.org/packages/Microsoft.Bcl.Async)
+2. [Microsoft.Bcl.Compression](https://www.nuget.org/packages/Microsoft.Bcl.Compression)
