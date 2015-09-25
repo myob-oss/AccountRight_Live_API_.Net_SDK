@@ -124,7 +124,7 @@ namespace MYOB.AccountRight.SDK.Communication
             request.Headers["x-myobapi-key"] = configuration.ClientId;
             request.Headers["x-myobapi-version"] = "v2";
 
-            if (credentials != null)
+            if ((credentials != null) && (!String.IsNullOrEmpty(credentials.Username))) // password can be empty
             {
                 request.Headers["x-myobapi-cftoken"] = Convert.ToBase64String(Encoding.UTF8.GetBytes(string.Format("{0}:{1}",
                     credentials.Username.Maybe(_ => _, string.Empty), credentials.Password.Maybe(_ => _, string.Empty))));
