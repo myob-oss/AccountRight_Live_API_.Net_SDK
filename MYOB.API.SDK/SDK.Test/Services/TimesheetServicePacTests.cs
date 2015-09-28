@@ -66,7 +66,7 @@ namespace SDK.Test.Services
                                 {"User-Agent", ApiRequestHelper.UserAgent},
                                 {"x-myobapi-key", ""},
                                 {"x-myobapi-version", "v2"},
-                                {"x-myobapi-cftoken", Convert.ToBase64String(Encoding.UTF8.GetBytes(":"))},
+                                {"x-myobapi-cftoken", Convert.ToBase64String(Encoding.UTF8.GetBytes("Administrator:"))},
                             },
                         Query = string.Format("StartDate={0}&EndDate={1}",
                                               startDate.Value.Date.ToString("s"),
@@ -89,7 +89,7 @@ namespace SDK.Test.Services
 
             
             // act
-            var result = _service.GetAsync(_cf, _uid, startDate.Value, endDate.Value, new CompanyFileCredentials("", ""), new CancellationToken()).Result;
+            var result = _service.GetAsync(_cf, _uid, startDate.Value, endDate.Value, new CompanyFileCredentials("Administrator", ""), new CancellationToken()).Result;
 
             // assert
             Assert.NotNull(result);
