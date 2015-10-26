@@ -1,12 +1,13 @@
 ﻿using MYOB.AccountRight.SDK.Communication;
 using MYOB.AccountRight.SDK.Contracts.Version2.Purchase;
+using MYOB.AccountRight.SDK.Services.Sale;
 
 namespace MYOB.AccountRight.SDK.Services.Purchase
 {
     /// <summary>
     /// A service that provides access to the <see cref="SupplierPayment"/> resource
     /// </summary>
-    public sealed class SupplierPaymentService : MutableService<SupplierPayment>
+    public sealed class SupplierPaymentService : PdfServiceBase<SupplierPayment>
     {
         /// <summary>
         /// Initialise a service that can use <see cref="SupplierPayment"/> resources
