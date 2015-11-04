@@ -85,6 +85,7 @@
   <ItemGroup>
     <Compile Include="ApiCommunicationExceptionTests.cs" />
     <Compile Include="ApiConfigurationTests.cs" />
+    <Compile Include="COMSupportedTests.cs" />
     <Compile Include="Contracts\Version2\UserTests.cs" />
     <Compile Include="MyobArlApiPact.cs" />
     <Compile Include="Communication\ApiRequestHandlerTests.cs" />

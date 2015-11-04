@@ -7,7 +7,7 @@ namespace MYOB.AccountRight.SDK.Services.Sale
     /// <summary>
     /// A service that provides access to the <see cref="CreditRefund"/> resource
     /// </summary>
-    public sealed class CreditRefundService : MutableService<CreditRefund>
+    public sealed class CreditRefundService : PdfServiceBase<CreditRefund>
     {
         /// <summary>
         /// Initialise a service that can use <see cref="CreditRefund"/> resources

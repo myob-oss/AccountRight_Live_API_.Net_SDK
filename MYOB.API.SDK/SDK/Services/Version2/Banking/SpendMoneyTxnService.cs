@@ -1,5 +1,6 @@
 ﻿using MYOB.AccountRight.SDK.Communication;
 using MYOB.AccountRight.SDK.Contracts.Version2.Banking;
+using MYOB.AccountRight.SDK.Services.Sale;
 
 namespace MYOB.AccountRight.SDK.Services.Banking
 {
@@ -7,7 +8,7 @@ namespace MYOB.AccountRight.SDK.Services.Banking
     /// <summary>
     /// A service that provides access to the <see cref="SpendMoneyTxn"/> resource
     /// </summary>
-    public class SpendMoneyTxnService : MutableService<SpendMoneyTxn>
+    public class SpendMoneyTxnService : PdfServiceBase<SpendMoneyTxn>
     {
         /// <summary>
         /// Initialise a service that can use <see cref="SpendMoneyTxn"/> resources
