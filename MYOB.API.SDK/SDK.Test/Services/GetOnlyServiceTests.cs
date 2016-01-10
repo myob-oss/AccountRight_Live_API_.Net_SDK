@@ -4,7 +4,6 @@ using System.Threading;
 using MYOB.AccountRight.SDK;
 using MYOB.AccountRight.SDK.Communication;
 using MYOB.AccountRight.SDK.Contracts;
-using MYOB.AccountRight.SDK.Contracts.Version2;
 using MYOB.AccountRight.SDK.Extensions;
 using MYOB.AccountRight.SDK.Services;
 using NSubstitute;
@@ -53,10 +52,21 @@ namespace SDK.Test.Services
                                                                                                service.Get(cf, null, (code, files) => { received = files; }, (uri, exception) => Assert.Fail(exception.Message));
                                                                                                return received;
                                                                                            }),
+                new Tuple<string, Func<TestGetOnlyService, CompanyFile, UserContract>>("Delegate",
+                                                                                       (service, cf) =>
+                                                                                           {
+                                                                                               UserContract received = null;
+                                                                                               service.Get(cf,"", null, (code, files) => { received = files; }, (uri, exception) => Assert.Fail(exception.Message));
+                                                                                               return received;
+                                                                                           }),
                 new Tuple<string, Func<TestGetOnlyService, CompanyFile, UserContract>>("Sync", 
                                                                                        (service, cf) => service.Get(cf, null)),
+                new Tuple<string, Func<TestGetOnlyService, CompanyFile, UserContract>>("Sync", 
+                                                                                       (service, cf) => service.Get(cf, "", null)),
                 new Tuple<string, Func<TestGetOnlyService, CompanyFile, UserContract>>("Async", 
-                                                                                       (service, cf) => service.GetAsync(cf, null).Result)
+                                                                                       (service, cf) => service.GetAsync(cf, null).Result),
+                new Tuple<string, Func<TestGetOnlyService, CompanyFile, UserContract>>("Async", 
+                                                                                       (service, cf) => service.GetAsync(cf,"", null).Result)
             };
 
         [Test]
@@ -88,15 +98,30 @@ namespace SDK.Test.Services
                     {
                         return service.Get(cf, null, "987654321");
                     }),
+                new Tuple<string, Func<TestGetOnlyService, CompanyFile, UserContract>>("Sync with params", 
+                    (service, cf) =>
+                    {
+                        return service.Get(cf, "", null, "987654321");
+                    }),
                 new Tuple<string, Func<TestGetOnlyService, CompanyFile, UserContract>>("Async", 
                     (service, cf) =>
                     {
                         return service.GetAsync(cf, null, "987654321").Result;
                     }),
+                new Tuple<string, Func<TestGetOnlyService, CompanyFile, UserContract>>("Async with params", 
+                    (service, cf) =>
+                    {
+                        return service.GetAsync(cf,"", null, "987654321").Result;
+                    }),
                 new Tuple<string, Func<TestGetOnlyService, CompanyFile, UserContract>>("AsyncCancel", 
                     (service, cf) =>
                     {
                         return service.GetAsync(cf, null, CancellationToken.None, "987654321").Result;
+                    }),
+                new Tuple<string, Func<TestGetOnlyService, CompanyFile, UserContract>>("AsyncWithQueryParametersCancel", 
+                    (service, cf) =>
+                    {
+                        return service.GetAsync(cf,"", null, CancellationToken.None, "987654321").Result;
                     }),
             };
 
@@ -116,6 +141,6 @@ namespace SDK.Test.Services
             // assert
             Assert.AreEqual("987654321", request.Headers[HttpRequestHeader.IfNoneMatch]);
         }
-        
+
     }
 }

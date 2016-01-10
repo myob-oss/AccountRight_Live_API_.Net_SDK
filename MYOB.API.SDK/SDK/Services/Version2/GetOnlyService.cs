@@ -16,7 +16,7 @@ namespace MYOB.AccountRight.SDK.Services
     /// </summary>
     /// <typeparam name="T">The resource type</typeparam>
     public abstract class GetOnlyService<T> : ServiceBase, IGetOnlyService<T>
-        where T: class
+        where T : class
     {
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace MYOB.AccountRight.SDK.Services
             : base(configuration, webRequestFactory, keyService)
         {
         }
-        
+
         /// <summary>
         /// Get a resource
         /// </summary>
@@ -43,6 +43,20 @@ namespace MYOB.AccountRight.SDK.Services
         }
 
         /// <summary>
+        /// Get a resource using query parameters
+        /// </summary>
+        /// <param name="companyFile">The company file</param>
+        /// <param name="credentials">The company file credentials</param>
+        /// <param name="queryParameters">The query parameters</param>
+        /// <param name="eTag">The <see cref="BaseEntity.ETag" /> from a previously fetched entity</param>
+        /// <returns></returns>
+        public T Get(CompanyFile companyFile, string queryParameters, ICompanyFileCredentials credentials, string eTag = null)
+        {
+            return MakeApiGetRequestSync<T>(BuildUri(companyFile, queryParameters), credentials, null, eTag);
+        }
+
+
+        /// <summary>
         /// Get a resource
         /// </summary>
         /// <param name="companyFile">The company file</param>
@@ -53,6 +67,20 @@ namespace MYOB.AccountRight.SDK.Services
         public void Get(CompanyFile companyFile, ICompanyFileCredentials credentials, Action<HttpStatusCode, T> onComplete, Action<Uri, Exception> onError, string eTag = null)
         {
             MakeApiGetRequestDelegate(BuildUri(companyFile), credentials, onComplete, onError, eTag);
+        }
+
+        /// <summary>
+        /// Get a resource using query parameters
+        /// </summary>
+        /// <param name="companyFile">The company file</param>
+        /// <param name="queryParameters">The query parameters</param>
+        /// <param name="credentials">The company file credentials</param>
+        /// <param name="onComplete">The action to call when the operation is complete</param>
+        /// <param name="onError">The action to call when the operation has an error</param>
+        /// <param name="eTag">The <see cref="BaseEntity.ETag" /> from a previously fetched entity</param>
+        public void Get(CompanyFile companyFile, string queryParameters, ICompanyFileCredentials credentials, Action<HttpStatusCode, T> onComplete, Action<Uri, Exception> onError, string eTag = null)
+        {
+            MakeApiGetRequestDelegate(BuildUri(companyFile, queryParameters), credentials, onComplete, onError, eTag);
         }
 
 #if ASYNC
@@ -78,13 +106,42 @@ namespace MYOB.AccountRight.SDK.Services
         /// <returns></returns>
         public Task<T> GetAsync(CompanyFile companyFile, ICompanyFileCredentials credentials, CancellationToken cancellationToken, string eTag = null)
         {
-            return this.MakeApiGetRequestAsync<T>(this.BuildUri(companyFile), credentials, cancellationToken, eTag);
+            return MakeApiGetRequestAsync<T>(BuildUri(companyFile), credentials, cancellationToken, eTag);
         }
-#endif
-        /// <exclude/>
-        protected Uri BuildUri(CompanyFile companyFile)
+
+        /// <summary>
+        /// Get a resource using query parameters
+        /// </summary>
+        /// <param name="companyFile">The company file</param>
+        /// <param name="credentials">The company file credentials</param>
+        /// <param name="queryParameters">The query parameters</param>
+        /// <param name="eTag">The <see cref="BaseEntity.ETag" /> from a previously fetched entity</param>
+        /// <returns></returns>
+        public Task<T> GetAsync(CompanyFile companyFile, string queryParameters, ICompanyFileCredentials credentials, string eTag = null)
         {
-            return UriHelper.BuildUri(companyFile, Route);
+            return GetAsync(companyFile, queryParameters, credentials, CancellationToken.None, eTag);
+        }
+
+        /// <summary>
+        /// Get a resource using query parameters
+        /// </summary>
+        /// <param name="companyFile">The company file</param>
+        /// <param name="queryParameters">The query parameters</param>
+        /// <param name="credentials">The company file credentials</param>
+        /// <param name="cancellationToken"></param>
+        /// <param name="eTag">The <see cref="BaseEntity.ETag" /> from a previously fetched entity</param>
+        /// <returns></returns>
+        public Task<T> GetAsync(CompanyFile companyFile, string queryParameters, ICompanyFileCredentials credentials, CancellationToken cancellationToken, string eTag = null)
+        {
+            return MakeApiGetRequestAsync<T>(BuildUri(companyFile, queryParameters), credentials, cancellationToken, eTag);
+        }
+
+#endif
+
+        /// <exclude/>
+        protected Uri BuildUri(CompanyFile companyFile, string queryString = null)
+        {
+            return UriHelper.BuildUri(companyFile, Route, queryString: queryString);
         }
 
         /// <summary>
