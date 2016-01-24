@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text;
 #if ASYNC
 using System.Threading.Tasks;
 using System.Threading;
 #endif
 using MYOB.AccountRight.SDK.Contracts;
-using MYOB.AccountRight.SDK.Extensions;
 
 namespace MYOB.AccountRight.SDK.Communication
 {
@@ -64,7 +60,7 @@ namespace MYOB.AccountRight.SDK.Communication
         /// <param name="code">The code received from the authorization site</param>
         public Task<Tuple<HttpStatusCode, OAuthTokens>> GetOAuthTokensAsync(WebRequest request, string code)
         {
-            return this.GetOAuthTokensAsync(request, code, CancellationToken.None);
+            return GetOAuthTokensAsync(request, code, CancellationToken.None);
         }
 
         /// <summary>
@@ -77,7 +73,7 @@ namespace MYOB.AccountRight.SDK.Communication
         {
             var data = BuildRequestTokenData(code);
             ConfigureRequest(request);
-            var get = await this.BeginRequestAsync(request, data, cancellationToken);
+            var get = await BeginRequestAsync(request, data, cancellationToken);
             return new Tuple<HttpStatusCode, OAuthTokens>(get.Item1, get.Item3);
         }
 #endif
@@ -116,7 +112,7 @@ namespace MYOB.AccountRight.SDK.Communication
         /// <param name="oAuthResponse">The current OAuth response object</param>
         public Task<Tuple<HttpStatusCode, OAuthTokens>> RenewOAuthTokensAsync(WebRequest request, OAuthTokens oAuthResponse)
         {
-            return this.RenewOAuthTokensAsync(request, oAuthResponse, CancellationToken.None);
+            return RenewOAuthTokensAsync(request, oAuthResponse, CancellationToken.None);
         }
 
         /// <summary>
@@ -129,7 +125,7 @@ namespace MYOB.AccountRight.SDK.Communication
         {
             var data = BuildRenewTokenData(oAuthResponse);
             ConfigureRequest(request);
-            var get = await this.BeginRequestAsync(request, data, cancellationToken);
+            var get = await BeginRequestAsync(request, data, cancellationToken);
             return new Tuple<HttpStatusCode, OAuthTokens>(get.Item1, get.Item3);
         }
 #endif
@@ -137,7 +133,7 @@ namespace MYOB.AccountRight.SDK.Communication
         private void BeginRequest(WebRequest request, Action<HttpStatusCode, string, OAuthTokens> onComplete, Action<Uri, Exception> onError, string data)
         {
             request.BeginGetRequestStream(HandleRequestCallback,
-                                           new RequestContext<string, OAuthTokens>
+                                           new RequestContext<OAuthTokens>
                                            {
                                                Body = data,
                                                Request = request,
@@ -149,10 +145,10 @@ namespace MYOB.AccountRight.SDK.Communication
 #if ASYNC
         async private Task<Tuple<HttpStatusCode, string, OAuthTokens>> BeginRequestAsync(WebRequest request, string data, CancellationToken cancellationToken)
         {
-            return await GetResponseTask<OAuthTokens>(await GetRequestStreamTask<string>(request, data), cancellationToken);
+            return await GetResponseTask<OAuthTokens>(await GetRequestStreamTask(request, data), cancellationToken);
         }
 
-        private static async Task<WebRequest> GetRequestStreamTask<T>(WebRequest request, string data)
+        private static async Task<WebRequest> GetRequestStreamTask(WebRequest request, string data)
         {
             using (var stream = await request.GetRequestStreamAsync())
             {
@@ -167,7 +163,7 @@ namespace MYOB.AccountRight.SDK.Communication
 
         private void HandleRequestCallback(IAsyncResult asynchronousResult)
         {
-            var requestData = (RequestContext<string, OAuthTokens>)asynchronousResult.AsyncState;
+            var requestData = (RequestContext<OAuthTokens>)asynchronousResult.AsyncState;
 
             var request = requestData.Request;
             using (var requestStream = request.EndGetRequestStream(asynchronousResult))
@@ -178,7 +174,7 @@ namespace MYOB.AccountRight.SDK.Communication
                 }
             }
 
-            request.BeginGetResponse(HandleResponseCallback<RequestContext<string, OAuthTokens>, string, OAuthTokens>, requestData);
+            request.BeginGetResponse(HandleResponseCallback<RequestContext<OAuthTokens>, OAuthTokens>, requestData);
         }
     }
 }
