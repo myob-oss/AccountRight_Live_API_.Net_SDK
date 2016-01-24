@@ -299,7 +299,8 @@ namespace MYOB.AccountRight.SDK.Services.GeneralLedger
         private Uri BuildUri(CompanyFile companyFile, int? financialYear, string postResource = null, string extraQueryString = null)
         {
             string qs = null;
-            if (!string.IsNullOrEmpty(extraQueryString)) qs += extraQueryString.TrimStart('?');
+            if (!string.IsNullOrEmpty(extraQueryString)) 
+                qs += extraQueryString.TrimStart('?');
 
             var uri = UriHelper.BuildUri(companyFile, financialYear.HasValue ? string.Format("{0}/{1}", Route, financialYear) : Route, null, postResource, qs == null ? null : qs.TrimEnd('&'));
             return uri;

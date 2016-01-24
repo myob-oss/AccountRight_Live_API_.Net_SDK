@@ -396,9 +396,12 @@ namespace MYOB.AccountRight.SDK.Services.Payroll
         private Uri BuildUri(CompanyFile companyFile, Guid? uid = null, string postResource = null, DateTime? startDate = null, DateTime? endDate = null, string extraQueryString = null)
         {
             string qs = null;
-            if (startDate.HasValue) qs+= string.Format("StartDate={0}&", startDate.Value.Date.ToString("s"));
-            if (endDate.HasValue) qs += string.Format("EndDate={0}&", endDate.Value.Date.ToString("s"));
-            if ((extraQueryString != null && extraQueryString != string.Empty)) qs += extraQueryString.TrimStart('?');
+            if (startDate.HasValue) 
+                qs+= string.Format("StartDate={0}&", startDate.Value.Date.ToString("s"));
+            if (endDate.HasValue) 
+                qs += string.Format("EndDate={0}&", endDate.Value.Date.ToString("s"));
+            if (!string.IsNullOrEmpty(extraQueryString)) 
+                qs += extraQueryString.TrimStart('?');
 
             return UriHelper.BuildUri(companyFile, Route, uid, postResource, qs == null ? null : qs.TrimEnd('&'));
         }

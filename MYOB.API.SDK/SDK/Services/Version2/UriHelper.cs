@@ -6,7 +6,7 @@ namespace MYOB.AccountRight.SDK.Services
     /// <summary>
     /// Uri helper utilities
     /// </summary>
-    public class UriHelper
+    public static class UriHelper
     {
         /// <summary>
         /// Build a uri
