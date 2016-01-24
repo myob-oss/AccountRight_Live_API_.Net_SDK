@@ -52,7 +52,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <returns></returns>
         public virtual byte[] GetPhoto(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials)
         {
-            return MakeApiGetRequestSync<Photo>(BuildUri(cf, uid, "/Photo"), credentials, null, null).Maybe(_ => _.Data);
+            return MakeApiGetRequestSync<Photo>(BuildUri(cf, uid, "/Photo"), credentials, null).Maybe(_ => _.Data);
         }
 
 #if ASYNC

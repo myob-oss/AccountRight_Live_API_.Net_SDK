@@ -122,7 +122,7 @@ namespace MYOB.AccountRight.SDK.Services
 #endif
 
         /// <exclude/>
-        protected T MakeApiGetRequestSync<T>(Uri uri, ICompanyFileCredentials credentials, Action<HttpWebRequest> transform, string eTag) where T : class
+        protected T MakeApiGetRequestSync<T>(Uri uri, ICompanyFileCredentials credentials, string eTag) where T : class
         {
             using (var wait = new AutoResetEvent(false))
             {

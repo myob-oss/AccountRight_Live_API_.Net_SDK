@@ -10,3 +10,4 @@ MYOB.API.SDK/**/obj/**/*
 /MYOB.API.SDK/SDK/MYOB.API.SDK.snk
 /*.nupkg
 /MYOB-Setup.txt
+/.sonarqube

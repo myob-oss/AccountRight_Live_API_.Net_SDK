@@ -28,7 +28,7 @@ namespace SDK.Test.Services
 
             public UserContract Get(Uri uri, string eTag=null)
             {
-                return MakeApiGetRequestSync<UserContract>(uri, null, null, eTag);
+                return MakeApiGetRequestSync<UserContract>(uri, null, eTag);
             }
 
             public void Delete(Uri uri)

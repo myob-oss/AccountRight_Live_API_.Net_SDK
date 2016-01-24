@@ -18,7 +18,7 @@ namespace MYOB.AccountRight.SDK.Communication
         /// <summary>
         /// The default production endpoint
         /// </summary>
-        public static Uri ApiRequestUri = new Uri("https://api.myob.com/accountright");
+        public static readonly Uri ApiRequestUri = new Uri("https://api.myob.com/accountright");
 
         private readonly OAuthTokens _oauth;
         private readonly IApiConfiguration _configuration;

@@ -22,7 +22,7 @@ namespace MYOB.AccountRight.SDK.Communication
     /// </code>
     public class WebRequestFactory : IWebRequestFactory
     {
-        private IApiConfiguration _configuration;
+        private readonly IApiConfiguration _configuration;
 
         /// <summary>
         /// WebRequest factory constructor

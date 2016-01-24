@@ -21,7 +21,7 @@ namespace MYOB.AccountRight.SDK.Communication
         /// <summary>
         /// https://secure.myob.com/oauth2/v1/authorize
         /// </summary>
-        public static Uri OAuthRequestUri = new Uri("https://secure.myob.com/oauth2/v1/authorize");
+        public static readonly Uri OAuthRequestUri = new Uri("https://secure.myob.com/oauth2/v1/authorize");
 
         private readonly IApiConfiguration _configuration;
 

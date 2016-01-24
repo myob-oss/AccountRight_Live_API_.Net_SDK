@@ -194,7 +194,7 @@ namespace MYOB.AccountRight.SDK.Services.Payroll
         /// <returns></returns>
         public Timesheet Get(CompanyFile cf, Guid uid, DateTime? startDate, DateTime? endDate, ICompanyFileCredentials credentials)
         {
-            return MakeApiGetRequestSync<Timesheet>(BuildUri(cf, uid, startDate: startDate, endDate: endDate), credentials, null, null);
+            return MakeApiGetRequestSync<Timesheet>(BuildUri(cf, uid, startDate: startDate, endDate: endDate), credentials, null);
         }
 
 #if ASYNC
@@ -250,7 +250,7 @@ namespace MYOB.AccountRight.SDK.Services.Payroll
         /// <returns></returns>
         public Timesheet Get(CompanyFile cf, Uri uri, ICompanyFileCredentials credentials)
         {
-            return MakeApiGetRequestSync<Timesheet>(ValidateUri(cf, uri), credentials, null, null);
+            return MakeApiGetRequestSync<Timesheet>(ValidateUri(cf, uri), credentials, null);
         }
 
 #if ASYNC
@@ -302,7 +302,7 @@ namespace MYOB.AccountRight.SDK.Services.Payroll
         /// <returns></returns>
         public PagedCollection<Timesheet> GetRange(CompanyFile cf, string queryString, ICompanyFileCredentials credentials)
         {
-            return MakeApiGetRequestSync<PagedCollection<Timesheet>>(BuildUri(cf, null, queryString == null ? null : "?" + queryString.TrimStart(new[] { '?' })), credentials, null, null);
+            return MakeApiGetRequestSync<PagedCollection<Timesheet>>(BuildUri(cf, null, queryString == null ? null : "?" + queryString.TrimStart(new[] { '?' })), credentials, null);
         }
 
 #if ASYNC
