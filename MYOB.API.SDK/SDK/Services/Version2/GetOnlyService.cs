@@ -52,7 +52,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <returns></returns>
         public T Get(CompanyFile companyFile, string queryParameters, ICompanyFileCredentials credentials, string eTag = null)
         {
-            return MakeApiGetRequestSync<T>(BuildUri(companyFile, queryParameters), credentials, null, eTag);
+            return MakeApiGetRequestSync<T>(BuildUri(companyFile, queryParameters), credentials, eTag);
         }
 
 
