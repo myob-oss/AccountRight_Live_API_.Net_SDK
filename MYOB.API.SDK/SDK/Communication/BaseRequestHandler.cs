@@ -38,9 +38,8 @@ namespace MYOB.AccountRight.SDK.Communication
         /// <summary>
         /// 
         /// </summary>
-        /// <typeparam name="T"></typeparam>
         /// <typeparam name="TR"></typeparam>
-        protected class RequestContext<T, TR>
+        protected class RequestContext<TR>
         {
             /// <summary>
             /// The request
@@ -72,7 +71,7 @@ namespace MYOB.AccountRight.SDK.Communication
         /// <returns></returns>
         protected Task<Tuple<HttpStatusCode, string, T>> GetResponseTask<T>(WebRequest request) where T : class
         {
-            return this.GetResponseTask<T>(request, CancellationToken.None);
+            return GetResponseTask<T>(request, CancellationToken.None);
         }
 
         /// <summary>
@@ -104,11 +103,10 @@ namespace MYOB.AccountRight.SDK.Communication
         /// 
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <typeparam name="TReq"></typeparam>
         /// <typeparam name="TResp"></typeparam>
         /// <param name="asynchronousResult"></param>
-        protected void HandleResponseCallback<T, TReq, TResp>(IAsyncResult asynchronousResult)
-            where T : RequestContext<TReq, TResp>
+        protected void HandleResponseCallback<T, TResp>(IAsyncResult asynchronousResult)
+            where T : RequestContext<TResp>
             where TResp : class
         {
             var requestData = (T)asynchronousResult.AsyncState;

@@ -122,63 +122,66 @@ namespace MYOB.AccountRight.SDK.Services
 #endif
 
         /// <exclude/>
-        protected T MakeApiGetRequestSync<T>(Uri uri, ICompanyFileCredentials credentials, Action<HttpWebRequest> transform, string eTag) where T : class
+        protected T MakeApiGetRequestSync<T>(Uri uri, ICompanyFileCredentials credentials, string eTag) where T : class
         {
-            var wait = new AutoResetEvent(false);
-            Exception ex = null;
-            var entity = default(T);
-            var requestUri = default(Uri);
+            using (var wait = new AutoResetEvent(false))
+            {
+                Exception ex = null;
+                var entity = default(T);
+                var requestUri = default(Uri);
 
-            MakeApiGetRequestDelegate<T>(
-                uri, credentials,
-                (code, data) =>
+                MakeApiGetRequestDelegate<T>(
+                    uri, credentials,
+                    (code, data) =>
                     {
                         entity = data;
                         wait.Set();
                     },
-                (exUri, exception) =>
+                    (exUri, exception) =>
                     {
                         requestUri = exUri;
                         ex = exception;
                         wait.Set();
                     }, eTag);
 
-            if (wait.WaitOne(new TimeSpan(0, 0, 0, 180)))
-            {
-                ex.ProcessException(requestUri);
+                if (wait.WaitOne(new TimeSpan(0, 0, 0, 180)))
+                {
+                    ex.ProcessException(requestUri);
+                }
+                return entity;
             }
-
-            return entity;
         }
 
         /// <exclude/>
         protected Stream MakeApiGetRequestSyncPdf(Uri uri, string acceptEncoding, ICompanyFileCredentials credentials)
         {
-            var wait = new AutoResetEvent(false);
-            Exception ex = null;
-            var entity = default(Stream);
-            var requestUri = default(Uri);
-
-            MakeApiGetRequestDelegateStream(
-                uri, acceptEncoding, credentials,
-                (code, data) =>
-                {
-                    entity = data;
-                    wait.Set();
-                },
-                (exUri, exception) =>
-                {
-                    requestUri = exUri;
-                    ex = exception;
-                    wait.Set();
-                });
-
-            if (wait.WaitOne(new TimeSpan(0, 0, 0, 180)))
+            using (var wait = new AutoResetEvent(false))
             {
-                ex.ProcessException(requestUri);
-            }
+                Exception ex = null;
+                var entity = default(Stream);
+                var requestUri = default(Uri);
 
-            return entity;
+                MakeApiGetRequestDelegateStream(
+                    uri, acceptEncoding, credentials,
+                    (code, data) =>
+                    {
+                        entity = data;
+                        wait.Set();
+                    },
+                    (exUri, exception) =>
+                    {
+                        requestUri = exUri;
+                        ex = exception;
+                        wait.Set();
+                    });
+
+                if (wait.WaitOne(new TimeSpan(0, 0, 0, 180)))
+                {
+                    ex.ProcessException(requestUri);
+                }
+
+                return entity;
+            }
         }
 
         /// <exclude/>
@@ -211,26 +214,28 @@ namespace MYOB.AccountRight.SDK.Services
         /// <exclude/>
         protected void MakeApiDeleteRequestSync(Uri uri, ICompanyFileCredentials credentials)
         {
-            var wait = new AutoResetEvent(false);
-            Exception ex = null;
-            var requestUri = default(Uri);
+            using (var wait = new AutoResetEvent(false))
+            {
+                Exception ex = null;
+                var requestUri = default(Uri);
 
-            MakeApiDeleteRequestDelegate(
-                uri, credentials,
-                (code) =>
+                MakeApiDeleteRequestDelegate(
+                    uri, credentials,
+                    (code) =>
                     {
                         wait.Set();
                     },
-                (exUri, exception) =>
+                    (exUri, exception) =>
                     {
                         requestUri = exUri;
                         ex = exception;
                         wait.Set();
                     });
 
-            if (wait.WaitOne(new TimeSpan(0, 0, 0, 180)))
-            {
-                ex.ProcessException(requestUri);
+                if (wait.WaitOne(new TimeSpan(0, 0, 0, 180)))
+                {
+                    ex.ProcessException(requestUri);
+                }
             }
         }
 
@@ -301,33 +306,35 @@ namespace MYOB.AccountRight.SDK.Services
             where TRequest : class
             where TResponse: class
         {
-            var wait = new AutoResetEvent(false);
-            Exception ex = null;
-            var requestUri = default(Uri);
-            string retlocation = null;
-            TResponse responseEntity = null;
-
-            MakeApiPostRequestDelegate<TRequest, TResponse>(
-                uri, entity, credentials,
-                (code, location, response) =>
-                {
-                    retlocation = location;
-                    responseEntity = response;
-                    wait.Set();
-                },
-                (exUri, exception) =>
-                {
-                    requestUri = exUri;
-                    ex = exception;
-                    wait.Set();
-                });
-
-            if (wait.WaitOne(new TimeSpan(0, 0, 0, 180)))
+            using (var wait = new AutoResetEvent(false))
             {
-                ex.ProcessException(requestUri);
-            }
+                Exception ex = null;
+                var requestUri = default(Uri);
+                string retlocation = null;
+                TResponse responseEntity = null;
 
-            return new KeyValuePair<string, TResponse>(retlocation, responseEntity);
+                MakeApiPostRequestDelegate<TRequest, TResponse>(
+                    uri, entity, credentials,
+                    (code, location, response) =>
+                    {
+                        retlocation = location;
+                        responseEntity = response;
+                        wait.Set();
+                    },
+                    (exUri, exception) =>
+                    {
+                        requestUri = exUri;
+                        ex = exception;
+                        wait.Set();
+                    });
+
+                if (wait.WaitOne(new TimeSpan(0, 0, 0, 180)))
+                {
+                    ex.ProcessException(requestUri);
+                }
+
+                return new KeyValuePair<string, TResponse>(retlocation, responseEntity);
+            }
         }
 
         /// <exclude/>
@@ -390,37 +397,40 @@ namespace MYOB.AccountRight.SDK.Services
         }
 
         /// <exclude/>
-        protected KeyValuePair<string, TResponse> MakeApiPutRequestSync<TRequest, TResponse>(Uri uri, TRequest entity, ICompanyFileCredentials credentials) 
+        protected KeyValuePair<string, TResponse> MakeApiPutRequestSync<TRequest, TResponse>(Uri uri, TRequest entity,
+            ICompanyFileCredentials credentials)
             where TRequest : class
             where TResponse : class
         {
-            var wait = new AutoResetEvent(false);
-            Exception ex = null;
-            var requestUri = default(Uri);
-            string retlocation = null;
-            TResponse responseEntity = null;
+            using (var wait = new AutoResetEvent(false))
+            {
+                Exception ex = null;
+                var requestUri = default(Uri);
+                string retlocation = null;
+                TResponse responseEntity = null;
 
-            MakeApiPutRequestDelegate<TRequest, TResponse>(
-                uri, entity, credentials,
-                (code, location, response) =>
+                MakeApiPutRequestDelegate<TRequest, TResponse>(
+                    uri, entity, credentials,
+                    (code, location, response) =>
                     {
                         retlocation = location;
                         responseEntity = response;
                         wait.Set();
                     },
-                (exUri, exception) =>
+                    (exUri, exception) =>
                     {
                         requestUri = exUri;
                         ex = exception;
                         wait.Set();
                     });
 
-            if (wait.WaitOne(new TimeSpan(0, 0, 0, 180)))
-            {
-                ex.ProcessException(requestUri);
-            }
+                if (wait.WaitOne(new TimeSpan(0, 0, 0, 180)))
+                {
+                    ex.ProcessException(requestUri);
+                }
 
-            return new KeyValuePair<string, TResponse>(retlocation, responseEntity);
+                return new KeyValuePair<string, TResponse>(retlocation, responseEntity);
+            }
         }
     }
 }

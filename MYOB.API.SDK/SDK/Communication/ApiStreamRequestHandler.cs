@@ -60,7 +60,6 @@ namespace MYOB.AccountRight.SDK.Communication
         private void SetStandardHeaders(WebRequest request)
         {
             _helper.SetStandardHeaders(request, _configuration, _credentials, _oauth);
-            //request.Accept = "application/pdf";
         }
 
 #if ASYNC

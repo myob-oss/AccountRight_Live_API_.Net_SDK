@@ -52,7 +52,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <returns></returns>
         public virtual byte[] GetPhoto(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials)
         {
-            return MakeApiGetRequestSync<Photo>(BuildUri(cf, uid, "/Photo"), credentials, null, null).Maybe(_ => _.Data);
+            return MakeApiGetRequestSync<Photo>(BuildUri(cf, uid, "/Photo"), credentials, null).Maybe(_ => _.Data);
         }
 
 #if ASYNC
@@ -143,7 +143,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="onError">The action to call when the operation has an error</param>
         public virtual void SavePhoto(CompanyFile cf, Guid uid, byte[] photoData, ICompanyFileCredentials credentials, Action<HttpStatusCode, string> onComplete, Action<Uri, Exception> onError)
         {
-            MakeApiPutRequestDelegate(BuildUri(cf, uid, "/Photo"), new Photo() { Data = photoData }, credentials, onComplete, onError);
+            MakeApiPutRequestDelegate(BuildUri(cf, uid, "/Photo"), new Photo { Data = photoData }, credentials, onComplete, onError);
         }
 
         /// <summary>
@@ -156,7 +156,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <returns></returns>
         public virtual string SavePhoto(CompanyFile cf, Guid uid, byte[] photoData, ICompanyFileCredentials credentials)
         {
-            return MakeApiPutRequestSync(BuildUri(cf, uid, "/Photo"), new Photo() { Data = photoData }, credentials);
+            return MakeApiPutRequestSync(BuildUri(cf, uid, "/Photo"), new Photo { Data = photoData }, credentials);
         }
 
 #if ASYNC

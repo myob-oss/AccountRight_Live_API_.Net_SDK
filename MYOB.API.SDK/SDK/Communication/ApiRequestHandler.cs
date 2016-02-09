@@ -18,7 +18,7 @@ namespace MYOB.AccountRight.SDK.Communication
         /// <summary>
         /// The default production endpoint
         /// </summary>
-        public static Uri ApiRequestUri = new Uri("https://api.myob.com/accountright");
+        public static readonly Uri ApiRequestUri = new Uri("https://api.myob.com/accountright");
 
         private readonly OAuthTokens _oauth;
         private readonly IApiConfiguration _configuration;
@@ -53,8 +53,8 @@ namespace MYOB.AccountRight.SDK.Communication
             ApiRequestHelper.SetStandardHeaders(request, _configuration, _credentials, _oauth);
             ApiRequestHelper.SetIsNoneMatch(request, eTag);
 
-            request.BeginGetResponse(HandleResponseCallback<RequestContext<string, T>, string, T>,
-                                     new RequestContext<string, T>
+            request.BeginGetResponse(HandleResponseCallback<RequestContext<T>, T>,
+                                     new RequestContext<T>
                                          {
                                              Request = request,
                                              OnComplete = (code, s, entity) => onComplete(code, entity),
@@ -72,7 +72,7 @@ namespace MYOB.AccountRight.SDK.Communication
         /// <returns></returns>
         public Task<Tuple<HttpStatusCode, T>> GetAsync<T>(WebRequest request, string eTag) where T : class
         {
-            return this.GetAsync<T>(request, CancellationToken.None, eTag);
+            return GetAsync<T>(request, CancellationToken.None, eTag);
         }
 
         /// <summary>
@@ -103,8 +103,8 @@ namespace MYOB.AccountRight.SDK.Communication
         {
             ApiRequestHelper.SetStandardHeaders(request, _configuration, _credentials, _oauth);
             request.Method = "DELETE";
-            request.BeginGetResponse(HandleResponseCallback<RequestContext<string, string>, string, string>,
-                                     new RequestContext<string, string>
+            request.BeginGetResponse(HandleResponseCallback<RequestContext<string>, string>,
+                                     new RequestContext<string>
                                          {
                                              Request = request,
                                              OnComplete = (code, s, entity) => onComplete(code),
@@ -120,7 +120,7 @@ namespace MYOB.AccountRight.SDK.Communication
         /// <returns></returns>
         public Task DeleteAsync(WebRequest request)
         {
-            return this.DeleteAsync(request, CancellationToken.None);
+            return DeleteAsync(request, CancellationToken.None);
         }
 
         /// <summary>
@@ -167,8 +167,8 @@ namespace MYOB.AccountRight.SDK.Communication
             ApiRequestHelper.SetStandardHeaders(request, _configuration, _credentials, _oauth);
             request.Method = "PUT";
             request.ContentType = "application/json";
-            request.BeginGetRequestStream(HandleRequestCallback<TRequest, TResponse>,
-                                          new RequestContext<TRequest, TResponse>
+            request.BeginGetRequestStream(HandleRequestCallback<TResponse>,
+                                          new RequestContext<TResponse>
                                               {
                                                   Body = entity.ToJson(),
                                                   Request = request,
@@ -187,7 +187,7 @@ namespace MYOB.AccountRight.SDK.Communication
         /// <returns></returns>
         public Task<string> PutAsync<T>(WebRequest request, T entity) where T : class
         {
-            return this.PutAsync(request, entity, CancellationToken.None);
+            return PutAsync(request, entity, CancellationToken.None);
         }
 
         /// <summary>
@@ -220,7 +220,7 @@ namespace MYOB.AccountRight.SDK.Communication
             where TRequestEntity : class
             where TResponseEntity : class
         {
-            return this.PutAsync<TRequestEntity, TResponseEntity>(request, entity, CancellationToken.None);
+            return PutAsync<TRequestEntity, TResponseEntity>(request, entity, CancellationToken.None);
         }
 
         /// <summary>
@@ -278,8 +278,8 @@ namespace MYOB.AccountRight.SDK.Communication
             ApiRequestHelper.SetStandardHeaders(request, _configuration, _credentials, _oauth);
             request.Method = "POST";
             request.ContentType = "application/json";
-            request.BeginGetRequestStream(HandleRequestCallback<TRequest, TResponse>,
-                                          new RequestContext<TRequest, TResponse>
+            request.BeginGetRequestStream(HandleRequestCallback<TResponse>,
+                                          new RequestContext<TResponse>
                                               {
                                                   Body = entity.ToJson(),
                                                   Request = request,
@@ -298,7 +298,7 @@ namespace MYOB.AccountRight.SDK.Communication
         /// <returns></returns>
         public Task<string> PostAsync<T>(WebRequest request, T entity) where T : class
         {
-            return this.PostAsync(request, entity, CancellationToken.None);
+            return PostAsync(request, entity, CancellationToken.None);
         }
 
         /// <summary>
@@ -331,7 +331,7 @@ namespace MYOB.AccountRight.SDK.Communication
             where TRequestEntity : class
             where TResponseEntity : class
         {
-            return this.PostAsync<TRequestEntity, TResponseEntity>(request, entity, CancellationToken.None);
+            return PostAsync<TRequestEntity, TResponseEntity>(request, entity, CancellationToken.None);
         }
 
         /// <summary>
@@ -371,10 +371,10 @@ namespace MYOB.AccountRight.SDK.Communication
         }
 #endif
 
-        private void HandleRequestCallback<TRequestEntity, TResponseEntity>(IAsyncResult asynchronousResult)
+        private void HandleRequestCallback<TResponseEntity>(IAsyncResult asynchronousResult)
             where TResponseEntity : class
         {
-            var requestData = (RequestContext<TRequestEntity, TResponseEntity>) asynchronousResult.AsyncState;
+            var requestData = (RequestContext<TResponseEntity>) asynchronousResult.AsyncState;
 
             var request = requestData.Request;
             using (var requestStream = request.EndGetRequestStream(asynchronousResult))
@@ -386,7 +386,7 @@ namespace MYOB.AccountRight.SDK.Communication
             }
 
             request.BeginGetResponse(
-                HandleResponseCallback<RequestContext<TRequestEntity, TResponseEntity>, TRequestEntity, TResponseEntity>,
+                HandleResponseCallback<RequestContext<TResponseEntity>, TResponseEntity>,
                 requestData);
         }
     }

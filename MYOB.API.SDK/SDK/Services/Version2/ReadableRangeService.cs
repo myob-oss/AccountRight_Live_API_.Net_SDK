@@ -77,7 +77,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <returns></returns>
         public virtual PagedCollection<T> GetRange(CompanyFile cf, string queryString, ICompanyFileCredentials credentials, string eTag = null)
         {
-            return MakeApiGetRequestSync<PagedCollection<T>>(BuildUri(cf, null, queryString.Maybe(_ => "?" + _.TrimStart(new[] { '?' }))), credentials, null, eTag);
+            return MakeApiGetRequestSync<PagedCollection<T>>(BuildUri(cf, null, queryString.Maybe(_ => "?" + _.TrimStart(new[] { '?' }))), credentials, eTag);
         }
 
 #if ASYNC

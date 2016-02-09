@@ -194,7 +194,7 @@ namespace MYOB.AccountRight.SDK.Services.Payroll
         /// <returns></returns>
         public Timesheet Get(CompanyFile cf, Guid uid, DateTime? startDate, DateTime? endDate, ICompanyFileCredentials credentials)
         {
-            return MakeApiGetRequestSync<Timesheet>(BuildUri(cf, uid, startDate: startDate, endDate: endDate), credentials, null, null);
+            return MakeApiGetRequestSync<Timesheet>(BuildUri(cf, uid, startDate: startDate, endDate: endDate), credentials, null);
         }
 
 #if ASYNC
@@ -250,7 +250,7 @@ namespace MYOB.AccountRight.SDK.Services.Payroll
         /// <returns></returns>
         public Timesheet Get(CompanyFile cf, Uri uri, ICompanyFileCredentials credentials)
         {
-            return MakeApiGetRequestSync<Timesheet>(ValidateUri(cf, uri), credentials, null, null);
+            return MakeApiGetRequestSync<Timesheet>(ValidateUri(cf, uri), credentials, null);
         }
 
 #if ASYNC
@@ -302,7 +302,7 @@ namespace MYOB.AccountRight.SDK.Services.Payroll
         /// <returns></returns>
         public PagedCollection<Timesheet> GetRange(CompanyFile cf, string queryString, ICompanyFileCredentials credentials)
         {
-            return MakeApiGetRequestSync<PagedCollection<Timesheet>>(BuildUri(cf, null, queryString == null ? null : "?" + queryString.TrimStart(new[] { '?' })), credentials, null, null);
+            return MakeApiGetRequestSync<PagedCollection<Timesheet>>(BuildUri(cf, null, queryString == null ? null : "?" + queryString.TrimStart(new[] { '?' })), credentials, null);
         }
 
 #if ASYNC
@@ -396,9 +396,12 @@ namespace MYOB.AccountRight.SDK.Services.Payroll
         private Uri BuildUri(CompanyFile companyFile, Guid? uid = null, string postResource = null, DateTime? startDate = null, DateTime? endDate = null, string extraQueryString = null)
         {
             string qs = null;
-            if (startDate.HasValue) qs+= string.Format("StartDate={0}&", startDate.Value.Date.ToString("s"));
-            if (endDate.HasValue) qs += string.Format("EndDate={0}&", endDate.Value.Date.ToString("s"));
-            if ((extraQueryString != null && extraQueryString != string.Empty)) qs += extraQueryString.TrimStart('?');
+            if (startDate.HasValue) 
+                qs+= string.Format("StartDate={0}&", startDate.Value.Date.ToString("s"));
+            if (endDate.HasValue) 
+                qs += string.Format("EndDate={0}&", endDate.Value.Date.ToString("s"));
+            if (!string.IsNullOrEmpty(extraQueryString)) 
+                qs += extraQueryString.TrimStart('?');
 
             return UriHelper.BuildUri(companyFile, Route, uid, postResource, qs == null ? null : qs.TrimEnd('&'));
         }
