@@ -1,3 +1,4 @@
+@echo off
 @cls
 set EnableNuGetPackageRestore=True
 mkdir .\Artefacts\Coverage
