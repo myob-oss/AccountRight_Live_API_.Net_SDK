@@ -29,7 +29,7 @@ namespace MYOB.AccountRight.SDK.Services
         public OAuthService(IApiConfiguration configuration, IWebRequestFactory factory = null)
         {
             _configuration = configuration;
-            this._factory = factory ?? new WebRequestFactory(configuration);
+            this._factory = factory ?? WebRequestFactory.SharedWebRequestFactory ?? new WebRequestFactory(configuration);
         }
 
         /// <summary>
