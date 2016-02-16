@@ -42,7 +42,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <returns></returns>
         public CompanyFile[] GetRange()
         {
-            return MakeApiGetRequestSync<CompanyFile[]>(new Uri(Configuration.ApiBaseUrl), null, null, null);
+            return MakeApiGetRequestSync<CompanyFile[]>(new Uri(Configuration.ApiBaseUrl), null, null);
         }
 
 #if ASYNC
@@ -83,7 +83,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <returns></returns>
         public CompanyFile[] GetRange(string queryString)
         {
-            return MakeApiGetRequestSync<CompanyFile[]>(BuildUri(queryString.Maybe(_ => "?" + _.TrimStart(new[] { '?' }))), null, null, null);
+            return MakeApiGetRequestSync<CompanyFile[]>(BuildUri(queryString.Maybe(_ => "?" + _.TrimStart(new[] { '?' }))), null, null);
         }
 
 #if ASYNC
@@ -128,7 +128,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <returns></returns>
         public CompanyFileWithResources Get(CompanyFile cf, ICompanyFileCredentials credentials)
         {
-            return MakeApiGetRequestSync<CompanyFileWithResources>(cf.Uri, credentials, null, null);
+            return MakeApiGetRequestSync<CompanyFileWithResources>(cf.Uri, credentials, null);
         }
 
 #if ASYNC

@@ -24,7 +24,12 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Contact
         /// <summary>
         /// Female
         /// </summary>
-        Female = 2
+        Female = 2,
+        
+        /// <summary>
+        /// Indeterminate
+        /// </summary>
+        Indeterminate = 3
     }
 
     /// <summary>

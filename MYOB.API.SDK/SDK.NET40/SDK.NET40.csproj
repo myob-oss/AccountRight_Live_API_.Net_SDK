@@ -80,6 +80,9 @@
   <ItemGroup>
     <Compile Include="..\SDK\ApiCommunicationException.cs" />
     <Compile Include="..\SDK\ApiConfiguration.cs" />
+    <Compile Include="..\SDK\Contracts\Version2\Report\GST\NZGSTReport.cs">
+      <Link>Contracts\Version2\Report\GST\NZGSTReport.cs</Link>
+    </Compile>
     <Compile Include="..\SDK\Properties\AssemblyInfoEx.cs">
       <Link>Properties\AssemblyInfoEx.cs</Link>
     </Compile>
@@ -1023,6 +1026,9 @@
     <Compile Include="..\SDK\Services\Version2\ReadableService.cs">
       <Link>Services\Version2\ReadableService.cs</Link>
     </Compile>
+    <Compile Include="..\SDK\Services\Version2\Report\GST\NzgstReportService.cs">
+      <Link>Services\Version2\Report\GST\NzgstReportService.cs</Link>
+    </Compile>
     <Compile Include="..\SDK\Services\Version2\Report\Payroll\EmployeePayrollAdviceService.cs">
       <Link>Services\Version2\Report\Payroll\EmployeePayrollAdviceService.cs</Link>
     </Compile>
@@ -1102,6 +1108,7 @@
     <None Include="..\SDK\MYOB.API.SDK.snk" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Import Project="$(SolutionDir)\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('$(SolutionDir)\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />

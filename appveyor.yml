@@ -1,4 +1,4 @@
-version: 2015.4.{build}
+version: 2016.1.{build}
 shallow_clone: true
 assembly_info:
   patch: true
@@ -9,6 +9,10 @@ assembly_info:
 environment:
   COVERALLS_REPO_TOKEN:
     secure: XBCyPFZbO55cEI6tMsd1Ts3O7sXF3IFCxGPYQGJbVae48G9j9miONIHmDwzG4iLG
+  SONARQUBE_USER:
+    secure: xQ0uPUuuXgtVDqMsTjpfaQ==
+  SONARQUBE_PASSWORD:
+    secure: feupc6DdN7VnWMEziKIEZQ==
 cache: .\MYOB.API.SDK\SDK\MYOB.API.SDK.snk
 build_script:
 - build.bat
@@ -46,4 +50,5 @@ notifications:
   on_build_failure: true
   on_build_status_changed: true
 on_success:
-- .\packages\coveralls.io.1.3.4\tools\coveralls.net.exe --opencover .\Artefacts\Coverage\output.xml
+- cmd: >-
+    sonar.bat

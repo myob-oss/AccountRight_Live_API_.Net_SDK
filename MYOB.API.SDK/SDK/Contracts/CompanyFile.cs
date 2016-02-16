@@ -37,5 +37,11 @@ namespace MYOB.AccountRight.SDK.Contracts
         /// Uri of the resource
         /// </summary>
         public Uri Uri { get; set; }
+
+        /// <summary>
+        /// Launcher Id can be used to open Online Company files from command line
+        /// </summary>
+        public Guid? LauncherId { get; set; }
+
     }
 }

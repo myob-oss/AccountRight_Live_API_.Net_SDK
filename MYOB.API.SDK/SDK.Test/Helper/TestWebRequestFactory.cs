@@ -12,11 +12,11 @@ using System.Threading.Tasks;
 
 namespace SDK.Test.Helper
 {
-    public class DefaultResponseTestWebRequestFactory : TestWebRequestFactory, IWebRequestFactory
+    public class DefaultResponseTestWebRequestFactory : TestWebRequestFactory
     {
         public readonly List<Uri> UnhandledUris = new List<Uri>(); 
         
-        public new WebRequest Create(Uri requestUri, string acceptEncoding = null)
+        public override WebRequest Create(Uri requestUri, string acceptEncoding = null)
         {
             var request = base.Create(requestUri, acceptEncoding);
 
@@ -99,7 +99,7 @@ namespace SDK.Test.Helper
             return response;
         }
 
-        public WebRequest Create(Uri requestUri, string acceptEncoding = null)
+        public virtual WebRequest Create(Uri requestUri, string acceptEncoding = null)
         {
             var uri = requestUri.ToString().TrimEnd('/').ToLowerInvariant();
 
