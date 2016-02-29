@@ -58,7 +58,7 @@ namespace MYOB.AccountRight.SDK.Services.Contact
         /// <returns></returns>
         public byte[] GetPhoto(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials)
         {
-            return MakeApiGetRequestSync<Photo>(BuildUri(cf, uid, "/Photo"), credentials, null, null).Maybe(_ => _.Data);
+            return MakeApiGetRequestSync<Photo>(BuildUri(cf, uid, "/Photo"), credentials, null).Maybe(_ => _.Data);
         }
 
 #if ASYNC

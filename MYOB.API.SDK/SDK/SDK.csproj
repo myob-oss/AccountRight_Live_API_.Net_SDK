@@ -145,6 +145,7 @@
     <Compile Include="Contracts\Version2\Purchase\ServicePurchaseOrder.cs" />
     <Compile Include="Contracts\Version2\Purchase\ServicePurchaseOrderLine.cs" />
     <Compile Include="Contracts\Version2\Purchase\PurchaseOrderWithLines.cs" />
+    <Compile Include="Contracts\Version2\Report\GST\NZGSTReport.cs" />
     <Compile Include="Contracts\Version2\Report\Payroll\EmployeePayrollAdvice.cs" />
     <Compile Include="Contracts\Version2\Sale\TimeBillingOrder.cs" />
     <Compile Include="Contracts\Version2\Sale\TimeBillingOrderLine.cs" />
@@ -360,6 +361,7 @@
     <Compile Include="Services\Version2\Purchase\ServicePurchaseOrderService.cs" />
     <Compile Include="Services\Version2\Purchase\PurchaseOrderService.cs" />
     <Compile Include="Services\Version2\ReadableRangeService.cs" />
+    <Compile Include="Services\Version2\Report\GST\NzgstReportService.cs" />
     <Compile Include="Services\Version2\Report\Payroll\EmployeePayrollAdviceService.cs" />
     <Compile Include="Services\Version2\Sale\TimeBillingOrderService.cs" />
     <Compile Include="Services\Version2\Sale\ItemOrderService.cs" />
@@ -464,6 +466,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <Import Project="$(SolutionDir)\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('$(SolutionDir)\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />

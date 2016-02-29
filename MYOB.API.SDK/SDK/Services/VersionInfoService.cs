@@ -43,7 +43,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <returns></returns>
         public VersionInfo Get(ICompanyFileCredentials credentials)
         {
-            return MakeApiGetRequestSync<VersionInfo>(BuildUri(), credentials, null, null);
+            return MakeApiGetRequestSync<VersionInfo>(BuildUri(), credentials, null);
         }
 
 #if ASYNC

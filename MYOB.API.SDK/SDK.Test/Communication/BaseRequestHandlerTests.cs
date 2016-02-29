@@ -1,8 +1,5 @@
 ﻿using System;
-using System.IO;
-using System.Linq;
 using System.Net;
-using System.Runtime.Serialization;
 using System.Threading.Tasks;
 using MYOB.AccountRight.SDK;
 using MYOB.AccountRight.SDK.Communication;
@@ -24,7 +21,7 @@ namespace SDK.Test.Communication
         {
             var request = _webRequestFactory.Create(new Uri(uri));
 
-            request.BeginGetResponse(HandleResponseCallback<RequestContext<string, UserContract>, string, UserContract>, new RequestContext<string, UserContract>() { Request = request, OnComplete = onSuccess, OnError = onError });
+            request.BeginGetResponse(HandleResponseCallback<RequestContext<UserContract>, UserContract>, new RequestContext<UserContract> { Request = request, OnComplete = onSuccess, OnError = onError });
         }
 
         async public Task<Tuple<HttpStatusCode, UserContract>> MakeRequestAsync(string uri)

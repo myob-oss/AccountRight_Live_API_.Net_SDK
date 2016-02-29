@@ -28,7 +28,7 @@ namespace SDK.Test.Services
 
             public UserContract Get(Uri uri, string eTag=null)
             {
-                return MakeApiGetRequestSync<UserContract>(uri, null, null, eTag);
+                return MakeApiGetRequestSync<UserContract>(uri, null, eTag);
             }
 
             public void Delete(Uri uri)
@@ -204,6 +204,36 @@ namespace SDK.Test.Services
 
             // assert
             Assert.AreEqual(apiUri, ex.URI);
+        }
+
+        public class TestWebRequestFactoryEx : TestWebRequestFactory 
+        {
+            public override WebRequest Create(Uri requestUri, string acceptEncoding = null)
+            {
+                var request = base.Create(requestUri, acceptEncoding);
+                return request;
+            }
+        }
+
+        [Test]
+        public void ServiceBaseGenerates_WebRequestEntities_From_SharedWebRequestFactory()
+        {
+            // arrange
+            var uri = new Uri("http://www.google.com"); 
+            var factory = new TestWebRequestFactoryEx();
+            var user = new UserContract {Name = "Freddie"};
+            factory.RegisterResultForUri(uri.ToString(), user.ToJson()); // if our hook is working then we should get contracts from google and not a search page
+
+            WebRequestFactory.SetSharedWebRequestFactory(factory);
+
+            // act
+            var service = new TestServiceBase(new ApiConfiguration("<<clientid>>", "<<clientsecret>>", "<<redirecturl>>"), null, null);
+
+            // assert
+            var contract = service.Get(uri);
+            Assert.AreNotSame(user, contract);
+            Assert.AreEqual(user.Name, contract.Name);
+
         }
     }
 }

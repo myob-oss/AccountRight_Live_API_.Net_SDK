@@ -141,6 +141,44 @@ namespace SDK.Test.Communication
 
         [Test]
         [TestCase(true, true)]
+        public void TestEmptyCredentials(bool supplyCredentials, bool supplyOAuth)
+        {
+            // arrange
+            var factory = new TestWebRequestFactory();
+            factory.RegisterResultForUri("http://localhost", new UserContract() { Name = "David" }.ToJson());
+            var request = factory.Create(new Uri("http://localhost"));
+
+            var handler = new ApiRequestHandler(new ApiConfiguration("<<clientid>>", "<<clientsecret>>", "<<redirecturl>>"),
+                supplyCredentials ? new CompanyFileCredentials("", "") : null, supplyOAuth ? new OAuthTokens() : null);
+
+            // act
+            handler.Get<UserContract>(request, (code, response) => { }, (uri, exception) => Assert.Fail(exception.Message), null);
+
+            // assert
+            AssertEmptyCredentialsHeaders(supplyOAuth, request);
+
+            var version = typeof(ApiRequestHandler).Assembly.GetName().Version.ToString(3);
+            var userAgent = request.Headers[HttpRequestHeader.UserAgent];
+            Assert.IsTrue(userAgent.Contains(string.Format("MYOB-ARL-SDK/{0}", version)));
+            Assert.IsNull(request.Headers[HttpRequestHeader.IfNoneMatch]);
+        }
+
+        private static void AssertEmptyCredentialsHeaders(bool supplyOAuth, WebRequest request)
+        {
+            if (supplyOAuth)
+                Assert.IsTrue(request.Headers[HttpRequestHeader.Authorization].StartsWith("Bearer"));
+            else
+                Assert.IsNull(request.Headers[HttpRequestHeader.Authorization]);
+
+            Assert.IsTrue(request.Headers[HttpRequestHeader.AcceptEncoding].Split(new[] { ',' }).Contains("gzip"));
+
+            Assert.AreEqual("<<clientid>>", request.Headers["x-myobapi-key"]);
+            Assert.AreEqual("v2", request.Headers["x-myobapi-version"]);
+            Assert.IsNull(request.Headers["x-myobapi-cftoken"]);
+        }
+
+        [Test]
+        [TestCase(true, true)]
         [TestCase(false, false)]
         async public void DuringDeleteRequest_Async_ExpectedHeadersAreAttached(bool supplyCredentials, bool supplyOAuth)
         {

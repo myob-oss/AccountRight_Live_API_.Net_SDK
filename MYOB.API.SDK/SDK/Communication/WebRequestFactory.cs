@@ -22,7 +22,7 @@ namespace MYOB.AccountRight.SDK.Communication
     /// </code>
     public class WebRequestFactory : IWebRequestFactory
     {
-        private IApiConfiguration _configuration;
+        private readonly IApiConfiguration _configuration;
 
         /// <summary>
         /// WebRequest factory constructor
@@ -51,6 +51,28 @@ namespace MYOB.AccountRight.SDK.Communication
 
             return webrequest;
         }
+
+        #region SharedWebRequestFactory
+
+        static WebRequestFactory()
+        {
+            SharedWebRequestFactory = null;
+        }
+
+        /// <summary>
+        /// Get the SharedWebRequestFactory
+        /// </summary>
+        public static IWebRequestFactory SharedWebRequestFactory { get; private set; }
+
+        /// <summary>
+        /// Get the SharedWebRequestFactory - implemented this way to avoid accidental assignment
+        /// </summary>
+        /// <param name="factory"></param>
+        public static void SetSharedWebRequestFactory(IWebRequestFactory factory)
+        {
+            SharedWebRequestFactory = factory;
+        }
+        #endregion
     }
 
 }

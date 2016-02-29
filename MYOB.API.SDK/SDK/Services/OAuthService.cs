@@ -29,7 +29,7 @@ namespace MYOB.AccountRight.SDK.Services
         public OAuthService(IApiConfiguration configuration, IWebRequestFactory factory = null)
         {
             _configuration = configuration;
-            this._factory = factory ?? new WebRequestFactory(configuration);
+            this._factory = factory ?? WebRequestFactory.SharedWebRequestFactory ?? new WebRequestFactory(configuration);
         }
 
         /// <summary>
@@ -63,30 +63,32 @@ namespace MYOB.AccountRight.SDK.Services
         /// <returns>The tokens that are required to access the user's company files</returns>
         public OAuthTokens GetTokens(string code)
         {
-            var wait = new ManualResetEvent(false);
-            OAuthTokens oauthTokens = null;
-            Exception ex = null;
-            var requestUri = default(Uri);
+            using (var wait = new ManualResetEvent(false))
+            {
+                OAuthTokens oauthTokens = null;
+                Exception ex = null;
+                var requestUri = default(Uri);
 
-            GetTokens(code,
-                (statusCode, tokens) =>
+                GetTokens(code,
+                    (statusCode, tokens) =>
                     {
                         oauthTokens = tokens;
                         wait.Set();
                     },
-                (uri, exception) =>
+                    (uri, exception) =>
                     {
                         requestUri = uri;
                         ex = exception;
                         wait.Set();
                     });
 
-            if (wait.WaitOne(new TimeSpan(0, 0, 0, 60)))
-            {
-                ex.ProcessException(requestUri);
-            }
+                if (wait.WaitOne(new TimeSpan(0, 0, 0, 60)))
+                {
+                    ex.ProcessException(requestUri);
+                }
 
-            return oauthTokens;
+                return oauthTokens;
+            }
         }
 
 #if ASYNC
@@ -135,31 +137,33 @@ namespace MYOB.AccountRight.SDK.Services
         /// <returns></returns>
         public OAuthTokens RenewTokens(OAuthTokens oauthTokens)
         {
-            var wait = new ManualResetEvent(false);
-            OAuthTokens newTokens = null;
-            Exception ex = null;
-            var requestUri = default(Uri);
+            using (var wait = new ManualResetEvent(false))
+            {
+                OAuthTokens newTokens = null;
+                Exception ex = null;
+                var requestUri = default(Uri);
 
-            RenewTokens(
-                oauthTokens,
-                (statusCode, tokens) =>
+                RenewTokens(
+                    oauthTokens,
+                    (statusCode, tokens) =>
                     {
                         newTokens = tokens;
                         wait.Set();
                     },
-                (uri, exception) =>
+                    (uri, exception) =>
                     {
                         requestUri = uri;
                         ex = exception;
                         wait.Set();
                     });
 
-            if (wait.WaitOne(new TimeSpan(0, 0, 0, 60)))
-            {
-                ex.ProcessException(requestUri);
-            }
+                if (wait.WaitOne(new TimeSpan(0, 0, 0, 60)))
+                {
+                    ex.ProcessException(requestUri);
+                }
 
-            return newTokens;
+                return newTokens;
+            }
         }
 
 #if ASYNC

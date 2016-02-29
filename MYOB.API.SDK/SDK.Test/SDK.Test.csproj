@@ -85,6 +85,7 @@
   <ItemGroup>
     <Compile Include="ApiCommunicationExceptionTests.cs" />
     <Compile Include="ApiConfigurationTests.cs" />
+    <Compile Include="COMSupportedTests.cs" />
     <Compile Include="Contracts\Version2\UserTests.cs" />
     <Compile Include="MyobArlApiPact.cs" />
     <Compile Include="Communication\ApiRequestHandlerTests.cs" />
@@ -128,6 +129,7 @@
     <Compile Include="Services\AccountBudgetServiceTests.cs" />
     <Compile Include="Services\EmployeeStandardPayServiceTests.cs" />
     <Compile Include="Services\JobBudgetServiceTests.cs" />
+    <Compile Include="Services\NZGSTReportServiceTests.cs" />
     <Compile Include="Services\ProfitLossDistributionServiceTests.cs" />
     <Compile Include="Services\RoleServiceTests.cs" />
     <Compile Include="Services\TimeBillingOrderServiceTests.cs" />

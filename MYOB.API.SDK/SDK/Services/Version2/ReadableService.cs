@@ -52,7 +52,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <returns></returns>
         public virtual T Get(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, string eTag = null)
         {
-            return MakeApiGetRequestSync<T>(BuildUri(cf, uid), credentials, null, eTag);
+            return MakeApiGetRequestSync<T>(BuildUri(cf, uid), credentials, eTag);
         }
 
 #if ASYNC
@@ -108,7 +108,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <returns></returns>
         public virtual T Get(CompanyFile cf, Uri uri, ICompanyFileCredentials credentials, string eTag = null)
         {
-            return MakeApiGetRequestSync<T>(ValidateUri(cf, uri), credentials, null, eTag);
+            return MakeApiGetRequestSync<T>(ValidateUri(cf, uri), credentials, eTag);
         }
 
 #if ASYNC
