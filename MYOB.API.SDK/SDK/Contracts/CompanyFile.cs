@@ -43,5 +43,9 @@ namespace MYOB.AccountRight.SDK.Contracts
         /// </summary>
         public Guid? LauncherId { get; set; }
 
+        /// <summary>
+        /// Country code.
+        /// </summary>
+        public String Country { get; set; }
     }
 }
