@@ -37,5 +37,10 @@ namespace MYOB.AccountRight.SDK.Contracts
         /// Uri of the resource
         /// </summary>
         public Uri Uri { get; set; }
+
+        /// <summary>
+        /// Country code.
+        /// </summary>
+        public String Country { get; set; }
     }
 }
