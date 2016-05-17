@@ -61,5 +61,21 @@ namespace SDK.Test.Services
             var expectedUri = string.Format("https://api.myob.com/accountright/{0}/{1}/{2}?$filter=Name eq 'abc'", _companyFile.Id, _route, uid);
             Assert.AreEqual(expectedUri, result.ToString());
         }
+
+        [Test]
+        public void BuildUriWithSubResource_With_RouteAndUid()
+        {
+            // arrange
+            var uid = Guid.NewGuid();
+            const string postResource = "?$filter=Name eq 'abc'";
+
+            // act
+            var actualRoute = "Payroll/EmployeePaymentSummary/{0}/INB";
+            var result = UriHelper.BuildUriWithSubResource(_companyFile, actualRoute, uid, postResource);
+
+            // assert
+            var expectedUri = string.Format("https://api.myob.com/accountright/{0}/Payroll/EmployeePaymentSummary/{1}/INB",_companyFile.Id, uid);
+            Assert.AreEqual(expectedUri, result.ToString());
+        }
     }
 }

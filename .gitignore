@@ -11,3 +11,4 @@ MYOB.API.SDK/**/obj/**/*
 /*.nupkg
 /MYOB-Setup.txt
 /.sonarqube
+/MYOB.AccountRight.API.SDK.nuspec

@@ -28,7 +28,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// Initialise base instance
         /// </summary>
         /// <param name="configuration">The configuration required to communicate with the API service</param>
-        /// <param name="webRequestFactory">A custom implementation of the <see cref="RequestFactory"/>, if one is not supplied a default <see cref="RequestFactory"/> will be used.</param>
+        /// <param name="webRequestFactory">A custom implementation of the <see cref="WebRequestFactory"/>, if one is not supplied a default <see cref="WebRequestFactory"/> will be used.</param>
         /// <param name="keyService">An implementation of a service that will store/persist the OAuth tokens required to communicate with the cloud based API at http://api.myob.com/accountright </param>
         protected ServiceBase(IApiConfiguration configuration, IWebRequestFactory webRequestFactory, IOAuthKeyService keyService)
         {
