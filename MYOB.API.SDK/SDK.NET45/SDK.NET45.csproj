@@ -62,6 +62,30 @@
   <ItemGroup>
     <Compile Include="..\SDK\ApiCommunicationException.cs" />
     <Compile Include="..\SDK\ApiConfiguration.cs" />
+    <Compile Include="..\SDK\Contracts\Version2\Payroll\EmployeePaymentSummary.cs">
+      <Link>Contracts\Version2\Payroll\EmployeePaymentSummary.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Payroll\EmployeePaymentSummaryETP.cs">
+      <Link>Contracts\Version2\Payroll\EmployeePaymentSummaryETP.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Payroll\EmployeePaymentSummaryETPAmended.cs">
+      <Link>Contracts\Version2\Payroll\EmployeePaymentSummaryETPAmended.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Payroll\EmployeePaymentSummaryINB.cs">
+      <Link>Contracts\Version2\Payroll\EmployeePaymentSummaryINB.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Payroll\EmployeePaymentSummaryINBAmended.cs">
+      <Link>Contracts\Version2\Payroll\EmployeePaymentSummaryINBAmended.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Payroll\EmployeePaymentSummaryLH.cs">
+      <Link>Contracts\Version2\Payroll\EmployeePaymentSummaryLH.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Payroll\EmployeePaymentSummaryLHAmended.cs">
+      <Link>Contracts\Version2\Payroll\EmployeePaymentSummaryLHAmended.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Payroll\EmployeePaymentSummaryTypeLink.cs">
+      <Link>Contracts\Version2\Payroll\EmployeePaymentSummaryTypeLink.cs</Link>
+    </Compile>
     <Compile Include="..\SDK\Contracts\Version2\Report\GST\NZGSTReport.cs">
       <Link>Contracts\Version2\Report\GST\NZGSTReport.cs</Link>
     </Compile>
@@ -947,6 +971,24 @@
     </Compile>
     <Compile Include="..\SDK\Services\Version2\PayrollCategory\PayrollCategoryWageService.cs">
       <Link>Services\Version2\PayrollCategory\PayrollCategoryWageService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Payroll\EmployeePaymentSummaryETPAmendedService.cs">
+      <Link>Services\Version2\Payroll\EmployeePaymentSummaryETPAmendedService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Payroll\EmployeePaymentSummaryETPService.cs">
+      <Link>Services\Version2\Payroll\EmployeePaymentSummaryETPService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Payroll\EmployeePaymentSummaryINBAmendedService.cs">
+      <Link>Services\Version2\Payroll\EmployeePaymentSummaryINBAmendedService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Payroll\EmployeePaymentSummaryINBService.cs">
+      <Link>Services\Version2\Payroll\EmployeePaymentSummaryINBService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Payroll\EmployeePaymentSummaryLHAmendedService.cs">
+      <Link>Services\Version2\Payroll\EmployeePaymentSummaryLHAmendedService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Payroll\EmployeePaymentSummaryLHService.cs">
+      <Link>Services\Version2\Payroll\EmployeePaymentSummaryLHService.cs</Link>
     </Compile>
     <Compile Include="..\SDK\Services\Version2\Payroll\PayrollEmploymentClassificationService.cs">
       <Link>Services\Version2\Payroll\PayrollEmploymentClassificationService.cs</Link>

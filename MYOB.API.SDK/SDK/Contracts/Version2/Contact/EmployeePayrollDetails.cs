@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MYOB.AccountRight.SDK.Contracts.Version2.Payroll;
 using MYOB.AccountRight.SDK.Contracts.Version2.PayrollCategory;
 
 namespace MYOB.AccountRight.SDK.Contracts.Version2.Contact
@@ -263,6 +264,11 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Contact
         /// <summary>
         /// Time Billing Info
         /// </summary>
-        public EmployeeTimeBillingInfo TimeBilling { get; set; }    
+        public EmployeeTimeBillingInfo TimeBilling { get; set; }
+
+        /// <summary>
+        /// Employee payment summmary
+        /// </summary>
+        public EmployeePaymentSummary EmployeePaymentSummary { get; set; }
     }
 }
