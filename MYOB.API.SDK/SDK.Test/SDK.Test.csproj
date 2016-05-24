@@ -127,6 +127,12 @@
     <Compile Include="Services\CategoryRegisterServiceTests.cs" />
     <Compile Include="Services\CategoryServiceTests.cs" />
     <Compile Include="Services\AccountBudgetServiceTests.cs" />
+    <Compile Include="Services\EmployeePaymentSummaryETPAmendedServiceTests.cs" />
+    <Compile Include="Services\EmployeePaymentSummaryETPServiceTests.cs" />
+    <Compile Include="Services\EmployeePaymentSummaryINBAmendedServiceTests.cs" />
+    <Compile Include="Services\EmployeePaymentSummaryINBServiceTests.cs" />
+    <Compile Include="Services\EmployeePaymentSummaryLHAmendedServiceTests.cs" />
+    <Compile Include="Services\EmployeePaymentSummaryLHServiceTests.cs" />
     <Compile Include="Services\EmployeeStandardPayServiceTests.cs" />
     <Compile Include="Services\JobBudgetServiceTests.cs" />
     <Compile Include="Services\NZGSTReportServiceTests.cs" />
@@ -201,6 +207,7 @@
     <Compile Include="Services\UriHelperTests.cs" />
     <Compile Include="Services\CurrentUserServiceTests.cs" />
     <Compile Include="Services\UserServiceTests.cs" />
+    <Compile Include="Helper\Utility.cs" />
     <Compile Include="UserContract.cs" />
     <Compile Include="Helper\TestWebRequestFactory.cs" />
     <Compile Include="Communication\WebRequestFactoryTests.cs" />

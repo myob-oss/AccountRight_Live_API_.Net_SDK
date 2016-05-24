@@ -35,7 +35,7 @@ namespace MYOB.AccountRight.SDK.Services
         public abstract string Route { get; }
 
         /// <exclude/>
-        protected Uri BuildUri(CompanyFile companyFile, Guid? uid = null, string postResource = null, string queryString = null)
+        protected virtual Uri BuildUri(CompanyFile companyFile, Guid? uid = null, string postResource = null, string queryString = null)
         {
             return UriHelper.BuildUri(companyFile, Route, uid, postResource, queryString);
         }
