@@ -32,7 +32,7 @@ namespace MYOB.AccountRight.SDK.Services.Payroll
         /// <returns></returns>
         protected override Uri BuildUri(CompanyFile companyFile, Guid? uid = null, string postResource = null, string queryString = null)
         {
-            return UriHelper.BuildUriWithSubResource(companyFile, Route, uid, postResource, queryString);
+            return UriHelper.BuildUriWithSubResource(companyFile, Route, uid);
         }
         /// <summary>
         /// The route to the service (after the company file identifier)
