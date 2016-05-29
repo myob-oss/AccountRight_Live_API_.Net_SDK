@@ -9,10 +9,8 @@ assembly_info:
 environment:
   COVERALLS_REPO_TOKEN:
     secure: XBCyPFZbO55cEI6tMsd1Ts3O7sXF3IFCxGPYQGJbVae48G9j9miONIHmDwzG4iLG
-  SONARQUBE_USER:
-    secure: xQ0uPUuuXgtVDqMsTjpfaQ==
-  SONARQUBE_PASSWORD:
-    secure: feupc6DdN7VnWMEziKIEZQ==
+  SONARQUBE_NEMO_TOKEN:
+    secure: qkZaaiugjQHhWgibzFdZzgd0aPuFvr0aXS+xLUzqftjT11tNjYF2ENALFC4QCPzu
 cache: .\MYOB.API.SDK\SDK\MYOB.API.SDK.snk
 build_script:
 - build.bat
