@@ -10,7 +10,7 @@ environment:
   COVERALLS_REPO_TOKEN:
     secure: XBCyPFZbO55cEI6tMsd1Ts3O7sXF3IFCxGPYQGJbVae48G9j9miONIHmDwzG4iLG
   SONARQUBE_NEMO_TOKEN:
-    secure: qkZaaiugjQHhWgibzFdZzgd0aPuFvr0aXS+xLUzqftjT11tNjYF2ENALFC4QCPzu
+    secure:  ueE1C6fuPog+1+DU+hRSZrYDRPGo3yoV7q77WsPpnHpVu0cN7+wBUG+bJ+0QQ2hn
 cache: .\MYOB.API.SDK\SDK\MYOB.API.SDK.snk
 build_script:
 - build.bat
