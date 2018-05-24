@@ -22,7 +22,14 @@ namespace SDK.Test.Services
     {
         public class TestReadOnlyService : ReadableService<UserContract>
         {
-            public TestReadOnlyService(IApiConfiguration configuration, IWebRequestFactory webRequestFactory, IOAuthKeyService keyService) : base(configuration, webRequestFactory, keyService)
+            public TestReadOnlyService(
+                IApiConfiguration configuration,
+                IWebRequestFactory webRequestFactory,
+                IOAuthKeyService keyService)
+            : base(
+                configuration,
+                webRequestFactory,
+                keyService)
             {
             }
 
@@ -49,19 +56,19 @@ namespace SDK.Test.Services
 
         private readonly Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>[] _getActions = new[]
             {
-                new Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>("Async", 
+                new Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>("Async",
                     (service, cf) =>
                     {
                         UserContract received = null;
                         service.Get(cf, _uid, null, (code, files) => { received = files; }, (uri, exception) => Assert.Fail(exception.Message));
                         return received;
                     }),
-                new Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>("Sync", 
+                new Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>("Sync",
                     (service, cf) =>
                     {
                         return service.Get(cf, _uid, null);
                     }),
-                new Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>("Async", 
+                new Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>("Async",
                     (service, cf) =>
                     {
                         return service.GetAsync(cf, _uid, null).Result;
@@ -85,24 +92,24 @@ namespace SDK.Test.Services
 
         private readonly Tuple<string, Func<TestReadOnlyService, CompanyFile, PagedCollection<UserContract>>>[] _getRangeActions = new[]
             {
-                new Tuple<string, Func<TestReadOnlyService, CompanyFile, PagedCollection<UserContract>>>("Delegate", 
+                new Tuple<string, Func<TestReadOnlyService, CompanyFile, PagedCollection<UserContract>>>("Delegate",
                     (service, cf) =>
                     {
                         PagedCollection<UserContract> received = null;
                         service.GetRange(cf, null, null, (code, files) => { received = files; }, (uri, exception) => Assert.Fail(exception.Message));
                         return received;
                     }),
-                new Tuple<string, Func<TestReadOnlyService, CompanyFile, PagedCollection<UserContract>>>("Sync", 
+                new Tuple<string, Func<TestReadOnlyService, CompanyFile, PagedCollection<UserContract>>>("Sync",
                     (service, cf) =>
                     {
                         return service.GetRange(cf, null, null);
                     }),
-                new Tuple<string, Func<TestReadOnlyService, CompanyFile, PagedCollection<UserContract>>>("Async", 
+                new Tuple<string, Func<TestReadOnlyService, CompanyFile, PagedCollection<UserContract>>>("Async",
                     (service, cf) =>
                     {
                         return service.GetRangeAsync(cf, null, null).Result;
                     }),
-                new Tuple<string, Func<TestReadOnlyService, CompanyFile, PagedCollection<UserContract>>>("AsyncWithCancel", 
+                new Tuple<string, Func<TestReadOnlyService, CompanyFile, PagedCollection<UserContract>>>("AsyncWithCancel",
                     (service, cf) =>
                     {
                         return service.GetRangeAsync(cf, null, null, CancellationToken.None).Result;
@@ -116,7 +123,7 @@ namespace SDK.Test.Services
             // arrange
             var cf = new CompanyFile() { Uri = new Uri("https://dc1.api.myob.com/accountright/7D5F5516-AF68-4C5B-844A-3F054E00DF10") };
             _webFactory.RegisterResultForUri(cf.Uri.AbsoluteUri + "/Test/User/Contract", new PagedCollection<UserContract> { Count = 1, Items = new[] { new UserContract() { UID = _uid } } }.ToJson());
-            
+
             // act
             var received = action.Item2(_service, cf);
 
@@ -126,19 +133,19 @@ namespace SDK.Test.Services
 
         private readonly Tuple<string, Func<TestReadOnlyService, CompanyFile, PagedCollection<UserContract>>>[] _getRangeQueryActions = new[]
             {
-                new Tuple<string, Func<TestReadOnlyService, CompanyFile, PagedCollection<UserContract>>>("Delegate", 
+                new Tuple<string, Func<TestReadOnlyService, CompanyFile, PagedCollection<UserContract>>>("Delegate",
                     (service, cf) =>
                     {
                         PagedCollection<UserContract> received = null;
                         service.GetRange(cf, "$filter=UID eq guid'2BB63466-1A6C-4757-B3B8-D8B799D641E9'", null, (code, files) => { received = files; }, (uri, exception) => Assert.Fail(exception.Message));
                         return received;
                     }),
-                new Tuple<string, Func<TestReadOnlyService, CompanyFile, PagedCollection<UserContract>>>("Sync", 
+                new Tuple<string, Func<TestReadOnlyService, CompanyFile, PagedCollection<UserContract>>>("Sync",
                     (service, cf) =>
                     {
                         return service.GetRange(cf, "$filter=UID eq guid'2BB63466-1A6C-4757-B3B8-D8B799D641E9'", null);
                     }),
-                new Tuple<string, Func<TestReadOnlyService, CompanyFile, PagedCollection<UserContract>>>("Async", 
+                new Tuple<string, Func<TestReadOnlyService, CompanyFile, PagedCollection<UserContract>>>("Async",
                     (service, cf) =>
                     {
                         return service.GetRangeAsync(cf, "$filter=UID eq guid'2BB63466-1A6C-4757-B3B8-D8B799D641E9'", null).Result;
@@ -162,19 +169,19 @@ namespace SDK.Test.Services
 
         private readonly Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>[] _getByUriActions = new[]
             {
-                new Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>("Async", 
+                new Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>("Async",
                     (service, cf) =>
                     {
                         UserContract received = null;
                         service.Get(cf, new Uri(cf.Uri.AbsoluteUri + "/Test/User/Contract/" + _uid.ToString().ToUpper()), null, (code, files) => { received = files; }, (uri, exception) => Assert.Fail(exception.Message));
                         return received;
                     }),
-                new Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>("Sync", 
+                new Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>("Sync",
                     (service, cf) =>
                     {
                         return service.Get(cf, new Uri(cf.Uri.AbsoluteUri + "/Test/User/Contract/" + _uid), null);
                     }),
-                new Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>("Async", 
+                new Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>("Async",
                     (service, cf) =>
                     {
                         return service.GetAsync(cf, new Uri(cf.Uri.AbsoluteUri + "/Test/User/Contract/" + _uid), null).Result;
@@ -197,53 +204,53 @@ namespace SDK.Test.Services
 
         private readonly Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>[] _getByInvalidUriActions = new[]
             {
-                new Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>("DelegateBadCF", 
+                new Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>("DelegateBadCF",
                     (service, cf) =>
                     {
                         UserContract received = null;
                         service.Get(cf, new Uri("http://localhost/accountright" + "/Test/User/Contract/" + _uid.ToString().ToUpper()), null, (code, files) => { received = files; }, (uri, exception) => Assert.Fail(exception.Message));
                         return received;
                     }),
-                new Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>("SyncBadCF", 
+                new Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>("SyncBadCF",
                     (service, cf) =>
                     {
                         return service.Get(cf, new Uri("http://localhost/accountright" + "/Test/User/Contract/" + _uid), null);
                     }),
-                new Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>("AsyncBadCF", 
+                new Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>("AsyncBadCF",
                     (service, cf) =>
                     {
                         return service.GetAsync(cf, new Uri("http://localhost/accountright" + "/Test/User/Contract/" + _uid), null).Result;
                     }),
-                new Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>("DelegateBadRoute", 
+                new Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>("DelegateBadRoute",
                     (service, cf) =>
                     {
                         UserContract received = null;
                         service.Get(cf, new Uri(cf.Uri.AbsoluteUri + "/Test/UnexpectedRoute/" + _uid.ToString().ToUpper()), null, (code, files) => { received = files; }, (uri, exception) => Assert.Fail(exception.Message));
                         return received;
                     }),
-                new Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>("SyncBadRoute", 
+                new Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>("SyncBadRoute",
                     (service, cf) =>
                     {
                         return service.Get(cf, new Uri(cf.Uri.AbsoluteUri + "/Test/UnexpectedRoute/" + _uid.ToString().ToUpper()), null);
                     }),
-                new Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>("AsyncBadRoute", 
+                new Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>("AsyncBadRoute",
                     (service, cf) =>
                     {
                         return service.GetAsync(cf, new Uri(cf.Uri.AbsoluteUri + "/Test/UnexpectedRoute/" + _uid.ToString().ToUpper()), null).Result;
                     }),
-                new Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>("DelegateInvalidUID", 
+                new Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>("DelegateInvalidUID",
                     (service, cf) =>
                     {
                         UserContract received = null;
                         service.Get(cf, new Uri(cf.Uri.AbsoluteUri + "/Test/User/Contract/" + "Item1"), null, (code, files) => { received = files; }, (uri, exception) => Assert.Fail(exception.Message));
                         return received;
                     }),
-                new Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>("SyncInvalidUID", 
+                new Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>("SyncInvalidUID",
                     (service, cf) =>
                     {
                         return service.Get(cf, new Uri(cf.Uri.AbsoluteUri + "/Test/User/Contract/" + "Item1"), null);
                     }),
-                new Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>("AsyncInvalidUID", 
+                new Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>("AsyncInvalidUID",
                     (service, cf) =>
                     {
                         return service.GetAsync(cf, new Uri(cf.Uri.AbsoluteUri + "/Test/User/Contract/" + "Item1"), null).Result;
@@ -264,19 +271,19 @@ namespace SDK.Test.Services
 
         private readonly Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>[] _getByUriActionsEtag = new[]
             {
-                new Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>("Async", 
+                new Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>("Async",
                     (service, cf) =>
                     {
                         UserContract received = null;
                         service.Get(cf, new Uri(cf.Uri.AbsoluteUri + "/Test/User/Contract/" + _uid.ToString().ToUpper()), null, (code, files) => { received = files; }, (uri, exception) => Assert.Fail(exception.Message), "987654321");
                         return received;
                     }),
-                new Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>("Sync", 
+                new Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>("Sync",
                     (service, cf) =>
                     {
                         return service.Get(cf, new Uri(cf.Uri.AbsoluteUri + "/Test/User/Contract/" + _uid), null, "987654321");
                     }),
-                new Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>("Async", 
+                new Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>("Async",
                     (service, cf) =>
                     {
                         return service.GetAsync(cf, new Uri(cf.Uri.AbsoluteUri + "/Test/User/Contract/" + _uid), null, "987654321").Result;
@@ -290,7 +297,7 @@ namespace SDK.Test.Services
             var cf = new CompanyFile() { Uri = new Uri("https://dc1.api.myob.com/accountright/7D5F5516-AF68-4C5B-844A-3F054E00DF10") };
             _webFactory.RegisterResultForUri(cf.Uri.AbsoluteUri + "/Test/User/Contract/" + _uid, new UserContract() { UID = _uid }.ToJson());
             HttpWebRequest request = null;
-            _webFactory.CreatedWebRequest += _ => request = (HttpWebRequest)_; 
+            _webFactory.CreatedWebRequest += _ => request = (HttpWebRequest)_;
 
             // act
             var received = action.Item2(_service, cf);
@@ -301,24 +308,24 @@ namespace SDK.Test.Services
 
         private readonly Tuple<string, Func<TestReadOnlyService, CompanyFile, PagedCollection<UserContract>>>[] _getRangeActionsEtag = new[]
             {
-                new Tuple<string, Func<TestReadOnlyService, CompanyFile, PagedCollection<UserContract>>>("Delegate", 
+                new Tuple<string, Func<TestReadOnlyService, CompanyFile, PagedCollection<UserContract>>>("Delegate",
                     (service, cf) =>
                     {
                         PagedCollection<UserContract> received = null;
                         service.GetRange(cf, null, null, (code, files) => { received = files; }, (uri, exception) => Assert.Fail(exception.Message), "987654321");
                         return received;
                     }),
-                new Tuple<string, Func<TestReadOnlyService, CompanyFile, PagedCollection<UserContract>>>("Sync", 
+                new Tuple<string, Func<TestReadOnlyService, CompanyFile, PagedCollection<UserContract>>>("Sync",
                     (service, cf) =>
                     {
                         return service.GetRange(cf, null, null, "987654321");
                     }),
-                new Tuple<string, Func<TestReadOnlyService, CompanyFile, PagedCollection<UserContract>>>("Async", 
+                new Tuple<string, Func<TestReadOnlyService, CompanyFile, PagedCollection<UserContract>>>("Async",
                     (service, cf) =>
                     {
                         return service.GetRangeAsync(cf, null, null, "987654321").Result;
                     }),
-                new Tuple<string, Func<TestReadOnlyService, CompanyFile, PagedCollection<UserContract>>>("AsyncWithCancel", 
+                new Tuple<string, Func<TestReadOnlyService, CompanyFile, PagedCollection<UserContract>>>("AsyncWithCancel",
                     (service, cf) =>
                     {
                         return service.GetRangeAsync(cf, null, null, CancellationToken.None, "987654321").Result;
@@ -327,19 +334,131 @@ namespace SDK.Test.Services
 
 
         [Test]
-        public void GetRange_IfRequestIsMadeWithETag_IfNoneMatchHeaderIsAttachedToRequest([ValueSource("_getRangeActionsEtag")] Tuple<string, Func<TestReadOnlyService, CompanyFile, PagedCollection<UserContract>>> action)
+        public void GetRange_IfRequestIsMadeWithETag_IfNoneMatchHeaderIsAttachedToRequest(
+            [ValueSource("_getRangeActionsEtag")]
+            Tuple<string, Func<TestReadOnlyService, CompanyFile, PagedCollection<UserContract>>> action)
         {
             // arrange
-            var cf = new CompanyFile() { Uri = new Uri("https://dc1.api.myob.com/accountright/7D5F5516-AF68-4C5B-844A-3F054E00DF10") };
-            _webFactory.RegisterResultForUri(cf.Uri.AbsoluteUri + "/Test/User/Contract", new PagedCollection<UserContract> { Count = 1, Items = new[] { new UserContract() { UID = _uid } } }.ToJson());
+            var cf = new CompanyFile()
+            {
+                Uri = new Uri("https://dc1.api.myob.com/accountright/7D5F5516-AF68-4C5B-844A-3F054E00DF10")
+            };
+
+            _webFactory.RegisterResultForUri(
+                cf.Uri.AbsoluteUri + "/Test/User/Contract",
+                new PagedCollection<UserContract>
+                {
+                    Count = 1,
+                    Items = new[]
+                    {
+                        new UserContract() { UID = _uid }
+                    }
+                }.ToJson());
+
             HttpWebRequest request = null;
-            _webFactory.CreatedWebRequest += _ => request = (HttpWebRequest)_; 
+            _webFactory.CreatedWebRequest += _ => request = (HttpWebRequest)_;
 
             // act
             var received = action.Item2(_service, cf);
 
             // assert
             Assert.AreEqual("987654321", request.Headers[HttpRequestHeader.IfNoneMatch]);
+        }
+
+        private readonly Func<TestReadOnlyService, CompanyFile, NavigablePagedCollection<UserContract>>[]
+            _getRangeDelegates = {
+                (service, cf) =>
+                {
+                    NavigablePagedCollection<UserContract> received = null;
+                    service.GetRange(
+                        cf,
+                        null,
+                        null,
+                        (code, files) => { received = files; },
+                        (uri, exception) => Assert.Fail(exception.Message),
+                        "987654321");
+
+                    return received;
+                },
+                (service, cf) => service.GetRange(cf, null, null),
+                (service, cf) => service.GetRangeAsync(cf, null, null).Result,
+                (service, cf) => service.GetRangeAsync(cf, null, null, CancellationToken.None).Result
+            };
+
+        [Test]
+        public void GetRange_WhenResponseHasNextPageLink_ShouldBeAbleToGetNextPage(
+            [ValueSource("_getRangeDelegates")]
+            Func<TestReadOnlyService, CompanyFile, NavigablePagedCollection<UserContract>> delegates)
+        {
+            // arrange
+            var cf = new CompanyFile
+            {
+                Uri = new Uri("https://dc1.api.myob.com/accountright/7D5F5516-AF68-4C5B-844A-3F054E00DF10")
+            };
+
+            var nextPageUri = new Uri(cf.Uri.AbsoluteUri + "/Test/User/Contract/?$top=1&$skip=1");
+
+            _webFactory.RegisterResultForUri(
+                cf.Uri.AbsoluteUri + "/Test/User/Contract",
+                new PagedCollection<UserContract>
+                {
+                    Count = 2,
+                    Items = new[] { new UserContract { UID = _uid } },
+                    NextPageLink = nextPageUri
+                }.ToJson());
+
+            _webFactory.RegisterResultForUri(
+                nextPageUri.ToString(),
+                new PagedCollection<UserContract>
+                {
+                    Count = 2,
+                    Items = new[] { new UserContract() }
+                }.ToJson());
+
+            // act
+            var received = _service.GetRange(cf, null, null);
+            var nextPage = received.NextPage();
+
+            // assert
+            Assert.IsInstanceOf<NavigablePagedCollection<UserContract>>(nextPage);
+        }
+
+        [Test]
+        public async Task GetRange_WhenResponseHasNextPageLink_ShouldBeAbleToGetNextPageAsync(
+            [ValueSource("_getRangeDelegates")]
+            Func<TestReadOnlyService, CompanyFile, NavigablePagedCollection<UserContract>> delegates)
+        {
+            // arrange
+            var cf = new CompanyFile
+            {
+                Uri = new Uri("https://dc1.api.myob.com/accountright/7D5F5516-AF68-4C5B-844A-3F054E00DF10")
+            };
+
+            var nextPageUri = new Uri(cf.Uri.AbsoluteUri + "/Test/User/Contract/?$top=1&$skip=1");
+            
+            _webFactory.RegisterResultForUri(
+                cf.Uri.AbsoluteUri + "/Test/User/Contract",
+                new PagedCollection<UserContract>
+                {
+                    Count = 2,
+                    Items = new[] { new UserContract { UID = _uid } },
+                    NextPageLink = nextPageUri
+                }.ToJson());
+
+            _webFactory.RegisterResultForUri(
+                nextPageUri.ToString(),
+                new PagedCollection<UserContract>
+                {
+                    Count = 2,
+                    Items = new[] { new UserContract() }
+                }.ToJson());
+
+            // act
+            var received = _service.GetRange(cf, null, null);
+            var nextPage = await received.NextPageAsync();
+
+            // assert
+            Assert.IsInstanceOf<NavigablePagedCollection<UserContract>>(nextPage);
         }
     }
 }
