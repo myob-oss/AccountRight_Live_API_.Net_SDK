@@ -388,7 +388,7 @@ namespace SDK.Test.Services
         [Test]
         public void GetRange_WhenResponseHasNextPageLink_ShouldBeAbleToGetNextPage(
             [ValueSource("_getRangeDelegates")]
-            Func<TestReadOnlyService, CompanyFile, NavigablePagedCollection<UserContract>> delegates)
+            Func<TestReadOnlyService, CompanyFile, NavigablePagedCollection<UserContract>> delegateFunc)
         {
             // arrange
             var cf = new CompanyFile
@@ -416,7 +416,7 @@ namespace SDK.Test.Services
                 }.ToJson());
 
             // act
-            var received = _service.GetRange(cf, null, null);
+            var received = delegateFunc(_service, cf);
             var nextPage = received.NextPage();
 
             // assert
@@ -426,7 +426,7 @@ namespace SDK.Test.Services
         [Test]
         public async Task GetRange_WhenResponseHasNextPageLink_ShouldBeAbleToGetNextPageAsync(
             [ValueSource("_getRangeDelegates")]
-            Func<TestReadOnlyService, CompanyFile, NavigablePagedCollection<UserContract>> delegates)
+            Func<TestReadOnlyService, CompanyFile, NavigablePagedCollection<UserContract>> delegateFunc)
         {
             // arrange
             var cf = new CompanyFile
@@ -454,7 +454,7 @@ namespace SDK.Test.Services
                 }.ToJson());
 
             // act
-            var received = _service.GetRange(cf, null, null);
+            var received = delegateFunc(_service, cf);
             var nextPage = await received.NextPageAsync();
 
             // assert
