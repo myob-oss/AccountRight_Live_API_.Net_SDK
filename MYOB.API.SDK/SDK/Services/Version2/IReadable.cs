@@ -25,7 +25,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="onComplete">The action to call when the operation is complete</param>
         /// <param name="onError">The action to call when the operation has an error</param>
         /// <param name="eTag">The <see cref="BaseEntity.ETag" /> from a previously fetched entity</param>
-        void GetRange(CompanyFile cf, string queryString, ICompanyFileCredentials credentials, Action<HttpStatusCode, PagedCollection<T>> onComplete, Action<Uri, Exception> onError, string eTag = null);
+        void GetRange(CompanyFile cf, string queryString, ICompanyFileCredentials credentials, Action<HttpStatusCode, NavigablePagedCollection<T>> onComplete, Action<Uri, Exception> onError, string eTag = null);
 
         /// <summary>
         /// Retrieve a paged list of entities
@@ -35,7 +35,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="credentials">The credentials to access the company file</param>
         /// <param name="eTag">The <see cref="BaseEntity.ETag" /> from a previously fetched entity</param>
         /// <returns></returns>
-        PagedCollection<T> GetRange(CompanyFile cf, string queryString, ICompanyFileCredentials credentials, string eTag = null);
+        NavigablePagedCollection<T> GetRange(CompanyFile cf, string queryString, ICompanyFileCredentials credentials, string eTag = null);
 
 #if ASYNC
         /// <summary>
@@ -47,7 +47,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="cancellationToken"></param>
         /// <param name="eTag">The <see cref="BaseEntity.ETag" /> from a previously fetched entity</param>
         /// <returns></returns>
-        Task<PagedCollection<T>> GetRangeAsync(CompanyFile cf, string queryString, ICompanyFileCredentials credentials, CancellationToken cancellationToken, string eTag = null);
+        Task<NavigablePagedCollection<T>> GetRangeAsync(CompanyFile cf, string queryString, ICompanyFileCredentials credentials, CancellationToken cancellationToken, string eTag = null);
 #endif
     }
 
