@@ -18,6 +18,11 @@
         /// <summary>
         /// Purged bill type
         /// </summary>
-        Purged
+        Purged,
+
+        /// <summary>
+        /// Legacy type of NotSet
+        /// </summary>
+        NotSet
     }
 }
