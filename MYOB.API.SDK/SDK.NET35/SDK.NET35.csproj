@@ -84,6 +84,12 @@
     <Compile Include="..\SDK\Contracts\Version2\Report\GST\NZGSTReport.cs">
       <Link>Contracts\Version2\Report\GST\NZGSTReport.cs</Link>
     </Compile>
+    <Compile Include="..\SDK\Extensions\SecurityProtocolTypeExtensions.cs">
+      <Link>Extensions\SecurityProtocolTypeExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Extensions\SslProtocolsExtensions.cs">
+      <Link>Extensions\SslProtocolsExtensions.cs</Link>
+    </Compile>
     <Compile Include="..\SDK\Properties\AssemblyInfoEx.cs">
       <Link>Properties\AssemblyInfoEx.cs</Link>
     </Compile>
