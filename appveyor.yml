@@ -14,6 +14,7 @@ environment:
 cache: .\MYOB.API.SDK\SDK\MYOB.API.SDK.snk
 build_script:
 - build.bat
+test: off
 artifacts:
 - path: .\Artefacts\Nuget\Release\*.nupkg
   name: Release
