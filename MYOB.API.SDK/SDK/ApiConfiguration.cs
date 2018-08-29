@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using MYOB.AccountRight.SDK;
 using MYOB.AccountRight.SDK.Contracts.Version2;
 
 #if !PORTABLE
