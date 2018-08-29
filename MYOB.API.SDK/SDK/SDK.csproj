@@ -317,8 +317,6 @@
     <Compile Include="Extensions\ExceptionExtensions.cs" />
     <Compile Include="Extensions\FunctionalExtensions.cs" />
     <Compile Include="Extensions\JsonExtensions.cs" />
-    <Compile Include="Extensions\SecurityProtocolTypeExtensions.cs" />
-    <Compile Include="Extensions\SslProtocolsExtensions.cs" />
     <Compile Include="Extensions\WebRequestExtensions.cs" />
     <Compile Include="IApiConfiguration.cs" />
     <Compile Include="IWebRequestFactory.cs" />
