@@ -165,7 +165,7 @@ namespace MYOB.AccountRight.SDK.Services.GeneralLedger
                              Action<Uri, Exception> onError, string eTag = null)
         {
             MakeApiGetRequestDelegate(
-                BuildUri(cf, null, queryString == null ? null : "?" + queryString.TrimStart(new[] {'?'})), credentials,
+                BuildUri(cf, null, queryString == null ? null : "?" + queryString.TrimStart('?')), credentials,
                 onComplete, onError, eTag);
         }
 
@@ -182,7 +182,7 @@ namespace MYOB.AccountRight.SDK.Services.GeneralLedger
         {
             return
                 MakeApiGetRequestSync<PagedCollection<AccountBudget>>(
-                    BuildUri(cf, null, queryString == null ? null : "?" + queryString.TrimStart(new[] {'?'})),
+                    BuildUri(cf, null, queryString == null ? null : "?" + queryString.TrimStart('?')),
                     credentials, eTag);
         }
 
@@ -216,7 +216,7 @@ namespace MYOB.AccountRight.SDK.Services.GeneralLedger
         {
             return
                 this.MakeApiGetRequestAsync<PagedCollection<AccountBudget>>(
-                    this.BuildUri(cf, null, queryString.Maybe(_ => "?" + _.TrimStart(new[] {'?'}))), credentials,
+                    this.BuildUri(cf, null, queryString.Maybe(_ => "?" + _.TrimStart('?'))), credentials,
                     cancellationToken, eTag);
         }
 #endif

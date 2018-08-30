@@ -29,10 +29,8 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="companyFile"></param>
         /// <param name="route"></param>
         /// <param name="uid"></param>
-        /// <param name="postResource"></param>
-        /// <param name="queryString"></param>
         /// <returns></returns>
-        public static Uri BuildUriWithSubResource(CompanyFile companyFile, string route, Guid? uid = null, string postResource = null, string queryString = null)
+        public static Uri BuildUriWithSubResource(CompanyFile companyFile, string route, Guid? uid = null)
         {
             return new Uri(string.Format("{0}/{1}", companyFile.Uri, string.Format(route, uid.HasValue ? uid.Value.ToString() : string.Empty)));
         }

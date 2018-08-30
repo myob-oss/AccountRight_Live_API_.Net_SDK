@@ -1,5 +1,4 @@
-version: 2016.2.{build}
-shallow_clone: true
+version: 2018.3.{build}
 assembly_info:
   patch: true
   file: '**\AssemblyInfo.*'
@@ -9,13 +8,12 @@ assembly_info:
 environment:
   COVERALLS_REPO_TOKEN:
     secure: XBCyPFZbO55cEI6tMsd1Ts3O7sXF3IFCxGPYQGJbVae48G9j9miONIHmDwzG4iLG
-  SONARQUBE_USER:
-    secure: xQ0uPUuuXgtVDqMsTjpfaQ==
-  SONARQUBE_PASSWORD:
-    secure: feupc6DdN7VnWMEziKIEZQ==
+  SONARQUBE_NEMO_TOKEN:
+    secure:  ueE1C6fuPog+1+DU+hRSZrYDRPGo3yoV7q77WsPpnHpVu0cN7+wBUG+bJ+0QQ2hn
 cache: .\MYOB.API.SDK\SDK\MYOB.API.SDK.snk
 build_script:
 - build.bat
+test: off
 artifacts:
 - path: .\Artefacts\Nuget\Release\*.nupkg
   name: Release
@@ -51,4 +49,4 @@ notifications:
   on_build_status_changed: true
 on_success:
 - cmd: >-
-    sonar.bat
+    .\packages\coveralls.io.1.3.4\tools\coveralls.net.exe --opencover .\Artefacts\Coverage\output.xml

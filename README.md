@@ -1,7 +1,7 @@
 | | |
 | --- | --- |
 | **Build** | [![Build status](https://img.shields.io/appveyor/ci/myob-developers/accountright-live-api-net-sdk.svg)](https://ci.appveyor.com/project/myob-developers/accountright-live-api-net-sdk) |
-| **Coverage** | <sup>Coveralls</sup> [![Coverage](https://img.shields.io/coveralls/MYOB-Technology/AccountRight_Live_API_.Net_SDK/master.svg)](https://coveralls.io/r/MYOB-Technology/AccountRight_Live_API_.Net_SDK) <sup>SonarQube</sup> [![SonarQube](http://sonarcovbadge.epicapp.com/?server=sonar.many-monkeys.com:9000&resource=myob-sdk&metrics=coverage)](http://sonar.many-monkeys.com:9000/dashboard/index/203) |
+| **Coverage** | <sup>Coveralls</sup> [![Coverage](https://img.shields.io/coveralls/MYOB-Technology/AccountRight_Live_API_.Net_SDK/master.svg)](https://coveralls.io/r/MYOB-Technology/AccountRight_Live_API_.Net_SDK) |
 | **Nuget Downloads** | [![Nuget](https://buildstats.info/nuget/MYOB.AccountRight.API.SDK)](http://nuget.org/packages/MYOB.AccountRight.API.SDK) |
 | **Nuget Release** | [![Nuget](https://img.shields.io/nuget/v/MYOB.AccountRight.API.SDK.svg)](http://nuget.org/packages/MYOB.AccountRight.API.SDK) |
 | **Nuget Latest** | [![Nuget](https://img.shields.io/nuget/vpre/MYOB.AccountRight.API.SDK.svg)](http://nuget.org/packages/MYOB.AccountRight.API.SDK) |
@@ -39,7 +39,7 @@ C# Example:
 
 ##Publishing##
 
-Publishing to [Nuget](http://nuget.org/packages/MYOB.AccountRight.API.SDK) is done via the [AppVeyor](https://ci.appveyor.com/project/sawilde/accountright-live-api-net-sdk) build system.
+Publishing to [Nuget](http://nuget.org/packages/MYOB.AccountRight.API.SDK) is done via the [AppVeyor](https://ci.appveyor.com/project/myob-developers/accountright-live-api-net-sdk) build system.
 
 To publish release-candidate create and merge from `master` to `candidate` branches.
 
@@ -49,12 +49,12 @@ To publish release create and merge from `master` to `release` branches.
 
 The code has been supplied to help developers who may not be able to use the NUGET package.
 
-Community Contributions requested.
+Community Contributions accepted.
 
 ##3rd Party Dependencies##
 
 The MYOB SDK uses the following 3rd party (via NUGET) packages
 
-1. [JSON.NET](http://james.newtonking.com/projects/json-net.aspx)
-2. [Bcl.Async](https://www.nuget.org/packages/Microsoft.Bcl.Async)
+1. [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json)
+2. [Microsoft.Bcl.Async](https://www.nuget.org/packages/Microsoft.Bcl.Async)
 2. [Microsoft.Bcl.Compression](https://www.nuget.org/packages/Microsoft.Bcl.Compression)

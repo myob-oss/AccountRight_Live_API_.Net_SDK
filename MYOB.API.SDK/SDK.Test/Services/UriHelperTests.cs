@@ -67,11 +67,10 @@ namespace SDK.Test.Services
         {
             // arrange
             var uid = Guid.NewGuid();
-            const string postResource = "?$filter=Name eq 'abc'";
 
             // act
             var actualRoute = "Payroll/EmployeePaymentSummary/{0}/INB";
-            var result = UriHelper.BuildUriWithSubResource(_companyFile, actualRoute, uid, postResource);
+            var result = UriHelper.BuildUriWithSubResource(_companyFile, actualRoute, uid);
 
             // assert
             var expectedUri = string.Format("https://api.myob.com/accountright/{0}/Payroll/EmployeePaymentSummary/{1}/INB",_companyFile.Id, uid);
