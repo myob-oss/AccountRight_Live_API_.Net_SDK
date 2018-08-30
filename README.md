@@ -1,7 +1,7 @@
 | | |
 | --- | --- |
 | **Build** | [![Build status](https://img.shields.io/appveyor/ci/myob-developers/accountright-live-api-net-sdk.svg)](https://ci.appveyor.com/project/myob-developers/accountright-live-api-net-sdk) |
-| **Coverage** | <sup>Coveralls</sup> [![Coverage](https://img.shields.io/coveralls/MYOB-Technology/AccountRight_Live_API_.Net_SDK/master.svg)](https://coveralls.io/r/MYOB-Technology/AccountRight_Live_API_.Net_SDK) <sup>SonarQube</sup> [![Nemo SonarQube](http://sonarcovbadge.epicapp.com/?server=sonarqube.com&resource=myob-sdk&metrics=coverage&ssl=true)](https://sonarqube.com/overview?id=myob-sdk) |
+| **Coverage** | <sup>Coveralls</sup> [![Coverage](https://img.shields.io/coveralls/MYOB-Technology/AccountRight_Live_API_.Net_SDK/master.svg)](https://coveralls.io/r/MYOB-Technology/AccountRight_Live_API_.Net_SDK) |
 | **Nuget Downloads** | [![Nuget](https://buildstats.info/nuget/MYOB.AccountRight.API.SDK)](http://nuget.org/packages/MYOB.AccountRight.API.SDK) |
 | **Nuget Release** | [![Nuget](https://img.shields.io/nuget/v/MYOB.AccountRight.API.SDK.svg)](http://nuget.org/packages/MYOB.AccountRight.API.SDK) |
 | **Nuget Latest** | [![Nuget](https://img.shields.io/nuget/vpre/MYOB.AccountRight.API.SDK.svg)](http://nuget.org/packages/MYOB.AccountRight.API.SDK) |
