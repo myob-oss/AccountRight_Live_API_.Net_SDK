@@ -10,7 +10,7 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Banking
     /// <summary>
     /// A spend money transaction entity
     /// </summary>
-    public class SpendMoneyTxn : BaseEntity
+    public class SpendMoneyTxn : SupportMulticurrencyEntity
     {
         /// <summary>
         /// Initialise

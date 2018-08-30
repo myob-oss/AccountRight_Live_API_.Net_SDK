@@ -3,14 +3,14 @@
 namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
 {
     /// <summary>
-    /// Describes a service order
+    /// Describes an item quote
     /// </summary>
-    public class ServiceOrder : OrderWithLines<ServiceOrderLine>
+    public class ItemQuote : QuoteWithLines<ItemQuoteLine>
     {
         /// <summary>
         /// Initialise
         /// </summary>
-        public ServiceOrder()
+        public ItemQuote()
         {
             DeliveryStatus = DocumentAction.Print;
         }
@@ -21,7 +21,7 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
         public string ShipToAddress { get; set; }
 
         /// <summary>
-        /// Sale order comment.
+        /// Comment.
         /// </summary>
         public string Comment { get; set; }
 

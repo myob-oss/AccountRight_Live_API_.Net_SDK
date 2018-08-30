@@ -1,4 +1,5 @@
 version: 2018.3.{build}
+shallow_clone: true
 assembly_info:
   patch: true
   file: '**\AssemblyInfo.*'

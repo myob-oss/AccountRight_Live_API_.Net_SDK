@@ -78,8 +78,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\SDK\ApiCommunicationException.cs" />
-    <Compile Include="..\SDK\ApiConfiguration.cs" />
+    <Compile Include="..\SDK\ApiCommunicationException.cs">
+      <Link>ApiCommunicationException.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\ApiConfiguration.cs">
+      <Link>ApiConfiguration.cs</Link>
+    </Compile>
     <Compile Include="..\SDK\Contracts\Version2\Payroll\EmployeePaymentSummary.cs">
       <Link>Contracts\Version2\Payroll\EmployeePaymentSummary.cs</Link>
     </Compile>
@@ -110,8 +114,62 @@
     <Compile Include="..\SDK\Extensions\SecurityProtocolTypeExtensions.cs">
       <Link>Extensions\SecurityProtocolTypeExtensions.cs</Link>
     </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Report\PayrollCategorySummary\PayrollCategorySummary.cs">
+      <Link>Contracts\Version2\Report\PayrollCategorySummary\PayrollCategorySummary.cs</Link>
+    </Compile>
     <Compile Include="..\SDK\Extensions\SslProtocolsExtensions.cs">
       <Link>Extensions\SslProtocolsExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Report\ProfitAndLossSummary\ProfitAndLossSummary.cs">
+      <Link>Contracts\Version2\Report\ProfitAndLossSummary\ProfitAndLossSummary.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Report\TaxCodeSummary\TaxCodeSummary.cs">
+      <Link>Contracts\Version2\Report\TaxCodeSummary\TaxCodeSummary.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\ItemQuote.cs">
+      <Link>Contracts\Version2\Sale\ItemQuote.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\ItemQuoteLine.cs">
+      <Link>Contracts\Version2\Sale\ItemQuoteLine.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\MiscellaneousQuote.cs">
+      <Link>Contracts\Version2\Sale\MiscellaneousQuote.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\MiscellaneousQuoteLine.cs">
+      <Link>Contracts\Version2\Sale\MiscellaneousQuoteLine.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\ProfessionalQuote.cs">
+      <Link>Contracts\Version2\Sale\ProfessionalQuote.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\ProfessionalQuoteLine.cs">
+      <Link>Contracts\Version2\Sale\ProfessionalQuoteLine.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\Quote.cs">
+      <Link>Contracts\Version2\Sale\Quote.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\QuoteLayoutType.cs">
+      <Link>Contracts\Version2\Sale\QuoteLayoutType.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\QuoteLine.cs">
+      <Link>Contracts\Version2\Sale\QuoteLine.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\QuoteLineType.cs">
+      <Link>Contracts\Version2\Sale\QuoteLineType.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\QuoteWithLines.cs">
+      <Link>Contracts\Version2\Sale\QuoteWithLines.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\ServiceQuote.cs">
+      <Link>Contracts\Version2\Sale\ServiceQuote.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\ServiceQuoteLine.cs">
+      <Link>Contracts\Version2\Sale\ServiceQuoteLine.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\TimeBillingQuote.cs">
+      <Link>Contracts\Version2\Sale\TimeBillingQuote.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\TImeBillingQuoteLine.cs">
+      <Link>Contracts\Version2\Sale\TImeBillingQuoteLine.cs</Link>
     </Compile>
     <Compile Include="..\SDK\Properties\AssemblyInfoEx.cs">
       <Link>Properties\AssemblyInfoEx.cs</Link>
@@ -351,6 +409,12 @@
     </Compile>
     <Compile Include="..\SDK\Contracts\Version2\GeneralLedger\Classification.cs">
       <Link>Contracts\Version2\GeneralLedger\Classification.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\GeneralLedger\Currency.cs">
+      <Link>Contracts\Version2\GeneralLedger\Currency.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\GeneralLedger\CurrencyLink.cs">
+      <Link>Contracts\Version2\GeneralLedger\CurrencyLink.cs</Link>
     </Compile>
     <Compile Include="..\SDK\Contracts\Version2\GeneralLedger\GeneralJournal.cs">
       <Link>Contracts\Version2\GeneralLedger\GeneralJournal.cs</Link>
@@ -778,6 +842,9 @@
     <Compile Include="..\SDK\Contracts\Version2\Security\User.cs">
       <Link>Contracts\Version2\Security\User.cs</Link>
     </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\SupportMulticurrencyEntity.cs">
+      <Link>Contracts\Version2\SupportMulticurrencyEntity.cs</Link>
+    </Compile>
     <Compile Include="..\SDK\Contracts\Version2\Terms.cs">
       <Link>Contracts\Version2\Terms.cs</Link>
     </Compile>
@@ -905,6 +972,9 @@
     </Compile>
     <Compile Include="..\SDK\Services\Version2\GeneralLedger\CategoryService.cs">
       <Link>Services\Version2\GeneralLedger\CategoryService.cs</Link>
+    </Compile>
+	<Compile Include="..\SDK\Services\Version2\GeneralLedger\CurrencyService.cs">
+      <Link>Services\Version2\GeneralLedger\CurrencyService.cs</Link>
     </Compile>
     <Compile Include="..\SDK\Services\Version2\GeneralLedger\GeneralJournalService.cs">
       <Link>Services\Version2\GeneralLedger\GeneralJournalService.cs</Link>
@@ -1077,8 +1147,17 @@
     <Compile Include="..\SDK\Services\Version2\Report\GST\NzgstReportService.cs">
       <Link>Services\Version2\Report\GST\NzgstReportService.cs</Link>
     </Compile>
+    <Compile Include="..\SDK\Services\Version2\Report\PayrollCategorySummary\PayrollCategorySummaryService.cs">
+      <Link>Services\Version2\Report\PayrollCategorySummary\PayrollCategorySummaryService.cs</Link>
+    </Compile>
     <Compile Include="..\SDK\Services\Version2\Report\Payroll\EmployeePayrollAdviceService.cs">
       <Link>Services\Version2\Report\Payroll\EmployeePayrollAdviceService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Report\ProfitAndLossSummary\ProfitAndLossSummaryService.cs">
+      <Link>Services\Version2\Report\ProfitAndLossSummary\ProfitAndLossSummaryService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Report\TaxCodeSummary\TaxCodeSummaryService.cs">
+      <Link>Services\Version2\Report\TaxCodeSummary\TaxCodeSummaryService.cs</Link>
     </Compile>
     <Compile Include="..\SDK\Services\Version2\Sale\CalculateDiscountsFeesService.cs">
       <Link>Services\Version2\Sale\CalculateDiscountsFeesService.cs</Link>
@@ -1104,11 +1183,17 @@
     <Compile Include="..\SDK\Services\Version2\Sale\ItemOrderService.cs">
       <Link>Services\Version2\Sale\ItemOrderService.cs</Link>
     </Compile>
+    <Compile Include="..\SDK\Services\Version2\Sale\ItemQuoteService.cs">
+      <Link>Services\Version2\Sale\ItemQuoteService.cs</Link>
+    </Compile>
     <Compile Include="..\SDK\Services\Version2\Sale\MiscellaneousInvoiceService.cs">
       <Link>Services\Version2\Sale\MiscellaneousInvoiceService.cs</Link>
     </Compile>
     <Compile Include="..\SDK\Services\Version2\Sale\MiscellaneousOrderService.cs">
       <Link>Services\Version2\Sale\MiscellaneousOrderService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Sale\MiscellaneousQuoteService.cs">
+      <Link>Services\Version2\Sale\MiscellaneousQuoteService.cs</Link>
     </Compile>
     <Compile Include="..\SDK\Services\Version2\Sale\OrderService.cs">
       <Link>Services\Version2\Sale\OrderService.cs</Link>
@@ -1122,17 +1207,29 @@
     <Compile Include="..\SDK\Services\Version2\Sale\ProfessionalOrderService.cs">
       <Link>Services\Version2\Sale\ProfessionalOrderService.cs</Link>
     </Compile>
+    <Compile Include="..\SDK\Services\Version2\Sale\ProfessionalQuoteService.cs">
+      <Link>Services\Version2\Sale\ProfessionalQuoteService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Sale\QuoteService.cs">
+      <Link>Services\Version2\Sale\QuoteService.cs</Link>
+    </Compile>
     <Compile Include="..\SDK\Services\Version2\Sale\ServiceInvoiceService.cs">
       <Link>Services\Version2\Sale\ServiceInvoiceService.cs</Link>
     </Compile>
     <Compile Include="..\SDK\Services\Version2\Sale\ServiceOrderService.cs">
       <Link>Services\Version2\Sale\ServiceOrderService.cs</Link>
     </Compile>
+    <Compile Include="..\SDK\Services\Version2\Sale\ServiceQuoteService.cs">
+      <Link>Services\Version2\Sale\ServiceQuoteService.cs</Link>
+    </Compile>
     <Compile Include="..\SDK\Services\Version2\Sale\TimeBillingInvoiceService.cs">
       <Link>Services\Version2\Sale\TimeBillingInvoiceService.cs</Link>
     </Compile>
     <Compile Include="..\SDK\Services\Version2\Sale\TimeBillingOrderService.cs">
       <Link>Services\Version2\Sale\TimeBillingOrderService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Sale\TimeBillingQuoteService.cs">
+      <Link>Services\Version2\Sale\TimeBillingQuoteService.cs</Link>
     </Compile>
     <Compile Include="..\SDK\Services\Version2\Security\RoleService.cs">
       <Link>Services\Version2\Security\RoleService.cs</Link>
