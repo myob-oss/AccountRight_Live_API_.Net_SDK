@@ -3,7 +3,7 @@
     /// <summary>
     /// Describes an Account resource
     /// </summary>
-    public class Account : BaseEntity
+    public class Account : SupportMulticurrencyEntity
     {
         /// <summary>
         /// Initialises an account resource

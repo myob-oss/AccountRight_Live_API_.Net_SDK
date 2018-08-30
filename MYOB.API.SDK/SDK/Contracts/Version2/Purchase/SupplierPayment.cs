@@ -9,7 +9,7 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Purchase
     /// <summary>
     /// Describe the SupplierPayment resource
     /// </summary>
-    public class SupplierPayment : BaseEntity
+    public class SupplierPayment : SupportMulticurrencyEntity
     {
         /// <summary>
         /// Initialise

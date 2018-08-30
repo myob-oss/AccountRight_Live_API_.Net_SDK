@@ -5,30 +5,20 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
     /// <summary>
     /// Describes a service order
     /// </summary>
-    public class ServiceOrder : OrderWithLines<ServiceOrderLine>
+    public class MiscellaneousQuote : QuoteWithLines<MiscellaneousQuoteLine>
     {
         /// <summary>
         /// Initialise
         /// </summary>
-        public ServiceOrder()
+        public MiscellaneousQuote()
         {
             DeliveryStatus = DocumentAction.Print;
         }
 
         /// <summary>
-        /// Ship to address text.
-        /// </summary>
-        public string ShipToAddress { get; set; }
-
-        /// <summary>
-        /// Sale order comment.
+        /// Comment.
         /// </summary>
         public string Comment { get; set; }
-
-        /// <summary>
-        /// Shipping method text.
-        /// </summary>
-        public string ShippingMethod { get; set; }
 
         /// <summary>
         /// The promised date

@@ -3,20 +3,20 @@
 namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
 {
     /// <summary>
-    /// Describes a service order
+    /// Describe the Sale/Invoice/TimeBilling resource
     /// </summary>
-    public class ServiceOrder : OrderWithLines<ServiceOrderLine>
+    public class TimeBillingQuote : QuoteWithLines<TimeBillingQuoteLine>
     {
         /// <summary>
         /// Initialise
         /// </summary>
-        public ServiceOrder()
+        public TimeBillingQuote()
         {
             DeliveryStatus = DocumentAction.Print;
         }
 
         /// <summary>
-        /// Ship to address text.
+        /// Shipping to address text.
         /// </summary>
         public string ShipToAddress { get; set; }
 

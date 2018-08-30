@@ -6,14 +6,14 @@ using MYOB.AccountRight.SDK.Contracts.Version2.GeneralLedger;
 namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
 {
     /// <summary>
-    /// Describes a basic sale order
+    /// Describes a basic sale quote
     /// </summary>
-    public class Order : BaseEntity
+    public class Quote : BaseEntity
     {
         /// <summary>
         /// Initialise
         /// </summary>
-        public Order()
+        public Quote()
         {
             IsTaxInclusive = true;
         }
@@ -24,7 +24,7 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
         public string Number { get; set; }
         
         /// <summary>
-        /// Order date entry
+        /// Quote date entry
         /// </summary>
         public DateTime Date { get; set; }
 
@@ -41,7 +41,7 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
         /// <summary>
         /// Customer payment terms
         /// </summary>
-        public OrderTerms Terms { get; set; }
+        public QuoteTerms Terms { get; set; }
 
         /// <summary>
         /// True indicates the transaction is set to tax inclusive.
@@ -55,10 +55,10 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
         public decimal Subtotal { get; set; }
 
         /// <summary>
-        /// Tax freight amount applicable to the sale order.
+        /// Tax freight amount applicable to the sale quote.
         /// </summary>
         /// <remarks>
-        /// Only supported by Item or Service orders
+        /// Only supported by Item or Service quotes
         /// </remarks>
         public decimal? Freight { get; set; }
 
@@ -66,7 +66,7 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
         /// The freight Tax code
         /// </summary>
         /// <remarks>
-        /// Only supported by Item or Service orders
+        /// Only supported by Item or Service quotes
         /// </remarks>
         public TaxCodeLink FreightTaxCode { get; set; }
 
@@ -111,41 +111,20 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
         public decimal BalanceDueAmount { get; set; }
 
         /// <summary>
-        /// The current status of the order
-        /// </summary>
-        public OrderStatus Status { get; set; }
-
-        /// <summary>
-        /// The date of the last payment made on the order
+        /// The date of the last payment made on the quote?
         /// </summary>
         public DateTime? LastPaymentDate { get; set; }
 
         /// <summary>
-        /// The type of order
+        /// The type of quote
         /// </summary>
-        public OrderLayoutType OrderType { get; set; }
+        public QuoteLayoutType QuoteType { get; set; }
     }
 
     /// <summary>
-    /// The status of an <see cref="Order" />
+    /// The terms of the <see cref="Quote" />
     /// </summary>
-    public enum OrderStatus
-    {
-        /// <summary>
-        /// The order is still open
-        /// </summary>
-        Open,
-
-        /// <summary>
-        /// The order has since been converted to an invoice
-        /// </summary>
-        ConvertedToInvoice
-    }
-
-    /// <summary>
-    /// Describe the Sale Order's terms
-    /// </summary>
-    public class OrderTerms : Terms
+    public class QuoteTerms : Terms
     {
         /// <summary>
         /// % monthly charge for late payment.
@@ -172,4 +151,5 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
         /// </summary>
         public decimal? FinanceCharge { get; set; }
     }
+
 }
