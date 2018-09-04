@@ -8,7 +8,7 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Purchase
     /// <summary>
     /// Describe the Purchase/Bill resource
     /// </summary>
-    public class Bill : BaseEntity
+    public class Bill : SupportMulticurrencyEntity
     {
         /// <summary>
         /// Purchase bill number

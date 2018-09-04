@@ -42,6 +42,11 @@ namespace MYOB.AccountRight.SDK.Contracts
         /// Launcher Id can be used to open Online Company files from command line
         /// </summary>
         public Guid? LauncherId { get; set; }
+		
+        /// <summary>
+        /// Serial Number of Company file
+        /// </summary>
+        public string SerialNumber { get; set; }
 
         /// <summary>
         /// Country code.
