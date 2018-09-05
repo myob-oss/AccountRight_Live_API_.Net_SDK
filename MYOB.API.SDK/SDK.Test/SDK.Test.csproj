@@ -140,6 +140,7 @@
     <Compile Include="Services\EmployeePaymentSummaryINBServiceTests.cs" />
     <Compile Include="Services\EmployeePaymentSummaryLHAmendedServiceTests.cs" />
     <Compile Include="Services\EmployeePaymentSummaryLHServiceTests.cs" />
+    <Compile Include="Services\EmployeePaymentSummaryReportServiceTests.cs" />
     <Compile Include="Services\EmployeeStandardPayServiceTests.cs" />
     <Compile Include="Services\ItemQuoteServiceTests.cs" />
     <Compile Include="Services\JobBudgetServiceTests.cs" />
