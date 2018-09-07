@@ -265,10 +265,5 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Contact
         /// Time Billing Info
         /// </summary>
         public EmployeeTimeBillingInfo TimeBilling { get; set; }
-
-        /// <summary>
-        /// Employee payment summmary
-        /// </summary>
-        public EmployeePaymentSummary EmployeePaymentSummary { get; set; }
     }
 }

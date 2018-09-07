@@ -115,6 +115,7 @@
     <Compile Include="Contracts\Version2\Company\CompanyTimesheetPreferences.cs" />
     <Compile Include="Contracts\Version2\Company\FormTemplate.cs" />
     <Compile Include="Contracts\Version2\Company\PriceLevel.cs" />
+    <Compile Include="Contracts\Version2\Contact\EmployeePaymentSummaryReport.cs" />
     <Compile Include="Contracts\Version2\Contact\EmployeeStandardPay.cs" />
     <Compile Include="Contracts\Version2\Contact\EmployeePaymentDetails.cs" />
     <Compile Include="Contracts\Version2\Contact\EmployeeEntitlementInfo.cs" />
@@ -367,6 +368,7 @@
     <Compile Include="Services\Version2\Company\CompanyPreferencesService.cs" />
     <Compile Include="Services\Version2\Company\FormTemplateService.cs" />
     <Compile Include="Services\Version2\Contact\ContactService.cs" />
+    <Compile Include="Services\Version2\Contact\EmployeePaymentSummaryReportService.cs" />
     <Compile Include="Services\Version2\Contact\EmployeeStandardPayService.cs" />
     <Compile Include="Services\Version2\Contact\EmployeePaymentDetailsService.cs" />
     <Compile Include="Services\Version2\Contact\EmployeePayrollDetailsService.cs" />
