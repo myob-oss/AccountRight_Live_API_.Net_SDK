@@ -84,6 +84,9 @@
     <Compile Include="..\SDK\ApiConfiguration.cs">
       <Link>ApiConfiguration.cs</Link>
     </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Contact\EmployeePaymentSummaryReport.cs">
+      <Link>Contracts\Version2\Contact\EmployeePaymentSummaryReport.cs</Link>
+    </Compile>
     <Compile Include="..\SDK\Contracts\Version2\Payroll\EmployeePaymentSummary.cs">
       <Link>Contracts\Version2\Payroll\EmployeePaymentSummary.cs</Link>
     </Compile>
@@ -933,6 +936,9 @@
     </Compile>
     <Compile Include="..\SDK\Services\Version2\Contact\EmployeePaymentDetailsService.cs">
       <Link>Services\Version2\Contact\EmployeePaymentDetailsService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Contact\EmployeePaymentSummaryReportService.cs">
+      <Link>Services\Version2\Contact\EmployeePaymentSummaryReportService.cs</Link>
     </Compile>
     <Compile Include="..\SDK\Services\Version2\Contact\EmployeePayrollDetailsService.cs">
       <Link>Services\Version2\Contact\EmployeePayrollDetailsService.cs</Link>
