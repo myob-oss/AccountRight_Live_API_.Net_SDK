@@ -6,9 +6,7 @@ using MYOB.AccountRight.SDK.Contracts.Version2;
 
 #if !PORTABLE
 using System.Net.Cache;
-using System.Net;
 #endif
-
 
 namespace MYOB.AccountRight.SDK
 {
@@ -23,14 +21,6 @@ namespace MYOB.AccountRight.SDK
     /// </remarks>>
     public class ApiConfiguration : IApiConfiguration
     {
-
-#if !PORTABLE
-        static ApiConfiguration()
-        {
-            ServicePointManager.SecurityProtocol |= SecurityProtocolTypeExtensions.Tls11 | SecurityProtocolTypeExtensions.Tls12;
-        }
-#endif
-
         /// <summary>
         /// Initializes an instance of the ApiConfiguration class (usually used for cloud mode)
         /// </summary>

@@ -55,12 +55,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\SDK\ApiCommunicationException.cs">
-      <Link>ApiCommunicationException.cs</Link>
-    </Compile>
-    <Compile Include="..\SDK\ApiConfiguration.cs">
-      <Link>ApiConfiguration.cs</Link>
-    </Compile>
+    <Compile Include="..\SDK\ApiCommunicationException.cs" />
+    <Compile Include="..\SDK\ApiConfiguration.cs" />
     <Compile Include="..\SDK\Contracts\Version2\Contact\EmployeePaymentSummaryReport.cs">
       <Link>Contracts\Version2\Contact\EmployeePaymentSummaryReport.cs</Link>
     </Compile>
@@ -91,14 +87,8 @@
     <Compile Include="..\SDK\Contracts\Version2\Report\GST\NZGSTReport.cs">
       <Link>Contracts\Version2\Report\GST\NZGSTReport.cs</Link>
     </Compile>
-    <Compile Include="..\SDK\Extensions\SecurityProtocolTypeExtensions.cs">
-      <Link>Extensions\SecurityProtocolTypeExtensions.cs</Link>
-    </Compile>
     <Compile Include="..\SDK\Contracts\Version2\Report\PayrollCategorySummary\PayrollCategorySummary.cs">
       <Link>Contracts\Version2\Report\PayrollCategorySummary\PayrollCategorySummary.cs</Link>
-    </Compile>
-    <Compile Include="..\SDK\Extensions\SslProtocolsExtensions.cs">
-      <Link>Extensions\SslProtocolsExtensions.cs</Link>
     </Compile>
     <Compile Include="..\SDK\Contracts\Version2\Report\ProfitAndLossSummary\ProfitAndLossSummary.cs">
       <Link>Contracts\Version2\Report\ProfitAndLossSummary\ProfitAndLossSummary.cs</Link>
@@ -296,6 +286,9 @@
     </Compile>
     <Compile Include="..\SDK\Contracts\Version2\Contact\EmployeeLink.cs">
       <Link>Contracts\Version2\Contact\EmployeeLink.cs</Link>
+    </Compile>
+	<Compile Include="..\SDK\Contracts\Version2\Contact\ContactLink.cs">
+      <Link>Contracts\Version2\Contact\ContactLink.cs</Link>
     </Compile>
     <Compile Include="..\SDK\Contracts\Version2\Contact\EmployeePaymentDetails.cs">
       <Link>Contracts\Version2\Contact\EmployeePaymentDetails.cs</Link>
@@ -830,6 +823,9 @@
     </Compile>
     <Compile Include="..\SDK\Contracts\Version2\TermsPaymentType.cs">
       <Link>Contracts\Version2\TermsPaymentType.cs</Link>
+    </Compile>	
+    <Compile Include="..\SDK\Contracts\Version2\TimeBilling\ActivitySlip.cs">
+      <Link>Contracts\Version2\TimeBilling\ActivitySlip.cs</Link>
     </Compile>
     <Compile Include="..\SDK\Contracts\Version2\TimeBilling\Activity.cs">
       <Link>Contracts\Version2\TimeBilling\Activity.cs</Link>
@@ -1219,6 +1215,9 @@
     </Compile>
     <Compile Include="..\SDK\Services\Version2\Security\UserService.cs">
       <Link>Services\Version2\Security\UserService.cs</Link>
+    </Compile>
+	<Compile Include="..\SDK\Services\Version2\TimeBilling\ActivitySlipService.cs">
+      <Link>Services\Version2\TimeBilling\ActivitySlipService.cs</Link>
     </Compile>
     <Compile Include="..\SDK\Services\Version2\TimeBilling\ActivityService.cs">
       <Link>Services\Version2\TimeBilling\ActivityService.cs</Link>
