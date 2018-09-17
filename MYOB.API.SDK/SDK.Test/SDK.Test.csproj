@@ -86,6 +86,12 @@
     <Compile Include="ApiCommunicationExceptionTests.cs" />
     <Compile Include="ApiConfigurationTests.cs" />
     <Compile Include="COMSupportedTests.cs" />
+    <Compile Include="Contracts\Version2\ItemQuoteTests.cs" />
+    <Compile Include="Contracts\Version2\MiscellaneousQuoteTests.cs" />
+    <Compile Include="Contracts\Version2\ProfessionalQuoteTests.cs" />
+    <Compile Include="Contracts\Version2\QuoteTests.cs" />
+    <Compile Include="Contracts\Version2\ServiceQuoteTests.cs" />
+    <Compile Include="Contracts\Version2\TimeBillingQuoteTests.cs" />
     <Compile Include="Contracts\Version2\UserTests.cs" />
     <Compile Include="MyobArlApiPact.cs" />
     <Compile Include="Communication\ApiRequestHandlerTests.cs" />
@@ -127,17 +133,27 @@
     <Compile Include="Services\CategoryRegisterServiceTests.cs" />
     <Compile Include="Services\CategoryServiceTests.cs" />
     <Compile Include="Services\AccountBudgetServiceTests.cs" />
+    <Compile Include="Services\CurrencyServiceTests.cs" />
     <Compile Include="Services\EmployeePaymentSummaryETPAmendedServiceTests.cs" />
     <Compile Include="Services\EmployeePaymentSummaryETPServiceTests.cs" />
     <Compile Include="Services\EmployeePaymentSummaryINBAmendedServiceTests.cs" />
     <Compile Include="Services\EmployeePaymentSummaryINBServiceTests.cs" />
     <Compile Include="Services\EmployeePaymentSummaryLHAmendedServiceTests.cs" />
     <Compile Include="Services\EmployeePaymentSummaryLHServiceTests.cs" />
+    <Compile Include="Services\EmployeePaymentSummaryReportServiceTests.cs" />
     <Compile Include="Services\EmployeeStandardPayServiceTests.cs" />
+    <Compile Include="Services\ItemQuoteServiceTests.cs" />
     <Compile Include="Services\JobBudgetServiceTests.cs" />
+    <Compile Include="Services\MiscellaneousQuoteServiceTests.cs" />
+    <Compile Include="Services\PayrollCategorySummaryServiceTests.cs" />
+    <Compile Include="Services\ProfessionalQuoteServiceTests.cs" />
+    <Compile Include="Services\ProfitAndLossSummaryServiceTests.cs" />
     <Compile Include="Services\NZGSTReportServiceTests.cs" />
     <Compile Include="Services\ProfitLossDistributionServiceTests.cs" />
+    <Compile Include="Services\QuoteServiceTests.cs" />
     <Compile Include="Services\RoleServiceTests.cs" />
+    <Compile Include="Services\ServiceQuoteServiceTests.cs" />
+    <Compile Include="Services\TaxCodeSummaryServiceTests.cs" />
     <Compile Include="Services\TimeBillingOrderServiceTests.cs" />
     <Compile Include="Services\EmployeePaymentDetailsServiceTests.cs" />
     <Compile Include="Services\ItemPurchaseOrderServiceTests.cs" />
@@ -158,6 +174,7 @@
     <Compile Include="Services\ServiceOrderServiceTests.cs" />
     <Compile Include="Services\StatementServiceTests.cs" />
     <Compile Include="Services\TimeBillingInvoiceServiceTests.cs" />
+    <Compile Include="Services\TimeBillingQuoteServiceTests.cs" />
     <Compile Include="Services\TimesheetServicePacTests.cs" />
     <Compile Include="Services\TimesheetServiceTests.cs" />
     <Compile Include="Services\EmployeePayrollDetailsServiceTests.cs" />
@@ -228,6 +245,9 @@
       <Project>{33dd5156-e3b7-47fc-913d-5216019146a7}</Project>
       <Name>SDK.NET45</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />

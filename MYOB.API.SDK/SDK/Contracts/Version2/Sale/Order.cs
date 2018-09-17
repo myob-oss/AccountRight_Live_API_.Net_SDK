@@ -24,7 +24,7 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
         public string Number { get; set; }
         
         /// <summary>
-        /// Oder date entry
+        /// Order date entry
         /// </summary>
         public DateTime Date { get; set; }
 

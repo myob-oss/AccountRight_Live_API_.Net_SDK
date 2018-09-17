@@ -9,7 +9,7 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Banking
     /// <summary>
     /// A receive money transaction entity
     /// </summary>
-    public class ReceiveMoneyTxn : BaseEntity
+    public class ReceiveMoneyTxn : SupportMulticurrencyEntity
     {
         /// <summary>
         /// Deposit To "Account" OR "Undeposited Funds"
@@ -63,12 +63,12 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Banking
         public string Memo { get; set; }
         
         /// <summary>
-        /// Transaction Lines
+        /// The Category associated with the transaction
         /// </summary>
         public CategoryLink Category { get; set; }
 
         /// <summary>
-        /// The Category associated with the transaction
+        /// Transaction Lines
         /// </summary>
         public IEnumerable<ReceiveMoneyTxnLine> Lines { get; set; }
     }

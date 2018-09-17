@@ -8,7 +8,7 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Purchase
     /// <summary>
     /// Describe the Purchase/Order resource
     /// </summary>
-    public class PurchaseOrder : BaseEntity
+    public class PurchaseOrder : SupportMulticurrencyEntity
     {
         /// <summary>
         /// Purchase order number
@@ -120,7 +120,6 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Purchase
         /// The type of the order
         /// </summary>
         public OrderLayoutType OrderType { get; set; }
-    
     }
 
     /// <summary>

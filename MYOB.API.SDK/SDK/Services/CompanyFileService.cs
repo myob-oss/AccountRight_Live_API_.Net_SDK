@@ -73,7 +73,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="onError">The action to call when the operation has an error</param>
         public void GetRange(string queryString, Action<HttpStatusCode, CompanyFile[]> onComplete, Action<Uri, Exception> onError)
         {
-            MakeApiGetRequestDelegate(BuildUri(queryString.Maybe(_ => "?" + _.TrimStart(new[] { '?' }))), null, onComplete, onError, null);
+            MakeApiGetRequestDelegate(BuildUri(queryString.Maybe(_ => "?" + _.TrimStart('?'))), null, onComplete, onError, null);
         }
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <returns></returns>
         public CompanyFile[] GetRange(string queryString)
         {
-            return MakeApiGetRequestSync<CompanyFile[]>(BuildUri(queryString.Maybe(_ => "?" + _.TrimStart(new[] { '?' }))), null, null);
+            return MakeApiGetRequestSync<CompanyFile[]>(BuildUri(queryString.Maybe(_ => "?" + _.TrimStart('?'))), null, null);
         }
 
 #if ASYNC
@@ -105,7 +105,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <returns></returns>
         public Task<CompanyFile[]> GetRangeAsync(string queryString, CancellationToken cancellationToken)
         {
-            return this.MakeApiGetRequestAsync<CompanyFile[]>(this.BuildUri(queryString.Maybe(_ => "?" + _.TrimStart(new[] { '?' }))), null, cancellationToken, null);
+            return this.MakeApiGetRequestAsync<CompanyFile[]>(this.BuildUri(queryString.Maybe(_ => "?" + _.TrimStart('?'))), null, cancellationToken, null);
         } 
 #endif
         /// <summary>

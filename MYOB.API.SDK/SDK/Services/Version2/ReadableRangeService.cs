@@ -64,7 +64,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="eTag">The <see cref="PagedCollection&lt;T&gt;.ETag" /> from a previously fetched entity</param>
         public virtual void GetRange(CompanyFile cf, string queryString, ICompanyFileCredentials credentials, Action<HttpStatusCode, PagedCollection<T>> onComplete, Action<Uri, Exception> onError, string eTag = null)
         {
-            MakeApiGetRequestDelegate(BuildUri(cf, null, queryString.Maybe(_ => "?" + _.TrimStart(new[] { '?' }))), credentials, onComplete, onError, eTag);
+            MakeApiGetRequestDelegate(BuildUri(cf, null, queryString.Maybe(_ => "?" + _.TrimStart('?'))), credentials, onComplete, onError, eTag);
         }
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <returns></returns>
         public virtual PagedCollection<T> GetRange(CompanyFile cf, string queryString, ICompanyFileCredentials credentials, string eTag = null)
         {
-            return MakeApiGetRequestSync<PagedCollection<T>>(BuildUri(cf, null, queryString.Maybe(_ => "?" + _.TrimStart(new[] { '?' }))), credentials, eTag);
+            return MakeApiGetRequestSync<PagedCollection<T>>(BuildUri(cf, null, queryString.Maybe(_ => "?" + _.TrimStart('?'))), credentials, eTag);
         }
 
 #if ASYNC
@@ -105,7 +105,7 @@ namespace MYOB.AccountRight.SDK.Services
         /// <returns></returns>
         public virtual Task<PagedCollection<T>> GetRangeAsync(CompanyFile cf, string queryString, ICompanyFileCredentials credentials, CancellationToken cancellationToken, string eTag = null)
         {
-            return this.MakeApiGetRequestAsync<PagedCollection<T>>(this.BuildUri(cf, null, queryString.Maybe(_ => "?" + _.TrimStart(new[] { '?' }))), credentials, cancellationToken, eTag);
+            return this.MakeApiGetRequestAsync<PagedCollection<T>>(this.BuildUri(cf, null, queryString.Maybe(_ => "?" + _.TrimStart('?'))), credentials, cancellationToken, eTag);
         }
 #endif
     }

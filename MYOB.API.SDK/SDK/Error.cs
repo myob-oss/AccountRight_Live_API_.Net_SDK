@@ -37,5 +37,10 @@ namespace MYOB.AccountRight.SDK
         /// The severity
         /// </summary>
         public string Severity { get; set; }
+
+        /// <summary>
+        /// The learn more link
+        /// </summary>
+        public string LearnMore { get; set; }
     }
 }

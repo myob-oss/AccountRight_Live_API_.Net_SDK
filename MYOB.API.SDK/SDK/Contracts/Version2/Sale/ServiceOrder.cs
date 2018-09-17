@@ -16,7 +16,7 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
         }
 
         /// <summary>
-        /// Shipping method text.
+        /// Ship to address text.
         /// </summary>
         public string ShipToAddress { get; set; }
 
