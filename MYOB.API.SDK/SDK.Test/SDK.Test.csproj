@@ -86,6 +86,7 @@
     <Compile Include="ApiCommunicationExceptionTests.cs" />
     <Compile Include="ApiConfigurationTests.cs" />
     <Compile Include="COMSupportedTests.cs" />
+    <Compile Include="Contracts\Version2\ActivitySlipTests.cs" />
     <Compile Include="Contracts\Version2\ItemQuoteTests.cs" />
     <Compile Include="Contracts\Version2\MiscellaneousQuoteTests.cs" />
     <Compile Include="Contracts\Version2\ProfessionalQuoteTests.cs" />
@@ -125,6 +126,7 @@
     <Compile Include="Extensions\WebRequestExtensionsTests.cs" />
     <Compile Include="Services\AccountRegisterServiceTests.cs" />
     <Compile Include="Services\AccountServiceTests.cs" />
+    <Compile Include="Services\ActivitySlipServiceTests.cs" />
     <Compile Include="Services\ActivityServiceTests.cs" />
     <Compile Include="Services\BankAccountServiceTests.cs" />
     <Compile Include="Services\BillServiceTests.cs" />
