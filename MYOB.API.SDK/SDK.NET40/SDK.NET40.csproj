@@ -320,6 +320,9 @@
     <Compile Include="..\SDK\Contracts\Version2\Contact\EmployeeLink.cs">
       <Link>Contracts\Version2\Contact\EmployeeLink.cs</Link>
     </Compile>
+	<Compile Include="..\SDK\Contracts\Version2\Contact\ContactLink.cs">
+      <Link>Contracts\Version2\Contact\ContactLink.cs</Link>
+    </Compile>
     <Compile Include="..\SDK\Contracts\Version2\Contact\EmployeePaymentDetails.cs">
       <Link>Contracts\Version2\Contact\EmployeePaymentDetails.cs</Link>
     </Compile>
@@ -857,6 +860,9 @@
     <Compile Include="..\SDK\Contracts\Version2\TimeBilling\Activity.cs">
       <Link>Contracts\Version2\TimeBilling\Activity.cs</Link>
     </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\TimeBilling\ActivitySlip.cs">
+      <Link>Contracts\Version2\TimeBilling\ActivitySlip.cs</Link>
+    </Compile>
     <Compile Include="..\SDK\Contracts\Version2\UserAccess.cs">
       <Link>Contracts\Version2\UserAccess.cs</Link>
     </Compile>
@@ -1242,6 +1248,9 @@
     </Compile>
     <Compile Include="..\SDK\Services\Version2\Security\UserService.cs">
       <Link>Services\Version2\Security\UserService.cs</Link>
+    </Compile>
+	<Compile Include="..\SDK\Services\Version2\TimeBilling\ActivitySlipService.cs">
+      <Link>Services\Version2\TimeBilling\ActivitySlipService.cs</Link>
     </Compile>
     <Compile Include="..\SDK\Services\Version2\TimeBilling\ActivityService.cs">
       <Link>Services\Version2\TimeBilling\ActivityService.cs</Link>
