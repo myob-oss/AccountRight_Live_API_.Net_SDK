@@ -198,6 +198,7 @@
     <Compile Include="Contracts\Version2\Security\RoleLink.cs" />
     <Compile Include="Contracts\Version2\Security\User.cs" />
     <Compile Include="Contracts\Version2\SupportMulticurrencyEntity.cs" />
+    <Compile Include="Contracts\Version2\TimeBilling\ActivitySlip.cs" />
     <Compile Include="Contracts\Version2\TimeBilling\Activity.cs" />
     <Compile Include="Contracts\Version2\PayrollCategory\ActivityLink.cs" />
     <Compile Include="Contracts\Version2\PayrollCategory\PayrollCategory.cs" />
@@ -258,6 +259,7 @@
     <Compile Include="Contracts\Version2\Contact\CustomerLink.cs" />
     <Compile Include="Contracts\Version2\Contact\CustomerSellingDetails.cs" />
     <Compile Include="Contracts\Version2\Contact\EmployeeLink.cs" />
+	  <Compile Include="Contracts\Version2\Contact\ContactLink.cs" />
     <Compile Include="Contracts\Version2\GeneralLedger\GSTReportingMethod.cs" />
     <Compile Include="Contracts\Version2\Purchase\Bill.cs" />
     <Compile Include="Contracts\Version2\Purchase\BillLine.cs" />
@@ -420,6 +422,7 @@
     <Compile Include="Services\Version2\Sale\TimeBillingInvoiceService.cs" />
     <Compile Include="Services\Version2\Security\RoleService.cs" />
     <Compile Include="Services\Version2\Security\UserService.cs" />
+    <Compile Include="Services\Version2\TimeBilling\ActivitySlipService.cs" />
     <Compile Include="Services\Version2\TimeBilling\ActivityService.cs" />
     <Compile Include="Services\Version2\PayrollCategory\PayrollCategoryDeductionService.cs" />
     <Compile Include="Services\Version2\PayrollCategory\PayrollCategoryEntitlementService.cs" />
