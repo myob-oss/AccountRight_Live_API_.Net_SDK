@@ -259,7 +259,7 @@
     <Compile Include="Contracts\Version2\Contact\CustomerLink.cs" />
     <Compile Include="Contracts\Version2\Contact\CustomerSellingDetails.cs" />
     <Compile Include="Contracts\Version2\Contact\EmployeeLink.cs" />
-	<Compile Include="Contracts\Version2\Contact\ContactLink.cs" />
+	  <Compile Include="Contracts\Version2\Contact\ContactLink.cs" />
     <Compile Include="Contracts\Version2\GeneralLedger\GSTReportingMethod.cs" />
     <Compile Include="Contracts\Version2\Purchase\Bill.cs" />
     <Compile Include="Contracts\Version2\Purchase\BillLine.cs" />
