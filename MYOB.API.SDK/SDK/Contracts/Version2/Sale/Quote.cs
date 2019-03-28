@@ -119,6 +119,11 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
         /// The type of quote
         /// </summary>
         public QuoteLayoutType QuoteType { get; set; }
+
+        /// <summary>
+        /// Foreign currency for multicurrency quotes.
+        /// </summary>
+        public CurrencyLink ForeignCurrency { get; set; }
     }
 
     /// <summary>

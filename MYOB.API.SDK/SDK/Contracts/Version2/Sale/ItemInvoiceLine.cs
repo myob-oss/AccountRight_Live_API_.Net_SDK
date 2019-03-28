@@ -16,6 +16,10 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
         /// Unit price assigned to the item.
         /// </summary>
         public decimal UnitPrice { get; set; }
+        /// <summary>
+        /// Unit price assigned to the item in foreign currency.
+        /// </summary>
+        public decimal? UnitPriceForeign { get; set; }
 
         /// <summary>
         /// Discount rate applicable to the line of the sale invoice.

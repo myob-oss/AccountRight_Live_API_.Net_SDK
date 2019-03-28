@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using MYOB.AccountRight.SDK.Contracts.Version2.Contact;
+using MYOB.AccountRight.SDK.Contracts.Version2.GeneralLedger;
 
 namespace MYOB.AccountRight.SDK.Contracts.Version2.Purchase
 {
@@ -43,5 +44,10 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Purchase
         /// The bills and orders to which this settlement was applied
         /// </summary>
         public IEnumerable<DebitSettlementLine> Lines { get; set; }
+
+        /// <summary>
+        /// Foreign currency of the debit settlement
+        /// </summary>
+        public CurrencyLink ForeignCurrency { get; set; }
     }
 }
