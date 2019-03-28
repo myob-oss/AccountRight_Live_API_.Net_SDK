@@ -8,7 +8,7 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
     /// <summary>
     /// Describes a basic sale order
     /// </summary>
-    public class Order : BaseEntity
+    public class Order : SupportMulticurrencyEntity
     {
         /// <summary>
         /// Initialise
