@@ -38,6 +38,11 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
         /// <summary>
         /// ID No of payment transaction
         /// </summary>
+        public Guid? TransactionUID { get; set; }
+
+        /// <summary>
+        /// Receipt No of payment transaction
+        /// </summary>
         public string ReceiptNumber { get; set; }
 
         /// <summary>
@@ -50,6 +55,11 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
         /// Total of all amounts applicable to the sale invoice.
         /// </summary>
         public decimal AmountReceived { get; set; }
+
+        /// <summary>
+        /// The foreign currency related to this customerpayment
+        /// </summary>
+        public CurrencyLink ForeignCurrency { get; set; }
 
         /// <summary>
         /// Payment method text.
