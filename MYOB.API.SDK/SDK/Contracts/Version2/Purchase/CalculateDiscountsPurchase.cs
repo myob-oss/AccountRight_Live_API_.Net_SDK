@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MYOB.AccountRight.SDK.Contracts.Version2.GeneralLedger;
+using System;
 
 namespace MYOB.AccountRight.SDK.Contracts.Version2.Purchase
 {
@@ -17,5 +18,15 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Purchase
         /// <para>Bill</para>
         /// </summary>
         public CalculateDiscountsPurchaseType Type { get; set; }
+
+        /// <summary>
+        /// Currency of Purchase (or null)
+        /// </summary>
+        public CurrencyLink ForeignCurrency { get; set; }
+
+        /// <summary>
+        /// Exchange rate of currency (if foreign)
+        /// </summary>
+        public decimal? CurrencyExchangeRate { get; set; }
     }
 }

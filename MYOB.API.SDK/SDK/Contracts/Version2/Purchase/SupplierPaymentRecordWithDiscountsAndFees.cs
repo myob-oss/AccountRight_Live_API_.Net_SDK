@@ -89,5 +89,16 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Purchase
         /// <para>AlreadyPrintedOrSent</para>
         /// </summary>
         public DocumentAction DeliveryStatus { get; set; }
+
+        /// <summary>
+        /// Foreign currency of the payment.
+        /// </summary>
+        public CurrencyLink ForeignCurrency { get; set; }
+
+        /// <summary>
+        /// Custom currency exchange rate.
+        /// </summary>
+        public decimal? CurrencyExchangeRate { get; set; }
+
     }
 }

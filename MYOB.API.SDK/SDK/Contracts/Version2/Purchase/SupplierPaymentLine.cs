@@ -28,6 +28,16 @@
         public decimal AmountApplied { get; set; }
 
         /// <summary>
+        /// Foreign Amount applied to the purchase.
+        /// </summary>
+        public decimal? AmountAppliedForeign { get; set; }
+
+        /// <summary>
+        /// Any gain or loss made on this payment due to exchange rate differences.
+        /// </summary>
+        public decimal? GainOrLossAmount { get; set; }
+
+        /// <summary>
         /// Incrementing number that can be used for change control but does does not preserve a date or a time. 
         /// <para>ONLY required for updating an existing supplier payment.</para>
         /// <para>NOT required when creating a new supplier payment.</para>

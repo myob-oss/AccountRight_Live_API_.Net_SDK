@@ -18,5 +18,15 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
         /// Account for service invoice line
         /// </summary>
         public AccountLink Account { get; set; }
+
+        /// <summary>
+        /// Unit of Measure
+        /// </summary>
+        public string UnitOfMeasure { get; set; }
+
+        /// <summary>
+        /// Unit Count
+        /// </summary>
+        public decimal? UnitCount { get; set; }
     }
 }
