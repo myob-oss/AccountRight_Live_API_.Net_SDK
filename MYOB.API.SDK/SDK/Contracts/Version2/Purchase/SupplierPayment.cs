@@ -48,6 +48,11 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Purchase
         /// </summary>
         public decimal AmountPaid { get; set; }
 
+        /// <summary>
+        /// Total Foreign Amount has been paid
+        /// <remarks>Read-only</remarks>
+        /// </summary>
+        public decimal? AmountPaidForeign { get; set; }
 
         /// <summary>
         /// Memo text of the supplier payment entry.

@@ -29,6 +29,11 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Purchase
         public decimal UnitPrice { get; set; }
 
         /// <summary>
+        /// Unit price Foreign assigned to the item.
+        /// </summary>
+        public decimal? UnitPriceForeign { get; set; }
+
+        /// <summary>
         /// Discount rate applicable to the line of the purchase bill.
         /// </summary>
         public decimal DiscountPercent { get; set; }
@@ -37,5 +42,10 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Purchase
         /// Item of the purchase item bill line
         /// </summary>
         public ItemLink Item { get; set; }
+
+        /// <summary>
+        /// Location of the purchase item bill line
+        /// </summary>
+        public LocationLink Location { get; set; }
     }
 }

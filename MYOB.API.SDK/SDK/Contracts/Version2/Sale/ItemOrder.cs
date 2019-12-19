@@ -5,7 +5,7 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
     /// <summary>
     /// Describes an item order
     /// </summary>
-    public class ItemOrder : OrderWithLines<ItemOrderLine>
+    public class ItemOrder : OrderWithMultiCurrencySupport<ItemOrderLine>
     {
         /// <summary>
         /// Initialise

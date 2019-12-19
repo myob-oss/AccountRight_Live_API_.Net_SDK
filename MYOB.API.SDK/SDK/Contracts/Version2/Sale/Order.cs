@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using MYOB.AccountRight.SDK.Contracts.Version2.Contact;
 using MYOB.AccountRight.SDK.Contracts.Version2.GeneralLedger;
 
@@ -163,6 +162,11 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
         public decimal? Discount { get; set; }
 
         /// <summary>
+        /// The foreign currency discount applicable if the amount if paid before the discount expiry date
+        /// </summary>
+        public decimal? DiscountForeign { get; set; }
+
+        /// <summary>
         /// Date the invoice balance is due.
         /// </summary>
         public DateTime? DueDate { get; set; }
@@ -171,5 +175,10 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
         /// Finance Charge amount applicable to the invoice.
         /// </summary>
         public decimal? FinanceCharge { get; set; }
+
+        /// <summary>
+        /// Finance Charge foreign currency amount applicable to the invoice.
+        /// </summary>
+        public decimal? FinanceChargeForeign { get; set; }
     }
 }

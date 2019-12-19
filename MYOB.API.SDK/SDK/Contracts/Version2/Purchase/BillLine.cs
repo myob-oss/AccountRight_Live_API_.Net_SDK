@@ -34,6 +34,10 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Purchase
         public decimal Total { get; set; }
 
         /// <summary>
+        /// Total amount for the line only.
+        /// </summary>
+        public decimal? TotalForeign { get; set; }
+        /// <summary>
         /// Job of the purchase line.
         /// </summary>
         public JobLink Job { get; set; }

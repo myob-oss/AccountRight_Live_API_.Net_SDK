@@ -56,5 +56,10 @@
         /// By setting this flag to True, the Tax will be set to the value of TaxAmount. 
         /// </summary>
         public bool IsOverriddenTaxAmount { get; set; }
+
+        /// <summary>
+        /// The quantity amount for this line
+        /// </summary>
+        public decimal? UnitCount { get; set; }
     }
 }

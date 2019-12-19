@@ -135,6 +135,8 @@
     <Compile Include="Contracts\Version2\GeneralLedger\ProfitLossDistribution.cs" />
     <Compile Include="Contracts\Version2\GeneralLedger\SourceTransaction.cs" />
     <Compile Include="Contracts\Version2\Inventory\InventoryAdjustment.cs" />
+    <Compile Include="Contracts\Version2\Inventory\Location.cs" />
+    <Compile Include="Contracts\Version2\Inventory\LocationLink.cs" />
     <Compile Include="Contracts\Version2\Inventory\ItemPriceMatrix.cs" />
     <Compile Include="Contracts\Version2\Inventory\Levels.cs" />
     <Compile Include="Contracts\Version2\Inventory\SellingPrice.cs" />
@@ -153,6 +155,7 @@
     <Compile Include="Contracts\Version2\Purchase\ProfessionalPurchaseOrderLine.cs" />
     <Compile Include="Contracts\Version2\Purchase\PurchaseOrder.cs" />
     <Compile Include="Contracts\Version2\Purchase\ItemPurchaseOrder.cs" />
+    <Compile Include="Contracts\Version2\Purchase\PurchaseOrderWithMultiCurrency.cs" />
     <Compile Include="Contracts\Version2\Purchase\ServicePurchaseOrder.cs" />
     <Compile Include="Contracts\Version2\Purchase\ServicePurchaseOrderLine.cs" />
     <Compile Include="Contracts\Version2\Purchase\PurchaseOrderWithLines.cs" />
@@ -172,6 +175,8 @@
     <Compile Include="Contracts\Version2\Sale\QuoteLine.cs" />
     <Compile Include="Contracts\Version2\Sale\QuoteLineType.cs" />
     <Compile Include="Contracts\Version2\Sale\QuoteWithLines.cs" />
+    <Compile Include="Contracts\Version2\Sale\SaleEmail.cs" />
+    <Compile Include="Contracts\Version2\Sale\SaleEmailResponse.cs" />
     <Compile Include="Contracts\Version2\Sale\ServiceQuote.cs" />
     <Compile Include="Contracts\Version2\Sale\ServiceQuoteLine.cs" />
     <Compile Include="Contracts\Version2\Sale\TimeBillingOrder.cs" />
@@ -190,6 +195,7 @@
     <Compile Include="Contracts\Version2\Sale\ServiceOrder.cs" />
     <Compile Include="Contracts\Version2\Sale\ServiceOrderLine.cs" />
     <Compile Include="Contracts\Version2\Sale\OrderWithLines.cs" />
+    <Compile Include="Contracts\Version2\Sale\OrderWithMultiCurrencySupport.cs" />
     <Compile Include="Contracts\Version2\Sale\TimeBillingInvoice.cs" />
     <Compile Include="Contracts\Version2\Sale\TimeBillingInvoiceLine.cs" />
     <Compile Include="Contracts\Version2\Sale\TimeBillingQuote.cs" />
@@ -259,7 +265,7 @@
     <Compile Include="Contracts\Version2\Contact\CustomerLink.cs" />
     <Compile Include="Contracts\Version2\Contact\CustomerSellingDetails.cs" />
     <Compile Include="Contracts\Version2\Contact\EmployeeLink.cs" />
-	  <Compile Include="Contracts\Version2\Contact\ContactLink.cs" />
+    <Compile Include="Contracts\Version2\Contact\ContactLink.cs" />
     <Compile Include="Contracts\Version2\GeneralLedger\GSTReportingMethod.cs" />
     <Compile Include="Contracts\Version2\Purchase\Bill.cs" />
     <Compile Include="Contracts\Version2\Purchase\BillLine.cs" />
@@ -412,6 +418,7 @@
     <Compile Include="Services\Version2\Sale\MiscellaneousQuoteService.cs" />
     <Compile Include="Services\Version2\Sale\ProfessionalQuoteService.cs" />
     <Compile Include="Services\Version2\Sale\QuoteService.cs" />
+    <Compile Include="Services\Version2\Sale\SaleEmailService.cs" />
     <Compile Include="Services\Version2\Sale\ServiceQuoteService.cs" />
     <Compile Include="Services\Version2\Sale\TimeBillingOrderService.cs" />
     <Compile Include="Services\Version2\Sale\ItemOrderService.cs" />

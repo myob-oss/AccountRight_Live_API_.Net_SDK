@@ -40,10 +40,15 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Banking
         public string Memo { get; set; }
 
         /// <summary>
+        /// The quantity amount for this line
+        /// </summary>
+        public decimal? UnitCount { get; set; }
+
+        /// <summary>
         /// Incrementing number that can be used for change control but does does not preserve a date or a time. 
         /// <para>ONLY required for updating an existing spend money transaction.</para>
         /// <para>NOT required when creating a new spend money transaction.</para>
         /// </summary>
-        public long RowVersion { get; set; }
+        public long RowVersion { get; set; }        
     }
 }

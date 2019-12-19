@@ -25,5 +25,12 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Company
         /// <para>Not null - Period locked and disallow entries prior to [value]</para>
         /// </summary>
         public DateTime? LockPeriodPriorTo { get; set; }
+
+        /// <summary>
+        /// Use AlphaAccountIdentifier
+        /// <para>true - Use Alphanumeric account identifier</para>
+        /// <para>false - Use ARL account identifier format</para>
+        /// </summary>
+        public bool UseAlphaAccountIdentifier { get; set; }
     }
 }
