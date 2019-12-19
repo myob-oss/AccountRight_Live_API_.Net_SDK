@@ -36,5 +36,10 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.GeneralLedger
         /// Date transaction has been reconciled
         /// </summary>
         public DateTime? ReconciledDate { get; set; }
+
+        /// <summary>
+        /// The quantity amount for this line
+        /// </summary>
+        public decimal? UnitCount { get; set; }
     }
 }

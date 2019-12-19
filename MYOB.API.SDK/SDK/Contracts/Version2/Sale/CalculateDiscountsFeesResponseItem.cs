@@ -1,4 +1,5 @@
 ﻿using System;
+using MYOB.AccountRight.SDK.Contracts.Version2.GeneralLedger;
 
 namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
 {
@@ -29,6 +30,11 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
         public decimal Discount { get; set; }
 
         /// <summary>
+        /// Calculated foreign discount amount (null if not foreign transaction)
+        /// </summary>
+        public decimal? DiscountForeign { get; set; }
+
+        /// <summary>
         /// Discount expiry date
         /// </summary>
         public DateTime DiscountExpiryDate { get; set; }
@@ -39,6 +45,11 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
         public decimal FinanceCharge { get; set; }
 
         /// <summary>
+        /// Calculated foreign finance charges (null if not foreign transaction)
+        /// </summary>
+        public decimal? FinanceChargeForeign { get; set; }
+
+        /// <summary>
         /// Balance due date
         /// </summary>
         public DateTime BalanceDueDate { get; set; }
@@ -47,5 +58,10 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
         /// Balance due amount
         /// </summary>
         public decimal BalanceDue { get; set; }
+
+        /// <summary>
+        /// Foreign Balance due amount (null if not foreign transaction)
+        /// </summary>
+        public decimal? BalanceDueForeign { get; set; }
     }
 }

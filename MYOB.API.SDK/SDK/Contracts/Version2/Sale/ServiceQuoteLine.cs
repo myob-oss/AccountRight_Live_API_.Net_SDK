@@ -38,5 +38,15 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
         /// Only applicable when <see cref="QuoteLine.Type"/>=<see cref="QuoteLineType.Transaction"/>
         /// </remarks>
         public TaxCodeLink TaxCode { get; set; }
+
+        /// <summary>
+        /// Unit of Measure
+        /// </summary>
+        public string UnitOfMeasure { get; set; }
+
+        /// <summary>
+        /// Unit Count
+        /// </summary>
+        public decimal? UnitCount { get; set; }
     }
 }

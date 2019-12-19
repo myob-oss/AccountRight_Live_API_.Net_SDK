@@ -56,8 +56,18 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
         public string Memo { get; set; }
 
         /// <summary>
+        /// The foreign currency related to this customerpayment
+        /// </summary>
+        public CurrencyLink ForeignCurrency { get; set; }
+
+        /// <summary>
+        /// The exchange rate (to local) of ForeignCurrency related to this customerpayment
+        /// </summary>
+        public decimal? CurrencyExchangeRate { get; set; }
+        /// <summary>
         /// The Invoices or Orders being affected
         /// </summary>
+
         public IEnumerable<CustomerPaymentRecordWithDiscountsAndFeesLine> Lines { get; set; }
     }
 }

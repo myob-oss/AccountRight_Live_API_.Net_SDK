@@ -6,7 +6,7 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Purchase
    /// <summary>
     /// Describes a service order
     /// </summary>
-    public class ServicePurchaseOrder : PurchaseOrderWithLines<ServicePurchaseOrderLine>
+    public class ServicePurchaseOrder : PurchaseOrderWithMultiCurrencySupport<ServicePurchaseOrderLine>
     {
         /// <summary>
         /// Initialise

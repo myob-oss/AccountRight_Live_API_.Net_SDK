@@ -33,11 +33,8 @@
         public Classification Classification { get; set; }
 
         /// <summary>
-        /// Account number for example 1150. Must be a unique four-digit number that does not include the account type classification number and account separator. (Required)
-        /// </summary>
-        /// <remarks>
-        /// Required. Initially defaults to -1 which will fail validation on the server if not set.
-        /// </remarks>
+        /// Account number for example 1150. Must be a unique four-digit number that does not include the account type classification number and account separator. 
+        /// </summary>       
         public int Number { get; set; }
 
         /// <summary>

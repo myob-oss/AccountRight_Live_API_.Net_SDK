@@ -21,6 +21,16 @@
         public decimal DiscountApplied { get; set; }
 
         /// <summary>
+        /// Foreign Amount applied to the purchase.
+        /// </summary>
+        public decimal AmountAppliedForeign { get; set; }
+
+        /// <summary>
+        /// Foreign Discount applied to the purchase.
+        /// </summary>
+        public decimal DiscountAppliedForeign { get; set; }
+
+        /// <summary>
         /// Is it an Bill or an Order 
         /// </summary>
         public SupplierPaymentLineType Type { get; set; }

@@ -35,5 +35,10 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
         /// Item for the invoice line
         /// </summary>
         public ItemLink Item { get; set; }
+
+        /// <summary>
+        /// Location of the purchase item bill line
+        /// </summary>
+        public LocationLink Location { get; set; }
     }
 }

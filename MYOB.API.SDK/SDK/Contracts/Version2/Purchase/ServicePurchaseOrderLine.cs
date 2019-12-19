@@ -17,6 +17,11 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Purchase
         public decimal Total { get; set; }
 
         /// <summary>
+        /// Total amount in foreign currency for the line only.
+        /// </summary>
+        public decimal? TotalForeign { get; set; }
+
+        /// <summary>
         /// The account
         /// </summary>
         /// <remarks>

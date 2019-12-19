@@ -57,9 +57,19 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
         public decimal AmountReceived { get; set; }
 
         /// <summary>
+        /// Total of all Foreign amounts applicable to the sale invoice.
+        /// </summary>
+        public decimal? AmountReceivedForeign { get; set; }
+
+        /// <summary>
         /// The foreign currency related to this customerpayment
         /// </summary>
         public CurrencyLink ForeignCurrency { get; set; }
+
+        /// <summary>
+        /// The exchange rate (to local) of ForeignCurrency related to this customerpayment
+        /// </summary>
+        public decimal? CurrencyExchangeRate { get; set; }
 
         /// <summary>
         /// Payment method text.
