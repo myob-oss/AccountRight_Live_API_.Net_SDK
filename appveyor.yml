@@ -25,14 +25,14 @@ artifacts:
 deploy:
 - provider: NuGet
   api_key:
-    secure: KaccNdIzaKg9lwNY0pWrSY37TcTYAExbUCRfTo7nOJGlAoGY3OfhUxyB4WPBlkBD
+    secure: Bt8SgvlZZ2V4hVkvaPnwBxiRy1uLw5WbksOUjMttEyramRkkooSEnF7GoPtVyZbI
   skip_symbols: true
   artifact: Release
   on:
     branch: release
 - provider: NuGet
   api_key:
-    secure: KaccNdIzaKg9lwNY0pWrSY37TcTYAExbUCRfTo7nOJGlAoGY3OfhUxyB4WPBlkBD
+    secure: Bt8SgvlZZ2V4hVkvaPnwBxiRy1uLw5WbksOUjMttEyramRkkooSEnF7GoPtVyZbI
   skip_symbols: true
   artifact: Candidate
   on:
