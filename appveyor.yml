@@ -1,4 +1,4 @@
-version: 2019.1.{build}
+version: 2020.{build}
 shallow_clone: true
 assembly_info:
   patch: true
@@ -25,18 +25,23 @@ artifacts:
 deploy:
 - provider: NuGet
   api_key:
-    secure: Bt8SgvlZZ2V4hVkvaPnwBxiRy1uLw5WbksOUjMttEyramRkkooSEnF7GoPtVyZbI
+    secure: LlFtlduQCvv8/wLHFr7i9bLjEdmXklNHtl4X0dbU3qe6b2fduuSGzLlytZGuFr2a
   skip_symbols: true
   artifact: Release
   on:
     branch: release
 - provider: NuGet
   api_key:
-    secure: Bt8SgvlZZ2V4hVkvaPnwBxiRy1uLw5WbksOUjMttEyramRkkooSEnF7GoPtVyZbI
+    secure: LlFtlduQCvv8/wLHFr7i9bLjEdmXklNHtl4X0dbU3qe6b2fduuSGzLlytZGuFr2a
   skip_symbols: true
   artifact: Candidate
   on:
     branch: candidate
+- provider: NuGet
+  server: https://www.myget.org/F/myob-developers/api/v2
+  api_key:
+    secure: OGw616WsfGBUWoVi1NZFVekoCyXoqi1f93v8GJJ8Y1DgcH5utdKg0yX2FGkFkXfj
+  artifact: Release
 notifications:
 - provider: Webhook
   url: https://webhooks.gitter.im/e/a5f4ffd724543d128fff

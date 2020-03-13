@@ -1,4 +1,5 @@
-﻿using MYOB.AccountRight.SDK.Contracts.Version2.Inventory;
+﻿using MYOB.AccountRight.SDK.Contracts.Version2.GeneralLedger;
+using MYOB.AccountRight.SDK.Contracts.Version2.Inventory;
 
 namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
 {
@@ -40,5 +41,20 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
         /// Location of the purchase item bill line
         /// </summary>
         public LocationLink Location { get; set; }
+
+        /// <summary>
+        /// Unit of Measure
+        /// </summary>
+        public string UnitOfMeasure { get; set; }
+
+        /// <summary>
+        /// Unit Count
+        /// </summary>
+        public decimal? UnitCount { get; set; }
+
+        /// <summary>
+        /// Item for the invoice line
+        /// </summary>
+        public AccountLink Account { get; set; }
     }
 }
