@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace MYOB.AccountRight.SDK.Contracts.Version2.Inventory
 {
@@ -16,14 +16,5 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Inventory
         /// Name of the Location.
         /// </summary>
         public string Name { get; set; }
-
-        /// <summary>
-        /// Endpoint of Location not yet available.
-        /// </summary>
-		public new Uri URI
-		{
-			get { return null;}
-		  
-		}
     }
 }

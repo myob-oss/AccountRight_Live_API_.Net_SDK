@@ -632,7 +632,7 @@
     <Compile Include="..\SDK\Contracts\Version2\Purchase\PurchaseOrderWithLines.cs">
       <Link>Contracts\Version2\Purchase\PurchaseOrderWithLines.cs</Link>
     </Compile>
-	<Compile Include="..\SDK\Contracts\Version2\Purchase\PurchaseOrderWithMultiCurrency.cs">
+    <Compile Include="..\SDK\Contracts\Version2\Purchase\PurchaseOrderWithMultiCurrency.cs">
       <Link>Contracts\Version2\Purchase\PurchaseOrderWithMultiCurrency.cs</Link>
     </Compile>
     <Compile Include="..\SDK\Contracts\Version2\Purchase\PurchaseStatus.cs">
@@ -791,7 +791,7 @@
     <Compile Include="..\SDK\Contracts\Version2\Sale\OrderWithLines.cs">
       <Link>Contracts\Version2\Sale\OrderWithLines.cs</Link>
     </Compile>
-	<Compile Include="..\SDK\Contracts\Version2\Sale\OrderWithMultiCurrencySupport.cs">
+    <Compile Include="..\SDK\Contracts\Version2\Sale\OrderWithMultiCurrencySupport.cs">
       <Link>Contracts\Version2\Sale\OrderWithMultiCurrencySupport.cs</Link>
     </Compile>
     <Compile Include="..\SDK\Contracts\Version2\Sale\ProfessionalInvoice.cs">
@@ -1265,6 +1265,7 @@
       <Link>Services\VersionInfoService.cs</Link>
     </Compile>
     <Compile Include="..\SDK\SimpleOAuthKeyService.cs" />
+    <Compile Include="Services\Version2\Inventory\LocationService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\SDK\MYOB.API.SDK.snk" />

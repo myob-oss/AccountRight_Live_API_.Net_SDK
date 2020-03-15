@@ -1,4 +1,6 @@
-﻿namespace MYOB.AccountRight.SDK.Contracts.Version2.Inventory
+using MYOB.AccountRight.SDK.Contracts.Version2.Contact;
+
+namespace MYOB.AccountRight.SDK.Contracts.Version2.Inventory
 {
     /// <summary>
     /// Item
@@ -10,7 +12,7 @@
         /// </summary>
         public Location()
         {
-            IsVisible = true;
+            IsActive = true;
         }
 
         /// <summary>
@@ -24,9 +26,24 @@
         public string Name { get; set; }
 
         /// <summary>
-        /// <para>True indicates the location is Visible. (default)</para>
-        /// <para>False indicates the location is not Visible.</para>
+        /// Notes describing the Location.
         /// </summary>
-        public bool IsVisible { get; set; }
+        public string Notes { get; set; }
+        /// <summary>
+        /// <para>True indicates the location is Active. (default)</para>
+        /// <para>False indicates the location is not Active.</para>
+        /// </summary>
+        public bool IsActive { get; set; }
+
+        /// <summary>
+        /// <para>True indicates the location can be used to Sell Items from. (default)</para>
+        /// <para>False indicates the location cannot be.</para>
+        /// </summary>
+        public bool CanSell { get; set; }
+
+        /// <summary>
+        /// Address of the Location
+        /// </summary>
+        public Address Address { get; set; }
     }
 }
