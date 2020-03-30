@@ -51,7 +51,7 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Purchase
         /// <para>True indicates the transaction is taxable.</para>
         /// <para>False indicates the transaction is not taxable.</para>
         /// </summary>
-        public bool? IsReportable { get; set; }
+        public bool IsReportable { get; set; }
         
         // Order = 9 is for Lines in PurchaseOrderWithLines class
         

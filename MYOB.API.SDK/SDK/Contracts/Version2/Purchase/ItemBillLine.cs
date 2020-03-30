@@ -1,4 +1,5 @@
-﻿using MYOB.AccountRight.SDK.Contracts.Version2.Inventory;
+﻿using MYOB.AccountRight.SDK.Contracts.Version2.GeneralLedger;
+using MYOB.AccountRight.SDK.Contracts.Version2.Inventory;
 
 namespace MYOB.AccountRight.SDK.Contracts.Version2.Purchase
 {
@@ -29,6 +30,21 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Purchase
         public decimal UnitPrice { get; set; }
 
         /// <summary>
+        /// Unit price Foreign assigned to the item.
+        /// </summary>
+        public decimal? UnitPriceForeign { get; set; }
+
+        /// <summary>
+        /// Unit Count of UnitOfMeasure
+        /// </summary>
+        public decimal? UnitCount { get; set; }
+
+        /// <summary>
+        /// Unit for Measure
+        /// </summary>
+        public string UnitOfMeasure { get; set; }
+
+        /// <summary>
         /// Discount rate applicable to the line of the purchase bill.
         /// </summary>
         public decimal DiscountPercent { get; set; }
@@ -37,5 +53,15 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Purchase
         /// Item of the purchase item bill line
         /// </summary>
         public ItemLink Item { get; set; }
+
+        /// <summary>
+        /// Account of purchase service bill line
+        /// </summary>
+        public AccountLink Account { get; set; }
+
+        /// <summary>
+        /// Location of the purchase item bill line
+        /// </summary>
+        public LocationLink Location { get; set; }
     }
 }

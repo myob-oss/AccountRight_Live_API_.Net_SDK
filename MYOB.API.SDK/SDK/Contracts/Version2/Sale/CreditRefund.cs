@@ -7,7 +7,7 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
     /// <summary>
     /// Describe the Sale/CreditRefund resource
     /// </summary>
-    public class CreditRefund : BaseEntity
+    public class CreditRefund : SupportMulticurrencyEntity
     {
         /// <summary>
         /// The account
@@ -58,5 +58,8 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
         /// The current delivery status of the refund
         /// </summary>
         public DocumentAction DeliveryStatus { get; set; }
+
+
+
     }
 }

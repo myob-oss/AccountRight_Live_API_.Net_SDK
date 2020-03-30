@@ -16,6 +16,14 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
         public decimal Total { get; set; }
 
         /// <summary>
+        /// The line foreign amount (depends on the value of <see cref="Order.IsTaxInclusive"/> in the parent <see cref="Order"/>)
+        /// </summary>
+        /// <remarks>
+        /// Only applicable when <see cref="OrderLine.Type"/>=<see cref="OrderLineType.Transaction"/>
+        /// </remarks>
+        public decimal? TotalForeign { get; set; }
+
+        /// <summary>
         /// The account
         /// </summary>
         /// <remarks>

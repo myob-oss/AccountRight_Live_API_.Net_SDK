@@ -39,6 +39,11 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
         public decimal BalanceDueAmount { get; set; }
 
         /// <summary>
+        /// Amount still payable on the sales invoice in foreign currency
+        /// </summary>
+        public decimal? BalanceDueAmountForeign { get; set; }
+
+        /// <summary>
         /// Invoice status
         /// </summary>
         public SaleStatus Status { get; set; }

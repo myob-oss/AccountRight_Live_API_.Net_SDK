@@ -16,9 +16,19 @@
         public decimal AmountApplied { get; set; }
 
         /// <summary>
+        /// The foreign amount of money applied
+        /// </summary>
+        public decimal AmountAppliedForeign { get; set; }
+
+        /// <summary>
         /// The discount to be applied
         /// </summary>
         public decimal DiscountApplied { get; set; }
+
+        /// <summary>
+        /// The foreign discount to be applied
+        /// </summary>
+        public decimal DiscountAppliedForeign { get; set; }
 
         /// <summary>
         /// Is it an Invoice or an Order 

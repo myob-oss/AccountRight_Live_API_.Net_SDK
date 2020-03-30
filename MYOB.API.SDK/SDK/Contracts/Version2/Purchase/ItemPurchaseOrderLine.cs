@@ -22,7 +22,6 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Purchase
         /// </summary>
         public decimal ReceivedQuantity { get; set; }
 
-       
         /// <summary>
         /// The unit price (depends on the value of <see cref="PurchaseOrder.IsTaxInclusive"/> in the parent <see cref="PurchaseOrder"/>)
         /// </summary>
@@ -30,6 +29,11 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Purchase
         /// Only applicable when <see cref="OrderLine.Type"/>=<see cref="OrderLineType.Transaction"/>
         /// </remarks>
         public decimal UnitPrice { get; set; }
+
+        /// <summary>
+        /// Unit price assigned to the item in foreign currency.
+        /// </summary>
+        public decimal? UnitPriceForeign { get; set; }
 
         /// <summary>
         /// The dicount applied
@@ -46,6 +50,11 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Purchase
         /// Only applicable when <see cref="OrderLine.Type"/>=<see cref="OrderLineType.Transaction"/>
         /// </remarks>
         public decimal Total { get; set; }
+
+        /// <summary>
+        /// Total amount in foreign currency for the line only.
+        /// </summary>
+        public decimal? TotalForeign { get; set; }
 
         /// <summary>
         /// The item
@@ -70,5 +79,13 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Purchase
         /// Only applicable when <see cref="OrderLine.Type"/>=<see cref="OrderLineType.Transaction"/>
         /// </remarks>
         public TaxCodeLink TaxCode { get; set; }
+
+        /// <summary>
+        /// The item
+        /// </summary>
+        /// <remarks>
+        /// Only applicable when <see cref="OrderLine.Type"/>=<see cref="OrderLineType.Transaction"/>
+        /// </remarks>
+        public LocationLink Location { get; set; }
     }
 }

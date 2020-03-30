@@ -1,4 +1,5 @@
-﻿using MYOB.AccountRight.SDK.Contracts.Version2.Inventory;
+﻿using MYOB.AccountRight.SDK.Contracts.Version2.GeneralLedger;
+using MYOB.AccountRight.SDK.Contracts.Version2.Inventory;
 
 namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
 {
@@ -16,6 +17,10 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
         /// Unit price assigned to the item.
         /// </summary>
         public decimal UnitPrice { get; set; }
+        /// <summary>
+        /// Unit price assigned to the item in foreign currency.
+        /// </summary>
+        public decimal? UnitPriceForeign { get; set; }
 
         /// <summary>
         /// Discount rate applicable to the line of the sale invoice.
@@ -31,5 +36,25 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
         /// Item for the invoice line
         /// </summary>
         public ItemLink Item { get; set; }
+
+        /// <summary>
+        /// Location of the purchase item bill line
+        /// </summary>
+        public LocationLink Location { get; set; }
+
+        /// <summary>
+        /// Unit of Measure
+        /// </summary>
+        public string UnitOfMeasure { get; set; }
+
+        /// <summary>
+        /// Unit Count
+        /// </summary>
+        public decimal? UnitCount { get; set; }
+
+        /// <summary>
+        /// Item for the invoice line
+        /// </summary>
+        public AccountLink Account { get; set; }
     }
 }

@@ -27,6 +27,10 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
         /// Available from 2013.5 (cloud), 2014.1 (desktop)
         /// </remarks>
         public decimal? Discount { get; set; }
+        /// <summary>
+        /// The discount applicable in foreign currency if the amount if paid before the discount expiry date
+        /// </summary>
+        public decimal? DiscountForeign { get; set; }
 
         /// <summary>
         /// Date the invoice balance is due.
@@ -43,5 +47,9 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
         /// Available from 2013.5 (cloud), 2014.1 (desktop)
         /// </remarks>
         public decimal? FinanceCharge { get; set; }
+        /// <summary>
+        /// Finance Charge amount in foreign currency applicable to the invoice.
+        /// </summary>
+        public decimal? FinanceChargeForeign { get; set; }
     }
 }

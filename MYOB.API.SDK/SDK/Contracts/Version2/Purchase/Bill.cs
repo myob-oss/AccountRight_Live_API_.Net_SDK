@@ -37,7 +37,7 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Purchase
         public string ShipToAddress { get; set; }
 
         /// <summary>
-        /// The payment terms
+        /// The payment terms 
         /// </summary>
         public InvoiceTerms Terms { get; set; }
 
@@ -59,14 +59,31 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Purchase
         public decimal Subtotal { get; set; }
 
         /// <summary>
+        /// Sum of all tax exclusive line amounts.
+        /// </summary>
+        public decimal? SubtotalForeign { get; set; }
+        
+
+        /// <summary>
         /// Total of all tax amounts applicable.
         /// </summary>
         public decimal TotalTax { get; set; }
+
+
+        /// <summary>
+        /// Total of all tax amounts applicable.
+        /// </summary>
+        public decimal? TotalTaxForeign { get; set; }
 
         /// <summary>
         /// The total amount
         /// </summary>
         public decimal TotalAmount { get; set; }
+
+        /// <summary>
+        /// The total amount
+        /// </summary>
+        public decimal? TotalAmountForeign { get; set; }
 
         /// <summary>
         /// A general comment
@@ -99,9 +116,20 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Purchase
         public decimal AppliedToDate { get; set; }
 
         /// <summary>
+        /// How much has been paid to date
+        /// </summary>
+        public decimal? AppliedToDateForeign { get; set; }
+
+
+        /// <summary>
         /// The outstanding balance
         /// </summary>
         public decimal BalanceDueAmount { get; set; }
+
+        /// <summary>
+        /// The outstanding balance
+        /// </summary>
+        public decimal? BalanceDueAmountForeign { get; set; }
 
         /// <summary>
         /// The current status of the purchase
@@ -133,6 +161,14 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Purchase
         /// Not supported by Professional or Miscellaneous bills
         /// </remarks>
         public decimal? Freight { get; set; }
+
+        /// <summary>
+        /// Tax freight amount applicable to the purchase bill.
+        /// </summary>
+        /// <remarks>
+        /// Not supported by Professional or Miscellaneous bills
+        /// </remarks>
+        public decimal? FreightForeign { get; set; }
 
         /// <summary>
         /// The freight Tax code

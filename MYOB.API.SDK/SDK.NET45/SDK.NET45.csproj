@@ -96,6 +96,12 @@
     <Compile Include="..\SDK\Contracts\Version2\Report\GST\NZGSTReport.cs">
       <Link>Contracts\Version2\Report\GST\NZGSTReport.cs</Link>
     </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\SaleEmail.cs">
+      <Link>Contracts\Version2\Sale\SaleEmail.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\SaleEmailResponse.cs">
+      <Link>Contracts\Version2\Sale\SaleEmailResponse.cs</Link>
+    </Compile>
     <Compile Include="..\SDK\Extensions\SecurityProtocolTypeExtensions.cs">
       <Link>Extensions\SecurityProtocolTypeExtensions.cs</Link>
     </Compile>
@@ -302,6 +308,9 @@
     <Compile Include="..\SDK\Contracts\Version2\Contact\EmployeeLink.cs">
       <Link>Contracts\Version2\Contact\EmployeeLink.cs</Link>
     </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Contact\ContactLink.cs">
+      <Link>Contracts\Version2\Contact\ContactLink.cs</Link>
+    </Compile>
     <Compile Include="..\SDK\Contracts\Version2\Contact\EmployeePaymentDetails.cs">
       <Link>Contracts\Version2\Contact\EmployeePaymentDetails.cs</Link>
     </Compile>
@@ -457,6 +466,12 @@
     </Compile>
     <Compile Include="..\SDK\Contracts\Version2\Inventory\ItemLink.cs">
       <Link>Contracts\Version2\Inventory\ItemLink.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Inventory\Location.cs">
+      <Link>Contracts\Version2\Inventory\Location.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Inventory\LocationLink.cs">
+      <Link>Contracts\Version2\Inventory\LocationLink.cs</Link>
     </Compile>
     <Compile Include="..\SDK\Contracts\Version2\Inventory\ItemPriceMatrix.cs">
       <Link>Contracts\Version2\Inventory\ItemPriceMatrix.cs</Link>
@@ -617,6 +632,9 @@
     <Compile Include="..\SDK\Contracts\Version2\Purchase\PurchaseOrderWithLines.cs">
       <Link>Contracts\Version2\Purchase\PurchaseOrderWithLines.cs</Link>
     </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Purchase\PurchaseOrderWithMultiCurrency.cs">
+      <Link>Contracts\Version2\Purchase\PurchaseOrderWithMultiCurrency.cs</Link>
+    </Compile>
     <Compile Include="..\SDK\Contracts\Version2\Purchase\PurchaseStatus.cs">
       <Link>Contracts\Version2\Purchase\PurchaseStatus.cs</Link>
     </Compile>
@@ -773,6 +791,9 @@
     <Compile Include="..\SDK\Contracts\Version2\Sale\OrderWithLines.cs">
       <Link>Contracts\Version2\Sale\OrderWithLines.cs</Link>
     </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Sale\OrderWithMultiCurrencySupport.cs">
+      <Link>Contracts\Version2\Sale\OrderWithMultiCurrencySupport.cs</Link>
+    </Compile>
     <Compile Include="..\SDK\Contracts\Version2\Sale\ProfessionalInvoice.cs">
       <Link>Contracts\Version2\Sale\ProfessionalInvoice.cs</Link>
     </Compile>
@@ -838,6 +859,9 @@
     </Compile>
     <Compile Include="..\SDK\Contracts\Version2\TimeBilling\Activity.cs">
       <Link>Contracts\Version2\TimeBilling\Activity.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\TimeBilling\ActivitySlip.cs">
+      <Link>Contracts\Version2\TimeBilling\ActivitySlip.cs</Link>
     </Compile>
     <Compile Include="..\SDK\Contracts\Version2\UserAccess.cs">
       <Link>Contracts\Version2\UserAccess.cs</Link>
@@ -961,7 +985,7 @@
     <Compile Include="..\SDK\Services\Version2\GeneralLedger\CategoryService.cs">
       <Link>Services\Version2\GeneralLedger\CategoryService.cs</Link>
     </Compile>
-	<Compile Include="..\SDK\Services\Version2\GeneralLedger\CurrencyService.cs">
+    <Compile Include="..\SDK\Services\Version2\GeneralLedger\CurrencyService.cs">
       <Link>Services\Version2\GeneralLedger\CurrencyService.cs</Link>
     </Compile>
     <Compile Include="..\SDK\Services\Version2\GeneralLedger\GeneralJournalService.cs">
@@ -1201,6 +1225,9 @@
     <Compile Include="..\SDK\Services\Version2\Sale\QuoteService.cs">
       <Link>Services\Version2\Sale\QuoteService.cs</Link>
     </Compile>
+    <Compile Include="..\SDK\Services\Version2\Sale\SaleEmailService.cs">
+      <Link>Services\Version2\Sale\SaleEmailService.cs</Link>
+    </Compile>
     <Compile Include="..\SDK\Services\Version2\Sale\ServiceInvoiceService.cs">
       <Link>Services\Version2\Sale\ServiceInvoiceService.cs</Link>
     </Compile>
@@ -1225,6 +1252,9 @@
     <Compile Include="..\SDK\Services\Version2\Security\UserService.cs">
       <Link>Services\Version2\Security\UserService.cs</Link>
     </Compile>
+    <Compile Include="..\SDK\Services\Version2\TimeBilling\ActivitySlipService.cs">
+      <Link>Services\Version2\TimeBilling\ActivitySlipService.cs</Link>
+    </Compile>
     <Compile Include="..\SDK\Services\Version2\TimeBilling\ActivityService.cs">
       <Link>Services\Version2\TimeBilling\ActivityService.cs</Link>
     </Compile>
@@ -1235,6 +1265,7 @@
       <Link>Services\VersionInfoService.cs</Link>
     </Compile>
     <Compile Include="..\SDK\SimpleOAuthKeyService.cs" />
+    <Compile Include="Services\Version2\Inventory\LocationService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\SDK\MYOB.API.SDK.snk" />

@@ -46,6 +46,10 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
         /// Sum of all tax exclusive line amounts applicable to the sale invoice.
         /// </summary>
         public decimal Subtotal { get; set; }
+        /// <summary>
+        /// Sum of all tax exclusive line amounts applicable to the sale invoice in foreign currency.
+        /// </summary>
+        public decimal? SubtotalForeign { get; set; }
 
         /// <summary>
         /// Tax freight amount applicable to the sale invoice.
@@ -54,6 +58,13 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
         /// Not supported by Professional or Miscellaneous invoices
         /// </remarks>
         public decimal Freight { get; set; }
+        /// <summary>
+        /// Tax freight amount applicable to the sale invoice in foreign currency.
+        /// </summary>
+        /// <remarks>
+        /// Not supported by Professional or Miscellaneous invoices
+        /// </remarks>
+        public decimal? FreightForeign { get; set; }
 
         /// <summary>
         /// The freight Tax code
@@ -67,11 +78,19 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
         /// Total of all tax amounts applicable to the sale invoice.
         /// </summary>
         public decimal TotalTax { get; set; }
+        /// <summary>
+        /// Total of all tax amounts applicable to the sale invoice in foreign currency.
+        /// </summary>
+        public decimal? TotalTaxForeign { get; set; }
 
         /// <summary>
         /// Total amount of the sale invoice.
         /// </summary>
         public decimal TotalAmount { get; set; }
+        /// <summary>
+        /// Total amount of the sale invoice in foreign currency.
+        /// </summary>
+        public decimal? TotalAmountForeign { get; set; }
 
         /// <summary>
         /// The category associated with the Invoice
@@ -131,5 +150,15 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
         /// Available from 2014.3
         /// </summary>
         public SaleOrderLink Order { get; set; }
+        
+        /// <summary>
+        /// The Foreign Currency associated with the entity
+        /// </summary>
+        public CurrencyLink ForeignCurrency { get; set; }
+
+        /// <summary>
+        /// The Local to Foreign Currency Exchange Rate associated with the entity
+        /// </summary>
+        public decimal? CurrencyExchangeRate { get; set; }
     }
 }

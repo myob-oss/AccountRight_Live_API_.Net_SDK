@@ -23,9 +23,18 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
         public Guid UID { get; set; }
 
         /// <summary>
-        /// Amount applied to invoice.
+        /// Amount applied to sale.
         /// </summary>
         public decimal AmountApplied { get; set; }
+        /// <summary>
+        /// Foreign Amount applied to sale.
+        /// </summary>
+        public decimal? AmountAppliedForeign { get; set; }
+
+        /// <summary>
+        /// Any gain or loss made on this sale due to exchange rate differences.
+        /// </summary>
+        public decimal? GainOrLoss { get; set; }
 
         /// <summary>
         /// The customer payment line type

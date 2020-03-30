@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using MYOB.AccountRight.SDK.Contracts.Version2.Contact;
+using MYOB.AccountRight.SDK.Contracts.Version2.GeneralLedger;
 
 namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
 {
@@ -18,6 +19,11 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
         /// The customer related to this creditnote
         /// </summary>
         public CustomerLink Customer { get; set; }
+
+        /// <summary>
+        /// The foreign currency related to this creditsettlement
+        /// </summary>
+        public CurrencyLink ForeignCurrency { get; set; }
 
         /// <summary>
         /// The number of the credit note
