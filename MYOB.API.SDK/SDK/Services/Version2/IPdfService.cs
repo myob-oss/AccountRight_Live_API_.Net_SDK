@@ -21,8 +21,9 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="resourceUid"></param>
         /// <param name="credentials"></param>
         /// <param name="template">The Template Name</param>
+        /// <param name="title">The Title</param>
         /// <returns></returns>
-        Stream GetPdf(CompanyFile cf, Guid resourceUid, ICompanyFileCredentials credentials, string template);
+        Stream GetPdf(CompanyFile cf, Guid resourceUid, ICompanyFileCredentials credentials, string template, string title=null);
 
         /// <summary>
         /// Get resource as Pdf
@@ -31,10 +32,11 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="resourceUid"></param>
         /// <param name="credentials"></param>
         /// <param name="template">The Template Name</param>
+        /// <param name="title">The Title</param>
         /// <param name="onComplete">The action to call when the operation is complete</param>
         /// <param name="onError">The action to call when the operation has an error</param>
         void GetPdf(CompanyFile cf, Guid resourceUid, ICompanyFileCredentials credentials, string template,
-                                 Action<HttpStatusCode, Stream> onComplete, Action<Uri, Exception> onError);
+                                 Action<HttpStatusCode, Stream> onComplete, Action<Uri, Exception> onError, string title = null);
 
 #if ASYNC
         /// <summary>
@@ -44,8 +46,9 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="resourceUid"></param>
         /// <param name="credentials"></param>
         /// <param name="template"></param>
+        /// <param name="title">The Title</param>
         /// <returns></returns>
-        Task<Stream> GetPdfAsync(CompanyFile cf, Guid resourceUid, ICompanyFileCredentials credentials, string template);
+        Task<Stream> GetPdfAsync(CompanyFile cf, Guid resourceUid, ICompanyFileCredentials credentials, string template, string title = null);
 
         /// <summary>
         /// Get resource as Pdf
@@ -54,9 +57,10 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="resourceUid"></param>
         /// <param name="credentials"></param>
         /// <param name="template"></param>
+        /// <param name="title">The Title</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<Stream> GetPdfAsync(CompanyFile cf, Guid resourceUid, ICompanyFileCredentials credentials, string template, CancellationToken cancellationToken);
+        Task<Stream> GetPdfAsync(CompanyFile cf, Guid resourceUid, ICompanyFileCredentials credentials, string template, CancellationToken cancellationToken, string title = null);
 #endif
 
     }

@@ -39,5 +39,10 @@
         /// Adjustment13Period
         /// </summary>
         public decimal YearEndAdjustment { get; set; }
+
+        /// <summary>
+        /// UnitCount
+        /// </summary>
+        public decimal? UnitCount { get; set; }
     }
 }
