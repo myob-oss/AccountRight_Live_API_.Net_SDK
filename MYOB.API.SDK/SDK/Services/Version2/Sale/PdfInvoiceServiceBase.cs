@@ -38,10 +38,11 @@ namespace MYOB.AccountRight.SDK.Services.Sale
         /// <param name="resourceUid">The identifier of the entity to retrieve</param>
         /// <param name="credentials">The credentials to access the company file</param>
         /// <param name="template">The Template Name</param>
+        /// <param name="title">The Title</param>
         /// <returns></returns>
-        public Stream GetPdf(CompanyFile cf, Guid resourceUid, ICompanyFileCredentials credentials, string template)
+        public Stream GetPdf(CompanyFile cf, Guid resourceUid, ICompanyFileCredentials credentials, string template, string title=null)
         {
-            return MakeApiGetRequestSyncPdf(BuildUri(cf, resourceUid, template), PdfMimetype, credentials);
+            return MakeApiGetRequestSyncPdf(BuildUri(cf, resourceUid, template, title), PdfMimetype, credentials);
         }
 
         /// <summary>
@@ -51,11 +52,12 @@ namespace MYOB.AccountRight.SDK.Services.Sale
         /// <param name="resourceUid">The identifier of the entity to retrieve</param>
         /// <param name="credentials">The credentials to access the company file</param>
         /// <param name="template">The Template Name</param>
+        /// <param name="title">The Title</param>
         /// <param name="onComplete">The action to call when the operation is complete</param>
         /// <param name="onError">The action to call when the operation has an error</param>
-        public void GetPdf(CompanyFile cf, Guid resourceUid, ICompanyFileCredentials credentials, string template, Action<HttpStatusCode, Stream> onComplete, Action<Uri, Exception> onError)
+        public void GetPdf(CompanyFile cf, Guid resourceUid, ICompanyFileCredentials credentials, string template, Action<HttpStatusCode, Stream> onComplete, Action<Uri, Exception> onError, string title = null)
         {
-            MakeApiGetRequestDelegateStream(BuildUri(cf, resourceUid, template), PdfMimetype, credentials, onComplete, onError);
+            MakeApiGetRequestDelegateStream(BuildUri(cf, resourceUid, template, title), PdfMimetype, credentials, onComplete, onError);
         }
 
 #if ASYNC
@@ -66,10 +68,11 @@ namespace MYOB.AccountRight.SDK.Services.Sale
         /// <param name="resourceUid">The identifier of the entity to retrieve</param>
         /// <param name="credentials">The credentials to access the company file</param>
         /// <param name="template">The Template Name</param>
+        /// <param name="title">The Title</param>
         /// <returns></returns>
-        public Task<Stream> GetPdfAsync(CompanyFile cf, Guid resourceUid, ICompanyFileCredentials credentials, string template)
+        public Task<Stream> GetPdfAsync(CompanyFile cf, Guid resourceUid, ICompanyFileCredentials credentials, string template, string title = null)
         {
-            return this.GetPdfAsync(cf, resourceUid, credentials, template, CancellationToken.None);
+            return this.GetPdfAsync(cf, resourceUid, credentials, template, CancellationToken.None, title);
         }
 
         /// <summary>
@@ -79,17 +82,21 @@ namespace MYOB.AccountRight.SDK.Services.Sale
         /// <param name="resourceUid">The identifier of the entity to retrieve</param>
         /// <param name="credentials">The credentials to access the company file</param>
         /// <param name="template">The Template Name</param>
+        /// <param name="title">The Title</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public Task<Stream> GetPdfAsync(CompanyFile cf, Guid resourceUid, ICompanyFileCredentials credentials, string template, CancellationToken cancellationToken)
+        public Task<Stream> GetPdfAsync(CompanyFile cf, Guid resourceUid, ICompanyFileCredentials credentials, string template, CancellationToken cancellationToken, string title = null)
         {
-            return this.MakeApiGetRequestAsyncStream(this.BuildUri(cf, resourceUid, template), PdfMimetype, credentials, cancellationToken, null);
+            return this.MakeApiGetRequestAsyncStream(this.BuildUri(cf, resourceUid, template, title), PdfMimetype, credentials, cancellationToken, null);
         }
 #endif
 
-        private Uri BuildUri(CompanyFile cf, Guid invoiceUid, string template)
+        private Uri BuildUri(CompanyFile cf, Guid invoiceUid, string template, string title)
         {
-            return BuildUri(cf, invoiceUid, queryString: string.Format("templatename={0}", template));
+            if(string.IsNullOrEmpty(title))
+                return BuildUri(cf, invoiceUid, queryString: string.Format("templatename={0}", template));
+            else
+                return BuildUri(cf, invoiceUid, queryString: string.Format("templatename={0}&title={1}", template, title));
         }
     }
 }
