@@ -48,5 +48,14 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.GeneralLedger
         /// </summary>
         public IList<GeneralJournalLine> Lines { get; set; }
 
+        /// <summary>
+        ///     Null is no foreign currency is set
+        /// </summary>
+        public CurrencyLink ForeignCurrency { get; set; }
+       
+        /// <summary>
+        /// The exchange rate between the Local and Foreign currency.
+        /// </summary>
+        public decimal? CurrencyExchangeRate { get; set; }
     }
 }
