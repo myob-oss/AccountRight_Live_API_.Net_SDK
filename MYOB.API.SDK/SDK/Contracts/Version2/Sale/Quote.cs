@@ -16,7 +16,6 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
         public Quote()
         {
             IsTaxInclusive = true;
-            Status = SaleQuoteStatus.Open;
         }
 
         /// <summary>
@@ -125,11 +124,6 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
         /// Foreign currency for multicurrency quotes.
         /// </summary>
         public CurrencyLink ForeignCurrency { get; set; }
-
-        /// <summary>
-        /// Quote Status
-        /// </summary>
-        public SaleQuoteStatus Status { get; set; }
     }
 
     /// <summary>

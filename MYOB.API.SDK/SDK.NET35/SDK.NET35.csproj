@@ -810,9 +810,6 @@
     <Compile Include="..\SDK\Contracts\Version2\Sale\SaleStatus.cs">
       <Link>Contracts\Version2\Sale\SaleStatus.cs</Link>
     </Compile>
-    <Compile Include="..\SDK\Contracts\Version2\Sale\SaleQuoteStatus.cs">
-      <Link>Contracts\Version2\Sale\SaleQuoteStatus.cs</Link>
-    </Compile>
     <Compile Include="..\SDK\Contracts\Version2\Sale\ServiceInvoice.cs">
       <Link>Contracts\Version2\Sale\ServiceInvoice.cs</Link>
     </Compile>

@@ -177,7 +177,6 @@
     <Compile Include="Contracts\Version2\Sale\QuoteWithLines.cs" />
     <Compile Include="Contracts\Version2\Sale\SaleEmail.cs" />
     <Compile Include="Contracts\Version2\Sale\SaleEmailResponse.cs" />
-    <Compile Include="Contracts\Version2\Sale\SaleQuoteStatus.cs" />
     <Compile Include="Contracts\Version2\Sale\ServiceQuote.cs" />
     <Compile Include="Contracts\Version2\Sale\ServiceQuoteLine.cs" />
     <Compile Include="Contracts\Version2\Sale\TimeBillingOrder.cs" />
