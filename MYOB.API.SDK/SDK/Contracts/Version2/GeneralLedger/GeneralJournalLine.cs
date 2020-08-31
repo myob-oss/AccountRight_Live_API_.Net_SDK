@@ -42,6 +42,12 @@
         public decimal Amount { get; set; }
 
         /// <summary>
+        /// Represents a foreign Credit Amount if <see cref="IsCredit"/> equals True
+        /// Represents a foreign Debit Amount if <see cref="IsCredit"/> equals False
+        /// </summary>
+        public decimal? AmountForeign { get; set; }
+
+        /// <summary>
         /// <see cref="Amount"/> Is Credit
         /// </summary>
         public bool IsCredit { get; set; }
@@ -51,6 +57,11 @@
         ///  The value written in Tax Amount is only taken into account if <see cref="IsOverriddenTaxAmount"/> equals True
         /// </summary>
         public decimal TaxAmount { get; set; }
+        
+        /// <summary>
+        /// Tax Foreign Amount
+        /// </summary>
+        public decimal? TaxAmountForeign { get; set; }
 
         /// <summary>
         /// By setting this flag to True, the Tax will be set to the value of TaxAmount. 
