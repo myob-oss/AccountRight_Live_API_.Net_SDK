@@ -159,12 +159,23 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Inventory
         /// </summary>
         public Uri PhotoURI { get; set; }
 
+        public ItemLocationDetail[] LocationDetails { get; set; }
+        public LocationLink DefaultSellLocation { get; set; }
+        public LocationLink DefaultReceiveLocation { get; set; }
+
+	}
+
+    public class ItemLocationDetail
+    {
+        public LocationLink Location { get; set; }
+
+        public double QuantityOnHand { get; set; }
     }
 
-    /// <summary>
-    /// The details when <see cref="Item.IsBought"/> is true
-    /// </summary>
-    public class ItemBuyingDetails
+	/// <summary>
+	/// The details when <see cref="Item.IsBought"/> is true
+	/// </summary>
+	public class ItemBuyingDetails
     {
         /// <summary>
         /// The last purchase price (read-only)
