@@ -54,8 +54,8 @@ namespace MYOB.AccountRight.SDK.Contracts
         public String Country { get; set; }
 
         /// <summary>
-        /// UIAccessFlags
+        /// Subscription Details of Company file
         /// </summary>
-        public int UIAccessFlags { get; set; }
+        public Subscription Subscription { get; set; }
     }
 }

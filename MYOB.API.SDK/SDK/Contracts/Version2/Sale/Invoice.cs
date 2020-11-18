@@ -160,5 +160,11 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
         /// The Local to Foreign Currency Exchange Rate associated with the entity
         /// </summary>
         public decimal? CurrencyExchangeRate { get; set; }
+
+        /// <summary>
+        /// If true, surcharge fee could apply to invoice 
+        /// </summary>
+        public bool CanApplySurcharge { get; set; }
+
     }
 }
