@@ -86,6 +86,7 @@
     <Compile Include="ApiCommunicationExceptionTests.cs" />
     <Compile Include="ApiConfigurationTests.cs" />
     <Compile Include="COMSupportedTests.cs" />
+    <Compile Include="Contracts\CompanyFileSubscriptionTests.cs" />
     <Compile Include="Contracts\Version2\GeneralJournalLineTests.cs" />
     <Compile Include="Contracts\Version2\LocationTests.cs" />
     <Compile Include="Contracts\Version2\SaleEmailTests.cs" />

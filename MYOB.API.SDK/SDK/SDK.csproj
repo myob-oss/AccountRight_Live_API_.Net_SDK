@@ -79,6 +79,7 @@
     <Compile Include="Contracts\Company.cs" />
     <Compile Include="Contracts\IETagSupport.cs" />
     <Compile Include="Contracts\ProductLevel.cs" />
+    <Compile Include="Contracts\Subscription.cs" />
     <Compile Include="Contracts\Version2\Banking\BankAccount.cs" />
     <Compile Include="Contracts\Version2\Banking\ReceiveMoneyTxnLine.cs" />
     <Compile Include="Contracts\Version2\Banking\ReceiveMoneyTxn.cs" />
