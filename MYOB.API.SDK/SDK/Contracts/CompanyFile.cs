@@ -52,10 +52,15 @@ namespace MYOB.AccountRight.SDK.Contracts
         /// Country code.
         /// </summary>
         public String Country { get; set; }
-
-        /// <summary>
+		
+		/// <summary>
         /// UIAccessFlags
         /// </summary>
         public int UIAccessFlags { get; set; }
+
+        /// <summary>
+        /// Subscription Details of Company file
+        /// </summary>
+        public Subscription Subscription { get; set; }
     }
 }

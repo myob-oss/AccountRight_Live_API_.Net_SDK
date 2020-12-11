@@ -25,7 +25,7 @@ namespace MYOB.AccountRight.SDK.Extensions
         /// <param name="requestUri"></param>
         public static void ProcessException(this Exception ex, Uri requestUri)
         {
-            if (ex == null) 
+            if (ex == null)
                 return;
 
             var webEx = ex as WebException;
@@ -60,7 +60,7 @@ namespace MYOB.AccountRight.SDK.Extensions
                             {
                                 throw;
                             }
-                            catch (Exception) 
+                            catch (Exception)
                             {
                                 info = output;
                             }

@@ -66,6 +66,9 @@
     <Compile Include="..\SDK\ApiConfiguration.cs">
       <Link>ApiConfiguration.cs</Link>
     </Compile>
+    <Compile Include="..\SDK\Contracts\Subscription.cs">
+      <Link>Contracts\Subscription.cs</Link>
+    </Compile>
     <Compile Include="..\SDK\Contracts\Version2\Contact\EmployeePaymentSummaryReport.cs">
       <Link>Contracts\Version2\Contact\EmployeePaymentSummaryReport.cs</Link>
     </Compile>
@@ -1268,7 +1271,9 @@
       <Link>Services\VersionInfoService.cs</Link>
     </Compile>
     <Compile Include="..\SDK\SimpleOAuthKeyService.cs" />
+    <Compile Include="Contracts\Version2\Report\BalanceSheetSummary\BalanceSheetSummary.cs" />
     <Compile Include="Services\Version2\Inventory\LocationService.cs" />
+    <Compile Include="Services\Version2\Report\BalanceSheetSummary\BalanceSheetSummaryService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\SDK\MYOB.API.SDK.snk" />
