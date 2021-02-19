@@ -37,11 +37,6 @@ deploy:
   artifact: Candidate
   on:
     branch: candidate
-- provider: NuGet
-  server: https://www.myget.org/F/myob-developers/api/v2
-  api_key:
-    secure: OGw616WsfGBUWoVi1NZFVekoCyXoqi1f93v8GJJ8Y1DgcH5utdKg0yX2FGkFkXfj
-  artifact: Release
 notifications:
 - provider: Webhook
   url: https://webhooks.gitter.im/e/a5f4ffd724543d128fff
