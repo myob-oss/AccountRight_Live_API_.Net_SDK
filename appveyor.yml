@@ -25,14 +25,14 @@ artifacts:
 deploy:
 - provider: NuGet
   api_key:
-    secure: fRXHJLS1bSzsTYijNLoXpeemiteAqraG/22cSD9UfDW3ek9lUTsPVpztFKVtLMmF
+    secure: QrhuWjsW4DDmkklGq8RHR5dLLvQ2F6xr+xurfIcWZjJM1afV8R86W4mDXzwa8wyx
   skip_symbols: true
   artifact: Release
   on:
     branch: release
 - provider: NuGet
   api_key:
-    secure: fRXHJLS1bSzsTYijNLoXpeemiteAqraG/22cSD9UfDW3ek9lUTsPVpztFKVtLMmF
+    secure: QrhuWjsW4DDmkklGq8RHR5dLLvQ2F6xr+xurfIcWZjJM1afV8R86W4mDXzwa8wyx
   skip_symbols: true
   artifact: Candidate
   on:
@@ -40,7 +40,7 @@ deploy:
 - provider: NuGet
   server: https://www.myget.org/F/myob-developers/api/v2
   api_key:
-    secure: fRXHJLS1bSzsTYijNLoXpeemiteAqraG/22cSD9UfDW3ek9lUTsPVpztFKVtLMmF
+    secure: OGw616WsfGBUWoVi1NZFVekoCyXoqi1f93v8GJJ8Y1DgcH5utdKg0yX2FGkFkXfj
   artifact: Release
 notifications:
 - provider: Webhook
