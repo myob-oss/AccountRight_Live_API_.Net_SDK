@@ -158,34 +158,33 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Inventory
         /// Uniform resource identifier to retrieve the Item's photo
         /// </summary>
         public Uri PhotoURI { get; set; }
-
         /// <summary>
-        /// List if LocationDetails
-        /// </summary>
+        /// List of LocationDetails
+        /// </summary> 
         public ItemLocationDetail[] LocationDetails { get; set; }
         /// <summary>
         /// Default Sell Location Link
-        /// </summary>
+        /// </summary> 
         public LocationLink DefaultSellLocation { get; set; }
         /// <summary>
-        /// Default Purchase Location Link
-        /// </summary>
+        /// Default Receive Location Link
+        /// </summary> 
         public LocationLink DefaultReceiveLocation { get; set; }
     }
 
-	/// <summary>
-	/// Item Location Details
-	/// </summary>
+    /// <summary>
+    /// Item Location Details
+    /// </summary> 
     public class ItemLocationDetail
     {
         /// <summary>
         /// Location Link
-        /// </summary>
+        /// </summary> 
         public LocationLink Location { get; set; }
 
         /// <summary>
         /// Quantity On Hand for location
-        /// </summary>
+        /// </summary> 
         public double QuantityOnHand { get; set; }
     }
 
@@ -203,6 +202,11 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Inventory
         /// The standard cost
         /// </summary>
         public decimal StandardCost { get; set; }
+
+        /// <summary>
+        /// The standard cost
+        /// </summary>
+        public bool? StandardCostTaxInclusive { get; set; }
 
         /// <summary>
         /// The unit of measure when buying items
