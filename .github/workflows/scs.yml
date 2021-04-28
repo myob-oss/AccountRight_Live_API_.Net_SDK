@@ -45,5 +45,5 @@ jobs: # this is where you add your Actions, each action is a new "job"
       - uses: ./.github/actions/sonarscanner
         with:
           projectKey: sonar-sme:arl-public-api-sdk
-          projectName: AArl Public API SDK
+          projectName: ARL Public API SDK
           login: ${{ secrets.SONARQUBE_TOKEN }}
