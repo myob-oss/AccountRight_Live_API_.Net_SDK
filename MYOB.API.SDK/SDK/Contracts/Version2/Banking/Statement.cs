@@ -50,6 +50,11 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Banking
         /// Status
         /// </summary>
         public StatementStatus Status { get; set; }
+
+        /// <summary>
+        /// Reference
+        /// </summary>
+        public string Reference { get; set; }
     }
 
     /// <summary>
