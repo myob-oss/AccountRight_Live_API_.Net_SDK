@@ -114,6 +114,9 @@
     <Compile Include="..\SDK\Extensions\SslProtocolsExtensions.cs">
       <Link>Extensions\SslProtocolsExtensions.cs</Link>
     </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Report\BalanceSheetSummary\BalanceSheetSummary.cs">
+      <Link>Contracts\Version2\Report\BalanceSheetSummary\BalanceSheetSummary.cs</Link>
+    </Compile>
     <Compile Include="..\SDK\Contracts\Version2\Report\ProfitAndLossSummary\ProfitAndLossSummary.cs">
       <Link>Contracts\Version2\Report\ProfitAndLossSummary\ProfitAndLossSummary.cs</Link>
     </Compile>
@@ -265,6 +268,12 @@
     </Compile>
     <Compile Include="..\SDK\Contracts\Version2\Company\CompanyTimesheetPreferences.cs">
       <Link>Contracts\Version2\Company\CompanyTimesheetPreferences.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Company\CustomList.cs">
+      <Link>Contracts\Version2\Company\CustomList.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Company\CustomListValue.cs">
+      <Link>Contracts\Version2\Company\CustomListValue.cs</Link>
     </Compile>
     <Compile Include="..\SDK\Contracts\Version2\Company\FormTemplate.cs">
       <Link>Contracts\Version2\Company\FormTemplate.cs</Link>
@@ -937,6 +946,9 @@
     <Compile Include="..\SDK\Services\Version2\Company\CompanyPreferencesService.cs">
       <Link>Services\Version2\Company\CompanyPreferencesService.cs</Link>
     </Compile>
+    <Compile Include="..\SDK\Services\Version2\Company\CustomListService.cs">
+      <Link>Services\Version2\Company\CustomListService.cs</Link>
+    </Compile>
     <Compile Include="..\SDK\Services\Version2\Company\FormTemplateService.cs">
       <Link>Services\Version2\Company\FormTemplateService.cs</Link>
     </Compile>
@@ -1171,6 +1183,9 @@
     <Compile Include="..\SDK\Services\Version2\Report\Payroll\EmployeePayrollAdviceService.cs">
       <Link>Services\Version2\Report\Payroll\EmployeePayrollAdviceService.cs</Link>
     </Compile>
+    <Compile Include="..\SDK\Services\Version2\Report\BalanceSheetSummary\BalanceSheetSummaryService.cs">
+      <Link>Services\Version2\Report\BalanceSheetSummary\BalanceSheetSummaryService.cs</Link>
+    </Compile>
     <Compile Include="..\SDK\Services\Version2\Report\ProfitAndLossSummary\ProfitAndLossSummaryService.cs">
       <Link>Services\Version2\Report\ProfitAndLossSummary\ProfitAndLossSummaryService.cs</Link>
     </Compile>
@@ -1271,13 +1286,13 @@
       <Link>Services\VersionInfoService.cs</Link>
     </Compile>
     <Compile Include="..\SDK\SimpleOAuthKeyService.cs" />
-    <Compile Include="Contracts\Version2\Report\BalanceSheetSummary\BalanceSheetSummary.cs" />
     <Compile Include="Services\Version2\Inventory\LocationService.cs" />
-    <Compile Include="Services\Version2\Report\BalanceSheetSummary\BalanceSheetSummaryService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\SDK\MYOB.API.SDK.snk" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

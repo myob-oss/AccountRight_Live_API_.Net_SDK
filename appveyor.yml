@@ -1,4 +1,4 @@
-version: 2020.4.{build}
+version: 2021.2.{build}
 shallow_clone: true
 assembly_info:
   patch: true
@@ -25,14 +25,14 @@ artifacts:
 deploy:
 - provider: NuGet
   api_key:
-    secure: Bt8SgvlZZ2V4hVkvaPnwBxiRy1uLw5WbksOUjMttEyramRkkooSEnF7GoPtVyZbI
+    secure: TvAgMkMonXiz+6/39tLFgbwWog1kr10sUCoCjUd/S1ylzqDyttGChbjDGepirhsB
   skip_symbols: true
   artifact: Release
   on:
     branch: release
 - provider: NuGet
   api_key:
-    secure: Bt8SgvlZZ2V4hVkvaPnwBxiRy1uLw5WbksOUjMttEyramRkkooSEnF7GoPtVyZbI
+    secure: TvAgMkMonXiz+6/39tLFgbwWog1kr10sUCoCjUd/S1ylzqDyttGChbjDGepirhsB
   skip_symbols: true
   artifact: Candidate
   on:
