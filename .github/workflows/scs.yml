@@ -1,0 +1,49 @@
+name: Security Scans # This is the name of your Github action "workflow"
+
+on:
+  pull_request:
+    types: [assigned, opened, edited, reopened] # run this workflow when the pull request meets one of these triggers
+
+  workflow_dispatch: # allows you to run the workflow by pushing a button
+
+jobs: # this is where you add your Actions, each action is a new "job"
+
+  trufflehog-scan:
+    runs-on: ubuntu-latest
+
+    steps:
+            # checkout local repo
+      - uses: actions/checkout@v2
+            # checkout appsec private actions repo
+      - uses: actions/checkout@v2
+        with:
+          repository: myob-ops/github-actions
+          ref: main
+          token: ${{ secrets.APPSEC_ACTIONS_TOKEN }} # stored in GitHub secrets
+          path: .github/actions
+        
+      - name: Trufflehog Actions Scan
+        uses: ./.github/actions/trufflehog
+        with:
+          scanArguments: "--regex --entropy=False --rules /regex.json --max_depth=50 --branch=${{ github.ref }}"
+
+  sonarscan:
+    runs-on: ubuntu-latest
+    
+    steps:
+            # checkout local repo
+      - uses: actions/checkout@v2
+
+            # checkout appsec private actions repo
+      - uses: actions/checkout@v2
+        with:
+          repository: myob-ops/github-actions
+          ref: main
+          token: ${{ secrets.APPSEC_ACTIONS_TOKEN }} # stored in GitHub secrets
+          path: .github/actions
+
+      - uses: ./.github/actions/sonarscanner
+        with:
+          projectKey: sonar-sme:arl-public-api-sdk
+          projectName: ARL Public API SDK
+          login: ${{ secrets.SONARQUBE_TOKEN }}
