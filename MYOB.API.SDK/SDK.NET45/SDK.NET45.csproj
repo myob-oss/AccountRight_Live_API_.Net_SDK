@@ -1286,7 +1286,16 @@
       <Link>Services\VersionInfoService.cs</Link>
     </Compile>
     <Compile Include="..\SDK\SimpleOAuthKeyService.cs" />
+    <Compile Include="Contracts\Version2\Banking\SpendMoneyAttachmentData.cs" />
+    <Compile Include="Contracts\Version2\Banking\SpendMoneyAttachmentWrapper.cs" />
+    <Compile Include="Contracts\Version2\Purchase\BillAttachmentData.cs" />
+    <Compile Include="Contracts\Version2\Purchase\BillAttachmentWrapper.cs" />
+    <Compile Include="Services\Version2\Banking\SpendMoneyAttachmentService.cs" />
     <Compile Include="Services\Version2\Inventory\LocationService.cs" />
+    <Compile Include="Services\Version2\Purchase\MiscellaneousBillAttachmentService.cs" />
+    <Compile Include="Services\Version2\Purchase\ProfessionalBillAttachmentService.cs" />
+    <Compile Include="Services\Version2\Purchase\ServiceBillAttachmentService.cs" />
+    <Compile Include="Services\Version2\Purchase\ItemBillAttachmentService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\SDK\MYOB.API.SDK.snk" />
