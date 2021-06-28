@@ -140,7 +140,330 @@ namespace MYOB.AccountRight.SDK.Services.Banking
 
         #endregion
 
-        #region Update Overrides
+        #region Base Class Overrides
+
+        /// <summary>
+        /// DO NOT USE THIS INHERITED MEMBER
+        /// </summary>
+        /// <param name="cf"></param>
+        /// <param name="uid"></param>
+        /// <param name="credentials"></param>
+        /// <param name="onComplete"></param>
+        /// <param name="onError"></param>
+        /// <param name="errorLevel"></param>
+        public override void Delete(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, Action<HttpStatusCode> onComplete, Action<Uri, Exception> onError, ErrorLevel errorLevel = ErrorLevel.IgnoreWarnings)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// DO NOT USE THIS INHERITED MEMBER
+        /// </summary>
+        /// <param name="cf"></param>
+        /// <param name="uid"></param>
+        /// <param name="credentials"></param>
+        /// <param name="errorLevel"></param>
+        public override void Delete(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, ErrorLevel errorLevel = ErrorLevel.IgnoreWarnings)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// DO NOT USE THIS INHERITED MEMBER
+        /// </summary>
+        /// <param name="cf"></param>
+        /// <param name="uid"></param>
+        /// <param name="credentials"></param>
+        /// <param name="cancellationToken"></param>
+        /// <param name="errorLevel"></param>
+        /// <returns></returns>
+        public override Task DeleteAsync(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, CancellationToken cancellationToken, ErrorLevel errorLevel = ErrorLevel.IgnoreWarnings)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// DO NOT USE THIS INHERITED MEMBER
+        /// </summary>
+        /// <param name="cf"></param>
+        /// <param name="uid"></param>
+        /// <param name="credentials"></param>
+        /// <param name="errorLevel"></param>
+        /// <returns></returns>
+        public override Task DeleteAsync(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, ErrorLevel errorLevel = ErrorLevel.IgnoreWarnings)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// DO NOT USE THIS INHERITED MEMBER
+        /// </summary>
+        /// <param name="cf"></param>
+        /// <param name="uid"></param>
+        /// <param name="credentials"></param>
+        /// <param name="onComplete"></param>
+        /// <param name="onError"></param>
+        /// <param name="eTag"></param>
+        public override void Get(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, Action<HttpStatusCode, SpendMoneyAttachmentWrapper> onComplete, Action<Uri, Exception> onError, string eTag = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// DO NOT USE THIS INHERITED MEMBER
+        /// </summary>
+        /// <param name="cf"></param>
+        /// <param name="uid"></param>
+        /// <param name="credentials"></param>
+        /// <param name="eTag"></param>
+        /// <returns></returns>
+        public override SpendMoneyAttachmentWrapper Get(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, string eTag = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// DO NOT USE THIS INHERITED MEMBER
+        /// </summary>
+        /// <param name="cf"></param>
+        /// <param name="uri"></param>
+        /// <param name="credentials"></param>
+        /// <param name="onComplete"></param>
+        /// <param name="onError"></param>
+        /// <param name="eTag"></param>
+        public override void Get(CompanyFile cf, Uri uri, ICompanyFileCredentials credentials, Action<HttpStatusCode, SpendMoneyAttachmentWrapper> onComplete, Action<Uri, Exception> onError, string eTag = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// DO NOT USE THIS INHERITED MEMBER
+        /// </summary>
+        /// <param name="cf"></param>
+        /// <param name="uri"></param>
+        /// <param name="credentials"></param>
+        /// <param name="eTag"></param>
+        /// <returns></returns>
+        public override SpendMoneyAttachmentWrapper Get(CompanyFile cf, Uri uri, ICompanyFileCredentials credentials, string eTag = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// DO NOT USE THIS INHERITED MEMBER
+        /// </summary>
+        /// <param name="cf"></param>
+        /// <param name="uid"></param>
+        /// <param name="credentials"></param>
+        /// <param name="cancellationToken"></param>
+        /// <param name="eTag"></param>
+        /// <returns></returns>
+        public override Task<SpendMoneyAttachmentWrapper> GetAsync(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, CancellationToken cancellationToken, string eTag = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// DO NOT USE THIS INHERITED MEMBER
+        /// </summary>
+        /// <param name="cf"></param>
+        /// <param name="uid"></param>
+        /// <param name="credentials"></param>
+        /// <param name="eTag"></param>
+        /// <returns></returns>
+        public override Task<SpendMoneyAttachmentWrapper> GetAsync(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, string eTag = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// DO NOT USE THIS INHERITED MEMBER
+        /// </summary>
+        /// <param name="cf"></param>
+        /// <param name="uri"></param>
+        /// <param name="credentials"></param>
+        /// <param name="cancellationToken"></param>
+        /// <param name="eTag"></param>
+        /// <returns></returns>
+        public override Task<SpendMoneyAttachmentWrapper> GetAsync(CompanyFile cf, Uri uri, ICompanyFileCredentials credentials, CancellationToken cancellationToken, string eTag = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// DO NOT USE THIS INHERITED MEMBER
+        /// </summary>
+        /// <param name="cf"></param>
+        /// <param name="uri"></param>
+        /// <param name="credentials"></param>
+        /// <param name="eTag"></param>
+        /// <returns></returns>
+        public override Task<SpendMoneyAttachmentWrapper> GetAsync(CompanyFile cf, Uri uri, ICompanyFileCredentials credentials, string eTag = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// DO NOT USE THIS INHERITED MEMBER
+        /// </summary>
+        /// <param name="cf"></param>
+        /// <param name="queryString"></param>
+        /// <param name="credentials"></param>
+        /// <param name="onComplete"></param>
+        /// <param name="onError"></param>
+        /// <param name="eTag"></param>
+        public override void GetRange(CompanyFile cf, string queryString, ICompanyFileCredentials credentials, Action<HttpStatusCode, PagedCollection<SpendMoneyAttachmentWrapper>> onComplete, Action<Uri, Exception> onError, string eTag = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// DO NOT USE THIS INHERITED MEMBER
+        /// </summary>
+        /// <param name="cf"></param>
+        /// <param name="queryString"></param>
+        /// <param name="credentials"></param>
+        /// <param name="eTag"></param>
+        /// <returns></returns>
+        public override PagedCollection<SpendMoneyAttachmentWrapper> GetRange(CompanyFile cf, string queryString, ICompanyFileCredentials credentials, string eTag = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// DO NOT USE THIS INHERITED MEMBER
+        /// </summary>
+        /// <param name="cf"></param>
+        /// <param name="queryString"></param>
+        /// <param name="credentials"></param>
+        /// <param name="cancellationToken"></param>
+        /// <param name="eTag"></param>
+        /// <returns></returns>
+        public override Task<PagedCollection<SpendMoneyAttachmentWrapper>> GetRangeAsync(CompanyFile cf, string queryString, ICompanyFileCredentials credentials, CancellationToken cancellationToken, string eTag = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// DO NOT USE THIS INHERITED MEMBER
+        /// </summary>
+        /// <param name="cf"></param>
+        /// <param name="queryString"></param>
+        /// <param name="credentials"></param>
+        /// <param name="eTag"></param>
+        /// <returns></returns>
+        public override Task<PagedCollection<SpendMoneyAttachmentWrapper>> GetRangeAsync(CompanyFile cf, string queryString, ICompanyFileCredentials credentials, string eTag = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// DO NOT USE THIS INHERITED MEMBER
+        /// </summary>
+        /// <param name="cf"></param>
+        /// <param name="entity"></param>
+        /// <param name="credentials"></param>
+        /// <param name="onComplete"></param>
+        /// <param name="onError"></param>
+        /// <param name="errorLevel"></param>
+        public override void Insert(CompanyFile cf, SpendMoneyAttachmentWrapper entity, ICompanyFileCredentials credentials, Action<HttpStatusCode, string> onComplete, Action<Uri, Exception> onError, ErrorLevel errorLevel = ErrorLevel.IgnoreWarnings)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// DO NOT USE THIS INHERITED MEMBER
+        /// </summary>
+        /// <param name="cf"></param>
+        /// <param name="entity"></param>
+        /// <param name="credentials"></param>
+        /// <param name="errorLevel"></param>
+        /// <returns></returns>
+        public override string Insert(CompanyFile cf, SpendMoneyAttachmentWrapper entity, ICompanyFileCredentials credentials, ErrorLevel errorLevel = ErrorLevel.IgnoreWarnings)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// DO NOT USE THIS INHERITED MEMBER
+        /// </summary>
+        /// <param name="cf"></param>
+        /// <param name="entity"></param>
+        /// <param name="credentials"></param>
+        /// <param name="cancellationToken"></param>
+        /// <param name="errorLevel"></param>
+        /// <returns></returns>
+        public override Task<string> InsertAsync(CompanyFile cf, SpendMoneyAttachmentWrapper entity, ICompanyFileCredentials credentials, CancellationToken cancellationToken, ErrorLevel errorLevel = ErrorLevel.IgnoreWarnings)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// DO NOT USE THIS INHERITED MEMBER
+        /// </summary>
+        /// <param name="cf"></param>
+        /// <param name="entity"></param>
+        /// <param name="credentials"></param>
+        /// <param name="errorLevel"></param>
+        /// <returns></returns>
+        public override Task<string> InsertAsync(CompanyFile cf, SpendMoneyAttachmentWrapper entity, ICompanyFileCredentials credentials, ErrorLevel errorLevel = ErrorLevel.IgnoreWarnings)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// DO NOT USE THIS INHERITED MEMBER
+        /// </summary>
+        /// <param name="cf"></param>
+        /// <param name="entity"></param>
+        /// <param name="credentials"></param>
+        /// <param name="onComplete"></param>
+        /// <param name="onError"></param>
+        /// <param name="errorLevel"></param>
+        public override void InsertEx(CompanyFile cf, SpendMoneyAttachmentWrapper entity, ICompanyFileCredentials credentials, Action<HttpStatusCode, string, SpendMoneyAttachmentWrapper> onComplete, Action<Uri, Exception> onError, ErrorLevel errorLevel = ErrorLevel.IgnoreWarnings)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// DO NOT USE THIS INHERITED MEMBER
+        /// </summary>
+        /// <param name="cf"></param>
+        /// <param name="entity"></param>
+        /// <param name="credentials"></param>
+        /// <param name="errorLevel"></param>
+        /// <returns></returns>
+        public override SpendMoneyAttachmentWrapper InsertEx(CompanyFile cf, SpendMoneyAttachmentWrapper entity, ICompanyFileCredentials credentials, ErrorLevel errorLevel = ErrorLevel.IgnoreWarnings)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// DO NOT USE THIS INHERITED MEMBER
+        /// </summary>
+        /// <param name="cf"></param>
+        /// <param name="entity"></param>
+        /// <param name="credentials"></param>
+        /// <param name="cancellationToken"></param>
+        /// <param name="errorLevel"></param>
+        /// <returns></returns>
+        public override Task<SpendMoneyAttachmentWrapper> InsertExAsync(CompanyFile cf, SpendMoneyAttachmentWrapper entity, ICompanyFileCredentials credentials, CancellationToken cancellationToken, ErrorLevel errorLevel = ErrorLevel.IgnoreWarnings)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// DO NOT USE THIS INHERITED MEMBER
+        /// </summary>
+        /// <param name="cf"></param>
+        /// <param name="entity"></param>
+        /// <param name="credentials"></param>
+        /// <param name="errorLevel"></param>
+        /// <returns></returns>
+        public override Task<SpendMoneyAttachmentWrapper> InsertExAsync(CompanyFile cf, SpendMoneyAttachmentWrapper entity, ICompanyFileCredentials credentials, ErrorLevel errorLevel = ErrorLevel.IgnoreWarnings)
+        {
+            throw new NotImplementedException();
+        }
 
         /// <summary>
         /// Update not supported for this resource
@@ -275,7 +598,7 @@ namespace MYOB.AccountRight.SDK.Services.Banking
             var qs = string.IsNullOrEmpty(queryString) ? string.Empty : queryString;
             var attchUid = attachmentUid.HasValue ? "/" + attachmentUid.ToString() : string.Empty;
 
-            return new Uri(string.Format("{0}/{1}/{2}{3}{4}", companyFile.Uri, "Banking/SpendMoney", spendMoneyUid.ToString(), "/Attachment", attchUid, qs));
+            return new Uri(string.Format("{0}/{1}/{2}{3}{4}{5}", companyFile.Uri, "Banking/SpendMoney", spendMoneyUid.ToString(), "/Attachment", attchUid, qs));
         }
     }
 }
