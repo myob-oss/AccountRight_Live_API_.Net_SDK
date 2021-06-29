@@ -1,5 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(SolutionDir)\packages\NUnit3TestAdapter.3.17.0\build\net35\NUnit3TestAdapter.props" Condition="Exists('..\..\..\packages\NUnit3TestAdapter.3.17.0\build\net35\NUnit3TestAdapter.props')" />
+  <Import Project="$(SolutionDir)\packages\NUnit.3.13.1\build\NUnit.props" Condition="Exists('..\..\..\packages\NUnit.3.13.1\build\NUnit.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -13,7 +15,8 @@
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
-    <NuGetPackageImportStamp>e447d0c4</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -55,9 +58,8 @@
       <HintPath>$(SolutionDir)\packages\NSubstitute.1.8.2.0\lib\net45\NSubstitute.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <HintPath>$(SolutionDir)\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="nunit.framework, Version=3.13.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>$(SolutionDir)\packages\NUnit.3.13.1\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="PactNet">
       <HintPath>$(SolutionDir)\packages\PactNet.1.0.7\lib\net40\PactNet.dll</HintPath>
@@ -96,6 +98,8 @@
     <Compile Include="Contracts\Version2\ProfessionalQuoteTests.cs" />
     <Compile Include="Contracts\Version2\QuoteTests.cs" />
     <Compile Include="Contracts\Version2\ServiceQuoteTests.cs" />
+    <Compile Include="Contracts\Version2\BillAttachmentWrapperTests.cs" />
+    <Compile Include="Contracts\Version2\SpendMoneyAttachmentWrapperTests.cs" />
     <Compile Include="Contracts\Version2\SpendMoneyTxnLineTests.cs" />
     <Compile Include="Contracts\Version2\TimeBillingQuoteTests.cs" />
     <Compile Include="Contracts\Version2\UserTests.cs" />
@@ -132,6 +136,10 @@
     <Compile Include="Services\AccountRegisterServiceTests.cs" />
     <Compile Include="Services\AccountServiceTests.cs" />
     <Compile Include="Services\BalanceSheetSummaryServiceTests.cs" />
+    <Compile Include="Services\CustomListServiceTests.cs" />
+    <Compile Include="Services\MiscellaneousBillAttachmentServiceTests.cs" />
+    <Compile Include="Services\ProfessionalBillAttachmentServiceTests.cs" />
+    <Compile Include="Services\ServiceBillAttachmentServiceTests.cs" />
     <Compile Include="Services\LocationServiceTests.cs" />
     <Compile Include="Services\SaleEmailServiceTests.cs" />
     <Compile Include="Services\ActivitySlipServiceTests.cs" />
@@ -163,6 +171,8 @@
     <Compile Include="Services\QuoteServiceTests.cs" />
     <Compile Include="Services\RoleServiceTests.cs" />
     <Compile Include="Services\ServiceQuoteServiceTests.cs" />
+    <Compile Include="Services\ItemBillAttachmentServiceTests.cs" />
+    <Compile Include="Services\SpendMoneyAttachmentServiceTests.cs" />
     <Compile Include="Services\TaxCodeSummaryServiceTests.cs" />
     <Compile Include="Services\TimeBillingOrderServiceTests.cs" />
     <Compile Include="Services\EmployeePaymentDetailsServiceTests.cs" />
@@ -263,6 +273,13 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\packages\NUnit.3.13.1\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\NUnit.3.13.1\build\NUnit.props'))" />
+    <Error Condition="!Exists('$(SolutionDir)\packages\NUnit3TestAdapter.3.17.0\build\net35\NUnit3TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\NUnit3TestAdapter.3.17.0\build\net35\NUnit3TestAdapter.props'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

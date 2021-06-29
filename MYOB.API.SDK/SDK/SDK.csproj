@@ -114,6 +114,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Contracts\Version2\Company\CompanyTimesheetPreferences.cs" />
+    <Compile Include="Contracts\Version2\Company\CustomList.cs" />
+    <Compile Include="Contracts\Version2\Company\CustomListValue.cs" />
     <Compile Include="Contracts\Version2\Company\FormTemplate.cs" />
     <Compile Include="Contracts\Version2\Company\PriceLevel.cs" />
     <Compile Include="Contracts\Version2\Contact\EmployeePaymentSummaryReport.cs" />
@@ -160,6 +162,7 @@
     <Compile Include="Contracts\Version2\Purchase\ServicePurchaseOrder.cs" />
     <Compile Include="Contracts\Version2\Purchase\ServicePurchaseOrderLine.cs" />
     <Compile Include="Contracts\Version2\Purchase\PurchaseOrderWithLines.cs" />
+    <Compile Include="Contracts\Version2\Report\BalanceSheetSummary\BalanceSheetSummary.cs" />
     <Compile Include="Contracts\Version2\Report\GST\NZGSTReport.cs" />
     <Compile Include="Contracts\Version2\Report\PayrollCategorySummary\PayrollCategorySummary.cs" />
     <Compile Include="Contracts\Version2\Report\Payroll\EmployeePayrollAdvice.cs" />
@@ -376,6 +379,7 @@
     <Compile Include="Services\Version2\Banking\StatementService.cs" />
     <Compile Include="Services\Version2\Banking\TransferMoneyTxnService.cs" />
     <Compile Include="Services\Version2\Company\CompanyPreferencesService.cs" />
+    <Compile Include="Services\Version2\Company\CustomListService.cs" />
     <Compile Include="Services\Version2\Company\FormTemplateService.cs" />
     <Compile Include="Services\Version2\Contact\ContactService.cs" />
     <Compile Include="Services\Version2\Contact\EmployeePaymentSummaryReportService.cs" />
@@ -411,6 +415,7 @@
     <Compile Include="Services\Version2\Purchase\ServicePurchaseOrderService.cs" />
     <Compile Include="Services\Version2\Purchase\PurchaseOrderService.cs" />
     <Compile Include="Services\Version2\ReadableRangeService.cs" />
+    <Compile Include="Services\Version2\Report\BalanceSheetSummary\BalanceSheetSummaryService.cs" />
     <Compile Include="Services\Version2\Report\GST\NzgstReportService.cs" />
     <Compile Include="Services\Version2\Report\PayrollCategorySummary\PayrollCategorySummaryService.cs" />
     <Compile Include="Services\Version2\Report\Payroll\EmployeePayrollAdviceService.cs" />
