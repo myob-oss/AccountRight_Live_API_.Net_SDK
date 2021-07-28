@@ -47,7 +47,7 @@ namespace SDK.Test.Services
             _uid = Guid.NewGuid();
         }
 
-        private readonly Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>[] _getActions = new[]
+        private static readonly Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>[] _getActions = new[]
             {
                 new Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>("Async", 
                     (service, cf) =>
@@ -83,7 +83,7 @@ namespace SDK.Test.Services
             Assert.AreEqual(_uid, received.UID, "Incorrect data received during {0} operation", action.Item1);
         }
 
-        private readonly Tuple<string, Func<TestReadOnlyService, CompanyFile, PagedCollection<UserContract>>>[] _getRangeActions = new[]
+        private static readonly Tuple<string, Func<TestReadOnlyService, CompanyFile, PagedCollection<UserContract>>>[] _getRangeActions = new[]
             {
                 new Tuple<string, Func<TestReadOnlyService, CompanyFile, PagedCollection<UserContract>>>("Delegate", 
                     (service, cf) =>
@@ -124,7 +124,7 @@ namespace SDK.Test.Services
             Assert.AreEqual(_uid, received.Items[0].UID, "Incorrect data received during {0} operation", action.Item1);
         }
 
-        private readonly Tuple<string, Func<TestReadOnlyService, CompanyFile, PagedCollection<UserContract>>>[] _getRangeQueryActions = new[]
+        private static readonly Tuple<string, Func<TestReadOnlyService, CompanyFile, PagedCollection<UserContract>>>[] _getRangeQueryActions = new[]
             {
                 new Tuple<string, Func<TestReadOnlyService, CompanyFile, PagedCollection<UserContract>>>("Delegate", 
                     (service, cf) =>
@@ -160,7 +160,7 @@ namespace SDK.Test.Services
             Assert.AreEqual(_uid, received.Items[0].UID, "Incorrect data received during {0} operation", action.Item1);
         }
 
-        private readonly Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>[] _getByUriActions = new[]
+        private static readonly Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>[] _getByUriActions = new[]
             {
                 new Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>("Async", 
                     (service, cf) =>
@@ -195,7 +195,7 @@ namespace SDK.Test.Services
             Assert.AreEqual(_uid, received.UID, "Incorrect data received during {0} operation", action.Item1);
         }
 
-        private readonly Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>[] _getByInvalidUriActions = new[]
+        private static readonly Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>[] _getByInvalidUriActions = new[]
             {
                 new Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>("DelegateBadCF", 
                     (service, cf) =>
@@ -262,7 +262,7 @@ namespace SDK.Test.Services
 
         }
 
-        private readonly Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>[] _getByUriActionsEtag = new[]
+        private static readonly Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>[] _getByUriActionsEtag = new[]
             {
                 new Tuple<string, Func<TestReadOnlyService, CompanyFile, UserContract>>("Async", 
                     (service, cf) =>
@@ -299,7 +299,7 @@ namespace SDK.Test.Services
             Assert.AreEqual("987654321", request.Headers[HttpRequestHeader.IfNoneMatch]);
         }
 
-        private readonly Tuple<string, Func<TestReadOnlyService, CompanyFile, PagedCollection<UserContract>>>[] _getRangeActionsEtag = new[]
+        private static readonly Tuple<string, Func<TestReadOnlyService, CompanyFile, PagedCollection<UserContract>>>[] _getRangeActionsEtag = new[]
             {
                 new Tuple<string, Func<TestReadOnlyService, CompanyFile, PagedCollection<UserContract>>>("Delegate", 
                     (service, cf) =>

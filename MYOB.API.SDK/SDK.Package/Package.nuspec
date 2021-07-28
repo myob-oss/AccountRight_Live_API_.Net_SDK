@@ -8,7 +8,7 @@
     <authors>MYOB_Developers</authors>
     <owners>MYOB Technology Pty. Ltd.</owners>
     <description>
-      A .NET portable library SDK wrapper around the MYOB AccountRight API v2. Samples of how to use this API can be found on Github (MYOB-OSS).
+      A .NET portable library SDK wrapper around the MYOB AccountRight API v2. Samples of how to use this API can be found on Github (MYOB-Technology).
     </description>
     <releaseNotes>
     </releaseNotes>
@@ -16,10 +16,10 @@
       A .NET portable library SDK wrapper around the MYOB AccountRight API v2.
     </summary>
     <language>en-US</language>
-    <projectUrl>https://github.com/MYOB-OSS/AccountRight_Live_API_.Net_SDK/</projectUrl>
+    <projectUrl>https://github.com/MYOB-Technology/AccountRight_Live_API_.Net_SDK/</projectUrl>
     <iconUrl>https://secure.gravatar.com/avatar/4048117a861a82676633e4d36721da06</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <licenseUrl>https://github.com/MYOB-OSS/AccountRight_Live_API_.Net_SDK/blob/master/LICENSE</licenseUrl>
+    <licenseUrl>https://github.com/MYOB-Technology/AccountRight_Live_API_.Net_SDK/blob/master/LICENSE</licenseUrl>
     <copyright>Copyright MYOB Technology Pty. Ltd. 2013-2015</copyright>
     <dependencies>
       <group targetFramework="net35">

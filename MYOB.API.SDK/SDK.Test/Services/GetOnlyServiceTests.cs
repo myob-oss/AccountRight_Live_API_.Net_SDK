@@ -43,7 +43,7 @@ namespace SDK.Test.Services
             _uid = Guid.NewGuid();
         }
 
-        private readonly Tuple<string, Func<TestGetOnlyService, CompanyFile, UserContract>>[] _testGetOnlyActions = new[]
+        private static readonly Tuple<string, Func<TestGetOnlyService, CompanyFile, UserContract>>[] _testGetOnlyActions = new[]
             {
                 new Tuple<string, Func<TestGetOnlyService, CompanyFile, UserContract>>("Delegate", 
                                                                                        (service, cf) =>
@@ -84,7 +84,7 @@ namespace SDK.Test.Services
             Assert.AreEqual(_uid, received.UID, "Incorrect data received during {0} operation", action.Item1);
         }
 
-        private readonly Tuple<string, Func<TestGetOnlyService, CompanyFile, UserContract>>[] _getByUriActionsEtag = new[]
+        private static readonly Tuple<string, Func<TestGetOnlyService, CompanyFile, UserContract>>[] _getByUriActionsEtag = new[]
             {
                 new Tuple<string, Func<TestGetOnlyService, CompanyFile, UserContract>>("Delegate", 
                     (service, cf) =>

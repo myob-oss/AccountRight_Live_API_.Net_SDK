@@ -131,6 +131,18 @@ namespace MYOB.AccountRight.SDK.Services
             return MakeApiGetRequestSync<CompanyFileWithResources>(cf.Uri, credentials, null);
         }
 
+        /// <summary>
+        /// Get a company file resource entry with the list of available resources
+        /// </summary>
+        /// <param name="cf">A company file that has been retrieved</param>
+        /// <param name="credentials">The credentials to access the company file</param>
+        /// <returns></returns>
+        public CompanyFileWithResources GetCompanyResource(CompanyFile cf, ICompanyFileCredentials credentials)
+        {
+            Uri cfResourceEndPoint = new Uri(cf.Uri + "/company");
+            return MakeApiGetRequestSync<CompanyFileWithResources>(cfResourceEndPoint, credentials, null);
+        }
+
 #if ASYNC
         /// <summary>
         /// Get a company file entry with the list of available resources

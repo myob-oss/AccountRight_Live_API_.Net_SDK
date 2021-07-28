@@ -106,7 +106,7 @@ namespace SDK.Test.Communication
         }
 
         [Test]
-        async public void CanExtractJsonEntityAsync()
+        async public Task CanExtractJsonEntityAsync()
         {
             // arrange
             var uri = "http://localhost/";
@@ -123,7 +123,7 @@ namespace SDK.Test.Communication
         }
 
         [Test]
-        async public void CanExtractCompressedJsonEntityAsync()
+        async public Task CanExtractCompressedJsonEntityAsync()
         {
             // arrange
             var uri = "http://localhost/";
@@ -149,7 +149,7 @@ namespace SDK.Test.Communication
             var handler = new TestBaseRequestHandler(factory);
 
             // act
-            Assert.Throws<ApiCommunicationException>(async () => await handler.MakeRequestAsync(uri));
+            Assert.ThrowsAsync<ApiCommunicationException>(async () => await handler.MakeRequestAsync(uri));
 
             // assert
         }

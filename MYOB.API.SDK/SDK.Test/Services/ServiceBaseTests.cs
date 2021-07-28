@@ -117,7 +117,7 @@ namespace SDK.Test.Services
             Assert.IsInstanceOf<InvalidOperationException>(ex.InnerException);
         }
 
-        private readonly Tuple<Action<TestServiceBase, Uri>, string, bool>[] _operations = new[]
+        private static readonly Tuple<Action<TestServiceBase, Uri>, string, bool>[] _operations = new[]
             {
                 new Tuple<Action<TestServiceBase, Uri>, string, bool>((@base, uri) => @base.Get(uri), new UserContract() { Name = "User" }.ToJson(), true),
                 new Tuple<Action<TestServiceBase, Uri>, string, bool>((@base, uri) => @base.Delete(uri), null, true),

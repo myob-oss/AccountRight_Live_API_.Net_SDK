@@ -9,7 +9,7 @@ namespace SDK.Test.Services
     [TestFixture]
     public class NamespaceTests
     {
-        private IEnumerable<Type> ServiceTypes
+        private static IEnumerable<Type> ServiceTypes
         {
             get
             {

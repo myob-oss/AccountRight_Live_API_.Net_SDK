@@ -50,7 +50,7 @@ namespace SDK.Test.Services
             _uid = Guid.NewGuid();
         }
 
-        private readonly Tuple<string, Func<TestMutableService, CompanyFile, bool>>[] _deleteActions = new[]
+        private static readonly Tuple<string, Func<TestMutableService, CompanyFile, bool>>[] _deleteActions = new[]
             {
                 new Tuple<string, Func<TestMutableService, CompanyFile, bool>>("Delegate", 
                     (service, cf) =>
@@ -94,7 +94,7 @@ namespace SDK.Test.Services
             Assert.IsTrue(ret, "Incorrect data received during {0} operation", action.Item1);
         }
 
-        private readonly Tuple<string, Func<TestMutableService, CompanyFile, string>>[] _postActions = new[]
+        private static readonly Tuple<string, Func<TestMutableService, CompanyFile, string>>[] _postActions = new[]
             {
                 new Tuple<string, Func<TestMutableService, CompanyFile, string>>("Delegate", 
                     (service, cf) =>
@@ -138,7 +138,7 @@ namespace SDK.Test.Services
 
         protected static Guid UID = Guid.NewGuid();
 
-        private readonly Tuple<string, Func<TestMutableService, CompanyFile, string>>[] _putActions = new[]
+        private static readonly Tuple<string, Func<TestMutableService, CompanyFile, string>>[] _putActions = new[]
             {
                 new Tuple<string, Func<TestMutableService, CompanyFile, string>>("Delegate", 
                     (service, cf) =>
@@ -179,7 +179,7 @@ namespace SDK.Test.Services
             Assert.AreEqual(location, received, "Incorrect data received during {0} operation", action.Item1);
         }
 
-        private readonly Tuple<string, Func<TestMutableService, CompanyFile, string>>[] _errorLevelActions = new[]
+        private static readonly Tuple<string, Func<TestMutableService, CompanyFile, string>>[] _errorLevelActions = new[]
             {
                 new Tuple<string, Func<TestMutableService, CompanyFile, string>>("DelegateUpdate", 
                     (service, cf) =>
@@ -282,7 +282,7 @@ namespace SDK.Test.Services
             Assert.IsNotNull(_webFactory.UnhandledUris.First(u => u.Query.ToLower().Contains("generateuris=false")));
         }
 
-        private readonly Tuple<string, Func<TestMutableService, CompanyFile, UserContract>>[] _postActionsEx = new[]
+        private static readonly Tuple<string, Func<TestMutableService, CompanyFile, UserContract>>[] _postActionsEx = new[]
             {
                 new Tuple<string, Func<TestMutableService, CompanyFile, UserContract>>("Delegate", 
                     (service, cf) =>
@@ -324,7 +324,7 @@ namespace SDK.Test.Services
             Assert.AreEqual(entity.UID, received.UID);
         }
 
-        private readonly Tuple<string, Func<TestMutableService, CompanyFile, UserContract>>[] _putActionsEx = new[]
+        private static readonly Tuple<string, Func<TestMutableService, CompanyFile, UserContract>>[] _putActionsEx = new[]
             {
                 new Tuple<string, Func<TestMutableService, CompanyFile, UserContract>>("Delegate", 
                     (service, cf) =>
