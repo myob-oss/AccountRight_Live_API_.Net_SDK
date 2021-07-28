@@ -34,7 +34,7 @@ namespace SDK.Test.Services
             Assert.AreEqual("Purchase/SupplierPayment/CalculateDiscounts", _service.Route);
         }
         
-        private readonly Tuple<string, Func<CalculateDiscountsService, CompanyFile, CalculateDiscountsResponse>>[] _executeActions =
+        private static readonly Tuple<string, Func<CalculateDiscountsService, CompanyFile, CalculateDiscountsResponse>>[] _executeActions =
         {
             new Tuple<string, Func<CalculateDiscountsService, CompanyFile, CalculateDiscountsResponse>>("ExecuteDelegate", 
                 (service, cf) =>

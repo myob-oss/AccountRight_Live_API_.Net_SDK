@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Threading.Tasks;
 using MYOB.AccountRight.SDK;
 using MYOB.AccountRight.SDK.Communication;
 using MYOB.AccountRight.SDK.Contracts;
@@ -64,7 +65,7 @@ namespace SDK.Test.Communication
         [Test]
         [TestCase(true, true)]
         [TestCase(false, false)]
-        async public void DuringGetRequest_Async_ExpectedHeadersAreAttached(bool supplyCredentials, bool supplyOAuth)
+        async public Task DuringGetRequest_Async_ExpectedHeadersAreAttached(bool supplyCredentials, bool supplyOAuth)
         {
             // arrange
             var factory = new TestWebRequestFactory();
@@ -83,7 +84,7 @@ namespace SDK.Test.Communication
         }
 
         [Test]
-        async public void DuringGetRequest_Async_IfNoneMatchHeaderAttached_IfSupplyETag()
+        async public Task DuringGetRequest_Async_IfNoneMatchHeaderAttached_IfSupplyETag()
         {
             // arrange
             var eTag = "123456789";
@@ -180,7 +181,7 @@ namespace SDK.Test.Communication
         [Test]
         [TestCase(true, true)]
         [TestCase(false, false)]
-        async public void DuringDeleteRequest_Async_ExpectedHeadersAreAttached(bool supplyCredentials, bool supplyOAuth)
+        async public Task DuringDeleteRequest_Async_ExpectedHeadersAreAttached(bool supplyCredentials, bool supplyOAuth)
         {
             // arrange
             var factory = new TestWebRequestFactory();
@@ -222,7 +223,7 @@ namespace SDK.Test.Communication
         [Test]
         [TestCase(true, true)]
         [TestCase(false, false)]
-        async public void DuringPutRequest_Async_ExpectedHeadersAreAttached(bool supplyCredentials, bool supplyOAuth)
+        async public Task DuringPutRequest_Async_ExpectedHeadersAreAttached(bool supplyCredentials, bool supplyOAuth)
         {
             // arrange
             var factory = new TestWebRequestFactory();
@@ -290,7 +291,7 @@ namespace SDK.Test.Communication
         [Test]
         [TestCase(true, true)]
         [TestCase(false, false)]
-        async public void DuringPostRequest_Async_ExpectedHeadersAreAttached(bool supplyCredentials, bool supplyOAuth)
+        async public Task DuringPostRequest_Async_ExpectedHeadersAreAttached(bool supplyCredentials, bool supplyOAuth)
         {
             // arrange
             var factory = new TestWebRequestFactory();
@@ -368,7 +369,7 @@ namespace SDK.Test.Communication
         }
 
         [Test]
-        async public void TheEntityIsPlacedOnTheOutgoingStreamInJsonFormatDuringPutAsync()
+        async public Task TheEntityIsPlacedOnTheOutgoingStreamInJsonFormatDuringPutAsync()
         {
             // arrange
             var factory = new TestWebRequestFactory();
@@ -416,7 +417,7 @@ namespace SDK.Test.Communication
         }
 
         [Test]
-        async public void TheEntityIsPlacedOnTheOutgoingStreamInJsonFormatDuringPostAsync()
+        async public Task TheEntityIsPlacedOnTheOutgoingStreamInJsonFormatDuringPostAsync()
         {
             // arrange
             var factory = new TestWebRequestFactory();
@@ -463,7 +464,7 @@ namespace SDK.Test.Communication
         }
 
         [Test]
-        async public void TheLocationIsReturnedAfterASuccesfulPostAsync()
+        async public Task TheLocationIsReturnedAfterASuccesfulPostAsync()
         {
             // arrange
             var factory = new TestWebRequestFactory();
@@ -505,7 +506,7 @@ namespace SDK.Test.Communication
         }
 
         [Test]
-        async public void TheLocationIsReturnedAfterASuccesfulPutAsync()
+        async public Task TheLocationIsReturnedAfterASuccesfulPutAsync()
         {
             // arrange
             var factory = new TestWebRequestFactory();

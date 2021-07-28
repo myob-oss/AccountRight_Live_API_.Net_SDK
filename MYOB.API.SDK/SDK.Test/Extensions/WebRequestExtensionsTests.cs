@@ -48,7 +48,7 @@ namespace SDK.Test.Extensions
 
             webRequestCompleteEvent.Set();
 
-            Assert.Throws<OperationCanceledException>(async () => await getResponseTask);
+            Assert.ThrowsAsync<OperationCanceledException>(async () => await getResponseTask);
 
             request.Received().Abort();
         }
@@ -78,7 +78,7 @@ namespace SDK.Test.Extensions
 
             webRequestCompleteEvent.Set();
 
-            Assert.Throws(Is.InstanceOf<OperationCanceledException>(), async () => await getResponseTask);
+            Assert.ThrowsAsync(Is.InstanceOf<OperationCanceledException>(), async () => await getResponseTask);
         }
 
         [Test]
@@ -106,7 +106,7 @@ namespace SDK.Test.Extensions
 
             webRequestCompleteEvent.Set();
 
-            Assert.Throws<WebException>(async () => await getResponseTask);
+            Assert.ThrowsAsync<WebException>(async () => await getResponseTask);
         }
     }
 }
