@@ -33,7 +33,7 @@ namespace SDK.Test.Services
             _configuration.ApiBaseUrl.Returns(ApiRequestHandler.ApiRequestUri.AbsoluteUri);
         }
 
-        private readonly Tuple<string, Func<AccountingPropertiesService, CompanyFile, AccountingProperties>>[] _getAccountingPropertiesActions = new[]
+        private static readonly Tuple<string, Func<AccountingPropertiesService, CompanyFile, AccountingProperties>>[] _getAccountingPropertiesActions = new[]
             {
                 new Tuple<string, Func<AccountingPropertiesService, CompanyFile, AccountingProperties>>("Delegate", 
                     (service, cf) =>

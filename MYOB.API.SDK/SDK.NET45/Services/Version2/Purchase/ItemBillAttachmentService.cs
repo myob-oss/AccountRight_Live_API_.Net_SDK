@@ -8,7 +8,7 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MYOB.AccountRight.SDK.Services.Version2.Purchase
+namespace MYOB.AccountRight.SDK.Services.Purchase
 {
     /// <summary>
     /// A service that provides access to the <see cref="BillAttachmentWrapper"/> resource

@@ -50,7 +50,7 @@ namespace SDK.Test.Services
             _uid = Guid.NewGuid();
         }
 
-        private readonly Tuple<string, Func<TestPhotoService, CompanyFile, byte[]>>[] _getPhotoActions = new[]
+        private static readonly Tuple<string, Func<TestPhotoService, CompanyFile, byte[]>>[] _getPhotoActions = new[]
             {
                 new Tuple<string, Func<TestPhotoService, CompanyFile, byte[]>>("Async", 
                     (service, cf) =>
@@ -87,7 +87,7 @@ namespace SDK.Test.Services
             Assert.AreEqual(photo.Data, received, "Incorrect data received during {0} operation", action.Item1);
         }
 
-        private readonly Tuple<string, Func<TestPhotoService, CompanyFile, bool>>[] _deletePhotoActions = new[]
+        private static readonly Tuple<string, Func<TestPhotoService, CompanyFile, bool>>[] _deletePhotoActions = new[]
             {
                 new Tuple<string, Func<TestPhotoService, CompanyFile, bool>>("Async", 
                     (service, cf) =>
@@ -125,7 +125,7 @@ namespace SDK.Test.Services
             Assert.IsTrue(ret, "Incorrect data received during {0} operation", action.Item1);
         }
 
-        private readonly Tuple<string, Func<TestPhotoService, CompanyFile, string>>[] _postPhotoActions = new[]
+        private static readonly Tuple<string, Func<TestPhotoService, CompanyFile, string>>[] _postPhotoActions = new[]
             {
                 new Tuple<string, Func<TestPhotoService, CompanyFile, string>>("Async", 
                     (service, cf) =>

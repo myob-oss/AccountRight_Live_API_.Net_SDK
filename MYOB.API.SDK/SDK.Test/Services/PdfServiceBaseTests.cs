@@ -46,7 +46,7 @@ namespace SDK.Test.Services
             _uid = Guid.NewGuid();
         }
 
-        private readonly Tuple<string, Func<TestInvoiceService, CompanyFile, Stream>>[] _getFormPdfActions = new[]
+        private static readonly Tuple<string, Func<TestInvoiceService, CompanyFile, Stream>>[] _getFormPdfActions = new[]
             {
                 new Tuple<string, Func<TestInvoiceService, CompanyFile, Stream>>("Delegate", 
                                                                                  (service, cf) =>

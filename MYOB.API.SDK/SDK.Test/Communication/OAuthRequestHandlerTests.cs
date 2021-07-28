@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web;
-using MYOB.AccountRight.SDK;
+﻿using MYOB.AccountRight.SDK;
 using MYOB.AccountRight.SDK.Communication;
 using MYOB.AccountRight.SDK.Contracts;
-using MYOB.AccountRight.SDK.Extensions;
 using NSubstitute;
 using NUnit.Framework;
 using SDK.Test.Helper;
+using System;
+using System.IO;
+using System.Net;
+using System.Threading.Tasks;
+using System.Web;
 
 namespace SDK.Test.Communication
 {
@@ -46,7 +41,7 @@ namespace SDK.Test.Communication
         public void WhenMakingAnOauthRequestTheCorrectTokensAreAddedToTheRequestBody()
         {
             // arrange
-            
+
             // act
             _handler.GetOAuthTokens(_request, "<<code>>", (code, response) => { }, (exuri, exception) => Assert.Fail(exception.Message));
 
@@ -83,7 +78,7 @@ namespace SDK.Test.Communication
         }
 
         [Test]
-        async public void WhenMakingAnOauthRequest_Async_TheCorrectTokensAreAddedToTheRequestBody()
+        async public Task WhenMakingAnOauthRequest_Async_TheCorrectTokensAreAddedToTheRequestBody()
         {
             // arrange
 
@@ -104,7 +99,7 @@ namespace SDK.Test.Communication
         }
 
         [Test]
-        async public void WhenMakingAnOauthRequestRenewal_Async_TheCorrectTokensAreAddedToTheRequestBody()
+        async public Task WhenMakingAnOauthRequestRenewal_Async_TheCorrectTokensAreAddedToTheRequestBody()
         {
             // arrange
 
@@ -126,13 +121,13 @@ namespace SDK.Test.Communication
         public void WhenMakingAnOauthRequestTheCorrectHeadersAreAdded()
         {
             _handler.GetOAuthTokens(_request, "<<code>>", (code, response) => { }, (exuri, exception) => Assert.Fail(exception.Message));
-            
+
             Assert.AreEqual("POST", _request.Method);
             Assert.AreEqual("application/x-www-form-urlencoded", _request.ContentType);
         }
 
         [Test]
-        public async void WhenMakingAnOauthRequest_Async_TheCorrectHeadersAreAdded()
+        public async Task WhenMakingAnOauthRequest_Async_TheCorrectHeadersAreAdded()
         {
             await _handler.GetOAuthTokensAsync(_request, "<<code>>");
 
@@ -150,7 +145,7 @@ namespace SDK.Test.Communication
         }
 
         [Test]
-        public async void WhenMakingAnOauthRequestRenewal_Async_TheCorrectHeadersAreAdded()
+        public async Task WhenMakingAnOauthRequestRenewal_Async_TheCorrectHeadersAreAdded()
         {
             await _handler.RenewOAuthTokensAsync(_request, new OAuthTokens() { RefreshToken = "<<refreshtoken>>" });
 

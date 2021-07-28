@@ -1,14 +1,14 @@
 | | |
 | --- | --- |
 | **Build** | [![Build status](https://img.shields.io/appveyor/ci/myob-developers/accountright-live-api-net-sdk.svg)](https://ci.appveyor.com/project/myob-developers/accountright-live-api-net-sdk) |
-| **Coverage** | <sup>Coveralls</sup> [![Coverage](https://img.shields.io/coveralls/MYOB-OSS/AccountRight_Live_API_.Net_SDK/master.svg)](https://coveralls.io/r/MYOB-OSS/AccountRight_Live_API_.Net_SDK) |
+| **Coverage** | <sup>Coveralls</sup> [![Coverage](https://img.shields.io/coveralls/MYOB-Technology/AccountRight_Live_API_.Net_SDK/master.svg)](https://coveralls.io/r/MYOB-Technology/AccountRight_Live_API_.Net_SDK) |
 | **Nuget Downloads** | [![Nuget](https://buildstats.info/nuget/MYOB.AccountRight.API.SDK)](http://nuget.org/packages/MYOB.AccountRight.API.SDK) |
 | **Nuget Release** | [![Nuget](https://img.shields.io/nuget/v/MYOB.AccountRight.API.SDK.svg)](http://nuget.org/packages/MYOB.AccountRight.API.SDK) |
 | **Nuget Latest** | [![Nuget](https://img.shields.io/nuget/vpre/MYOB.AccountRight.API.SDK.svg)](http://nuget.org/packages/MYOB.AccountRight.API.SDK) |
 
 #AccountRight Live API .Net SDK#
 
-[![Join the chat at https://gitter.im/MYOB-OSS/AccountRight_Live_API_.Net_SDK](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/MYOB-OSS/AccountRight_Live_API_.Net_SDK?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Join the chat at https://gitter.im/MYOB-Technology/AccountRight_Live_API_.Net_SDK](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/MYOB-Technology/AccountRight_Live_API_.Net_SDK?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 This is the source repository for the MYOB AccountRight Live .Net SDK.
 

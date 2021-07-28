@@ -30,7 +30,7 @@ namespace SDK.Test.Services
             _configuration.ApiBaseUrl.Returns(ApiRequestHandler.ApiRequestUri.AbsoluteUri);
         }
 
-        private readonly Tuple<string, Func<VersionInfoService, VersionInfo>>[] _versionInfoGetActions = new[]
+        private static readonly Tuple<string, Func<VersionInfoService, VersionInfo>>[] _versionInfoGetActions = new[]
             {
                 new Tuple<string, Func<VersionInfoService, VersionInfo>>("Delegate", 
                     (service) =>
@@ -84,7 +84,7 @@ namespace SDK.Test.Services
             _configuration.ApiBaseUrl.Returns(ApiRequestHandler.ApiRequestUri.AbsoluteUri);
         }
 
-        private readonly Tuple<string, Func<CompanyFileService, CompanyFile[]>>[] _companyFileActions = new[]
+        private static readonly Tuple<string, Func<CompanyFileService, CompanyFile[]>>[] _companyFileActions = new[]
             {
                 new Tuple<string, Func<CompanyFileService, CompanyFile[]>>("Delegate", 
                     service =>
@@ -121,7 +121,7 @@ namespace SDK.Test.Services
 
         }
 
-        private readonly Tuple<string, Func<CompanyFileService, CompanyFile, CompanyFileWithResources>>[] _companyFileWithResourceActions = new[]
+        private static readonly Tuple<string, Func<CompanyFileService, CompanyFile, CompanyFileWithResources>>[] _companyFileWithResourceActions = new[]
             {
                 new Tuple<string, Func<CompanyFileService, CompanyFile, CompanyFileWithResources>>("Delegate", 
                     (service, cf) =>
@@ -157,7 +157,7 @@ namespace SDK.Test.Services
             Assert.AreEqual(id, received.CompanyFile.Id);
         }
 
-        private readonly Tuple<string, Func<CompanyFileService, CompanyFile[]>>[] _getRangeQueryActions = new[]
+        private static readonly Tuple<string, Func<CompanyFileService, CompanyFile[]>>[] _getRangeQueryActions = new[]
             {
                 new Tuple<string, Func<CompanyFileService, CompanyFile[]>>("Delegate", 
                     (service) =>

@@ -9,6 +9,7 @@ using MYOB.AccountRight.SDK;
 using NSubstitute;
 using NUnit.Framework;
 using MYOB.AccountRight.SDK.Extensions;
+using System.IO.Compression;
 
 namespace SDK.Test.Extensions
 {
@@ -89,6 +90,86 @@ namespace SDK.Test.Extensions
                 Assert.AreEqual("ValidationError", apiCommunicationEx.Errors[0].Name);
                 Assert.AreEqual("Duplicate RequestID", apiCommunicationEx.Errors[0].Message);
                 Assert.AreEqual("RequestID", apiCommunicationEx.Errors[0].AdditionalDetails);
+            }
+        }
+
+        [Test]
+        public void ProcessException_GZippedExceptionReturnWithValidErrors()
+        {
+            var mesg = @"{
+            ""Errors"": [{                     
+            ""Name"": ""ValidationError"",       
+            ""Message"": ""Duplicate RequestID"",
+            ""AdditionalDetails"": ""RequestID"",
+            ""ErrorCode"": 16000               
+            }]}";
+
+            using (Stream responsestream = GetStream(mesg))
+            {
+                using (var compressedStream = new MemoryStream())
+                using (Stream compressionStream = new GZipStream(compressedStream, CompressionMode.Compress))
+                {
+                    responsestream.CopyTo(compressionStream);
+                    compressionStream.Flush();
+                    compressionStream.Close();
+                    var bytes = compressedStream.ToArray();
+
+                    using (var compressedResponseStream = new MemoryStream(bytes))
+                    {
+                        var wex = GetWebException(compressedResponseStream);
+                        (wex.Response as HttpWebResponse).Headers.Returns(new WebHeaderCollection { { "Content-Encoding", "gzip" } });
+                        (wex.Response as HttpWebResponse).StatusCode.Returns(HttpStatusCode.BadRequest);
+
+                        var uri = new Uri("http://dc1.api.myob.com/");
+                        var apiCommunicationEx = Assert.Throws<ApiValidationException>(() => wex.ProcessException(uri));
+                        Assert.IsNotNull(apiCommunicationEx.Errors[0]);
+                        Assert.AreEqual(16000, apiCommunicationEx.Errors[0].ErrorCode);
+                        Assert.AreEqual("ValidationError", apiCommunicationEx.Errors[0].Name);
+                        Assert.AreEqual("Duplicate RequestID", apiCommunicationEx.Errors[0].Message);
+                        Assert.AreEqual("RequestID", apiCommunicationEx.Errors[0].AdditionalDetails);
+
+                    }
+                }
+            }
+        }
+
+        [Test]
+        public void ProcessException_DeflateExceptionReturnWithValidErrors()
+        {
+            var mesg = @"{
+            ""Errors"": [{                     
+            ""Name"": ""ValidationError"",       
+            ""Message"": ""Duplicate RequestID"",
+            ""AdditionalDetails"": ""RequestID"",
+            ""ErrorCode"": 16000               
+            }]}";
+
+            using (Stream responsestream = GetStream(mesg))
+            {
+                using (var compressedStream = new MemoryStream())
+                using (Stream compressionStream = new DeflateStream(compressedStream, CompressionMode.Compress))
+                {
+                    responsestream.CopyTo(compressionStream);
+                    compressionStream.Flush();
+                    compressionStream.Close();
+                    var bytes = compressedStream.ToArray();
+
+                    using (var compressedResponseStream = new MemoryStream(bytes))
+                    {
+                        var wex = GetWebException(compressedResponseStream);
+                        (wex.Response as HttpWebResponse).Headers.Returns(new WebHeaderCollection { { "Content-Encoding", "deflate" } });
+                        (wex.Response as HttpWebResponse).StatusCode.Returns(HttpStatusCode.BadRequest);
+
+                        var uri = new Uri("http://dc1.api.myob.com/");
+                        var apiCommunicationEx = Assert.Throws<ApiValidationException>(() => wex.ProcessException(uri));
+                        Assert.IsNotNull(apiCommunicationEx.Errors[0]);
+                        Assert.AreEqual(16000, apiCommunicationEx.Errors[0].ErrorCode);
+                        Assert.AreEqual("ValidationError", apiCommunicationEx.Errors[0].Name);
+                        Assert.AreEqual("Duplicate RequestID", apiCommunicationEx.Errors[0].Message);
+                        Assert.AreEqual("RequestID", apiCommunicationEx.Errors[0].AdditionalDetails);
+
+                    }
+                }
             }
         }
 

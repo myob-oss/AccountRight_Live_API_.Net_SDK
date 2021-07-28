@@ -256,7 +256,7 @@ namespace SDK.Test.Services
             Assert.AreEqual("Payroll/Timesheet", new TimesheetService(null).Route);
         }
 
-        private readonly Tuple<string, Func<TimesheetService, CompanyFile, string>>[] _putActions = new[]
+        private static readonly Tuple<string, Func<TimesheetService, CompanyFile, string>>[] _putActions = new[]
             {
                 new Tuple<string, Func<TimesheetService, CompanyFile, string>>("Delegate", 
                     (service, cf) =>
@@ -297,7 +297,7 @@ namespace SDK.Test.Services
             Assert.AreEqual(location, received, "Incorrect data received during {0} operation", action.Item1);
         }
 
-        private readonly Tuple<string, Func<TimesheetService, CompanyFile, string>>[] _putActionsWarnings = new[]
+        private static readonly Tuple<string, Func<TimesheetService, CompanyFile, string>>[] _putActionsWarnings = new[]
             {
                 new Tuple<string, Func<TimesheetService, CompanyFile, string>>("Delegate", 
                     (service, cf) =>

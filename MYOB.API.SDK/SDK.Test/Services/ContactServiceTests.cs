@@ -40,7 +40,7 @@ namespace SDK.Test.Services
             _uid = Guid.NewGuid();
         }
 
-        private readonly Tuple<string, Func<ContactService, CompanyFile, byte[]>>[] _getPhotoActions = new[]
+        private static readonly Tuple<string, Func<ContactService, CompanyFile, byte[]>>[] _getPhotoActions = new[]
             {
                 new Tuple<string, Func<ContactService, CompanyFile, byte[]>>("Delegate", 
                     (service, cf) =>

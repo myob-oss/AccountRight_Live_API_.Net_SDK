@@ -29,17 +29,6 @@ namespace MYOB.AccountRight.SDK.Contracts
     }
 
     /// <summary>
-    ///  SubscriptionFeature Class
-    /// </summary>
-    public class SubscriptionFeature
-    {
-        /// <summary>
-        /// Name of the feature
-        /// </summary>
-        public string Name { get; set; }
-    }
-
-    /// <summary>
     /// Subscription Class
     /// </summary>
     public class Subscription
@@ -53,10 +42,5 @@ namespace MYOB.AccountRight.SDK.Contracts
         /// The following set of information pulls through details for the New Essentials product
         /// </summary>
         public SubscriptionProduct Product { get; set; }
-
-        /// <summary>
-        ///  The following information pulls through the features available in the New Essentials product
-        /// </summary>
-        public SubscriptionFeature[] Features { get; set; }
     }
 }
