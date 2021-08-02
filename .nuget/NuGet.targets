@@ -24,6 +24,7 @@
             <PackageSource Include="https://my-nuget-source/nuget/" />
         -->
       <PackageSource Include="https://nuget.org/api/v2/" />
+      <PackageSource Include="https://nugetserver.myob.myobcorp.net/NuGetRepository/nuget" />
     </ItemGroup>
 
     <PropertyGroup Condition=" '$(OS)' == 'Windows_NT'">
@@ -68,7 +69,7 @@
         </BuildDependsOn>
 		
 		<TaskAssembly Condition="Exists('$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll')">$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll</TaskAssembly>
-		<TaskAssembly Condition="'$(TaskAssembly)' == '' AND Exists('$(MSBuildToolsPath)\Microsoft.Build.Tasks.v12.0.dll')">$(MSBuildToolsPath)\Microsoft.Build.Tasks.v12.0.dll</TaskAssembly>
+		<TaskAssembly Condition="'$(TaskAssembly)' == '' AND Exists('$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll')">$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll</TaskAssembly>
     </PropertyGroup>
 
     <Target Name="CheckPrerequisites">
