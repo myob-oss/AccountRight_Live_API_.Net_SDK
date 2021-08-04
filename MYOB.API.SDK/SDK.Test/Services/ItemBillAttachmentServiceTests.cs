@@ -1,7 +1,7 @@
-﻿using System;
-using MYOB.AccountRight.SDK.Contracts;
-using MYOB.AccountRight.SDK.Services.Version2.Purchase;
+﻿using MYOB.AccountRight.SDK.Contracts;
+using MYOB.AccountRight.SDK.Services.Purchase;
 using NUnit.Framework;
+using System;
 
 namespace SDK.Test.Services
 {
