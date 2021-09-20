@@ -13,7 +13,13 @@ powershell -file sdk.project.check.ps1
 
 @IF ERRORLEVEL 1 exit /b
 
-MSBuild.exe MYOB.API.SDK.sln /p:Configuration=Release
+
+if exist "%ProgramFiles(x86)%\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\Bin\" (
+  "%ProgramFiles(x86)%\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\Bin\MSBuild.exe" MYOB.API.SDK.sln /p:Configuration=Release
+) else (
+  MSBuild.exe MYOB.API.SDK.sln /p:Configuration=Release
+)
+
 @IF ERRORLEVEL 1 exit /b
 
 .\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -filter:"+[MYOB.*]*" -skipautoprops -output:".\Artefacts\Coverage\output.xml" -target:".\packages\NUnit.ConsoleRunner.3.12.0\tools\nunit3-console.exe" -targetargs:".\Artefacts\SDK\Test\Release\SDK.Tests.dll"

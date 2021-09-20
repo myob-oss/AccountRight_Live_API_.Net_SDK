@@ -1,4 +1,4 @@
-﻿using MYOB.AccountRight.SDK.Contracts.Version2.Purchase;
+using MYOB.AccountRight.SDK.Contracts.Version2.Purchase;
 using NUnit.Framework;
 
 namespace SDK.Test.Contracts.Version2
