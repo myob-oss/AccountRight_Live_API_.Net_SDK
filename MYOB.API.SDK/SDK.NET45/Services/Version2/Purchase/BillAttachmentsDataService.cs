@@ -1,3 +1,7 @@
+#if NET35
+#else
+#if NET40
+#else
 using MYOB.AccountRight.SDK.Communication;
 using MYOB.AccountRight.SDK.Contracts;
 using MYOB.AccountRight.SDK.Contracts.Version2.Purchase;
@@ -262,3 +266,5 @@ namespace MYOB.AccountRight.SDK.Services.Version2.Purchase
         }
     }
 }
+#endif
+#endif
