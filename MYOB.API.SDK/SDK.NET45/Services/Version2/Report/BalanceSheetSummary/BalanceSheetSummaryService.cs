@@ -1,4 +1,8 @@
-﻿using MYOB.AccountRight.SDK.Communication;
+﻿#if NET35
+#else
+#if NET40
+#else
+using MYOB.AccountRight.SDK.Communication;
 using MYOB.AccountRight.SDK.Contracts.Version2.Report.BalanceSheetSummary;
 
 namespace MYOB.AccountRight.SDK.Services
@@ -28,3 +32,5 @@ namespace MYOB.AccountRight.SDK.Services
         }
     }
 }
+#endif
+#endif

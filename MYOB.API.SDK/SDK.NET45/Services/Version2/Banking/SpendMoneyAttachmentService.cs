@@ -1,3 +1,7 @@
+#if NET35
+#else
+#if NET40
+#else
 using System;
 using MYOB.AccountRight.SDK.Communication;
 using MYOB.AccountRight.SDK.Contracts;
@@ -35,7 +39,7 @@ namespace MYOB.AccountRight.SDK.Services.Banking
             get { return "Banking/SpendMoney/{uid}/Attachment"; }
         }
 
-        #region Insert Operations
+#region Insert Operations
 
         /// <summary>
         /// Adds an Attachment to a Spend Money
@@ -70,9 +74,9 @@ namespace MYOB.AccountRight.SDK.Services.Banking
 
 
 #endif
-        #endregion
+#endregion
 
-        #region Delete Operations
+#region Delete Operations
 
 
         /// <summary>
@@ -106,9 +110,9 @@ namespace MYOB.AccountRight.SDK.Services.Banking
         }
 #endif
 
-        #endregion
+#endregion
 
-        #region Get Operations
+#region Get Operations
 
         /// <summary>
         /// Gets an Spend Money Attachment object
@@ -138,9 +142,9 @@ namespace MYOB.AccountRight.SDK.Services.Banking
             return MakeApiGetRequestAsync<SpendMoneyAttachmentWrapper>(BuildUri(cf, spendMoneyUid, attachmentUid), credentials, CancellationToken.None, eTag);
         }
 
-        #endregion
+#endregion
 
-        #region Base Class Overrides
+#region Base Class Overrides
 
         /// <summary>
         /// DO NOT USE THIS INHERITED MEMBER
@@ -573,7 +577,7 @@ namespace MYOB.AccountRight.SDK.Services.Banking
             throw new NotImplementedException();
         }
 
-        #endregion
+#endregion
 
 
         /// <exclude/>
@@ -602,3 +606,5 @@ namespace MYOB.AccountRight.SDK.Services.Banking
         }
     }
 }
+#endif
+#endif
