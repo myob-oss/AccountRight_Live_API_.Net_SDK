@@ -91,5 +91,10 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Inventory
         /// <para>NOT required when creating a new sale invoice.</para>
         /// </summary>
         public string RowVersion { get; set; }
+
+        /// <summary>
+        /// Location of the inventory adjustment line
+        /// </summary>
+        public LocationLink Location { get; set; }
     }
 }
