@@ -1,4 +1,4 @@
-using MYOB.AccountRight.SDK.Contracts;
+﻿using MYOB.AccountRight.SDK.Contracts;
 using MYOB.AccountRight.SDK.Services.Banking;
 using NUnit.Framework;
 using System;
@@ -11,14 +11,14 @@ namespace SDK.Test.Services
         [Test]
         public void ServiceHasExpectedRoute()
         {
-            Assert.AreEqual("Banking/SpendMoney/{uid}/Attachment", new SpendMoneyAttachmentService(null, null).Route);
+            Assert.AreEqual("Banking/SpendMoneyTxn/{uid}/Attachment", new SpendMoneyAttachmentService(null, null).Route);
         }
 
         [Test]
         public void When_NoAttachmentUIDProvided_ServiceBuildsURICorrectly()
         {
             var service = new SpendMoneyAttachmentService(null, null);
-            var expected = new Uri("http://api.test.com/accountright/Banking/SpendMoney/7c54adeb-ec94-493e-8317-f2c893ecadfc/Attachment");
+            var expected = new Uri("http://api.test.com/accountright/Banking/SpendMoneyTxn/7c54adeb-ec94-493e-8317-f2c893ecadfc/Attachment");
 
             var cf = new CompanyFile
             {
@@ -34,7 +34,7 @@ namespace SDK.Test.Services
         public void When_AttachmentUIDProvided_ServiceBuildsURICorrectly()
         {
             var service = new SpendMoneyAttachmentService(null, null);
-            var expected = new Uri("http://api.test.com/accountright/Banking/SpendMoney/7c54adeb-ec94-493e-8317-f2c893ecadfc/Attachment/ae625ae8-96fd-4f5d-8c66-d6de2e2c96e3");
+            var expected = new Uri("http://api.test.com/accountright/Banking/SpendMoneyTxn/7c54adeb-ec94-493e-8317-f2c893ecadfc/Attachment/ae625ae8-96fd-4f5d-8c66-d6de2e2c96e3");
 
             var cf = new CompanyFile
             {
