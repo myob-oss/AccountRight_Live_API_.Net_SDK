@@ -1,4 +1,4 @@
-using MYOB.AccountRight.SDK.Communication;
+﻿using MYOB.AccountRight.SDK.Communication;
 using MYOB.AccountRight.SDK.Contracts;
 using MYOB.AccountRight.SDK.Contracts.Version2;
 using MYOB.AccountRight.SDK.Contracts.Version2.Purchase;
