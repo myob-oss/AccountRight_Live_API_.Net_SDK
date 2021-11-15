@@ -1,4 +1,4 @@
-namespace MYOB.AccountRight.SDK.Contracts.Version2.Banking
+﻿namespace MYOB.AccountRight.SDK.Contracts.Version2.Banking
 {
     /// <summary>
     /// Describes the AttachmentData object

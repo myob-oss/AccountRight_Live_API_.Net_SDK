@@ -1,4 +1,4 @@
-namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
+﻿namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
 {
     /// <summary>
     /// Quote Status Type
