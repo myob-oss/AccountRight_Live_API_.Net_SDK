@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using MYOB.AccountRight.SDK.Communication;
 using MYOB.AccountRight.SDK.Contracts;
 using System.Collections.Generic;
@@ -32,7 +32,7 @@ namespace MYOB.AccountRight.SDK.Services.Banking
         /// </summary>
         public override string Route
         {
-            get { return "Banking/SpendMoney/{uid}/Attachment"; }
+            get { return "Banking/SpendMoneyTxn/{uid}/Attachment"; }
         }
 
         #region Insert Operations
@@ -591,14 +591,14 @@ namespace MYOB.AccountRight.SDK.Services.Banking
 
         /// <exclude />
         // Examples:
-        // baseUrl/Banking/SpendMoney/spendMoneyUid/Attachment/attachmentUid
-        // baseUrl/Banking/SpendMoney/spendMoneyUid/Attachment
+        // baseUrl/Banking/SpendMoneyTxn/spendMoneyUid/Attachment/attachmentUid
+        // baseUrl/Banking/SpendMoneyTxn/spendMoneyUid/Attachment
         public Uri BuildUri(CompanyFile companyFile, Guid spendMoneyUid, Guid? attachmentUid = null, string queryString = null)
         {
             var qs = string.IsNullOrEmpty(queryString) ? string.Empty : queryString;
             var attchUid = attachmentUid.HasValue ? "/" + attachmentUid.ToString() : string.Empty;
 
-            return new Uri(string.Format("{0}/{1}/{2}{3}{4}{5}", companyFile.Uri, "Banking/SpendMoney", spendMoneyUid.ToString(), "/Attachment", attchUid, qs));
+            return new Uri(string.Format("{0}/{1}/{2}{3}{4}{5}", companyFile.Uri, "Banking/SpendMoneyTxn", spendMoneyUid.ToString(), "/Attachment", attchUid, qs));
         }
     }
 }
