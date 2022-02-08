@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace MYOB.AccountRight.SDK.Contracts
 {
