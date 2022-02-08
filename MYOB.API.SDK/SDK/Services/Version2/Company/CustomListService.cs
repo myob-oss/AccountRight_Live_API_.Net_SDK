@@ -1,4 +1,4 @@
-﻿using MYOB.AccountRight.SDK.Communication;
+using MYOB.AccountRight.SDK.Communication;
 using MYOB.AccountRight.SDK.Contracts.Version2.Company;
 
 namespace MYOB.AccountRight.SDK.Services.Company
