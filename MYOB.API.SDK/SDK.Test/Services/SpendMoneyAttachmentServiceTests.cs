@@ -1,4 +1,4 @@
-﻿using MYOB.AccountRight.SDK.Contracts;
+using MYOB.AccountRight.SDK.Contracts;
 using MYOB.AccountRight.SDK.Services.Banking;
 using NUnit.Framework;
 using System;

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using MYOB.AccountRight.SDK.Communication;
 using MYOB.AccountRight.SDK.Contracts;
 using System.Collections.Generic;
