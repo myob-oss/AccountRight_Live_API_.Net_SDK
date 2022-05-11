@@ -1,4 +1,4 @@
-using MYOB.AccountRight.SDK.Communication;
+﻿using MYOB.AccountRight.SDK.Communication;
 using MYOB.AccountRight.SDK.Contracts;
 using MYOB.AccountRight.SDK.Contracts.Version2;
 using MYOB.AccountRight.SDK.Contracts.Version2.Purchase;
@@ -253,7 +253,7 @@ namespace MYOB.AccountRight.SDK.Services.Purchase
         /// <param name="credentials"></param>
         /// <param name="eTag"></param>
         /// <returns></returns>
-        public override BillAttachmentWrapper Get(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, string eTag = null)
+        public override BillAttachmentWrapper Get(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, string eTag = null, string query = null)
         {
             throw new NotImplementedException();
         }

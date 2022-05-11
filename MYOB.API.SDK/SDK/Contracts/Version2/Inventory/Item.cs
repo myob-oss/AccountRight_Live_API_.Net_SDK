@@ -158,18 +158,26 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Inventory
         /// Uniform resource identifier to retrieve the Item's photo
         /// </summary>
         public Uri PhotoURI { get; set; }
+
         /// <summary>
         /// List of LocationDetails
         /// </summary> 
         public ItemLocationDetail[] LocationDetails { get; set; }
+
         /// <summary>
         /// Default Sell Location Link
         /// </summary> 
         public LocationLink DefaultSellLocation { get; set; }
+
         /// <summary>
         /// Default Receive Location Link
         /// </summary> 
         public LocationLink DefaultReceiveLocation { get; set; }
+
+        /// <summary>
+        /// Bill Of Material Information
+        /// </summary>
+        public BillOfMaterials BillOfMaterials { get; set; }
     }
 
     /// <summary>
@@ -343,4 +351,35 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Inventory
 
     }
 
+    /// <summary>
+    /// Item information required for Bill Of Materials items
+    /// </summary>
+    public class BillOfMaterialsItem
+    {
+        /// <summary>
+        /// Quantity of component items
+        /// </summary>
+        public double Quantity { get; set; }
+
+        /// <summary>
+        /// Component item definition
+        /// </summary>
+        public ItemLink Item { get; set; }
+    }
+
+    /// <summary>
+    /// Bill Of Materials data
+    /// </summary>
+    public class BillOfMaterials
+    {
+        /// <summary>
+        /// Quantity of built item
+        /// </summary>
+        public double Quantity { get; set; }
+
+        /// <summary>
+        /// List of component items
+        /// </summary>
+        public BillOfMaterialsItem[] Items { get; set; }
+    }
 }
