@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using MYOB.AccountRight.SDK.Contracts.Version2.GeneralLedger;
 using MYOB.AccountRight.SDK.Contracts.Version2.Report.TaxCodeSummary;

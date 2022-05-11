@@ -44,7 +44,7 @@ namespace MYOB.AccountRight.SDK.Services.GeneralLedger
         /// <param name="credentials">The credentials to access the company file</param>
         /// <param name="eTag">The <see cref="BaseEntity.ETag" /> from a previously fetched entity</param>
         /// <returns></returns>
-        public override CategoryRegister Get(Contracts.CompanyFile cf, System.Guid uid, ICompanyFileCredentials credentials, string eTag = null)
+        public override CategoryRegister Get(Contracts.CompanyFile cf, System.Guid uid, ICompanyFileCredentials credentials, string eTag = null, string query = null)
         {
             throw new NotSupportedException();
         }

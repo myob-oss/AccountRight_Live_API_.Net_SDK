@@ -50,9 +50,9 @@ namespace MYOB.AccountRight.SDK.Services
         /// <param name="credentials">The credentials to access the company file</param>
         /// <param name="eTag">The <see cref="BaseEntity.ETag" /> from a previously fetched entity</param>
         /// <returns></returns>
-        public virtual T Get(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, string eTag = null)
+        public virtual T Get(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, string eTag = null, string query = null)
         {
-            return MakeApiGetRequestSync<T>(BuildUri(cf, uid), credentials, eTag);
+            return MakeApiGetRequestSync<T>(BuildUri(cf, uid, query), credentials, eTag);
         }
 
 #if ASYNC
