@@ -44,7 +44,7 @@ namespace MYOB.AccountRight.SDK.Services.GeneralLedger
         /// <param name="credentials">The credentials to access the company file</param>
         /// <param name="eTag">The <see cref="BaseEntity.ETag" /> from a previously fetched entity</param>
         /// <returns></returns>
-        public override AccountingProperties Get(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, string eTag = null)
+        public override AccountingProperties Get(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, string eTag = null, string query = null)
         {
             return base.GetRange(cf, null, credentials, eTag).Items.Maybe(_ => _[0]);
         }
