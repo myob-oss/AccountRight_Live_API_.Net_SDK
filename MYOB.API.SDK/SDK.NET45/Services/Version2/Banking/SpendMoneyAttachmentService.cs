@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using MYOB.AccountRight.SDK.Communication;
 using MYOB.AccountRight.SDK.Contracts;
 using System.Collections.Generic;
@@ -217,7 +217,7 @@ namespace MYOB.AccountRight.SDK.Services.Banking
         /// <param name="credentials"></param>
         /// <param name="eTag"></param>
         /// <returns></returns>
-        public override SpendMoneyAttachmentWrapper Get(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, string eTag = null)
+        public override SpendMoneyAttachmentWrapper Get(CompanyFile cf, Guid uid, ICompanyFileCredentials credentials, string eTag = null, string query = null)
         {
             throw new NotImplementedException();
         }

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace MYOB.AccountRight.SDK.Contracts.Version2.Purchase
