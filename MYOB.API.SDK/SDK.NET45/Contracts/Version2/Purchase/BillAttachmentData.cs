@@ -1,4 +1,4 @@
-﻿namespace MYOB.AccountRight.SDK.Contracts.Version2.Purchase
+namespace MYOB.AccountRight.SDK.Contracts.Version2.Purchase
 {
     /// <summary>
     /// Describes the BillAttachmentData object
