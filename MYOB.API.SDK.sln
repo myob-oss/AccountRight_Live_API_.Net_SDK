@@ -26,6 +26,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		MYOB.API.SDK\SDK.Package\Package.nuspec = MYOB.API.SDK\SDK.Package\Package.nuspec
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SDK.FULL", "MYOB.API.SDK\SDK.FULL\SDK.FULL.csproj", "{4BAA30E0-3CBA-4150-A478-71306B659E6E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,6 +54,10 @@ Global
 		{33DD5156-E3B7-47FC-913D-5216019146A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33DD5156-E3B7-47FC-913D-5216019146A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33DD5156-E3B7-47FC-913D-5216019146A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4BAA30E0-3CBA-4150-A478-71306B659E6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BAA30E0-3CBA-4150-A478-71306B659E6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BAA30E0-3CBA-4150-A478-71306B659E6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BAA30E0-3CBA-4150-A478-71306B659E6E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
