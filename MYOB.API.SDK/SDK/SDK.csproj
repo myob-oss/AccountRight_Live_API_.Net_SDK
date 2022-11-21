@@ -138,6 +138,7 @@
     <Compile Include="Contracts\Version2\GeneralLedger\ProfitLossDistribution.cs" />
     <Compile Include="Contracts\Version2\GeneralLedger\SourceTransaction.cs" />
     <Compile Include="Contracts\Version2\Inventory\InventoryAdjustment.cs" />
+    <Compile Include="Contracts\Version2\Inventory\InventoryBuild.cs" />
     <Compile Include="Contracts\Version2\Inventory\Location.cs" />
     <Compile Include="Contracts\Version2\Inventory\LocationLink.cs" />
     <Compile Include="Contracts\Version2\Inventory\ItemPriceMatrix.cs" />
@@ -402,6 +403,7 @@
     <Compile Include="Services\Version2\GetOnlyService.cs" />
     <Compile Include="Services\Version2\IGetOnlyService.cs" />
     <Compile Include="Services\Version2\Inventory\InventoryAdjustmentService.cs" />
+    <Compile Include="Services\Version2\Inventory\InventoryBuildService.cs" />
     <Compile Include="Services\Version2\Inventory\ItemPriceMatrixService.cs" />
     <Compile Include="Services\Version2\Payroll\EmployeePaymentSummaryETPAmendedService.cs" />
     <Compile Include="Services\Version2\Payroll\EmployeePaymentSummaryETPService.cs" />

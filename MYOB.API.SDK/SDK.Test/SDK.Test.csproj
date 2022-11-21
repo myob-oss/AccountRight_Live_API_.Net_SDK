@@ -142,6 +142,7 @@
     <Compile Include="Services\AccountServiceTests.cs" />
     <Compile Include="Services\BalanceSheetSummaryServiceTests.cs" />
     <Compile Include="Services\CustomListServiceTests.cs" />
+    <Compile Include="Services\InventoryBuildServiceTests.cs" />
     <Compile Include="Services\MiscellaneousBillAttachmentServiceTests.cs" />
     <Compile Include="Services\ProfessionalBillAttachmentServiceTests.cs" />
     <Compile Include="Services\ServiceBillAttachmentServiceTests.cs" />

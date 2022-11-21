@@ -67,6 +67,9 @@
     <Compile Include="..\SDK\Contracts\Version2\Contact\EmployeePaymentSummaryReport.cs">
       <Link>Contracts\Version2\Contact\EmployeePaymentSummaryReport.cs</Link>
     </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Inventory\InventoryBuild.cs">
+      <Link>Contracts\Version2\Inventory\InventoryBuild.cs</Link>
+    </Compile>
     <Compile Include="..\SDK\Contracts\Version2\Payroll\EmployeePaymentSummary.cs">
       <Link>Contracts\Version2\Payroll\EmployeePaymentSummary.cs</Link>
     </Compile>
@@ -1042,6 +1045,9 @@
     </Compile>
     <Compile Include="..\SDK\Services\Version2\Inventory\InventoryAdjustmentService.cs">
       <Link>Services\Version2\Inventory\InventoryAdjustmentService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Inventory\InventoryBuildService.cs">
+      <Link>Services\Version2\Inventory\InventoryBuildService.cs</Link>
     </Compile>
     <Compile Include="..\SDK\Services\Version2\Inventory\ItemPriceMatrixService.cs">
       <Link>Services\Version2\Inventory\ItemPriceMatrixService.cs</Link>
