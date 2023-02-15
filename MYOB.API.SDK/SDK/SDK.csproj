@@ -165,6 +165,8 @@
     <Compile Include="Contracts\Version2\Purchase\PurchaseOrderWithLines.cs" />
     <Compile Include="Contracts\Version2\Report\BalanceSheetSummary\BalanceSheetSummary.cs" />
     <Compile Include="Contracts\Version2\Report\GST\NZGSTReport.cs" />
+    <Compile Include="Contracts\Version2\Report\JournalTransactionHistory\JournalTransactionHistory.cs" />
+    <Compile Include="Contracts\Version2\GeneralLedger\JournalTransactionOperationType.cs" />
     <Compile Include="Contracts\Version2\Report\PayrollCategorySummary\PayrollCategorySummary.cs" />
     <Compile Include="Contracts\Version2\Report\Payroll\EmployeePayrollAdvice.cs" />
     <Compile Include="Contracts\Version2\Report\ProfitAndLossSummary\ProfitAndLossSummary.cs" />
@@ -419,6 +421,7 @@
     <Compile Include="Services\Version2\ReadableRangeService.cs" />
     <Compile Include="Services\Version2\Report\BalanceSheetSummary\BalanceSheetSummaryService.cs" />
     <Compile Include="Services\Version2\Report\GST\NzgstReportService.cs" />
+    <Compile Include="Services\Version2\Report\JournalTransactionHistory\JournalTransactionHistoryService.cs" />
     <Compile Include="Services\Version2\Report\PayrollCategorySummary\PayrollCategorySummaryService.cs" />
     <Compile Include="Services\Version2\Report\Payroll\EmployeePayrollAdviceService.cs" />
     <Compile Include="Services\Version2\Report\ProfitAndLossSummary\ProfitAndLossSummaryService.cs" />

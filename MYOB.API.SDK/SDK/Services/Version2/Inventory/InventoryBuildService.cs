@@ -6,7 +6,7 @@ namespace MYOB.AccountRight.SDK.Services.Inventory
     /// <summary>
     /// A service that provides access to the <see cref="InventoryBuild"/> resource 
     /// </summary>
-    public sealed class InventoryBuildService : ReadableService<InventoryBuild>
+    public sealed class InventoryBuildService : MutableService<InventoryBuild>
     {
         /// <summary>
         /// Initialise a service that can use <see cref="InventoryBuild"/> resources
