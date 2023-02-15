@@ -115,6 +115,9 @@
 	<Compile Include="..\SDK\Contracts\Version2\Report\BalanceSheetSummary\BalanceSheetSummary.cs">
       <Link>Contracts\Version2\Report\BalanceSheetSummary\BalanceSheetSummary.cs</Link>
     </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Report\JournalTransactionHistory\JournalTransactionHistory.cs">
+      <Link>Contracts\Version2\Report\JournalTransactionHistory\JournalTransactionHistory.cs</Link>
+    </Compile>
     <Compile Include="..\SDK\Contracts\Version2\Report\ProfitAndLossSummary\ProfitAndLossSummary.cs">
       <Link>Contracts\Version2\Report\ProfitAndLossSummary\ProfitAndLossSummary.cs</Link>
     </Compile>
@@ -446,6 +449,9 @@
     </Compile>
     <Compile Include="..\SDK\Contracts\Version2\GeneralLedger\JournalTransactionLine.cs">
       <Link>Contracts\Version2\GeneralLedger\JournalTransactionLine.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\GeneralLedger\JournalTransactionOperationType.cs">
+      <Link>Contracts\Version2\GeneralLedger\JournalTransactionOperationType.cs</Link>
     </Compile>
     <Compile Include="..\SDK\Contracts\Version2\GeneralLedger\JournalType.cs">
       <Link>Contracts\Version2\GeneralLedger\JournalType.cs</Link>
@@ -1186,6 +1192,9 @@
     </Compile>
 	<Compile Include="..\SDK\Services\Version2\Report\BalanceSheetSummary\BalanceSheetSummaryService.cs">
       <Link>Services\Version2\Report\BalanceSheetSummary\BalanceSheetSummaryService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Report\JournalTransactionHistory\JournalTransactionHistoryService.cs">
+      <Link>Services\Version2\Report\JournalTransactionHistory\JournalTransactionHistoryService.cs</Link>
     </Compile>
     <Compile Include="..\SDK\Services\Version2\Report\ProfitAndLossSummary\ProfitAndLossSummaryService.cs">
       <Link>Services\Version2\Report\ProfitAndLossSummary\ProfitAndLossSummaryService.cs</Link>
