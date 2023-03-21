@@ -1,4 +1,4 @@
-version: 2023.1.{build}
+version: 2023.2.{build}
 shallow_clone: true
 assembly_info:
   patch: true
@@ -25,14 +25,14 @@ artifacts:
 deploy:
 - provider: NuGet
   api_key:
-    secure: bpVQhiwc92bNODO8fHvMq/S69e1P+8S1ELHcds+9s6YYppchTbgX2FiehNAVJJk8
+    secure: 93FcjymW95mjyg2lKI8vfBhuuPnAwVCuRBxbhc3QvvLnZorHRHM5K1tOe9AmoZRz
   skip_symbols: true
   artifact: Release
   on:
     branch: release
 - provider: NuGet
   api_key:
-    secure: bpVQhiwc92bNODO8fHvMq/S69e1P+8S1ELHcds+9s6YYppchTbgX2FiehNAVJJk8
+    secure: 93FcjymW95mjyg2lKI8vfBhuuPnAwVCuRBxbhc3QvvLnZorHRHM5K1tOe9AmoZRz
   skip_symbols: true
   artifact: Candidate
   on:
