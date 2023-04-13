@@ -43,7 +43,7 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Inventory
         /// <summary>
         /// The row id (required to update an existing entry)
         /// </summary>
-        ///public int RowID { get; set; }
+        public int RowID { get; set; }
         
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Inventory
         /// <para>ONLY required for updating an existing line.</para>
         /// <para>NOT required when creating a new line.</para>
         /// </summary>
-        ///public string RowVersion { get; set; }
+        public string RowVersion { get; set; }
         
         /// <summary>
         /// The quantity of build transaction line (defaults to 0)
