@@ -38,6 +38,28 @@
     <Prefer32Bit>false</Prefer32Bit>
     <DocumentationFile>$(SolutionDir)\Artefacts\SDK\Ship\NET45\MYOB.AccountRight.SDK.XML</DocumentationFile>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Local-Dev-Mainline|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>$(SolutionDir)\Artefacts\SDK\Ship\NET45\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;ASYNC</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <DocumentationFile>$(SolutionDir)\Artefacts\SDK\Ship\NET45\MYOB.AccountRight.SDK.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Local-Dev-Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>$(SolutionDir)\Artefacts\SDK\Ship\NET45\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;ASYNC</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <DocumentationFile>$(SolutionDir)\Artefacts\SDK\Ship\NET45\MYOB.AccountRight.SDK.XML</DocumentationFile>
+  </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>

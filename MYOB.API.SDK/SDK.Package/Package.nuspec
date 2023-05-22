@@ -3,7 +3,7 @@
   <metadata>
     <id>MYOB.AccountRight.API.SDK</id>
     <!-- the version number is managed by appveyor -->
-    <version>2015.3.0</version>
+    <version>2023.23.4</version>
     <title>MYOB AccountRight API SDK</title>
     <authors>MYOB_Developers</authors>
     <owners>MYOB Technology Pty. Ltd.</owners>
