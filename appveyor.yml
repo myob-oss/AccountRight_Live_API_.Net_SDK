@@ -1,4 +1,4 @@
-version: 2023.9.{build}
+version: 2023.10.{build}
 shallow_clone: true
 assembly_info:
   patch: true
