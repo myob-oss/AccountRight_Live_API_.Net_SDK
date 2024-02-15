@@ -1,3 +1,7 @@
+#if NET35
+#else
+#if NET40
+#else
 using System;
 using System.Collections.Generic;
 
@@ -14,3 +18,5 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Banking
         public List<SpendMoneyAttachmentData> Attachments;
     }
 }
+#endif
+#endif
