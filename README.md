@@ -8,8 +8,6 @@
 
 #AccountRight Live API .Net SDK#
 
-[![Join the chat at https://gitter.im/MYOB-Technology/AccountRight_Live_API_.Net_SDK](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/MYOB-Technology/AccountRight_Live_API_.Net_SDK?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 This is the source repository for the MYOB AccountRight Live .Net SDK.
 
 The official release of the SDK can be found on [NUGET](http://www.nuget.org/packages/MYOB.AccountRight.API.SDK/) and can be installed from Visual Studio using the Package Manager console.
