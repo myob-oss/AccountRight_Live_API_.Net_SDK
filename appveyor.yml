@@ -28,12 +28,6 @@ deploy:
   api_key:
     secure: OGw616WsfGBUWoVi1NZFVekoCyXoqi1f93v8GJJ8Y1DgcH5utdKg0yX2FGkFkXfj
   artifact: Release
-notifications:
-- provider: Webhook
-  url: https://webhooks.gitter.im/e/a5f4ffd724543d128fff
-  on_build_success: true
-  on_build_failure: true
-  on_build_status_changed: true
 on_success:
 - cmd: >-
     .\packages\coveralls.io.1.3.4\tools\coveralls.net.exe --opencover .\Artefacts\Coverage\output.xml
