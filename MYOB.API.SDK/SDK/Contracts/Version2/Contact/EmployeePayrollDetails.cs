@@ -161,7 +161,12 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Contact
         /// <summary>
         /// Monthly
         /// </summary>
-        Monthly = 3
+        Monthly = 3,
+
+        /// <summary>
+        /// Quarterly
+        /// </summary>
+        Quarterly = 4
     }
 
     /// <summary>
