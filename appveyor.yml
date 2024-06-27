@@ -24,20 +24,6 @@ artifacts:
   name: Coverage
 deploy:
 - provider: NuGet
-  api_key:
-    secure: 93FcjymW95mjyg2lKI8vfBhuuPnAwVCuRBxbhc3QvvLnZorHRHM5K1tOe9AmoZRz
-  skip_symbols: true
-  artifact: Release
-  on:
-    branch: release
-- provider: NuGet
-  api_key:
-    secure: 93FcjymW95mjyg2lKI8vfBhuuPnAwVCuRBxbhc3QvvLnZorHRHM5K1tOe9AmoZRz
-  skip_symbols: true
-  artifact: Candidate
-  on:
-    branch: candidate
-- provider: NuGet
   server: https://www.myget.org/F/myob-developers/api/v2
   api_key:
     secure: OGw616WsfGBUWoVi1NZFVekoCyXoqi1f93v8GJJ8Y1DgcH5utdKg0yX2FGkFkXfj
