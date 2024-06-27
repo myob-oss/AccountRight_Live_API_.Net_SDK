@@ -165,6 +165,11 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
         /// If true, surcharge fee could apply to invoice 
         /// </summary>
         public bool CanApplySurcharge { get; set; }
+        
+        /// <summary>
+        /// If true or null, BPay could apply to invoice when OIP enabled  
+        /// </summary>
+        public bool? CanApplyBPay { get; set; }
 
     }
 }

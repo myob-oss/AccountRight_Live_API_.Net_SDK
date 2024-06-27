@@ -80,6 +80,11 @@ namespace MYOB.AccountRight.SDK
         /// </summary>
         public bool GenerateUris { get; private set; }
 
+        /// <summary>
+        /// The Api key used for making api request
+        /// </summary>
+        public string AuthApiKey { get; private set; }
+
 #if !PORTABLE
         /// <summary>
         /// Gets or sets the cache policy for all requests

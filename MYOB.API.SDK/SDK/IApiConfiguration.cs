@@ -30,6 +30,11 @@ namespace MYOB.AccountRight.SDK
         /// </summary>
         string ApiBaseUrl { get; }
 
+        /// <summary>
+        /// The Api key used for making api request
+        /// </summary>
+        string AuthApiKey { get; }
+
 #if !PORTABLE
         /// <summary>
         /// Gets or sets the cache policy for all requests

@@ -121,7 +121,7 @@ namespace MYOB.AccountRight.SDK.Communication
 #endif
                 });
 
-            request.Headers["x-myobapi-key"] = configuration.ClientId;
+            request.Headers["x-myobapi-key"] = configuration.AuthApiKey;
             request.Headers["x-myobapi-version"] = "v2";
 
             if ((credentials != null) && (!String.IsNullOrEmpty(credentials.Username))) // password can be empty
