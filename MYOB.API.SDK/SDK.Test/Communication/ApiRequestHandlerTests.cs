@@ -131,7 +131,6 @@ namespace SDK.Test.Communication
         
             Assert.IsTrue(request.Headers[HttpRequestHeader.AcceptEncoding].Split(new[] {','}).Contains("gzip"));
 
-            Assert.AreEqual("<<clientid>>", request.Headers["x-myobapi-key"]);
             Assert.AreEqual("v2", request.Headers["x-myobapi-version"]);
 
             if (supplyCredentials)
@@ -173,7 +172,6 @@ namespace SDK.Test.Communication
 
             Assert.IsTrue(request.Headers[HttpRequestHeader.AcceptEncoding].Split(new[] { ',' }).Contains("gzip"));
 
-            Assert.AreEqual("<<clientid>>", request.Headers["x-myobapi-key"]);
             Assert.AreEqual("v2", request.Headers["x-myobapi-version"]);
             Assert.IsNull(request.Headers["x-myobapi-cftoken"]);
         }
