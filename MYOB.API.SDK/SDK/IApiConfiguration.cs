@@ -31,7 +31,16 @@ namespace MYOB.AccountRight.SDK
         string ApiBaseUrl { get; }
 
         /// <summary>
-        /// The Api key used for making api request
+        /// The username for password flow
+        /// </summary>
+        string AuthUsername { get;  }
+
+        /// <summary>
+        /// The password for password flow
+        /// </summary>
+        string AuthPassword { get;  }
+        /// <summary>
+        /// The api for password flow
         /// </summary>
         string AuthApiKey { get; }
 

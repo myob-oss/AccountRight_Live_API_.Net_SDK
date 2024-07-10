@@ -39,10 +39,11 @@ namespace MYOB.AccountRight.SDK
         /// <param name="redirectUrl">The redirect uri for the application (OAuth related)</param>
         /// <param name="apiBaseUrl">The AccountRight API endpoint, defaults to 'https://api.myob.com/accountright'</param>
         /// <param name="generateUris">Should the returned entities have the <see cref="BaseEntity.URI"/> and <see cref="BaseLink.URI"/> fields populated</param>
-        public ApiConfiguration(string clientId, string clientSecret, string redirectUrl, string apiBaseUrl = "https://api.myob.com/accountright", bool generateUris = true)
+        public ApiConfiguration(string clientId, string clientSecret, string redirectUrl, string apiBaseUrl = "https://api.myob.com/accountright", bool generateUris = true, string apiKey = null)
         {
             ApiBaseUrl = apiBaseUrl;
             ClientId = clientId;
+            AuthApiKey = apiKey ?? clientId;
             ClientSecret = clientSecret;
             RedirectUrl = redirectUrl;
             GenerateUris = generateUris;
@@ -81,9 +82,19 @@ namespace MYOB.AccountRight.SDK
         public bool GenerateUris { get; private set; }
 
         /// <summary>
+        /// The username for password flow
+        /// </summary>
+        public string AuthUsername { get; }
+
+        /// <summary>
+        /// The password for password flow
+        /// </summary>
+        public string AuthPassword { get; }
+
+        /// <summary>
         /// The Api key used for making api request
         /// </summary>
-        public string AuthApiKey { get; private set; }
+        public string AuthApiKey { get; }
 
 #if !PORTABLE
         /// <summary>
