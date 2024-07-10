@@ -48,7 +48,6 @@ namespace MYOB.AccountRight.SDK.Communication
         {
             var data = string.Format("client_id={0}&client_secret={1}&redirect_uri={2}&scope=CompanyFile&code={3}&grant_type=authorization_code",
                     _configuration.ClientId, _configuration.ClientSecret, Uri.EscapeDataString(_configuration.RedirectUrl), code);
-
             return data;
         }
 
