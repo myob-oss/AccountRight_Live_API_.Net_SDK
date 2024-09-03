@@ -23,8 +23,8 @@ namespace MYOB.AccountRight.SDK.Services.Purchase
         /// <param name="webRequestFactory">A custom implementation of the <see cref="WebRequestFactory"/>, if one is not supplied a default <see cref="WebRequestFactory"/> will be used.</param>
         /// <param name="keyService">An implementation of a service that will store/persist the OAuth tokens required to communicate with the cloud based API at http://api.myob.com/accountright </param>
         /// <param name="apiRequestHandler">A custom implementation of the <see cref="IApiRequestHandler"/>, if one is not supplied a default <see cref="ApiRequestHandler"/> will be used.</param>
-        public CalculateDiscountsService(IApiConfiguration configuration, IWebRequestFactory webRequestFactory = null, IOAuthKeyService keyService = null, IApiRequestHandler apiRequestHandler = null)
-            : base(configuration, webRequestFactory, keyService, apiRequestHandler)
+        public CalculateDiscountsService(IApiConfiguration configuration, IWebRequestFactory webRequestFactory = null, IOAuthKeyService keyService = null, IApiRequestHandlerFactory apiRequestHandlerFactory = null)
+            : base(configuration, webRequestFactory, keyService, apiRequestHandlerFactory)
         {
         }
 
