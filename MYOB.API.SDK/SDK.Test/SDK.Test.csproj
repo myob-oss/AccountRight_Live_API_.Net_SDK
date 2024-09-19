@@ -117,6 +117,7 @@
     <Compile Include="Contracts\Version2\GeneralJournalLineTests.cs" />
     <Compile Include="Contracts\Version2\LocationTests.cs" />
     <Compile Include="Contracts\Version2\JournalTransactionHistoryTests.cs" />
+    <Compile Include="Contracts\Version2\PriceLevelDetailTests.cs" />
     <Compile Include="Contracts\Version2\SaleEmailTests.cs" />
     <Compile Include="Contracts\Version2\ActivitySlipTests.cs" />
     <Compile Include="Contracts\Version2\ItemQuoteTests.cs" />
@@ -166,6 +167,7 @@
     <Compile Include="Services\CustomListServiceTests.cs" />
     <Compile Include="Services\InventoryBuildServiceTests.cs" />
     <Compile Include="Services\MiscellaneousBillAttachmentServiceTests.cs" />
+    <Compile Include="Services\PriceLevelDetailServiceTests.cs" />
     <Compile Include="Services\ProfessionalBillAttachmentServiceTests.cs" />
     <Compile Include="Services\ServiceBillAttachmentServiceTests.cs" />
     <Compile Include="Services\LocationServiceTests.cs" />

@@ -143,6 +143,7 @@
     <Compile Include="Contracts\Version2\Inventory\LocationLink.cs" />
     <Compile Include="Contracts\Version2\Inventory\ItemPriceMatrix.cs" />
     <Compile Include="Contracts\Version2\Inventory\Levels.cs" />
+    <Compile Include="Contracts\Version2\Inventory\PriceLevelDetail.cs" />
     <Compile Include="Contracts\Version2\Inventory\SellingPrice.cs" />
     <Compile Include="Contracts\Version2\Payroll\EmployeePaymentSummary.cs" />
     <Compile Include="Contracts\Version2\Payroll\EmployeePaymentSummaryETP.cs" />
@@ -407,6 +408,7 @@
     <Compile Include="Services\Version2\Inventory\InventoryAdjustmentService.cs" />
     <Compile Include="Services\Version2\Inventory\InventoryBuildService.cs" />
     <Compile Include="Services\Version2\Inventory\ItemPriceMatrixService.cs" />
+    <Compile Include="Services\Version2\Inventory\PriceLevelDetailService.cs" />
     <Compile Include="Services\Version2\Payroll\EmployeePaymentSummaryETPAmendedService.cs" />
     <Compile Include="Services\Version2\Payroll\EmployeePaymentSummaryETPService.cs" />
     <Compile Include="Services\Version2\Payroll\EmployeePaymentSummaryINBAmendedService.cs" />
