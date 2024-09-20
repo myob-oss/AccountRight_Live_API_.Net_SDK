@@ -39,6 +39,7 @@ namespace MYOB.AccountRight.SDK
         /// <param name="redirectUrl">The redirect uri for the application (OAuth related)</param>
         /// <param name="apiBaseUrl">The AccountRight API endpoint, defaults to 'https://api.myob.com/accountright'</param>
         /// <param name="generateUris">Should the returned entities have the <see cref="BaseEntity.URI"/> and <see cref="BaseLink.URI"/> fields populated</param>
+        /// <param name="apiKey">If API Key is different from the Client ID, we can provide it explicitly</param>
         public ApiConfiguration(string clientId, string clientSecret, string redirectUrl, string apiBaseUrl = "https://api.myob.com/accountright", bool generateUris = true, string apiKey = null)
         {
             ApiBaseUrl = apiBaseUrl;
