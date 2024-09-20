@@ -97,6 +97,9 @@
     <Compile Include="..\SDK\Contracts\Version2\Inventory\InventoryBuild.cs">
       <Link>Contracts\Version2\Inventory\InventoryBuild.cs</Link>
     </Compile>
+    <Compile Include="..\SDK\Contracts\Version2\Inventory\PriceLevelDetail.cs">
+      <Link>Contracts\Version2\Inventory\PriceLevelDetail.cs</Link>
+    </Compile>
     <Compile Include="..\SDK\Contracts\Version2\Payroll\EmployeePaymentSummary.cs">
       <Link>Contracts\Version2\Payroll\EmployeePaymentSummary.cs</Link>
     </Compile>
@@ -1087,6 +1090,9 @@
     </Compile>
     <Compile Include="..\SDK\Services\Version2\Inventory\ItemService.cs">
       <Link>Services\Version2\Inventory\ItemService.cs</Link>
+    </Compile>
+    <Compile Include="..\SDK\Services\Version2\Inventory\PriceLevelDetailService.cs">
+      <Link>Services\Version2\Inventory\PriceLevelDetailService.cs</Link>
     </Compile>
     <Compile Include="..\SDK\Services\Version2\IOperation.cs">
       <Link>Services\Version2\IOperation.cs</Link>
