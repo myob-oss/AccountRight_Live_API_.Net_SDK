@@ -360,6 +360,7 @@
     <Compile Include="Extensions\SslProtocolsExtensions.cs" />
     <Compile Include="Extensions\WebRequestExtensions.cs" />
     <Compile Include="IApiConfiguration.cs" />
+    <Compile Include="IApiRequestHandler.cs" />
     <Compile Include="IWebRequestFactory.cs" />
     <Compile Include="ApiConfiguration.cs" />
     <Compile Include="Communication\BaseRequestHandler.cs" />
