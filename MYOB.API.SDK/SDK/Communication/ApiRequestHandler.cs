@@ -13,7 +13,7 @@ namespace MYOB.AccountRight.SDK.Communication
     /// <summary>
     /// Handles API requests
     /// </summary>
-    public class ApiRequestHandler : BaseRequestHandler
+    public class ApiRequestHandler : BaseRequestHandler, IApiRequestHandler
     {
         /// <summary>
         /// The default production endpoint
