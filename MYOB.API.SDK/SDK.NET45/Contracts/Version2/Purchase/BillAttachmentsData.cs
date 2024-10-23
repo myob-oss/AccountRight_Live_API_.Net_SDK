@@ -1,3 +1,7 @@
+#if NET35
+#else
+#if NET40
+#else
 using System;
 using System.Collections.Generic;
 
@@ -24,3 +28,5 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Purchase
         public string BillLayout;
     }
 }
+#endif
+#endif

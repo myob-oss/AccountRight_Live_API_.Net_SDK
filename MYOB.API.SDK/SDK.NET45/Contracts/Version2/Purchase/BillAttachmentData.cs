@@ -1,3 +1,7 @@
+#if NET35
+#else
+#if NET40
+#else
 namespace MYOB.AccountRight.SDK.Contracts.Version2.Purchase
 {
     /// <summary>
@@ -26,3 +30,5 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Purchase
         public string FileBase64Content { get; set; }
     }
 }
+#endif
+#endif
