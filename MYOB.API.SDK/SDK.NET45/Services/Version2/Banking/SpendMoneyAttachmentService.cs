@@ -595,10 +595,9 @@ namespace MYOB.AccountRight.SDK.Services.Banking
         // baseUrl/Banking/SpendMoneyTxn/spendMoneyUid/Attachment
         public Uri BuildUri(CompanyFile companyFile, Guid spendMoneyUid, Guid? attachmentUid = null, string queryString = null)
         {
-            var qs = string.IsNullOrEmpty(queryString) ? string.Empty : queryString;
-            var attchUid = attachmentUid.HasValue ? "/" + attachmentUid.ToString() : string.Empty;
-
-            return new Uri(string.Format("{0}/{1}/{2}{3}{4}{5}", companyFile.Uri, "Banking/SpendMoneyTxn", spendMoneyUid.ToString(), "/Attachment", attchUid, qs));
+            string text = (string.IsNullOrEmpty(queryString) ? string.Empty : (queryString.StartsWith("?") ? queryString : ("?" + queryString)));
+	    string text2 = (attachmentUid.HasValue ? ("/" + attachmentUid.ToString()) : string.Empty);
+            return new Uri(string.Format("{0}/{1}/{2}{3}{4}{5}", companyFile.Uri, "Banking/SpendMoneyTxn", spendMoneyUid.ToString(), "/Attachment", text2, text));
         }
     }
 }
