@@ -616,10 +616,10 @@ namespace MYOB.AccountRight.SDK.Services.Purchase
         // baseUrl/Purchase/Bill/Service/billUid/Attachment
         public Uri BuildUri(CompanyFile companyFile, Guid billUid, Guid? attachmentUid = null, string queryString = null)
         {
-            var qs = string.IsNullOrEmpty(queryString) ? string.Empty : queryString;
-            var attchUid = attachmentUid.HasValue ? "/" + attachmentUid.ToString() : string.Empty;
+            string text = (string.IsNullOrEmpty(queryString) ? string.Empty : (queryString.StartsWith("?") ? queryString : ("?" + queryString)));
+	    string text2 = (attachmentUid.HasValue ? ("/" + attachmentUid.ToString()) : string.Empty);
 
-            return new Uri(string.Format("{0}/{1}/{2}{3}{4}{5}", companyFile.Uri, "Purchase/Bill/Service", billUid.ToString(), "/Attachment", attchUid, qs));
+            return new Uri(string.Format("{0}/{1}/{2}{3}{4}{5}", companyFile.Uri, "Purchase/Bill/Service", billUid.ToString(), "/Attachment", text2, text));
         }
     }
 }
