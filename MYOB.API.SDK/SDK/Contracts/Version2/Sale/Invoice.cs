@@ -171,5 +171,10 @@ namespace MYOB.AccountRight.SDK.Contracts.Version2.Sale
         /// </summary>
         public bool? CanApplyBPay { get; set; }
 
+        /// <summary>  
+        /// Online Payment Methods should be turned on for this resource. Values can be 'All' or 'None'.
+        /// </summary>  
+        public string OnlinePaymentMethod { get; set; }
+
     }
 }
