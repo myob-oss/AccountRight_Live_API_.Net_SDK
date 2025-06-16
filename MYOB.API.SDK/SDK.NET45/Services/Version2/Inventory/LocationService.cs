@@ -1,3 +1,7 @@
+#if NET35
+#else
+#if NET40
+#else
 using MYOB.AccountRight.SDK.Communication;
 using MYOB.AccountRight.SDK.Contracts.Version2.Inventory;
 
@@ -28,3 +32,5 @@ namespace MYOB.AccountRight.SDK.Services.Inventory
         }
     }
 }
+#endif
+#endif
