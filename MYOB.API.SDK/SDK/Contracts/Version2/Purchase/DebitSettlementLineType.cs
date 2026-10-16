@@ -18,6 +18,11 @@
         /// <summary>
         /// Purged bill type
         /// </summary>
-        Purged
+        Purged,
+
+        /// <summary>
+        /// Likely a legacy data issue
+        /// </summary>
+        NotSet        
     }
 }
